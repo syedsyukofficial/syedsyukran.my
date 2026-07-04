@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuiz Kenal Diri — Pelan Induk Peperiksaan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0E1B33; --navy2:#15294c; --navy3:#1d3560;
+    --gold:#D4A836; --gold-soft:#E8C877; --gold-deep:#A9821E;
+    --cream:#F6F1E7; --cream2:#EFE7D6;
+    --ink:#1A2338; --muted:#6B7896;
+    --green:#3E7C5A; --line:rgba(212,168,54,.28);
+    --disp:'Space Grotesk',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--body); color:var(--cream);
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #1a3160 0%, transparent 60%),
+      linear-gradient(160deg,#0b1730 0%, #0E1B33 45%, #0a1428 100%);
+    background-attachment:fixed;
+    min-height:100vh; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* faint geometric motif */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; opacity:.06; z-index:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23D4A836' stroke-width='1'%3E%3Crect x='20' y='20' width='40' height='40' transform='rotate(45 40 40)'/%3E%3Crect x='28' y='28' width='24' height='24' transform='rotate(45 40 40)'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .wrap{position:relative; z-index:1; max-width:640px; margin:0 auto; padding:26px 18px 60px;}
+
+  .eyebrow{font-family:var(--disp); letter-spacing:.32em; text-transform:uppercase;
+    font-size:11px; color:var(--gold); font-weight:600;}
+  .crest{width:66px;height:66px;margin:0 auto 14px;display:block}
+
+  /* ---- Cards ---- */
+  .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    border:1px solid var(--line); border-radius:18px; padding:26px 22px;
+    backdrop-filter:blur(2px); box-shadow:0 18px 40px -22px rgba(0,0,0,.7);}
+
+  /* ---- Intro ---- */
+  .intro{text-align:center; animation:rise .5s ease both}
+  .intro h1{font-family:var(--disp); font-weight:700; font-size:30px; line-height:1.12;
+    margin:6px 0 4px; color:#fff; letter-spacing:-.5px}
+  .intro h1 span{color:var(--gold)}
+  .intro .sub{color:#c6cfe3; font-size:14.5px; max-width:440px; margin:10px auto 0}
+  .dims{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:22px 0 8px}
+  .dim{background:rgba(212,168,54,.07); border:1px solid var(--line); border-radius:12px;
+    padding:12px 8px; text-align:center}
+  .dim .ic{font-size:20px; margin-bottom:4px}
+  .dim b{font-family:var(--disp); font-size:12px; color:var(--gold-soft); display:block; letter-spacing:.02em}
+  .dim small{color:var(--muted); font-size:10.5px}
+  .verse{font-style:italic; color:#aeb9d2; font-size:12.5px; margin:16px auto 0; max-width:460px}
+  .verse b{color:var(--gold-soft); font-style:normal}
+
+  .btn{font-family:var(--disp); font-weight:600; font-size:15px; letter-spacing:.02em;
+    border:none; cursor:pointer; border-radius:999px; padding:14px 30px; color:#12203c;
+    background:linear-gradient(180deg,var(--gold-soft),var(--gold));
+    box-shadow:0 10px 24px -10px rgba(212,168,54,.7); transition:transform .12s, box-shadow .2s;}
+  .btn:hover{transform:translateY(-2px); box-shadow:0 16px 30px -12px rgba(212,168,54,.85)}
+  .btn:active{transform:translateY(0)}
+  .btn.ghost{background:transparent; color:var(--gold-soft); border:1px solid var(--line);
+    box-shadow:none}
+  .btn-row{display:flex; gap:12px; justify-content:center; align-items:center; margin-top:24px; flex-wrap:wrap}
+
+  /* ---- Progress ---- */
+  .top{display:flex; align-items:center; gap:14px; margin-bottom:18px}
+  .prog{flex:1; height:7px; background:rgba(255,255,255,.09); border-radius:99px; overflow:hidden}
+  .prog i{display:block; height:100%; width:0; border-radius:99px;
+    background:linear-gradient(90deg,var(--gold-deep),var(--gold-soft)); transition:width .4s cubic-bezier(.5,.2,.2,1)}
+  .count{font-family:var(--disp); font-size:12px; color:var(--muted); white-space:nowrap}
+
+  .sec-label{font-family:var(--disp); letter-spacing:.28em; text-transform:uppercase;
+    font-size:10.5px; color:var(--gold); font-weight:600; margin-bottom:10px; display:flex; align-items:center; gap:8px}
+  .sec-label::after{content:""; flex:1; height:1px; background:var(--line)}
+  .q{font-family:var(--disp); font-weight:600; font-size:21px; line-height:1.3; color:#fff; margin-bottom:20px; letter-spacing:-.2px}
+  .q .num{color:var(--gold); margin-right:6px}
+
+  .opts{display:flex; flex-direction:column; gap:11px}
+  .opt{position:relative; text-align:left; cursor:pointer; border-radius:13px;
+    border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.03);
+    padding:15px 16px 15px 52px; color:#e7ecf7; font-size:15px; font-weight:500;
+    transition:border-color .15s, background .15s, transform .1s; font-family:var(--body)}
+  .opt:hover{border-color:var(--gold); background:rgba(212,168,54,.08)}
+  .opt:active{transform:scale(.99)}
+  .opt .tag{position:absolute; left:14px; top:50%; transform:translateY(-50%);
+    width:26px;height:26px;border-radius:8px; display:grid; place-items:center;
+    font-family:var(--disp); font-weight:700; font-size:13px; color:var(--gold-soft);
+    background:rgba(212,168,54,.12); border:1px solid var(--line)}
+  .opt.pick{border-color:var(--gold); background:rgba(212,168,54,.14)}
+  .opt.pick .tag{background:var(--gold); color:#12203c; border-color:var(--gold)}
+
+  .qcard{animation:rise .35s ease both}
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+  @keyframes pop{from{opacity:0; transform:scale(.96)} to{opacity:1; transform:none}}
+
+  .nav{display:flex; justify-content:space-between; margin-top:22px}
+  .link{background:none;border:none;color:var(--muted); font-family:var(--disp);
+    font-size:13px; cursor:pointer; padding:8px 4px}
+  .link:hover{color:var(--gold-soft)}
+  .link[disabled]{opacity:.3; cursor:default}
+
+  /* ---- Results ---- */
+  .result{animation:pop .5s ease both}
+  .idcard{background:linear-gradient(160deg,#fbf6ec,#efe6d3); color:var(--ink);
+    border-radius:18px; padding:24px 22px; position:relative; overflow:hidden;
+    border:1px solid var(--gold); box-shadow:0 20px 50px -20px rgba(0,0,0,.6)}
+  .idcard::before{content:""; position:absolute; inset:8px; border:1px solid rgba(169,130,30,.35); border-radius:12px; pointer-events:none}
+  .idcard .kh{font-family:var(--disp); letter-spacing:.28em; text-transform:uppercase; font-size:10px; color:var(--gold-deep); font-weight:700; text-align:center}
+  .idcard h2{font-family:var(--disp); text-align:center; font-size:15px; color:var(--muted); font-weight:500; margin-top:2px}
+  .profile{font-family:var(--disp); text-align:center; font-weight:700; font-size:25px; color:var(--navy); margin:12px 0 4px; line-height:1.2; letter-spacing:-.3px}
+  .profile b{color:var(--gold-deep)}
+  .rows{margin-top:16px; display:flex; flex-direction:column; gap:12px}
+  .row{display:flex; align-items:center; gap:12px}
+  .row .rl{font-family:var(--disp); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); width:74px; flex-shrink:0}
+  .row .rv{font-family:var(--disp); font-weight:600; font-size:14px; color:var(--navy); width:96px; flex-shrink:0}
+  .bar{flex:1; height:9px; background:rgba(30,53,96,.12); border-radius:99px; overflow:hidden; position:relative}
+  .bar i{position:absolute; left:0; top:0; height:100%; border-radius:99px; background:linear-gradient(90deg,var(--gold-deep),var(--gold)); width:0; transition:width .9s cubic-bezier(.4,.1,.2,1)}
+
+  /* softened profile header */
+  .cue{font-family:var(--disp); letter-spacing:.2em; text-transform:uppercase; font-size:10px; color:var(--gold-deep); text-align:center; margin-top:10px; font-weight:600}
+  .disc{text-align:center; font-size:11.5px; color:#8a7c5f; margin-top:9px; font-style:italic; line-height:1.55}
+  .disc em{color:#6b5e42; font-style:italic}
+
+  /* score breakdown */
+  .bgroup{margin-bottom:16px}
+  .bgroup.last{margin-bottom:0}
+  .glabel{font-family:var(--disp); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:9px}
+  .brow{display:flex; align-items:center; gap:10px; margin-bottom:8px}
+  .brow:last-child{margin-bottom:0}
+  .bn{font-family:var(--disp); font-size:13px; color:#cdd6ea; width:80px; flex-shrink:0}
+  .brow.lead .bn{color:#fff; font-weight:600}
+  .mbar{flex:1; height:9px; background:rgba(255,255,255,.09); border-radius:99px; overflow:hidden; position:relative}
+  .mbar i{position:absolute; left:0; top:0; height:100%; width:0; border-radius:99px;
+    background:linear-gradient(90deg,rgba(169,130,30,.5),rgba(212,168,54,.5)); transition:width .9s cubic-bezier(.4,.1,.2,1)}
+  .brow.lead .mbar i{background:linear-gradient(90deg,var(--gold-deep),var(--gold-soft))}
+  .bp{font-family:var(--disp); font-size:12.5px; width:40px; text-align:right; flex-shrink:0; font-weight:600; color:var(--muted)}
+  .brow.lead .bp{color:var(--gold-soft)}
+
+  /* challenge card */
+  .warncard{border-color:rgba(224,155,155,.28)}
+  .warncard h3{color:#e79b9b}
+  .warncard h3::after{background:rgba(224,155,155,.22)}
+  .b.warn{color:#e79b9b}
+
+  /* proven techniques card */
+  .techcard{border-color:rgba(126,196,150,.32)}
+  .techcard h3{color:#8fd0a6}
+  .techcard h3::after{background:rgba(126,196,150,.25)}
+  .techlead{font-size:13px; color:#c6cfe3; margin-bottom:14px; line-height:1.55}
+  .techlead b{color:#fff}
+  .tech{display:flex; gap:13px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.07)}
+  .tech:last-of-type{border-bottom:none}
+  .tnum{flex-shrink:0; width:30px; height:30px; border-radius:9px; display:grid; place-items:center;
+    font-family:var(--disp); font-weight:700; font-size:15px; color:#12203c;
+    background:linear-gradient(180deg,#9fdcb4,#5fae7c)}
+  .tbody{flex:1}
+  .tname{font-family:var(--disp); font-weight:600; font-size:15px; color:#fff; display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:2px}
+  .ttier{font-family:var(--body); font-weight:600; font-size:9.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:#9fb3d6; background:rgba(159,179,214,.14); border:1px solid rgba(159,179,214,.28); padding:2px 7px; border-radius:99px}
+  .ttier.top{color:#8fd0a6; background:rgba(126,196,150,.14); border-color:rgba(126,196,150,.35)}
+  .tech p{font-size:13.5px; color:#dbe2f1; line-height:1.5}
+  .islamnote{margin-top:14px; font-size:12.5px; font-style:italic; color:#c9b98f;
+    background:rgba(212,168,54,.07); border-left:2px solid var(--gold); padding:10px 12px; border-radius:0 8px 8px 0; line-height:1.55}
+  .islamnote b{color:var(--gold-soft); font-style:normal}
+  .techavoid{margin-top:12px; font-size:12.5px; color:#e0a9a9; line-height:1.5}
+  .techavoid b{color:#e79b9b; font-family:var(--disp)}
+
+  /* conclusion */
+  .conclude{text-align:center; margin-top:20px; padding:22px 20px;
+    background:linear-gradient(180deg, rgba(212,168,54,.10), rgba(212,168,54,.04));
+    border:1px solid var(--line); border-radius:16px}
+  .cq{font-family:var(--disp); font-weight:600; font-size:16px; line-height:1.5; color:#fff; letter-spacing:-.2px}
+  .cnote{font-size:12.5px; color:var(--muted); margin-top:12px; line-height:1.55}
+  .cnote b{color:var(--gold-soft)}
+
+  .block{margin-top:20px}
+  .block h3{font-family:var(--disp); font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:flex; align-items:center; gap:8px}
+  .block h3::after{content:""; flex:1; height:1px; background:var(--line)}
+  .tip{display:flex; gap:11px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.07); align-items:flex-start}
+  .tip:last-child{border-bottom:none}
+  .tip .b{color:var(--gold); font-size:15px; line-height:1.4; flex-shrink:0}
+  .tip p{font-size:14px; color:#dbe2f1}
+  .tip p b{color:#fff; font-family:var(--disp); font-weight:600}
+  .avoid{color:#e79b9b !important; font-weight:600}
+
+  .pillars{background:rgba(212,168,54,.07); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-top:20px}
+  .pillars .f{font-family:var(--disp); text-align:center; font-size:15px; font-weight:600; color:#fff; line-height:1.6}
+  .pillars .f b{color:var(--gold-soft)}
+  .pillars p{text-align:center; font-size:12.5px; color:var(--muted); margin-top:8px; font-style:italic}
+
+  .foot{text-align:center; margin-top:24px; color:var(--muted); font-size:12px}
+  .foot .name{font-family:var(--disp); color:var(--gold-soft); letter-spacing:.05em; font-weight:600; margin-top:4px}
+
+  @media(max-width:400px){
+    .intro h1{font-size:25px} .q{font-size:19px} .profile{font-size:21px}
+    .dims{gap:7px} .dim{padding:10px 5px}
+    .row .rl{width:60px} .row .rv{width:80px; font-size:13px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+const CREST = `<svg class="crest" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="45" fill="rgba(212,168,54,.08)" stroke="#D4A836" stroke-width="2.4"/>
+  <circle cx="50" cy="50" r="36.5" fill="none" stroke="#E8C877" stroke-width="1" opacity=".55"/>
+  <text x="50" y="50" text-anchor="middle" dominant-baseline="central" font-family="'Space Grotesk',system-ui,sans-serif" font-weight="700" font-size="37" letter-spacing="-3" fill="#E8C877">SS</text>
+</svg>`;
+
+// ---------- QUESTIONS ----------
+// dim: A=brain(kiri/kanan), B=VAK(V/A/K), C=personality(I/E)
+const Q = [
+  // Bahagian A — Otak
+  {dim:'A', sec:'Bahagian 1 · Minda & Sikap', q:'Bila saya gagal dalam sesuatu ujian, saya rasa…',
+    opts:[['GROWTH','Saya belum kuasai lagi — perlu ubah cara belajar'],['FIXED','Mungkin saya memang tak berbakat subjek ini']]},
+  {dim:'A', sec:'Bahagian 1 · Minda & Sikap', q:'Bila kawan lebih pandai daripada saya, saya…',
+    opts:[['GROWTH','Belajar caranya & cuba tingkatkan diri'],['FIXED','Rasa dia bijak semula jadi, saya tak sampai']]},
+  {dim:'A', sec:'Bahagian 1 · Minda & Sikap', q:'Cabaran yang susah membuat saya…',
+    opts:[['GROWTH','Teruja — peluang untuk berkembang'],['FIXED','Ingin elak — takut nampak lemah']]},
+  {dim:'A', sec:'Bahagian 1 · Minda & Sikap', q:'Bila diberi teguran / kritikan, saya…',
+    opts:[['GROWTH','Guna ia untuk baiki kelemahan'],['FIXED','Rasa tersinggung atau kecil hati']]},
+  {dim:'A', sec:'Bahagian 1 · Minda & Sikap', q:'Pada saya, kepandaian ialah…',
+    opts:[['GROWTH','Boleh dibina dengan latihan & usaha'],['FIXED','Bakat semula jadi yang tetap']]},
+  {dim:'A', sec:'Bahagian 1 · Minda & Sikap', q:'Bila usaha saya belum membuahkan hasil, saya…',
+    opts:[['GROWTH','Teruskan & ubah strategi'],['FIXED','Mula rasa buang masa, nak berputus asa']]},
+  // Bahagian B — VAK
+  {dim:'B', sec:'Bahagian 2 · Gaya Terima Maklumat', q:'Saya paling faham arahan bila…',
+    opts:[['V','Melihat gambar, video atau contoh'],['A','Mendengar penjelasan lisan'],['K','Mencuba sendiri terus']]},
+  {dim:'B', sec:'Bahagian 2 · Gaya Terima Maklumat', q:'Cara saya paling mudah menghafal…',
+    opts:[['V','Tengok nota berwarna & rajah'],['A','Baca kuat / dengar rakaman'],['K','Tulis berulang kali dengan tangan']]},
+  {dim:'B', sec:'Bahagian 2 · Gaya Terima Maklumat', q:'Waktu lapang, saya lebih cenderung…',
+    opts:[['V','Tonton video atau membaca'],['A','Dengar podcast atau muzik'],['K','Bersukan / buat sesuatu']]},
+  {dim:'B', sec:'Bahagian 2 · Gaya Terima Maklumat', q:'Saya paling ingat seseorang melalui…',
+    opts:[['V','Wajahnya'],['A','Suara & cara ia bercakap'],['K','Aktiviti yang kami buat bersama']]},
+  {dim:'B', sec:'Bahagian 2 · Gaya Terima Maklumat', q:'Untuk faham konsep yang susah, saya suka…',
+    opts:[['V','Lukis rajah / carta alir'],['A','Terangkan & bincang kuat-kuat'],['K','Buat contoh praktikal / latih tubi']]},
+  {dim:'B', sec:'Bahagian 2 · Gaya Terima Maklumat', q:'Yang paling bantu saya ingat dalam dewan…',
+    opts:[['V','Bayangkan nota / rajah berwarna'],['A','Dengar semula penjelasan dalam kepala'],['K','Ingat pergerakan tangan menulis']]},
+  // Bahagian C — Personaliti
+  {dim:'C', sec:'Bahagian 3 · Sumber Tenaga', q:'Selepas seharian bersama ramai orang, saya rasa…',
+    opts:[['I','Letih — perlu masa bersendirian'],['E','Bersemangat — mahu terus bersosial']]},
+  {dim:'C', sec:'Bahagian 3 · Sumber Tenaga', q:'Saya belajar paling berkesan…',
+    opts:[['I','Bersendirian / kumpulan kecil (2–3)'],['E','Dalam study group yang aktif']]},
+  {dim:'C', sec:'Bahagian 3 · Sumber Tenaga', q:'Dalam kelas, saya lebih cenderung…',
+    opts:[['I','Dengar & perhati dahulu'],['E','Bertanya & bercakap']]},
+  {dim:'C', sec:'Bahagian 3 · Sumber Tenaga', q:'Bila fikir masalah, saya proses dengan…',
+    opts:[['I','Berfikir dalam diri sendiri'],['E','Bercakap dengan orang lain']]},
+  {dim:'C', sec:'Bahagian 3 · Sumber Tenaga', q:'Bila tertekan, saya lebih suka…',
+    opts:[['I','Bersendiri & refleksi'],['E','Keluar & jumpa kawan']]},
+  {dim:'C', sec:'Bahagian 3 · Sumber Tenaga', q:'Idea terbaik saya biasanya datang bila…',
+    opts:[['I','Bersendirian & tenang'],['E','Berbual & bertukar fikiran']]},
+];
+
+// ---------- RECOMMENDATION CONTENT ----------
+const REC = {
+  V:{name:'Visual', tips:[
+    ['Bina <b>peta minda</b> setiap bab & <b>kod warna</b> ikut topik.'],
+    ['Tukar nota panjang kepada <b>carta alir & jadual</b>.'],
+    ['Tonton <b>video tutorial</b> topik yang susah difahami.'],
+    ['Tampal <b>flashcard visual</b> di tempat yang selalu dilihat.']]},
+  A:{name:'Auditori', tips:[
+    ['<b>Rakam suara</b> sendiri menerangkan konsep, dengar semula.'],
+    ['<b>Baca nota kuat-kuat</b> — jangan hanya baca dalam hati.'],
+    ['<b>Ajar kawan</b> secara lisan; berbincang dalam study group.'],
+    ['Dengar <b>podcast / kuliah</b> berkaitan sambil berulang alik.']]},
+  K:{name:'Kinestetik', tips:[
+    ['Buat <b>BANYAK soalan tahun lepas</b> — bukan sekadar membaca.'],
+    ['<b>Tulis semula nota</b> dengan tangan; buat flashcard sendiri.'],
+    ['Jalankan <b>simulasi exam berjadual</b> (timed practice).'],
+    ['Terangkan konsep <b>sambil bergerak</b> atau berjalan.']]},
+  I:{name:'Introvert', tips:[
+    ['Jadualkan <b>masa study solo</b> yang tetap & terlindung.'],
+    ['Pilih <b>kumpulan kecil 2–3 orang</b> sahaja.'],
+    ['<b>Sediakan soalan dahulu</b> sebelum sesi diskusi.'],
+    ['Recharge dengan <b>quiet time</b> selepas aktiviti ramai.'],
+    ['<span class="avoid">Elak:</span> memaksa diri dalam kumpulan besar sampai fokus & tenaga habis.']]},
+  E:{name:'Extrovert', tips:[
+    ['Sertai <b>study group</b> secara aktif.'],
+    ['Jadi <b>orang yang mengajar</b> — belajar dengan menerangkan.'],
+    ['Hadir <b>semua sesi ulang kaji & tutorial</b>.'],
+    ['Cari <b>study partner</b> untuk kekal bermotivasi.'],
+    ['<span class="avoid">Elak:</span> study solo terlalu lama sehingga hilang motivasi.']]},
+};
+const MINDSET = {
+  GROWTH:'Anda cenderung percaya kebolehan boleh <b>berkembang dengan usaha</b> — asas ketahanan menghadapi kegagalan sementara. Teruskan: lihat kesukaran sebagai latihan otak, bukan bukti "tak pandai".',
+  FIXED:'Anda kadang merasa kebolehan itu <b>tetap</b> ("saya memang tak pandai subjek ini"). Berita baik: minda ini sendiri boleh diubah. Tukar ayat "saya tak boleh" kepada <b>"saya belum boleh lagi"</b> — setiap usaha benar-benar membentuk otak.',
+  SEIMBANG:'Minda anda bercampur — kadang yakin boleh berkembang, kadang rasa terhad. Sedari bila suara "fixed" muncul (biasanya selepas gagal), dan ganti fokus kepada <b>usaha & proses</b>, bukan label pandai/tak pandai.'
+};
+
+// Cabaran / risiko yang perlu diberi perhatian ikut kecenderungan
+const CHAL = {
+  GROWTH:['Pastikan keyakinan "boleh berkembang" disusuli tindakan konsisten — optimisme perlu ada strategi.'],
+  FIXED:['Perhatikan ayat dalaman "saya memang tak boleh" — ia menghadkan usaha sebelum mula. Tukar kepada "saya belum boleh lagi".'],
+  SEIMBANG:['Sedari bila suara "fixed" muncul (biasanya selepas gagal) & alihkan fokus kepada usaha, bukan bakat.'],
+  V:['Mudah terganggu bila bahan tidak tersusun.','Berhati-hati agar tidak habiskan masa mencantikkan nota berbanding menguji kefahaman.'],
+  A:['Gemar berbincang sehingga kurang masa mengulang kaji bersendirian.','Mudah terganggu oleh persekitaran yang bising.'],
+  K:['Sukar duduk lama untuk bacaan pasif — jadual rehat pendek yang kerap.','Elak tergesa-gesa buat latihan sebelum faham konsep asas.'],
+  I:['Mungkin teragak-agak bertanya bila tidak faham — beranikan diri berjumpa pensyarah.','Risiko overthinking bila terlalu lama bersendirian.'],
+  E:['Gemar berbincang sehingga kurang masa mengulang kaji secara mendalam.','Mudah hilang fokus bila terpaksa belajar solo.'],
+  AMBI:['Kenal pasti bila diri perlukan fokus solo dan bila perlukan tenaga kumpulan — jangan biar mood menentukan.']
+};
+
+// 5 teknik study terbukti (sama untuk semua profil)
+const TECH = [
+  {n:'1', tier:'Paling kukuh', name:'Active Recall', desc:'Tutup nota, cuba ingat semula, baru semak. Uji diri — jangan sekadar baca ulang.'},
+  {n:'2', tier:'Paling kukuh', name:'Spaced Practice', desc:'Sebarkan ulang kaji: hari 1, 3, 7, 14. Elak tumpuk semua pada saat akhir (cramming).'},
+  {n:'3', tier:'Sangat membantu', name:'Interleaving', desc:'Selang-seli topik & jenis soalan dalam satu sesi — seperti keadaan sebenar dalam dewan.'},
+  {n:'4', tier:'Sangat membantu', name:'Elaboration', desc:'Tanya "kenapa" & "bagaimana"; terangkan dengan ayat sendiri; ajar orang lain.'},
+  {n:'5', tier:'Sangat membantu', name:'Dual Coding', desc:'Gabungkan perkataan dengan rajah / carta alir. Di sinilah gaya Visual jadi pelengkap.'},
+];
+
+// ---------- TRACKING ----------
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxFErSyAFGO4MBjbaFRVKVGEyyh9T6NazfIlTiijBLJ45Z3LfQPaoyrn6ak7U0MuvbjOQ/exec';
+
+function trackResult(data){
+  try {
+    fetch(SHEET_URL, {
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    });
+  } catch(e){ /* senyap — jangan ganggu pengalaman pelajar */ }
+}
+
+// ---------- STATE ----------
+let idx=0; const ans=new Array(Q.length).fill(null);
+const app=document.getElementById('app');
+
+function renderIntro(){
+  app.innerHTML=`
+  <div class="card intro">
+    ${CREST}
+    <div class="eyebrow">Pelan Induk Peperiksaan Akhir</div>
+    <h1>Kenali <span>Dirimu</span>,<br>Optimumkan Usahamu</h1>
+    <p class="sub">18 soalan ringkas untuk mengenali cara belajarmu yang tersendiri — supaya usahamu padan dengan fitrah dirimu, bukan menyalin cara orang lain.</p>
+    <div class="dims">
+      <div class="dim"><div class="ic">🌱</div><b>MINDA</b><small>Growth / Fixed</small></div>
+      <div class="dim"><div class="ic">👁️</div><b>GAYA</b><small>V / A / K</small></div>
+      <div class="dim"><div class="ic">🔋</div><b>TENAGA</b><small>Introvert / Extrovert</small></div>
+    </div>
+    <p class="verse">"Dan di antara tanda kekuasaan-Nya ialah perbezaan bahasa & warna kulit kamu." <b>— Ar-Rum: 22</b></p>
+    <div class="btn-row"><button class="btn" onclick="start()">Mula Kuiz →</button></div>
+  </div>`;
+}
+
+function start(){ idx=0; renderQ(); }
+
+function renderQ(){
+  const item=Q[idx];
+  const pct=Math.round((idx)/Q.length*100);
+  app.innerHTML=`
+  <div class="top">
+    <div class="prog"><i style="width:${pct}%"></i></div>
+    <div class="count">${idx+1} / ${Q.length}</div>
+  </div>
+  <div class="card qcard">
+    <div class="sec-label">${item.sec}</div>
+    <div class="q"><span class="num">${idx+1}.</span>${item.q}</div>
+    <div class="opts" id="opts">
+      ${item.opts.map((o,i)=>`
+        <button class="opt ${ans[idx]===o[0]?'pick':''}" onclick="pick('${o[0]}', this)">
+          <span class="tag">${String.fromCharCode(65+i)}</span>${o[1]}
+        </button>`).join('')}
+    </div>
+    <div class="nav">
+      <button class="link" onclick="back()" ${idx===0?'disabled':''}>← Sebelum</button>
+      <button class="link" id="skip" onclick="next()" style="${ans[idx]?'':'visibility:hidden'}">Seterusnya →</button>
+    </div>
+  </div>`;
+  requestAnimationFrame(()=>{document.querySelector('.prog i').style.width=pct+'%';});
+}
+
+function pick(val, el){
+  ans[idx]=val;
+  document.querySelectorAll('.opt').forEach(e=>e.classList.remove('pick'));
+  el.classList.add('pick');
+  setTimeout(()=>{ idx<Q.length-1 ? (idx++, renderQ()) : renderResult(); }, 230);
+}
+function next(){ if(!ans[idx])return; idx<Q.length-1?(idx++,renderQ()):renderResult(); }
+function back(){ if(idx>0){idx--; renderQ();} }
+
+function tally(dim, keys){
+  const c={}; keys.forEach(k=>c[k]=0);
+  Q.forEach((q,i)=>{ if(q.dim===dim && ans[i]!=null && k_in(keys,ans[i])) c[ans[i]]++; });
+  return c;
+}
+function k_in(keys,v){return keys.indexOf(v)>-1;}
+function winner(c){
+  let best=null,max=-1,tie=false;
+  for(const k in c){ if(c[k]>max){max=c[k];best=k;tie=false;} else if(c[k]===max){tie=true;} }
+  return {best,tie,c};
+}
+
+function pctOf(count,total){ return Math.round(count/total*100); }
+// sorted breakdown rows for a dimension
+function breakdown(counts, total, names){
+  return Object.keys(counts)
+    .map(k=>({k, name:names[k], pct:pctOf(counts[k],total)}))
+    .sort((a,b)=>b.pct-a.pct);
+}
+function barRows(items){
+  return items.map((it,i)=>`
+    <div class="brow ${i===0?'lead':''}">
+      <span class="bn">${it.name}</span>
+      <div class="mbar"><i data-w="${it.pct}"></i></div>
+      <span class="bp">${it.pct}%</span>
+    </div>`).join('');
+}
+
+function renderResult(){
+  const A=winner(tally('A',['GROWTH','FIXED']));
+  const B=winner(tally('B',['V','A','K']));
+  const C=winner(tally('C',['I','E']));
+
+  const totalA=Q.filter(q=>q.dim==='A').length;
+  const totalB=Q.filter(q=>q.dim==='B').length;
+  const totalC=Q.filter(q=>q.dim==='C').length;
+
+  const mindName={GROWTH:'Growth',FIXED:'Fixed'};
+  const vakName={V:'Visual',A:'Auditori',K:'Kinestetik'};
+  const persName={I:'Introvert',E:'Extrovert'};
+
+  // labels (softened)
+  const brainLabel = A.tie ? 'Seimbang' : mindName[A.best];
+  const brainKey   = A.tie ? 'SEIMBANG' : A.best;
+  const vakLabel   = vakName[B.best];
+  const persLabel  = C.tie ? 'Ambivert' : persName[C.best];
+  const persKey    = C.tie ? null : C.best;
+
+  // breakdowns (all options, sorted desc)
+  const bdA = breakdown(A.c, totalA, mindName);
+  const bdB = breakdown(B.c, totalB, vakName);
+  const bdC = breakdown(C.c, totalC, persName);
+
+  const profileTitle = `${brainLabel} · <b>${vakLabel}</b> · ${persLabel}`;
+
+  // Hantar data ke Google Sheets
+  trackResult({
+    minda       : brainLabel,
+    minda_pct   : bdA[0].pct,
+    gaya        : vakLabel,
+    gaya_pct    : bdB[0].pct,
+    tenaga      : persLabel,
+    tenaga_pct  : bdC[0].pct,
+    profil      : `${brainLabel} · ${vakLabel} · ${persLabel}`
+  });
+
+  // strategy tips
+  const vakTips = REC[B.best].tips.map(t=>`<div class="tip"><span class="b">◆</span><p>${t[0]}</p></div>`).join('');
+  const persTips = (persKey?REC[persKey].tips:[
+    ['Anda fleksibel (<b>Ambivert</b>) — seimbangkan study solo & kumpulan ikut keperluan hari itu.'],
+    ['Guna waktu bersendirian untuk fokus mendalam, dan waktu kumpulan untuk uji kefahaman.']
+  ]).map(t=>`<div class="tip"><span class="b">◆</span><p>${t[0]}</p></div>`).join('');
+
+  // challenges: brain(1) + vak(2) + personality(2)
+  let chal = [];
+  chal = chal.concat(CHAL[brainKey]||[]);
+  chal = chal.concat(CHAL[B.best]||[]);
+  chal = chal.concat(persKey?(CHAL[persKey]||[]):CHAL.AMBI);
+  const chalHtml = chal.map(c=>`<div class="tip"><span class="b warn">▲</span><p>${c}</p></div>`).join('');
+
+  app.innerHTML=`
+  <div class="result">
+    <div class="idcard">
+      <div class="kh">Kad Profil Diri</div>
+      <h2>Kecenderungan &amp; cara belajar anda</h2>
+      <div class="cue">Anda cenderung kepada pendekatan</div>
+      <div class="profile">${profileTitle}</div>
+      <p class="disc">Ini <em>kecenderungan dominan</em>, bukan label mutlak — setiap orang ada campuran ketiga-tiganya.</p>
+    </div>
+
+    <div class="card block">
+      <h3>📊 Taburan Skor Anda</h3>
+      <div class="bgroup"><div class="glabel">Minda &amp; Sikap</div>${barRows(bdA)}</div>
+      <div class="bgroup"><div class="glabel">Gaya Terima Maklumat</div>${barRows(bdB)}</div>
+      <div class="bgroup last"><div class="glabel">Sumber Tenaga</div>${barRows(bdC)}</div>
+    </div>
+
+    <div class="card block">
+      <h3>🌱 Sikap Minda Anda</h3>
+      <div class="tip"><span class="b">◆</span><p>${MINDSET[brainKey]}</p></div>
+    </div>
+
+    <div class="card block">
+      <h3>📚 Strategi Study (${vakLabel})</h3>
+      ${vakTips}
+    </div>
+
+    <div class="card block">
+      <h3>🔋 Atur Persekitaran (${persLabel})</h3>
+      ${persTips}
+    </div>
+
+    <div class="card block warncard">
+      <h3>⚠️ Cabaran Yang Perlu Diberi Perhatian</h3>
+      ${chalHtml}
+    </div>
+
+    <div class="card block techcard">
+      <h3>✅ 5 Teknik Study Terbukti — Untuk Semua Profil</h3>
+      <p class="techlead">Profil di atas untuk <b>kenal diri &amp; kekal bermotivasi</b>. Tetapi kaedah di bawah ini terbukti (sains kognitif) menaikkan markah untuk <b>semua jenis pelajar</b> — tanpa mengira profil:</p>
+      ${TECH.map(t=>`
+        <div class="tech">
+          <span class="tnum">${t.n}</span>
+          <div class="tbody">
+            <div class="tname">${t.name}<span class="ttier ${t.tier==='Paling kukuh'?'top':''}">${t.tier}</span></div>
+            <p>${t.desc}</p>
+          </div>
+        </div>`).join('')}
+      <div class="islamnote">Selari dengan tradisi Islam: <b>muraja'ah</b> (mengulang hafalan berjarak) &amp; penurunan wahyu secara beransur (<b>munajjaman</b>) selama 23 tahun — bukan sekali gus.</div>
+      <div class="techavoid"><b>Elak:</b> baca ulang pasif, highlight berlebihan &amp; salin nota semula — terasa "sibuk belajar" tetapi lemah kesannya.</div>
+    </div>
+
+    <div class="conclude">
+      <div class="cq">"Kenali dirimu untuk selesa &amp; bermotivasi — tetapi belajarlah dengan kaedah yang terbukti berkesan untuk semua."</div>
+      <div class="cnote">Dua tunjang paling kukuh secara kajian: <b>Growth Mindset</b> (kebolehan boleh berkembang) &amp; <b>Disiplin diri</b> — inilah Pilar 2 (Usaha &amp; Disiplin) dalam bahasa sains.</div>
+    </div>
+
+    <div class="pillars">
+      <div class="f"><b>Doa</b> + Usaha Ikut Fitrah Diri + <b>Tawakkal</b><br>= Keberkatan &amp; ketenangan di dalam dewan</div>
+      <p>Ikat unta dahulu dengan strategi yang padan — kemudian serahkan hasil kepada Allah.</p>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn ghost" onclick="renderIntro()">↺ Ulang Kuiz</button>
+    </div>
+
+    <div class="foot">Pelan Induk Peperiksaan Akhir
+      <div class="name">Ustaz Syed Syukran</div>
+    </div>
+  </div>`;
+
+  requestAnimationFrame(()=>{
+    setTimeout(()=>document.querySelectorAll('.mbar i').forEach(el=>{el.style.width=el.dataset.w+'%';}),140);
+  });
+}
+
+renderIntro();
+</script>
+</body>
+</html>
