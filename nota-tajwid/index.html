@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nota Tajwid · SRI Iqra' Al-Hafiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;500;700&family=Reem+Kufi:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F2EA; --card:#FFFFFF; --card-2:#FBFAF4;
+  --ink:#23302B; --muted:#5E6C64; --faint:#8A968E;
+  --emerald:#0F6B53; --emerald-deep:#0A4334; --emerald-soft:#E6F0EC;
+  --gold:#B5862B; --gold-deep:#8A6315; --gold-soft:#F0E6C8;
+  --line:#E5E0D1; --line-soft:#EFEBDF;
+  /* Warna tajwid */
+  --c-dengung:#0E8C7E; --c-dengung-bg:rgba(26,165,154,.15);
+  --c-idgham:#7A4FBF;  --c-idgham-bg:rgba(122,79,191,.14);
+  --c-ikhfa:#2E78C7;   --c-ikhfa-bg:rgba(46,120,199,.14);
+  --c-iqlab:#D2691E;   --c-iqlab-bg:rgba(210,105,30,.16);
+  --c-izhar:#2E8B57;   --c-izhar-bg:rgba(46,139,87,.14);
+  --c-qalqalah:#D23B3B;--c-qalqalah-bg:rgba(210,59,59,.14);
+  --c-mad:#B5862B;     --c-mad-bg:rgba(181,134,43,.18);
+  --shadow:0 1px 2px rgba(20,40,32,.04),0 10px 30px -18px rgba(20,40,32,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+  font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px}
+.ar{font-family:"Amiri",serif;direction:rtl;font-weight:400}
+.quran{font-family:"Scheherazade New","Amiri",serif;direction:rtl;line-height:2.1}
+
+/* ===== KULIT ===== */
+.cover{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;position:relative;overflow:hidden;
+  background:
+    radial-gradient(120% 80% at 50% -10%, #146a52 0%, #0c4d3b 55%, #093325 100%);
+  color:#fdfcf6;padding:60px 22px;
+}
+.cover::after{
+  content:"";position:absolute;inset:0;opacity:.10;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 50% 50%, transparent 60%, #ffffff 61%, transparent 62%),
+    radial-gradient(circle at 0 0, transparent 70%, #ffffff 71%, transparent 72%);
+  background-size:46px 46px;
+}
+.cover-star{width:96px;height:96px;margin-bottom:30px;position:relative;z-index:2}
+.cover-eyebrow{
+  font-family:"Reem Kufi",sans-serif;letter-spacing:.32em;text-transform:uppercase;
+  font-size:13px;color:var(--gold-soft);margin:0 0 18px;font-weight:600
+}
+.cover h1{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:clamp(48px,12vw,92px);line-height:.95;margin:0;letter-spacing:-.02em;position:relative;z-index:2
+}
+.cover .ar-title{font-family:"Reem Kufi",sans-serif;font-size:clamp(30px,8vw,52px);margin:14px 0 0;color:#fff;opacity:.96;position:relative;z-index:2}
+.cover-rule{width:60px;height:3px;background:var(--gold);border-radius:3px;margin:34px 0 30px;position:relative;z-index:2}
+.cover-school{font-size:16px;letter-spacing:.04em;opacity:.92;position:relative;z-index:2;max-width:460px}
+.cover-school strong{font-family:"Bricolage Grotesque",sans-serif;display:block;font-size:20px;letter-spacing:0;margin-bottom:4px}
+.cover-fields{margin-top:40px;display:grid;gap:10px;width:100%;max-width:420px;position:relative;z-index:2}
+.cover-field{display:flex;gap:12px;align-items:baseline;text-align:left;font-size:14px;color:#e9f2ee}
+.cover-field span{white-space:nowrap;opacity:.8}
+.cover-field i{flex:1;border-bottom:1.5px dotted rgba(255,255,255,.45);transform:translateY(-3px)}
+
+/* ===== HALAMAN PETIKAN ===== */
+.verse-page{padding:70px 0 30px}
+.verse{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:34px 30px;margin:0 0 20px;box-shadow:var(--shadow);text-align:center;position:relative
+}
+.verse .tag{
+  font-family:"Reem Kufi",sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold-deep);display:inline-block;margin-bottom:18px
+}
+.verse .quran{font-size:34px;color:var(--emerald-deep);margin:6px 0 18px}
+.verse .ar{font-size:30px}
+.verse .trans{color:var(--muted);font-style:italic;font-size:16px;margin:8px auto 0;max-width:540px}
+.verse .src{display:block;margin-top:10px;font-size:13px;color:var(--gold-deep);font-style:normal;font-weight:600}
+
+.byline{text-align:center;color:var(--muted);font-size:14px;margin:30px 0 0;line-height:1.6}
+.byline strong{color:var(--ink)}
+
+/* ===== ISI KANDUNGAN ===== */
+.toc{padding:64px 0}
+.section-eyebrow{
+  font-family:"Reem Kufi",sans-serif;letter-spacing:.28em;text-transform:uppercase;
+  font-size:12px;color:var(--gold-deep);font-weight:600;margin:0 0 8px
+}
+.h-big{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(30px,6vw,44px);line-height:1.05;letter-spacing:-.02em;margin:0 0 26px}
+.toc-list{list-style:none;margin:0;padding:0;counter-reset:toc}
+.toc-list li{counter-increment:toc}
+.toc-list a{
+  display:flex;align-items:center;gap:16px;text-decoration:none;color:var(--ink);
+  padding:14px 16px;border-radius:14px;border:1px solid transparent;transition:.18s
+}
+.toc-list a:hover{background:var(--card);border-color:var(--line);box-shadow:var(--shadow)}
+.toc-list a::before{
+  content:counter(toc,decimal-leading-zero);font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:700;font-size:14px;color:var(--gold);background:var(--gold-soft);
+  width:38px;height:38px;display:grid;place-items:center;border-radius:10px;flex:none
+}
+.toc-list a span{flex:1;font-weight:600}
+.toc-list a small{color:var(--faint);font-weight:500;font-size:13px}
+
+/* ===== LEGENDA WARNA ===== */
+.legend{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px;margin:10px 0 0;box-shadow:var(--shadow)}
+.legend h3{font-family:"Bricolage Grotesque",sans-serif;margin:0 0 4px;font-size:20px}
+.legend p{margin:0 0 18px;color:var(--muted);font-size:14.5px}
+.legend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.legend-grid div{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
+.dot{width:16px;height:16px;border-radius:5px;flex:none}
+
+/* ===== BAB ===== */
+.chapter{padding:56px 0 10px;border-top:1px solid var(--line-soft)}
+.chapter-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:8px}
+.chapter-num{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;color:#fff;
+  background:var(--emerald);width:46px;height:46px;border-radius:12px;display:grid;place-items:center;flex:none;margin-top:4px
+}
+.chapter-head h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(26px,5vw,36px);line-height:1.08;letter-spacing:-.02em;margin:0}
+.chapter-head .ar-h{font-family:"Reem Kufi",sans-serif;color:var(--gold-deep);font-size:24px;margin:2px 0 0}
+.lead{color:var(--muted);font-size:16.5px;margin:6px 0 24px}
+
+/* Kad */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 24px;margin:0 0 18px;box-shadow:var(--shadow)}
+.card.sub{background:var(--card-2)}
+.card h3{font-family:"Bricolage Grotesque",sans-serif;font-size:21px;margin:0 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.card h3 .ar-h{font-family:"Amiri",serif;color:var(--gold-deep);font-weight:700;font-size:21px}
+.card h4{font-family:"Bricolage Grotesque",sans-serif;font-size:16px;margin:18px 0 8px;color:var(--emerald-deep)}
+.pill{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:999px;color:#fff}
+.pill.green{background:var(--emerald)} .pill.gold{background:var(--gold)}
+
+/* Senarai fakta */
+.facts{margin:14px 0 0;border-top:1px solid var(--line-soft)}
+.facts div{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:15.5px}
+.facts dt{flex:none;width:118px;color:var(--muted);font-weight:600}
+.facts dd{margin:0;flex:1}
+
+/* Kotak huruf */
+.huruf{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.huruf b{
+  font-family:"Amiri",serif;font-size:26px;line-height:1;background:var(--emerald-soft);color:var(--emerald-deep);
+  border:1px solid #cfe3da;border-radius:12px;min-width:48px;height:52px;display:grid;place-items:center;padding:0 6px;font-weight:700
+}
+.huruf.gold b{background:var(--gold-soft);color:var(--gold-deep);border-color:#e6d6a6}
+
+/* Ayat contoh */
+.examples{display:grid;gap:10px;margin:16px 0 0}
+.ex{display:flex;align-items:center;gap:14px;background:var(--card-2);border:1px solid var(--line-soft);border-radius:14px;padding:12px 16px}
+.ex .ar{font-size:29px;flex:1;text-align:right}
+.ex .label{font-size:12.5px;color:var(--muted);font-weight:600;flex:none;max-width:42%;text-align:left}
+.ex .arrow{color:var(--gold);font-weight:800;flex:none}
+
+.ex-big{background:var(--emerald-soft);border-color:#cfe3da}
+.ex-big .ar{font-size:34px}
+
+/* Highlight tajwid */
+.hl{padding:.02em .14em;border-radius:.28em;font-weight:700}
+.hl-dengung{color:var(--c-dengung);background:var(--c-dengung-bg)}
+.hl-idgham{color:var(--c-idgham);background:var(--c-idgham-bg)}
+.hl-ikhfa{color:var(--c-ikhfa);background:var(--c-ikhfa-bg)}
+.hl-iqlab{color:var(--c-iqlab);background:var(--c-iqlab-bg)}
+.hl-izhar{color:var(--c-izhar);background:var(--c-izhar-bg)}
+.hl-qalqalah{color:var(--c-qalqalah);background:var(--c-qalqalah-bg)}
+.hl-mad{color:var(--c-mad);background:var(--c-mad-bg)}
+
+/* Petua / nota */
+.tip{display:flex;gap:12px;background:var(--gold-soft);border:1px solid #e6d6a6;border-radius:14px;padding:13px 16px;margin:16px 0 0;font-size:15px}
+.tip b{color:var(--gold-deep)}
+.tip .ic{flex:none;font-size:18px}
+.note{display:flex;gap:12px;background:#eef5f1;border:1px solid #d4e6dd;border-radius:14px;padding:13px 16px;margin:16px 0 0;font-size:15px}
+.note .ic{flex:none;font-size:18px}
+.correction{background:#fdeeee;border-color:#f3cccc}
+.correction .ic{color:var(--c-qalqalah)}
+
+/* Jadual */
+.tbl{width:100%;border-collapse:collapse;margin:14px 0 0;font-size:15px;overflow:hidden;border-radius:12px;border:1px solid var(--line)}
+.tbl th,.tbl td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line-soft)}
+.tbl thead th{background:var(--emerald);color:#fff;font-weight:600;font-size:13.5px;letter-spacing:.02em}
+.tbl tbody tr:nth-child(even){background:var(--card-2)}
+.tbl .ar{font-size:23px;direction:rtl;text-align:right}
+.tbl .ctr{text-align:center}
+
+/* Cara/kolum */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.cols .card{margin:0}
+@media (max-width:620px){.cols{grid-template-columns:1fr}}
+
+.steps{counter-reset:step;list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.steps li{counter-increment:step;display:flex;gap:14px;align-items:flex-start;background:var(--card-2);border:1px solid var(--line-soft);border-radius:14px;padding:13px 16px}
+.steps li::before{content:counter(step);font-family:"Bricolage Grotesque",sans-serif;font-weight:700;color:var(--emerald);background:var(--emerald-soft);width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;font-size:14px}
+
+/* Doa */
+.doa{background:linear-gradient(160deg,#0f6b53,#0a4334);color:#fdfcf6;border-radius:20px;padding:30px 26px;margin:0 0 18px;text-align:center;box-shadow:var(--shadow)}
+.doa .tag{font-family:"Reem Kufi",sans-serif;letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--gold-soft);margin-bottom:18px}
+.doa .quran{font-size:30px;color:#fff}
+
+footer{background:var(--emerald-deep);color:#cfe3da;text-align:center;padding:40px 22px;margin-top:60px;font-size:14px;line-height:1.7}
+footer .star{width:40px;height:40px;margin:0 auto 14px;opacity:.8}
+footer a{color:var(--gold-soft)}
+
+.totop{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;background:var(--emerald);color:#fff;border:none;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s;z-index:50;font-size:20px}
+.totop.show{opacity:1;pointer-events:auto}
+
+@media print{
+  body{background:#fff;font-size:12.5px}
+  .totop{display:none}
+  .cover{min-height:auto;page-break-after:always}
+  .chapter{page-break-before:auto}
+  .card,.verse,.legend,.doa{box-shadow:none;break-inside:avoid}
+  a{color:inherit}
+}
+.opsi{display:block;margin-top:7px;font-size:14.5px;color:var(--ink);line-height:1.9}
+.opsi b{color:var(--emerald-deep);font-weight:700}
+.opsi .ar{font-size:20px}
+.qbox .ar{font-size:21px}
+.bank{background:var(--gold-soft);border:1px solid #e6d6a6;border-radius:12px;padding:10px 14px;margin:10px 0 0;font-size:14.5px}
+.bank b{color:var(--gold-deep)}
+</style>
+</head>
+<body>
+
+<!-- ============ KULIT ============ -->
+<header class="cover">
+  <svg class="cover-star" viewBox="0 0 100 100" fill="none" stroke="#E8D9A8" stroke-width="1.4">
+    <circle cx="50" cy="50" r="46"/>
+    <path d="M50 6 L61 39 L96 39 L67 60 L78 94 L50 73 L22 94 L33 60 L4 39 L39 39 Z"/>
+    <path d="M50 18 L57 40 L80 40 L61 54 L68 76 L50 62 L32 76 L39 54 L20 40 L43 40 Z"/>
+    <circle cx="50" cy="50" r="10"/>
+  </svg>
+  <p class="cover-eyebrow">Panduan Bacaan Al-Quran</p>
+  <h1>Nota Tajwid</h1>
+  <div class="ar-title">عِلْمُ التَّجْوِيد</div>
+  <div class="cover-rule"></div>
+  <div class="cover-school">
+    <strong>Sekolah Rendah Islam Iqra' Al-Hafiz</strong>
+    Denai Alam, Shah Alam, Selangor
+  </div>
+  <div class="cover-fields">
+    <div class="cover-field"><span>Nama</span><i></i></div>
+    <div class="cover-field"><span>Tahun / Kelas</span><i></i></div>
+    <div class="cover-field"><span>Nama Guru</span><i></i></div>
+  </div>
+</header>
+
+<!-- ============ PETIKAN ============ -->
+<div class="wrap verse-page">
+  <div class="verse">
+    <span class="tag">Firman Allah ﷻ</span>
+    <div class="quran">وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا</div>
+    <p class="trans">"Dan bacalah Al-Quran itu dengan tartil (mentajwidkan huruf-hurufnya)."
+    <span class="src">Surah Al-Muzzammil · Ayat 4</span></p>
+  </div>
+  <div class="verse">
+    <span class="tag">Sabda Rasulullah ﷺ</span>
+    <div class="ar">خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ</div>
+    <p class="trans">"Sebaik-baik kamu ialah orang yang belajar Al-Quran dan mengajarkannya."
+    <span class="src">Riwayat Al-Bukhari</span></p>
+  </div>
+  <p class="byline">
+    Disusun asal oleh <strong>Syed Muhammad Syukran bin Syed Noah</strong><br>
+    Edisi kemas kini &amp; disemak semula · Susun atur moden berwarna
+  </p>
+</div>
+
+<!-- ============ ISI KANDUNGAN ============ -->
+<div class="wrap toc">
+  <p class="section-eyebrow">Isi Kandungan</p>
+  <h2 class="h-big">Apa yang akan kamu pelajari</h2>
+  <ol class="toc-list">
+    <li><a href="#bab-1"><span>Hukum Isti'azah &amp; Basmalah</span><small>Cara memulakan bacaan</small></a></li>
+    <li><a href="#bab-2"><span>Ghunnah</span><small>Dengung wajib</small></a></li>
+    <li><a href="#bab-3"><span>Nun Sukun atau Tanwin</span><small>Izhar · Idgham · Iqlab · Ikhfa'</small></a></li>
+    <li><a href="#bab-4"><span>Hukum Mim Sukun</span><small>Tiga hukum</small></a></li>
+    <li><a href="#bab-5"><span>Hukum Idgham</span><small>Mutamatsilain · Mutaqaribain · Mutajanisain</small></a></li>
+    <li><a href="#bab-6"><span>Qalqalah</span><small>Lantunan</small></a></li>
+    <li><a href="#bab-7"><span>Lafaz Jalalah</span><small>Tebal &amp; nipis</small></a></li>
+    <li><a href="#bab-8"><span>Alif Lam</span><small>Syamsiah &amp; Qamariah</small></a></li>
+    <li><a href="#bab-9"><span>Izhar Wajib</span><small>Izhar Mutlak</small></a></li>
+    <li><a href="#bab-10"><span>Hukum Ra'</span><small>Tafkhim &amp; Tarqiq</small></a></li>
+    <li><a href="#bab-11"><span>Hukum Mad</span><small>Mad Asli &amp; 13 Mad Far'i</small></a></li>
+    <li><a href="#bab-12"><span>Waqaf</span><small>Berhenti &amp; tanda-tandanya</small></a></li>
+    <li><a href="#bab-13"><span>Tingkatan Bacaan Al-Quran</span><small>Tahqiq · Tartil · Tadwir · Hadar</small></a></li>
+    <li><a href="#bab-14"><span>Hamzah Qata' &amp; Hamzah Wasal</span><small>Disebut atau digugurkan</small></a></li>
+    <li><a href="#bab-15"><span>Bacaan Gharib &amp; Musykilat</span><small>Bacaan istimewa</small></a></li>
+    <li><a href="#bab-16"><span>Tanda Bacaan Mushaf Baru</span><small>Membaca tanda mushaf</small></a></li>
+    <li><a href="#bab-17"><span>Doa Sebelum &amp; Selepas Membaca</span><small>Adab tilawah</small></a></li>
+    <li><a href="#latihan"><span>Latihan Setiap Bab</span><small>Objektif &middot; Isi tempat &middot; Padankan</small></a></li>
+    <li><a href="#skema"><span>Skema Jawapan</span><small>Jawapan latihan</small></a></li>
+  </ol>
+
+  <div class="legend">
+    <h3>Legenda Warna Tajwid</h3>
+    <p>Dalam buku ini, huruf yang terlibat dengan sesuatu hukum diwarnakan supaya kamu mudah mengenalinya — sama seperti mushaf berwarna.</p>
+    <div class="legend-grid">
+      <div><span class="dot" style="background:var(--c-dengung)"></span>Dengung / Ghunnah</div>
+      <div><span class="dot" style="background:var(--c-idgham)"></span>Idgham (masuk)</div>
+      <div><span class="dot" style="background:var(--c-ikhfa)"></span>Ikhfa' (samar)</div>
+      <div><span class="dot" style="background:var(--c-iqlab)"></span>Iqlab (tukar)</div>
+      <div><span class="dot" style="background:var(--c-izhar)"></span>Izhar (jelas)</div>
+      <div><span class="dot" style="background:var(--c-qalqalah)"></span>Qalqalah (lantun)</div>
+      <div><span class="dot" style="background:var(--c-mad)"></span>Mad (panjang)</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+<!-- ===== BAB 1 ===== -->
+<section class="chapter" id="bab-1">
+  <div class="chapter-head">
+    <div class="chapter-num">01</div>
+    <div>
+      <h2>Hukum Isti'azah &amp; Basmalah</h2>
+      <div class="ar-h">الِاسْتِعَاذَة وَالْبَسْمَلَة</div>
+    </div>
+  </div>
+  <p class="lead">Sebelum membaca Al-Quran, kita memulakannya dengan <em>isti'azah</em> (memohon perlindungan Allah) dan <em>basmalah</em>.</p>
+
+  <div class="card">
+    <h3>Lafaz Isti'azah</h3>
+    <div class="ex ex-big"><div class="ar">أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ</div></div>
+    <p style="margin:10px 0 0;color:var(--muted)"><em>"Aku berlindung kepada Allah daripada syaitan yang direjam."</em></p>
+  </div>
+
+  <div class="card">
+    <h3>Lafaz Basmalah</h3>
+    <div class="ex ex-big"><div class="ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div></div>
+    <p style="margin:10px 0 0;color:var(--muted)"><em>"Dengan nama Allah Yang Maha Pemurah lagi Maha Penyayang."</em></p>
+    <div class="note"><span class="ic">ℹ️</span><div>Basmalah dibaca apabila memulakan bacaan dari awal surah atau pertengahan surah — <b>kecuali di awal Surah At-Taubah</b> sahaja, yang tidak dimulakan dengan basmalah.</div></div>
+  </div>
+
+  <div class="card sub">
+    <h3>4 Cara Membaca Ta'awwudz, Basmalah &amp; Awal Surah</h3>
+    <p style="color:var(--muted);margin:0">Contoh menggunakan awal Surah Al-Ikhlas: <span class="ar" style="font-size:22px">قُلْ هُوَ اللَّهُ أَحَدٌ</span></p>
+    <ol class="steps">
+      <li><b>Putus semua</b> — berhenti selepas ta'awwudz, selepas basmalah, dan selepas awal surah.</li>
+      <li><b>Sambung semua</b> — ta'awwudz, basmalah dan awal surah dibaca terus tanpa berhenti.</li>
+      <li><b>Sambung basmalah dengan awal surah</b>, manakala ta'awwudz diputuskan.</li>
+      <li><b>Sambung ta'awwudz dengan basmalah</b>, manakala awal surah diputuskan.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h4>Cara Membaca Basmalah Antara Dua Surah</h4>
+    <p style="margin:0 0 6px">Terdapat empat keadaan — tiga harus, satu tidak harus:</p>
+    <div class="facts">
+      <div><dt style="color:var(--c-izhar)">Harus</dt><dd>Memisahkan basmalah dengan surah (berhenti dahulu).</dd></div>
+      <div><dt style="color:var(--c-izhar)">Harus</dt><dd>Menyambung basmalah dengan awal surah berikutnya.</dd></div>
+      <div><dt style="color:var(--c-izhar)">Harus</dt><dd>Menyambung kesemuanya sekali.</dd></div>
+      <div><dt style="color:var(--c-qalqalah)">Tidak harus</dt><dd>Menyambung akhir surah dengan basmalah, kemudian berhenti — kerana dibimbangi ada yang menyangka basmalah itu sebahagian daripada ayat surah sebelumnya.</dd></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BAB 2 ===== -->
+<section class="chapter" id="bab-2">
+  <div class="chapter-head">
+    <div class="chapter-num">02</div>
+    <div>
+      <h2>Ghunnah</h2>
+      <div class="ar-h">الْغُنَّة</div>
+    </div>
+  </div>
+  <p class="lead">Setiap huruf <b>Nun</b> ( نّ ) atau <b>Mim</b> ( مّ ) yang bertanda <em>tasydid</em> wajib dibaca dengan dengung.</p>
+
+  <div class="card">
+    <dl class="facts">
+      <div><dt>Maksud</dt><dd>Nun atau Mim yang bertasydid ( نّ — مّ ).</dd></div>
+      <div><dt>Hukum bacaan</dt><dd>Wajib dengung (<em>Wajibul Ghunnah</em>).</dd></div>
+      <div><dt>Maksud dengung</dt><dd>Suara halus yang keluar dari rongga hidung.</dd></div>
+      <div><dt>Kadar bacaan</dt><dd>2 harakat.</dd></div>
+    </dl>
+    <h4>Contoh</h4>
+    <div class="examples">
+      <div class="ex"><div class="ar">مِنَ الْجِنَّةِ وَالنَّاسِ</div><div class="label"><span class="hl hl-dengung">نّ</span> · النَّاس</div></div>
+      <div class="ex"><div class="ar">وَأَنَّا مِنَّا الصَّالِحُونَ</div><div class="label"><span class="hl hl-dengung">نّ</span> · مِنَّا</div></div>
+      <div class="ex"><div class="ar">حَمَّالَةَ الْحَطَبِ</div><div class="label"><span class="hl hl-dengung">مّ</span> · حَمَّالَة</div></div>
+      <div class="ex"><div class="ar">فَأَمَّا مَنْ أَعْطَىٰ وَاتَّقَىٰ</div><div class="label"><span class="hl hl-dengung">مّ</span> · أَمَّا</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BAB 3 ===== -->
+<section class="chapter" id="bab-3">
+  <div class="chapter-head">
+    <div class="chapter-num">03</div>
+    <div>
+      <h2>Nun Sukun atau Tanwin</h2>
+      <div class="ar-h">النُّون السَّاكِنَة وَالتَّنْوِين</div>
+    </div>
+  </div>
+  <p class="lead">Bunyi nun sukun ( نْ ) dan tanwin ( ـً ـٍ ـٌ ) adalah sama, maka hukumnya juga sama. Terdapat <b>4 hukum</b>: Izhar, Idgham, Iqlab dan Ikhfa'.</p>
+
+  <div class="tip"><span class="ic">💡</span><div><b>Ingat:</b> &nbsp;مٌ = مُنْ &nbsp;·&nbsp; مٍ = مِنْ &nbsp;·&nbsp; مًا = مَنْ &nbsp;— tanwin sebenarnya bunyi "nun" pada hujung perkataan.</div></div>
+
+  <!-- Izhar Halqi -->
+  <div class="card">
+    <h3><span class="pill green">Hukum 1</span> Izhar Halqi <span class="ar-h">إِظْهَار حَلْقِي</span></h3>
+    <dl class="facts">
+      <div><dt>Erti</dt><dd>Nun sukun / tanwin bertemu salah satu huruf <b>halqi</b> (kerongkong).</dd></div>
+      <div><dt>Huruf (6)</dt><dd>ء &nbsp; ه &nbsp; ع &nbsp; ح &nbsp; غ &nbsp; خ</dd></div>
+      <div><dt>Hukum bacaan</dt><dd>Dibaca <b>jelas &amp; nyata</b>, tanpa dengung.</dd></div>
+    </dl>
+    <div class="examples">
+      <div class="ex"><div class="ar">مِ<span class="hl hl-izhar">نْ أ</span>َحَدٍ</div><span class="arrow">·</span><div class="ar">عَذَا<span class="hl hl-izhar">بٌ أ</span>َلِيمٌ</div></div>
+      <div class="ex"><div class="ar">مِ<span class="hl hl-izhar">نْ ح</span>َبْلٍ</div><span class="arrow">·</span><div class="ar">قَوْ<span class="hl hl-izhar">مًا ع</span>َمِينَ</div></div>
+      <div class="ex"><div class="ar">مِ<span class="hl hl-izhar">نْ خ</span>َوْفٍ</div><span class="arrow">·</span><div class="ar">شَيْ<span class="hl hl-izhar">ءٍ ه</span>َالِكٌ</div></div>
+    </div>
+    <div class="tip"><span class="ic">✅</span><div>Elakkan dengung, saktah atau qalqalah ketika membaca Izhar.</div></div>
+  </div>
+
+  <!-- Idgham Bi Ghunnah -->
+  <div class="card">
+    <h3><span class="pill green">Hukum 2a</span> Idgham Bi Ghunnah <span class="ar-h">إِدْغَام بِغُنَّة</span></h3>
+    <dl class="facts">
+      <div><dt>Erti</dt><dd>Nun sukun / tanwin bertemu huruf idgham bi ghunnah dalam <b>dua kalimah</b>.</dd></div>
+      <div><dt>Huruf (4)</dt><dd>ي &nbsp; ن &nbsp; م &nbsp; و &nbsp; <span style="color:var(--muted)">(rangkaikan: يَنْمُو)</span></dd></div>
+      <div><dt>Hukum bacaan</dt><dd>Memasukkan huruf <b>beserta dengung</b> (2 harakat).</dd></div>
+    </dl>
+    <table class="tbl">
+      <thead><tr><th>Nun Sukun</th><th>Tanwin</th></tr></thead>
+      <tbody>
+        <tr><td class="ar">أَ<span class="hl hl-dengung">ن يَ</span>كُونَ</td><td class="ar">عِوَجًا <span class="hl hl-dengung">وَّ</span>لَا أَمْتًا</td></tr>
+        <tr><td class="ar">مِ<span class="hl hl-dengung">ن وَّ</span>رَائِهِمْ</td><td class="ar">رَحِيقٍ <span class="hl hl-dengung">مَّ</span>خْتُومٍ</td></tr>
+        <tr><td class="ar">مِ<span class="hl hl-dengung">ن نِّ</span>سَائِهِمْ</td><td class="ar">لَيَالٍ <span class="hl hl-dengung">وَّ</span>ثَمَانِيَةً</td></tr>
+        <tr><td class="ar">مِ<span class="hl hl-dengung">ن مَّ</span>اءٍ</td><td class="ar">قَوْمٌ <span class="hl hl-dengung">مُّ</span>سْرِفُونَ</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Idgham Bila Ghunnah -->
+  <div class="card">
+    <h3><span class="pill green">Hukum 2b</span> Idgham Bila Ghunnah <span class="ar-h">إِدْغَام بِلَا غُنَّة</span></h3>
+    <dl class="facts">
+      <div><dt>Erti</dt><dd>Nun sukun / tanwin bertemu Lam atau Ra' dalam <b>dua kalimah</b>.</dd></div>
+      <div><dt>Huruf (2)</dt><dd>ل &nbsp; ر</dd></div>
+      <div><dt>Hukum bacaan</dt><dd>Memasukkan huruf <b>tanpa dengung</b>.</dd></div>
+    </dl>
+    <table class="tbl">
+      <thead><tr><th>Nun Sukun</th><th>Tanwin</th></tr></thead>
+      <tbody>
+        <tr><td class="ar">مِ<span class="hl hl-idgham">ن لَّ</span>دُنْكَ</td><td class="ar">قَلِيلٍ <span class="hl hl-idgham">لَّ</span>يُصْبِحُنَّ</td></tr>
+        <tr><td class="ar">مِ<span class="hl hl-idgham">ن رَّ</span>بِّ</td><td class="ar">لَطِيفٌ <span class="hl hl-idgham">لِّ</span>مَا</td></tr>
+        <tr><td class="ar">فَمَ<span class="hl hl-idgham">ن رَّ</span>بُّكُمَا</td><td class="ar">غَفُورٌ <span class="hl hl-idgham">رَّ</span>حِيمٌ</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Iqlab -->
+  <div class="card">
+    <h3><span class="pill green">Hukum 3</span> Iqlab <span class="ar-h">إِقْلَاب</span></h3>
+    <dl class="facts">
+      <div><dt>Erti</dt><dd>Nun sukun / tanwin bertemu huruf <b>Ba'</b> — bunyi nun ditukar kepada bunyi mim disertai dengung.</dd></div>
+      <div><dt>Huruf (1)</dt><dd>ب</dd></div>
+      <div><dt>Hukum bacaan</dt><dd>Dengung (2 harakat).</dd></div>
+    </dl>
+    <table class="tbl">
+      <thead><tr><th>Nun Sukun</th><th>Tanwin</th></tr></thead>
+      <tbody>
+        <tr><td class="ar">مَ<span class="hl hl-iqlab">نْۢ بَ</span>خِلَ</td><td class="ar">جَزَاءًۢ <span class="hl hl-iqlab">بِ</span>مَا</td></tr>
+        <tr><td class="ar">مِ<span class="hl hl-iqlab">نْۢ بَ</span>عْدِ</td><td class="ar">عَوَانٌۢ <span class="hl hl-iqlab">بَ</span>يْنَ</td></tr>
+        <tr><td class="ar">أَ<span class="hl hl-iqlab">نْۢبَ</span>تَكُمْ</td><td class="ar">حِزْبٍۢ <span class="hl hl-iqlab">بِ</span>مَا</td></tr>
+      </tbody>
+    </table>
+    <div class="tip"><span class="ic">💡</span><div>Bibir dibuka sekadar sehelai kertas. Tanda mudah: ada <b>mim kecil ( ۢ )</b> di antara nun dan Ba'.</div></div>
+  </div>
+
+  <!-- Ikhfa Hakiki -->
+  <div class="card">
+    <h3><span class="pill green">Hukum 4</span> Ikhfa' Hakiki <span class="ar-h">إِخْفَاء حَقِيقِي</span></h3>
+    <dl class="facts">
+      <div><dt>Erti</dt><dd>Nun sukun / tanwin bertemu salah satu daripada baki <b>15 huruf</b> (selain huruf izhar, idgham &amp; iqlab).</dd></div>
+      <div><dt>Hukum bacaan</dt><dd>Dibaca samar antara izhar dan idgham, disertai dengung.</dd></div>
+    </dl>
+    <div class="huruf">
+      <b>ت</b><b>ث</b><b>ج</b><b>د</b><b>ذ</b><b>ز</b><b>س</b><b>ش</b><b>ص</b><b>ض</b><b>ط</b><b>ظ</b><b>ف</b><b>ق</b><b>ك</b>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Nun Sukun</th><th>Tanwin</th></tr></thead>
+      <tbody>
+        <tr><td class="ar">مَ<span class="hl hl-ikhfa">ن كَ</span>انَ</td><td class="ar">قَوْمً<span class="hl hl-ikhfa">ا صَ</span>الِحِينَ</td></tr>
+        <tr><td class="ar">مَ<span class="hl hl-ikhfa">ن جَ</span>اءَ</td><td class="ar">يَوْمَئِذٍ <span class="hl hl-ikhfa">زُ</span>رْقًا</td></tr>
+        <tr><td class="ar">أَ<span class="hl hl-ikhfa">ندَ</span>ادًا</td><td class="ar">عَذَا<span class="hl hl-ikhfa">بٌ شَ</span>دِيدٌ</td></tr>
+      </tbody>
+    </table>
+    <div class="tip"><span class="ic">✅</span><div>Elakkan menyentuh lidah ke langit-langit mulut semasa membaca Ikhfa' Hakiki.</div></div>
+  </div>
+</section>
+
+<!-- ===== BAB 4 ===== -->
+<section class="chapter" id="bab-4">
+  <div class="chapter-head">
+    <div class="chapter-num">04</div>
+    <div>
+      <h2>Hukum Mim Sukun</h2>
+      <div class="ar-h">الْمِيم السَّاكِنَة</div>
+    </div>
+  </div>
+  <p class="lead">Apabila Mim sukun ( مْ ) bertemu huruf selepasnya, terdapat <b>3 hukum</b>.</p>
+
+  <div class="card">
+    <h3><span class="pill green">1</span> Idgham Mitsli <span class="ar-h">إِدْغَام مِثْلِي</span></h3>
+    <p style="margin:0 0 4px"><b>Mim sukun bertemu Mim ( م )</b> — dibaca dengung.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">لَهُ<span class="hl hl-dengung">م مَّ</span>ثَلًا</div><div class="label">م ← م</div></div>
+      <div class="ex"><div class="ar">كُنتُ<span class="hl hl-dengung">م مُّ</span>سْلِمِينَ</div><div class="label">م ← م</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="pill green">2</span> Ikhfa' Syafawi <span class="ar-h">إِخْفَاء شَفَوِي</span></h3>
+    <p style="margin:0 0 4px"><b>Mim sukun bertemu Ba' ( ب )</b> — dibaca samar di bibir dengan dengung.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">تَرْمِيهِ<span class="hl hl-dengung">م بِ</span>حِجَارَةٍ</div><div class="label">م — ب</div></div>
+      <div class="ex"><div class="ar">إِنَّهُ<span class="hl hl-dengung">م بِ</span>ذَٰلِكَ</div><div class="label">م — ب</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="pill green">3</span> Izhar Syafawi <span class="ar-h">إِظْهَار شَفَوِي</span></h3>
+    <p style="margin:0 0 4px"><b>Mim sukun bertemu semua huruf kecuali Mim &amp; Ba'</b> — dibaca jelas, tanpa dengung.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">هُ<span class="hl hl-izhar">مْ نَ</span>ائِمُونَ</div><div class="label">م — ن</div></div>
+      <div class="ex"><div class="ar">أَنْتُ<span class="hl hl-izhar">مْ دَ</span>اخِرُونَ</div><div class="label">م — د</div></div>
+    </div>
+    <div class="tip"><span class="ic">⚠️</span><div>Berhati-hati ketika mim sukun bertemu <b>Wau ( و )</b> dan <b>Fa' ( ف )</b> — jangan dengungkan, kerana makhrajnya berdekatan dengan bibir.</div></div>
+  </div>
+</section>
+
+<!-- ===== BAB 5 ===== -->
+<section class="chapter" id="bab-5">
+  <div class="chapter-head">
+    <div class="chapter-num">05</div>
+    <div>
+      <h2>Hukum Idgham</h2>
+      <div class="ar-h">أَحْكَام الْإِدْغَام</div>
+    </div>
+  </div>
+  <p class="lead">Idgham bermaksud memasukkan huruf pertama (sukun) ke dalam huruf kedua (berbaris). Terdapat <b>3 jenis</b> berdasarkan makhraj &amp; sifat huruf.</p>
+
+  <div class="card">
+    <h3><span class="pill gold">1</span> Idgham Mutamatsilain <span class="ar-h">الْمُتَمَاثِلَيْن</span></h3>
+    <p style="margin:0 0 4px">Dua huruf yang <b>sama makhraj &amp; sama sifat</b> (kecuali Mim &amp; Nun yang telah masuk hukum lain).</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">يُسْرِ<span class="hl hl-idgham">ف فِّ</span>ي</div><div class="label">ف ← ف</div></div>
+      <div class="ex"><div class="ar">وَقَ<span class="hl hl-idgham">د دَّ</span>خَلُوا</div><div class="label">د ← د</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="pill gold">2</span> Idgham Mutaqaribain <span class="ar-h">الْمُتَقَارِبَيْن</span></h3>
+    <p style="margin:0 0 4px">Dua huruf yang <b>hampir sama</b> makhraj &amp; sifat. Dua pasangan: ( ق ← ك ) dan ( ل ← ر ).</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">أَلَمْ نَخْلُ<span class="hl hl-idgham">قكُّ</span>مْ</div><div class="label">ق ← ك</div></div>
+      <div class="ex"><div class="ar">قُ<span class="hl hl-idgham">ل رَّ</span>بِّ</div><div class="label">ل ← ر</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="pill gold">3</span> Idgham Mutajanisain <span class="ar-h">الْمُتَجَانِسَيْن</span></h3>
+    <p style="margin:0 0 4px">Dua huruf yang <b>sama makhraj tetapi berlainan sifat</b>. Terdapat 7 pasangan:</p>
+    <table class="tbl">
+      <thead><tr><th>Pasangan</th><th>Contoh</th></tr></thead>
+      <tbody>
+        <tr><td class="ctr">د ← ت</td><td class="ar">قَ<span class="hl hl-idgham">د تَّ</span>بَيَّنَ</td></tr>
+        <tr><td class="ctr">ت ← د</td><td class="ar">أُجِيبَ<span class="hl hl-idgham">ت دَّ</span>عْوَتُكُمَا</td></tr>
+        <tr><td class="ctr">ت ← ط</td><td class="ar">وَدَّ<span class="hl hl-idgham">ت طَّ</span>ائِفَةٌ</td></tr>
+        <tr><td class="ctr">ط ← ت</td><td class="ar">بَسَ<span class="hl hl-idgham">طتُّ</span>مْ</td></tr>
+        <tr><td class="ctr">ث ← ذ</td><td class="ar">يَلْهَ<span class="hl hl-idgham">ث ذَّٰ</span>لِكَ</td></tr>
+        <tr><td class="ctr">ذ ← ظ</td><td class="ar">إِ<span class="hl hl-idgham">ذ ظَّ</span>لَمُوا</td></tr>
+        <tr><td class="ctr">ب ← م</td><td class="ar">ارْكَ<span class="hl hl-idgham">ب مَّ</span>عَنَا</td></tr>
+      </tbody>
+    </table>
+    <div class="note correction"><span class="ic">✎</span><div><b>Semakan:</b> Pasangan ke-7 yang betul ialah <b>ب ← م</b> (ارْكَب مَّعَنَا), bukan "ن ← م" seperti tertulis dalam edisi asal.</div></div>
+  </div>
+</section>
+
+<!-- ===== BAB 6 ===== -->
+<section class="chapter" id="bab-6">
+  <div class="chapter-head">
+    <div class="chapter-num">06</div>
+    <div>
+      <h2>Qalqalah</h2>
+      <div class="ar-h">الْقَلْقَلَة</div>
+    </div>
+  </div>
+  <p class="lead">Qalqalah bermaksud <b>lantunan</b> — bunyi anjal yang berlaku pada huruf qalqalah yang sukun.</p>
+
+  <div class="card">
+    <dl class="facts">
+      <div><dt>Erti</dt><dd>Lantunan / pantulan suara.</dd></div>
+      <div><dt>Huruf (5)</dt><dd><span class="hl hl-qalqalah">ق ط ب ج د</span></dd></div>
+    </dl>
+    <div class="tip"><span class="ic">💡</span><div><b>Mudah diingat:</b> rangkaikan huruf qalqalah sebagai <b>قُطْبُ جَدٍّ</b> — "Qutbu Jaddin".</div></div>
+  </div>
+
+  <div class="cols">
+    <div class="card sub">
+      <h3>1 · Sughra <span class="ar-h">صُغْرَى</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Huruf qalqalah sukun asli di <b>tengah</b> kalimah. Lantunan ringan.</p>
+      <div class="examples">
+        <div class="ex"><div class="ar">يَ<span class="hl hl-qalqalah">قْ</span>رَأُ</div></div>
+        <div class="ex"><div class="ar">يَ<span class="hl hl-qalqalah">جْ</span>عَلُ</div></div>
+        <div class="ex"><div class="ar">سُ<span class="hl hl-qalqalah">بْ</span>حَانَ</div></div>
+      </div>
+    </div>
+    <div class="card sub">
+      <h3>2 · Kubra <span class="ar-h">كُبْرَى</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Huruf qalqalah di <b>hujung</b> kalimah, sukun kerana waqaf. Lantunan sederhana.</p>
+      <div class="examples">
+        <div class="ex"><div class="ar">خَلَ<span class="hl hl-qalqalah">قْ</span></div><span class="arrow">←</span><div class="label">خَلَقَ</div></div>
+        <div class="ex"><div class="ar">أَحَ<span class="hl hl-qalqalah">دْ</span></div><span class="arrow">←</span><div class="label">أَحَدٌ</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h3>3 · Akbar <span class="ar-h">أَكْبَر</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Huruf qalqalah di hujung kalimah, sukun kerana waqaf <b>dan bertasydid ( ـّ )</b>. Lantunan paling kuat.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">الْحَ<span class="hl hl-qalqalah">قّْ</span></div><span class="arrow">←</span><div class="label">الْحَقُّ</div></div>
+      <div class="ex"><div class="ar">وَتَ<span class="hl hl-qalqalah">بّْ</span></div><span class="arrow">←</span><div class="label">وَتَبَّ</div></div>
+      <div class="ex"><div class="ar">الْحَ<span class="hl hl-qalqalah">جّْ</span></div><span class="arrow">←</span><div class="label">الْحَجُّ</div></div>
+    </div>
+    <div class="note"><span class="ic">ℹ️</span><div>Sebahagian ulama hanya membahagikan qalqalah kepada dua (Sughra &amp; Kubra), dan menganggap Akbar sebagai sebahagian daripada Kubra yang dikuatkan.</div></div>
+  </div>
+</section>
+
+<!-- ===== BAB 7 ===== -->
+<section class="chapter" id="bab-7">
+  <div class="chapter-head">
+    <div class="chapter-num">07</div>
+    <div>
+      <h2>Lafaz Jalalah</h2>
+      <div class="ar-h">لَفْظ الْجَلَالَة · اللَّه</div>
+    </div>
+  </div>
+  <p class="lead">Lafaz Jalalah ialah kalimah <b>اللَّه</b>. Cara membacanya bergantung pada baris huruf sebelumnya.</p>
+
+  <div class="cols">
+    <div class="card">
+      <h3>1 · Tafkhim <span class="ar-h">تَفْخِيم</span> <span class="pill gold">Tebal</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Apabila didahului baris <b>fathah</b> atau <b>dhommah</b>.</p>
+      <div class="examples">
+        <div class="ex"><div class="ar">وَ<span class="hl hl-mad">اللَّ</span>هُ</div><div class="label">selepas fathah</div></div>
+        <div class="ex"><div class="ar">نَصْرُ <span class="hl hl-mad">اللَّ</span>هِ</div><div class="label">selepas dhommah</div></div>
+      </div>
+      <div class="tip" style="margin-top:12px"><span class="ic">👄</span><div>Bibir dimuncungkan sedikit ke hadapan.</div></div>
+    </div>
+    <div class="card">
+      <h3>2 · Tarqiq <span class="ar-h">تَرْقِيق</span> <span class="pill green">Nipis</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Apabila didahului baris <b>kasrah</b>.</p>
+      <div class="examples">
+        <div class="ex"><div class="ar">بِ<span class="hl hl-izhar">اللَّ</span>هِ</div><div class="label">selepas kasrah</div></div>
+        <div class="ex"><div class="ar">بِسْمِ <span class="hl hl-izhar">اللَّ</span>هِ</div><div class="label">selepas kasrah</div></div>
+      </div>
+      <div class="tip" style="margin-top:12px"><span class="ic">🙂</span><div>Bibir dilebarkan sedikit, seakan-akan senyum.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BAB 8 ===== -->
+<section class="chapter" id="bab-8">
+  <div class="chapter-head">
+    <div class="chapter-num">08</div>
+    <div>
+      <h2>Alif Lam</h2>
+      <div class="ar-h">أَلْ التَّعْرِيف</div>
+    </div>
+  </div>
+  <p class="lead">Alif Lam ( ال ) di pangkal perkataan terbahagi kepada <b>dua</b>: Syamsiah dan Qamariah.</p>
+
+  <div class="card">
+    <h3>1 · Alif Lam Syamsiah <span class="ar-h">شَمْسِيَّة</span></h3>
+    <p style="margin:0 0 4px">Huruf Lam <b>tidak dibaca</b> (lebur/idgham) — huruf selepasnya bertasydid. Ada <b>14 huruf</b>.</p>
+    <div class="huruf">
+      <b>ت</b><b>ث</b><b>د</b><b>ذ</b><b>ر</b><b>ز</b><b>س</b><b>ش</b><b>ص</b><b>ض</b><b>ط</b><b>ظ</b><b>ل</b><b>ن</b>
+    </div>
+    <div class="examples">
+      <div class="ex"><div class="ar">وَا<span class="hl hl-idgham">لتِّ</span>ينِ</div></div>
+      <div class="ex"><div class="ar">ا<span class="hl hl-idgham">لثَّ</span>مَرَاتِ</div></div>
+      <div class="ex"><div class="ar">ا<span class="hl hl-idgham">لدَّ</span>ارِ</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>2 · Alif Lam Qamariah <span class="ar-h">قَمَرِيَّة</span></h3>
+    <p style="margin:0 0 4px">Huruf Lam <b>dibaca jelas</b> (izhar). Ada <b>14 huruf</b>.</p>
+    <div class="huruf gold">
+      <b>ء</b><b>ب</b><b>غ</b><b>ح</b><b>ج</b><b>ك</b><b>و</b><b>خ</b><b>ف</b><b>ع</b><b>ق</b><b>ي</b><b>م</b><b>ه</b>
+    </div>
+    <div class="examples">
+      <div class="ex"><div class="ar">ا<span class="hl hl-izhar">لْبَ</span>لَدِ</div></div>
+      <div class="ex"><div class="ar">ا<span class="hl hl-izhar">لْحَ</span>دِيدِ</div></div>
+      <div class="ex"><div class="ar">ا<span class="hl hl-izhar">لْعَ</span>زِيزِ</div></div>
+    </div>
+    <div class="tip"><span class="ic">💡</span><div><b>Mudah diingat:</b> 14 huruf Qamariah terkumpul dalam ungkapan <b>اِبْغِ حَجَّكَ وَخَفْ عَقِيمَهُ</b>.</div></div>
+    <div class="note correction"><span class="ic">✎</span><div><b>Semakan:</b> Huruf <b>Hamzah ( ء )</b> dan <b>Ha' ( ه )</b> dilengkapkan dalam senarai Qamariah supaya cukup 14 huruf.</div></div>
+  </div>
+</section>
+
+<!-- ===== BAB 9 ===== -->
+<section class="chapter" id="bab-9">
+  <div class="chapter-head">
+    <div class="chapter-num">09</div>
+    <div>
+      <h2>Izhar Wajib</h2>
+      <div class="ar-h">إِظْهَار مُطْلَق</div>
+    </div>
+  </div>
+  <p class="lead">Dikenali juga sebagai <b>Izhar Mutlak</b>.</p>
+
+  <div class="card">
+    <dl class="facts">
+      <div><dt>Erti</dt><dd>Nun sukun bertemu <b>Wau ( و )</b> atau <b>Ya' ( ي )</b> di dalam <b>satu perkataan</b>.</dd></div>
+      <div><dt>Huruf (2)</dt><dd>و &nbsp; ي</dd></div>
+      <div><dt>Hukum bacaan</dt><dd>Dibaca <b>jelas</b> (bukan idgham), supaya makna kekal.</dd></div>
+      <div><dt>Kalimah</dt><dd>Hanya 4 perkataan dalam Al-Quran.</dd></div>
+    </dl>
+    <div class="examples">
+      <div class="ex"><div class="ar">بُ<span class="hl hl-izhar">نْيَ</span>انٌ</div><div class="label">نْ — ي</div></div>
+      <div class="ex"><div class="ar">الدُّ<span class="hl hl-izhar">نْيَ</span>ا</div><div class="label">نْ — ي</div></div>
+      <div class="ex"><div class="ar">صِ<span class="hl hl-izhar">نْوَ</span>انٌ</div><div class="label">نْ — و</div></div>
+      <div class="ex"><div class="ar">قِ<span class="hl hl-izhar">نْوَ</span>انٌ</div><div class="label">نْ — و</div></div>
+    </div>
+    <div class="note"><span class="ic">ℹ️</span><div>Jika nun sukun bertemu Wau/Ya' dalam <b>dua perkataan berasingan</b>, hukumnya menjadi Idgham Bi Ghunnah (Bab 3), bukan izhar.</div></div>
+  </div>
+</section>
+
+<!-- ===== BAB 10 ===== -->
+<section class="chapter" id="bab-10">
+  <div class="chapter-head">
+    <div class="chapter-num">10</div>
+    <div>
+      <h2>Hukum Ra'</h2>
+      <div class="ar-h">أَحْكَام الرَّاء</div>
+    </div>
+  </div>
+  <p class="lead">Huruf Ra' ( ر ) dibaca <b>tebal (tafkhim)</b> atau <b>nipis (tarqiq)</b> bergantung pada baris dan keadaannya.</p>
+
+  <div class="card">
+    <h3><span class="pill gold">Tebal</span> Ra' Tafkhim <span class="ar-h">تَفْخِيم</span></h3>
+    <table class="tbl">
+      <thead><tr><th>Keadaan</th><th>Contoh</th></tr></thead>
+      <tbody>
+        <tr><td>Ra' berbaris fathah / fathatain</td><td class="ar"><span class="hl hl-mad">رَ</span>بَّنَا · خَيْ<span class="hl hl-mad">رًا</span></td></tr>
+        <tr><td>Ra' berbaris dhommah / dhommatain</td><td class="ar"><span class="hl hl-mad">رُ</span>زِقَ · كَبِي<span class="hl hl-mad">رٌ</span></td></tr>
+        <tr><td>Ra' sukun didahului fathah / dhommah</td><td class="ar">أَ<span class="hl hl-mad">رْ</span>سَلَ · قُ<span class="hl hl-mad">رْ</span>آنَ</td></tr>
+        <tr><td>Ra' sukun didahului kasrah (hamzah wasal)</td><td class="ar">أَمِ ا<span class="hl hl-mad">رْ</span>تَابُوا · ا<span class="hl hl-mad">رْ</span>جِعُوا</td></tr>
+        <tr><td>Ra' sukun didahului kasrah, diikuti huruf isti'la'</td><td class="ar">مِ<span class="hl hl-mad">رْ</span>صَادِ · قِ<span class="hl hl-mad">رْ</span>طَاسٌ</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3><span class="pill green">Nipis</span> Ra' Tarqiq <span class="ar-h">تَرْقِيق</span></h3>
+    <table class="tbl">
+      <thead><tr><th>Keadaan</th><th>Contoh</th></tr></thead>
+      <tbody>
+        <tr><td>Ra' berbaris kasrah / kasratain</td><td class="ar"><span class="hl hl-izhar">رِ</span>جْسٌ · خُسْ<span class="hl hl-izhar">رٍ</span></td></tr>
+        <tr><td>Ra' sukun didahului kasrah asli</td><td class="ar">فِ<span class="hl hl-izhar">رْ</span>عَوْنَ · شِ<span class="hl hl-izhar">رْ</span>كٌ</td></tr>
+        <tr><td>Ra' (waqaf) didahului Ya' sukun</td><td class="ar">بَصِي<span class="hl hl-izhar">رْ</span> · خَيْ<span class="hl hl-izhar">رْ</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip"><span class="ic">💡</span><div><b>Huruf Isti'la' (7):</b> &nbsp;خ &nbsp; ص &nbsp; ض &nbsp; غ &nbsp; ط &nbsp; ق &nbsp; ظ &nbsp; — rangkaikan sebagai <b>خُصَّ ضَغْطٍ قِظْ</b>.</div></div>
+  <div class="note correction"><span class="ic">✎</span><div><b>Semakan:</b> Huruf isti'la' yang lengkap ialah <b>7 huruf</b> termasuk <b>Ghain ( غ )</b>, yang tertinggal dalam senarai edisi asal.</div></div>
+</section>
+
+<!-- ===== BAB 11 ===== -->
+<section class="chapter" id="bab-11">
+  <div class="chapter-head">
+    <div class="chapter-num">11</div>
+    <div>
+      <h2>Hukum Mad</h2>
+      <div class="ar-h">أَحْكَام الْمَدّ</div>
+    </div>
+  </div>
+  <p class="lead">Mad ( مَدّ ) bermaksud <b>bacaan panjang</b>. Huruf mad ada 3: <b>ا · و · ي</b>. Mad terbahagi kepada Mad Asli dan Mad Far'i.</p>
+
+  <div class="card">
+    <h3>Mad Asli / Thabi'i <span class="ar-h">مَدّ أَصْلِي</span></h3>
+    <p style="margin:0 0 4px">Memanjangkan suara pada huruf mad tanpa sebab tambahan (tiada hamzah / sukun). Kadar: <b>2 harakat</b>.</p>
+    <table class="tbl">
+      <thead><tr><th>Syarat</th><th>Contoh</th></tr></thead>
+      <tbody>
+        <tr><td>Alif sukun, sebelumnya fathah ( ـَ ا )</td><td class="ar">قَ<span class="hl hl-mad">ا</span>لَ</td></tr>
+        <tr><td>Wau sukun, sebelumnya dhommah ( ـُ و )</td><td class="ar">يَقُ<span class="hl hl-mad">و</span>لُ</td></tr>
+        <tr><td>Ya' sukun, sebelumnya kasrah ( ـِ ي )</td><td class="ar">قِ<span class="hl hl-mad">ي</span>لَ</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-family:'Bricolage Grotesque';font-size:22px;margin:26px 0 6px">Mad Far'i <span class="ar-h" style="color:var(--gold-deep)">مَدّ فَرْعِي</span></h3>
+  <p style="color:var(--muted);margin:0 0 16px">Mad yang panjangnya melebihi mad asli kerana <b>hamzah</b> atau <b>sukun</b>. Terdapat 13 jenis.</p>
+
+  <p class="section-eyebrow" style="margin:6px 0 8px">A · Kerana Hamzah</p>
+
+  <div class="card sub">
+    <h3><span class="pill gold">1</span> Mad Wajib Muttasil <span class="ar-h">مُتَّصِل</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Huruf mad bertemu hamzah dalam <b>satu kalimah</b>. Kadar: <b>wajib 4 / 5 harakat</b>.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">جَ<span class="hl hl-mad">ا</span>ءَ</div></div>
+      <div class="ex"><div class="ar">السَّمَ<span class="hl hl-mad">ا</span>ءُ</div></div>
+      <div class="ex"><div class="ar">سُوءَ → سَوَ<span class="hl hl-mad">ا</span>ءٌ</div></div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h3><span class="pill gold">2</span> Mad Jaiz Munfasil <span class="ar-h">مُنْفَصِل</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Huruf mad di hujung satu kalimah bertemu hamzah di <b>awal kalimah berikutnya</b>. Kadar: <b>harus 2 / 4 / 5 harakat</b>.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">لَ<span class="hl hl-mad">ا</span> أَعْبُدُ</div></div>
+      <div class="ex"><div class="ar">إِنَّ<span class="hl hl-mad">ا</span> أَعْطَيْنَا</div></div>
+      <div class="ex"><div class="ar">بِمَ<span class="hl hl-mad">ا</span> أُنزِلَ</div></div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h3><span class="pill gold">3</span> Mad Silah <span class="ar-h">صِلَة</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Berlaku pada <b>Ha' Dhamir ( ـه )</b> di hujung perkataan.</p>
+    <div class="facts">
+      <div><dt>Qasirah</dt><dd>Ha' dhamir bertemu huruf <b>bukan hamzah</b> — 2 harakat. <span class="ar" style="font-size:20px">مَالَهُۥ · لِرَبِّهِۦ</span></dd></div>
+      <div><dt>Thawilah</dt><dd>Ha' dhamir bertemu <b>hamzah</b> — 2/4/5 harakat. <span class="ar" style="font-size:20px">عِنْدَهُۥٓ إِلَّا · عِلْمِهِۦٓ إِلَّا</span></dd></div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h3><span class="pill gold">4</span> Mad Badal <span class="ar-h">بَدَل</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Dua hamzah berhimpun dalam satu kalimah; hamzah kedua ditukar kepada huruf mad. Kadar: <b>2 harakat</b>. (Juga dipanggil <em>Mad Gantian</em>.)</p>
+    <table class="tbl">
+      <thead><tr><th>Asal</th><th>Dibaca</th></tr></thead>
+      <tbody>
+        <tr><td class="ar">أَأْمَنَ</td><td class="ar">ءَ<span class="hl hl-mad">ا</span>مَنُوا</td></tr>
+        <tr><td class="ar">أُؤْذُوا</td><td class="ar">أُ<span class="hl hl-mad">و</span>ذُوا</td></tr>
+        <tr><td class="ar">إِئْمَان</td><td class="ar">إِ<span class="hl hl-mad">ي</span>مَان</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="section-eyebrow" style="margin:18px 0 8px">B · Kerana Sukun</p>
+
+  <div class="card sub">
+    <h3><span class="pill green">5</span> Mad 'Aridh Lis Sukun <span class="ar-h">عَارِض لِلسُّكُون</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Huruf mad bertemu huruf berbaris yang dimatikan kerana <b>waqaf</b>. Kadar: <b>2 / 4 / 6 harakat</b>.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">لِلْحَاكِمِ<span class="hl hl-mad">ي</span>نْ</div><span class="arrow">←</span><div class="label">لِلْحَاكِمِينَ</div></div>
+      <div class="ex"><div class="ar">رَبِّ الْعَالَمِ<span class="hl hl-mad">ي</span>نْ</div><span class="arrow">←</span><div class="label">الْعَالَمِينَ</div></div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h3><span class="pill green">6</span> Mad Lin <span class="ar-h">لِين</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Wau / Ya' sukun didahului fathah, bertemu huruf hidup yang dimatikan kerana <b>waqaf</b>. Kadar: <b>2 / 4 / 6 harakat</b>.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">مِنْ خَ<span class="hl hl-mad">وْ</span>فْ</div><span class="arrow">←</span><div class="label">خَوْفٍ</div></div>
+      <div class="ex"><div class="ar">بَيْنَ يَدَ<span class="hl hl-mad">يْ</span>هْ</div><span class="arrow">←</span><div class="label">يَدَيْهِ</div></div>
+    </div>
+    <div class="note"><span class="ic">ℹ️</span><div>Jika tidak diwaqafkan, ia menjadi <b>Harfu Lin</b> biasa (tidak dipanjangkan).</div></div>
+  </div>
+
+  <div class="card sub">
+    <h3><span class="pill green">7</span> Mad 'Iwadh <span class="ar-h">عِوَض</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Huruf berbaris <b>fathatain ( ـً )</b> di hujung kalimah yang diwaqafkan — dibaca panjang sebagai ganti tanwin (kecuali Ta' Marbutah ـة). Kadar: <b>2 harakat</b>.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">حَكِيمَ<span class="hl hl-mad">ا</span></div><span class="arrow">←</span><div class="label">حَكِيمًا</div></div>
+      <div class="ex"><div class="ar">بَصِيرَ<span class="hl hl-mad">ا</span></div><span class="arrow">←</span><div class="label">بَصِيرًا</div></div>
+    </div>
+    <div class="note correction"><span class="ic">✎</span><div><b>Semakan:</b> Contoh Mad 'Iwadh mesti berakhir dengan <b>fathatain</b> (cth: حَكِيمًا → حَكِيمَا). "يَشَاءَ" dalam edisi asal bukan contoh Mad 'Iwadh.</div></div>
+  </div>
+
+  <div class="card sub">
+    <h3><span class="pill green">8</span> Mad Tamkin <span class="ar-h">تَمْكِين</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Dua Ya' berhimpun: Ya' pertama berbaris kasrah bertasydid ( يِّ ) bertemu Ya' sukun ( يْ ). Kadar: <b>2 harakat</b>.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">حُ<span class="hl hl-mad">يِّي</span>تُمْ</div></div>
+      <div class="ex"><div class="ar">النَّبِ<span class="hl hl-mad">يِّي</span>نَ</div></div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h3><span class="pill green">9</span> Mad Farq <span class="ar-h">فَرْق</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Hamzah istifham (pertanyaan) bertemu hamzah wasal yang berbaris — dipanjangkan untuk <b>membezakan</b> antara soalan dan berita. Kadar: <b>6 harakat</b>. (Juga dipanggil <em>Mad Istifham</em>.)</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">قُلْ <span class="hl hl-mad">آ</span>لذَّكَرَيْنِ</div></div>
+      <div class="ex"><div class="ar"><span class="hl hl-mad">آ</span>للَّهُ خَيْرٌ</div></div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h3><span class="pill green">10</span> Mad Lazim Kalimi Muthaqqal <span class="ar-h">كَلِمِي مُثَقَّل</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Huruf mad bertemu huruf <b>bertasydid</b> dalam satu kalimah. Kadar: <b>6 harakat</b>.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">الْحَ<span class="hl hl-mad">ا</span>قَّةُ</div></div>
+      <div class="ex"><div class="ar">وَلَا الضَّ<span class="hl hl-mad">ا</span>لِّينَ</div></div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h3><span class="pill green">11</span> Mad Lazim Kalimi Mukhaffaf <span class="ar-h">كَلِمِي مُخَفَّف</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Huruf mad bertemu huruf <b>bertanda sukun</b> dalam satu kalimah. Kadar: <b>6 harakat</b>.</p>
+    <div class="examples"><div class="ex"><div class="ar">ءَ<span class="hl hl-mad">ا</span>لْآنَ</div></div></div>
+    <div class="note"><span class="ic">ℹ️</span><div>Hanya satu kalimah dalam Al-Quran, terdapat di <b>dua tempat</b> — Surah Yunus ayat 51 &amp; 91.</div></div>
+  </div>
+
+  <div class="card sub">
+    <h3><span class="pill green">12–13</span> Mad Lazim Harfi <span class="ar-h">حَرْفِي</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Huruf mad bertemu sukun pada <b>huruf-huruf Muqatta'ah</b> (huruf keramat di awal sesetengah surah). Kadar: <b>6 harakat</b>.</p>
+    <div class="cols" style="margin-top:8px">
+      <div class="card" style="margin:0;background:#fff">
+        <b style="color:var(--emerald-deep)">12 · Muthaqqal (berat)</b>
+        <p style="margin:4px 0 0;font-size:14px">Selepas huruf mad ada <b>idgham</b>.<br><span class="ar" style="font-size:24px">الٓمٓ · طٰسٓمّٓ</span></p>
+      </div>
+      <div class="card" style="margin:0;background:#fff">
+        <b style="color:var(--emerald-deep)">13 · Mukhaffaf (ringan)</b>
+        <p style="margin:4px 0 0;font-size:14px">Selepas huruf mad <b>tiada idgham</b>.<br><span class="ar" style="font-size:24px">الٓرٰ · صٓ · قٓ · نٓ</span></p>
+      </div>
+    </div>
+    <div class="tip"><span class="ic">💡</span><div>Huruf Muqatta'ah yang dibaca <b>6 harakat</b>: ن ق ص ع س ل ك م (نَقَصَ عَسَلُكُمْ). Yang dibaca <b>2 harakat</b>: ح ي ط ه ر (حَيٌّ طَهُرَ). Alif tidak dipanjangkan.</div></div>
+  </div>
+
+  <div class="card">
+    <h4>Ringkasan Kadar Harakat Mad</h4>
+    <table class="tbl">
+      <thead><tr><th>Hukum Mad</th><th class="ctr">2</th><th class="ctr">4</th><th class="ctr">5</th><th class="ctr">6</th></tr></thead>
+      <tbody>
+        <tr><td>Mad Asli</td><td class="ctr">●</td><td></td><td></td><td></td></tr>
+        <tr><td>Mad Wajib Muttasil</td><td></td><td class="ctr">●</td><td class="ctr">●</td><td></td></tr>
+        <tr><td>Mad Jaiz Munfasil</td><td class="ctr">●</td><td class="ctr">●</td><td class="ctr">●</td><td></td></tr>
+        <tr><td>Mad 'Aridh Lis Sukun</td><td class="ctr">●</td><td class="ctr">●</td><td></td><td class="ctr">●</td></tr>
+        <tr><td>Mad 'Iwadh</td><td class="ctr">●</td><td></td><td></td><td></td></tr>
+        <tr><td>Mad Silah Qasirah</td><td class="ctr">●</td><td></td><td></td><td></td></tr>
+        <tr><td>Mad Silah Thawilah</td><td class="ctr">●</td><td class="ctr">●</td><td class="ctr">●</td><td></td></tr>
+        <tr><td>Mad Badal</td><td class="ctr">●</td><td></td><td></td><td></td></tr>
+        <tr><td>Mad Tamkin</td><td class="ctr">●</td><td></td><td></td><td></td></tr>
+        <tr><td>Mad Lin</td><td class="ctr">●</td><td class="ctr">●</td><td></td><td class="ctr">●</td></tr>
+        <tr><td>Mad Lazim Kalimi Muthaqqal</td><td></td><td></td><td></td><td class="ctr">●</td></tr>
+        <tr><td>Mad Lazim Kalimi Mukhaffaf</td><td></td><td></td><td></td><td class="ctr">●</td></tr>
+        <tr><td>Mad Lazim Harfi Muthaqqal</td><td></td><td></td><td></td><td class="ctr">●</td></tr>
+        <tr><td>Mad Lazim Harfi Mukhaffaf</td><td></td><td></td><td></td><td class="ctr">●</td></tr>
+        <tr><td>Mad Farq</td><td></td><td></td><td></td><td class="ctr">●</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== BAB 12 ===== -->
+<section class="chapter" id="bab-12">
+  <div class="chapter-head">
+    <div class="chapter-num">12</div>
+    <div>
+      <h2>Waqaf</h2>
+      <div class="ar-h">الْوَقْف · Berhenti</div>
+    </div>
+  </div>
+  <p class="lead">Waqaf bermaksud berhenti. Kefahaman waqaf yang betul menjaga <b>makna</b> ayat.</p>
+
+  <div class="card">
+    <h4>Jenis Waqaf (Mengikut Makna)</h4>
+    <table class="tbl">
+      <thead><tr><th>Jenis</th><th>Maksud</th><th>Penerangan</th></tr></thead>
+      <tbody>
+        <tr><td>Taamm <span class="ar">تَامّ</span></td><td>Sempurna</td><td>Ayat putus sempurna — tiada kaitan lafaz/makna dengan ayat selepasnya.</td></tr>
+        <tr><td>Kaaf <span class="ar">كَافٍ</span></td><td>Memadai</td><td>Putus pada lafaz, tetapi masih berkaitan dari segi makna.</td></tr>
+        <tr><td>Hasan <span class="ar">حَسَن</span></td><td>Baik</td><td>Masih berkaitan lafaz &amp; makna, namun maknanya telah memadai untuk berhenti.</td></tr>
+        <tr><td>Qabih <span class="ar">قَبِيح</span></td><td>Buruk</td><td>Berhenti pada tempat yang belum sempurna maknanya — boleh mengelirukan.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h4>Tanda-Tanda Waqaf</h4>
+    <table class="tbl">
+      <thead><tr><th class="ctr">Tanda</th><th>Maksud</th><th>Hukum</th></tr></thead>
+      <tbody>
+        <tr><td class="ctr ar" style="font-size:26px">مـ</td><td>Waqaf Lazim</td><td><b>Wajib berhenti</b> — jika tidak, makna boleh berubah.</td></tr>
+        <tr><td class="ctr ar" style="font-size:26px">لا</td><td>La Waqaf / Mamnu'</td><td><b>Jangan berhenti</b> (di pertengahan ayat).</td></tr>
+        <tr><td class="ctr ar" style="font-size:26px">ج</td><td>Waqaf Jaiz</td><td>Boleh berhenti atau sambung.</td></tr>
+        <tr><td class="ctr ar" style="font-size:26px">صلى</td><td>Al-Wasl Aula</td><td>Sambung lebih baik.</td></tr>
+        <tr><td class="ctr ar" style="font-size:26px">قلى</td><td>Al-Waqf Aula</td><td>Berhenti lebih baik.</td></tr>
+        <tr><td class="ctr ar" style="font-size:22px">∴ … ∴</td><td>Mu'anaqah</td><td>Berhenti di <b>salah satu</b> sahaja, bukan kedua-duanya.</td></tr>
+        <tr><td class="ctr ar" style="font-size:26px">ۜ</td><td>Saktah</td><td>Berhenti seketika <b>tanpa mengambil nafas</b>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== BAB 13 ===== -->
+<section class="chapter" id="bab-13">
+  <div class="chapter-head">
+    <div class="chapter-num">13</div>
+    <div>
+      <h2>Tingkatan Bacaan Al-Quran</h2>
+      <div class="ar-h">مَرَاتِب التِّلَاوَة</div>
+    </div>
+  </div>
+  <p class="lead">Empat tingkatan kelajuan bacaan — semuanya wajib menjaga hukum tajwid. Disusun dari paling perlahan ke paling laju.</p>
+
+  <div class="card">
+    <table class="tbl">
+      <thead><tr><th>Peringkat</th><th>Penerangan</th></tr></thead>
+      <tbody>
+        <tr><td>Tahqiq <span class="ar">التَّحْقِيق</span></td><td>Paling perlahan &amp; tenang — sesuai untuk yang baru belajar tajwid.</td></tr>
+        <tr><td>Tartil <span class="ar">التَّرْتِيل</span></td><td>Tenang &amp; sederhana laju, menjaga hukum tajwid <b>beserta tadabbur makna</b>. Inilah cara terbaik.</td></tr>
+        <tr><td>Tadwir <span class="ar">التَّدْوِير</span></td><td>Pertengahan antara Tartil dan Hadar — selalunya digunakan ketika solat.</td></tr>
+        <tr><td>Hadar <span class="ar">الْحَدْر</span></td><td>Laju, tetapi tetap menjaga dengung, mad dan waqaf.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== BAB 14 ===== -->
+<section class="chapter" id="bab-14">
+  <div class="chapter-head">
+    <div class="chapter-num">14</div>
+    <div>
+      <h2>Hamzah Qata' &amp; Hamzah Wasal</h2>
+      <div class="ar-h">هَمْزَة الْقَطْع وَهَمْزَة الْوَصْل</div>
+    </div>
+  </div>
+  <p class="lead">Dua jenis hamzah di pangkal perkataan — satu sentiasa disebut, satu lagi gugur ketika disambung.</p>
+
+  <div class="cols">
+    <div class="card">
+      <h3>Hamzah Qata' <span class="ar-h">الْقَطْع</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Ditulis <b>أ · إ · ء</b>. Sentiasa disebut — di awal mahupun ketika sambung.</p>
+      <div class="examples">
+        <div class="ex"><div class="ar">أَخْرَجَ</div></div>
+        <div class="ex"><div class="ar">إِنْسَانٌ</div></div>
+        <div class="ex"><div class="ar">جَاءَكُمْ</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Hamzah Wasal <span class="ar-h">الْوَصْل</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Ditulis <b>ٱ</b> (seperti kepala huruf Sad). Disebut di awal bacaan, <b>gugur</b> ketika disambung.</p>
+      <div class="examples">
+        <div class="ex"><div class="ar">قُلِ ٱلْحَمْدُ لِلَّهِ</div></div>
+        <div class="ex"><div class="ar">رَبِّ ٱلْعَالَمِينَ</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h4>Cara Membaca Hamzah Wasal di Permulaan Bacaan</h4>
+    <ol class="steps">
+      <li><b>Bertemu Lam ( ال )</b> — dibariskan <b>fathah</b>. Cth: ٱلرَّحْمَٰنِ · ٱلطَّارِقُ · ٱلنَّاسُ.</li>
+      <li><b>Bukan Lam, huruf ketiga dhommah</b> — dibariskan <b>dhommah</b>. Cth: ٱسْجُدُوا · ٱدْخُلُوا.</li>
+      <li><b>Bukan Lam, huruf ketiga fathah / kasrah</b> — dibariskan <b>kasrah</b>. Cth: ٱهْدِنَا · ٱمْشُوا · ٱقْضُوا.</li>
+    </ol>
+    <div class="note"><span class="ic">ℹ️</span><div><b>7 kata nama</b> yang dikasrahkan tanpa panduan huruf ketiga: ٱبْن · ٱبْنَت · ٱثْنَيْن · ٱثْنَتَيْن · ٱسْم · ٱمْرُؤ · ٱمْرَأَة.</div></div>
+  </div>
+</section>
+
+<!-- ===== BAB 15 ===== -->
+<section class="chapter" id="bab-15">
+  <div class="chapter-head">
+    <div class="chapter-num">15</div>
+    <div>
+      <h2>Bacaan Gharib &amp; Musykilat</h2>
+      <div class="ar-h">الْغَرِيب وَالْمُشْكِلَات</div>
+    </div>
+  </div>
+  <p class="lead"><b>Gharib</b> ialah bacaan yang samar &amp; memerlukan penjelasan khusus. <b>Musykilat</b> ialah bacaan yang tulisannya berbeza daripada cara membacanya.</p>
+
+  <div class="card">
+    <h3>1 · Saktah <span class="ar-h">سَكْتَة</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Berhenti seketika tanpa bernafas, dengan niat menyambung bacaan. Ada <b>4 tempat</b>:</p>
+    <table class="tbl">
+      <thead><tr><th>Tempat</th><th>Contoh</th></tr></thead>
+      <tbody>
+        <tr><td>Al-Kahfi : 1</td><td class="ar">عِوَجًا ۜ قَيِّمًا</td></tr>
+        <tr><td>Yasin : 52</td><td class="ar">مَرْقَدِنَا ۜ هَٰذَا</td></tr>
+        <tr><td>Al-Qiyamah : 27</td><td class="ar">مَنْ ۜ رَاقٍ</td></tr>
+        <tr><td>Al-Mutaffifin : 14</td><td class="ar">بَلْ ۜ رَانَ</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>2 · Sajdah <span class="ar-h">سَجْدَة</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Ditandai gambar berbentuk kubah. Disunatkan sujud tilawah bagi pembaca &amp; pendengar. Terdapat <b>15 ayat sajdah</b> dalam Al-Quran.</p>
+    <div class="doa" style="padding:22px;margin:8px 0 0">
+      <div class="tag">Bacaan Sujud Tilawah</div>
+      <div class="quran" style="font-size:24px;line-height:2.3">سَجَدَ وَجْهِيَ لِلَّذِي خَلَقَهُ وَصَوَّرَهُ وَشَقَّ سَمْعَهُ وَبَصَرَهُ بِحَوْلِهِ وَقُوَّتِهِ، فَتَبَارَكَ اللَّهُ أَحْسَنُ الْخَالِقِينَ</div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="card sub">
+      <h3>3 · Imalah <span class="ar-h">إِمَالَة</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Memiringkan bunyi fathah ke arah kasrah (seakan-akan "re"). Hanya <b>1 tempat</b> — Surah Hud : 41.</p>
+      <div class="ex"><div class="ar">مَجْر۪ىٰهَا</div><div class="label">dibaca "majrēhā"</div></div>
+    </div>
+    <div class="card sub">
+      <h3>4 · Isymam <span class="ar-h">إِشْمَام</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Mencampurkan bunyi dhommah pada sukun dengan memuncungkan bibir. Hanya <b>1 tempat</b> — Surah Yusuf : 11.</p>
+      <div class="ex"><div class="ar">لَا تَأْمَنَّا</div></div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="card sub">
+      <h3>5 · Tashil <span class="ar-h">تَسْهِيل</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Meringankan hamzah kedua antara hamzah dan alif. Hanya <b>1 tempat</b> — Surah Fussilat : 44.</p>
+      <div class="ex"><div class="ar">ءَا۬عْجَمِيٌّ</div></div>
+    </div>
+    <div class="card sub">
+      <h3>6 · Naql <span class="ar-h">نَقْل</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Memindahkan baris hamzah ke huruf sebelumnya. Hanya <b>1 tempat</b> — Surah Al-Hujurat : 11.</p>
+      <div class="ex"><div class="ar">بِئْسَ الِاسْمُ</div><div class="label">dibaca "bi'salismu"</div></div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h3>7 · Badal <span class="ar-h">بَدَل</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Menggantikan satu huruf dengan huruf lain ketika dibaca. Contoh: hamzah ditulis tetapi dibaca Ya' (Surah Al-Ahqaf : 4).</p>
+    <div class="ex"><div class="ar">ٱئْتُونِي → إِيتُونِي بِكِتَابٍ</div></div>
+    <p style="margin:10px 0 0;font-size:14px;color:var(--muted)">Termasuk juga huruf Sad ( ص ) yang ditulis tetapi dibaca Sin ( س ) — cth: يَبْصُۜطُ (Al-Baqarah:245), بَصْۜطَةً (Al-A'raf:69).</p>
+  </div>
+
+  <div class="card sub">
+    <h3>8 · Nun Wiqayah <span class="ar-h">نُون الْوِقَايَة</span></h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Nun berbaris kasrah yang ditambah apabila perkataan bertanwin bertemu Alif Lam ( ال ) atau hamzah wasal. Juga dipanggil <em>Nun 'Iwadh</em>.</p>
+    <table class="tbl">
+      <thead><tr><th>Tulisan</th><th>Dibaca</th></tr></thead>
+      <tbody>
+        <tr><td class="ar">خَيْرًا ٱلْوَصِيَّةُ</td><td class="ar">خَيْرَ<span class="hl hl-izhar">نِ</span> الْوَصِيَّةُ</td></tr>
+        <tr><td class="ar">يَوْمَئِذٍ ٱلْحَقُّ</td><td class="ar">يَوْمَئِذِ<span class="hl hl-izhar">نِ</span> الْحَقُّ</td></tr>
+        <tr><td class="ar">لَهْوًا ٱنفَضُّوا</td><td class="ar">لَهْوَ<span class="hl hl-izhar">نِ</span> انفَضُّوا</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cols">
+    <div class="card sub">
+      <h3>9 · Ash-Shifrul Mustadir <span style="font-family:inherit">( O )</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Bulatan <b>bulat penuh</b> di atas huruf mad — huruf itu <b>tidak dibaca panjang langsung</b>, sama ada wasal atau waqaf.</p>
+      <div class="ex"><div class="ar">أَنَا۠</div><div class="label">dibaca "ana"</div></div>
+    </div>
+    <div class="card sub">
+      <h3>10 · Ash-Shifrul Mustatil <span style="font-family:inherit">( 0 )</span></h3>
+      <p style="margin:0 0 6px;font-size:14.5px">Bulatan <b>lonjong tegak</b> di atas mad — tidak dibaca panjang ketika <b>wasal</b>, tetapi dibaca panjang ketika <b>waqaf</b>.</p>
+      <div class="ex"><div class="ar">قَوَارِيرَا۟</div><div class="label">wasal: pendek · waqaf: panjang</div></div>
+    </div>
+  </div>
+
+  <div class="card sub">
+    <h3>11 · Huruf-Huruf Kecil</h3>
+    <p style="margin:0 0 6px;font-size:14.5px">Huruf <b>Alif, Ya', Wau &amp; Nun</b> kecil yang tidak ditulis penuh pada Mushaf Uthmani, tetapi <b>wajib disebut</b> dalam bacaan.</p>
+    <div class="examples">
+      <div class="ex"><div class="ar">ذَٰلِكَ ٱلْكِتَٰبُ</div></div>
+      <div class="ex"><div class="ar">وَرَحْمَتُهُۥ</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="bab-16">
+  <div class="chapter-head">
+    <div class="chapter-num">16</div>
+    <div>
+      <h2>Tanda Bacaan Mushaf Baru</h2>
+      <div class="ar-h">عَلَامَاتُ الضَّبْط</div>
+    </div>
+  </div>
+  <p class="lead">Mushaf <b>Rasm Uthmani</b> (cetakan Madinah &amp; Malaysia terkini) menggunakan <b>tanda khas</b> untuk memandu bacaan. Sekali kita faham tanda-tanda ini, hukum tajwid dapat dibaca <em>terus dari mushaf</em> tanpa perlu menghafal setiap perkataan.</p>
+
+  <div class="tip">
+    <b>Petua mudah:</b> Lihat sahaja sama ada huruf itu <b>bertanda sukun (ْ)</b> atau <b>tidak</b>, dan sama ada tanwin itu <b>lurus sejajar</b> atau <b>berjenjang</b>. Tanda menentukan hukum.
+  </div>
+
+  <div class="card">
+    <h3>A · Tanda pada Nun Sukun &amp; Tanwin</h3>
+    <table class="tbl">
+      <thead><tr><th>Tanda pada mushaf</th><th>Hukum</th><th>Cara baca</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Nun ada <b>tanda sukun bulat ( نْ )</b> &middot; atau tanwin <b>lurus sejajar ( ـٌ ـٍ ـً )</b></td>
+          <td><span class="pill green">Izhar</span></td>
+          <td>Sebut nun dengan <b>jelas &amp; nyata</b>, tiada dengung.</td>
+        </tr>
+        <tr>
+          <td>Nun <b>tiada tanda sukun</b> &middot; atau tanwin <b>berjenjang / tidak sejajar ( ـٌ ـٍ ـً )</b>, diikuti huruf <em>idgham</em> (ي ر م ل و ن)</td>
+          <td><span class="pill" style="background:#efe9fb;color:#5b3da8;border-color:#d9cdf3">Idgham</span></td>
+          <td>Masukkan bunyi nun ke huruf berikut, biasanya <span class="hl hl-dengung">berdengung</span>.</td>
+        </tr>
+        <tr>
+          <td>Nun <b>tiada tanda sukun</b> &middot; atau tanwin <b>berjenjang</b>, diikuti 15 huruf <em>ikhfa'</em></td>
+          <td><span class="pill" style="background:#e7effb;color:#23508f;border-color:#cfe0f6">Ikhfa'</span></td>
+          <td>Samarkan bunyi nun antara izhar &amp; idgham, <span class="hl hl-dengung">dengung ± 2 harakat</span>.</td>
+        </tr>
+        <tr>
+          <td><b>Mim kecil ( مۢ )</b> diletak di atas/selepas nun sukun atau tanwin, sebelum huruf <b>Ba ( ب )</b></td>
+          <td><span class="pill gold">Iqlab</span></td>
+          <td>Tukar bunyi nun kepada <span class="hl hl-iqlab">mim</span> serta dengung.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>B · Tanda pada Mim Sukun</h3>
+    <table class="tbl">
+      <thead><tr><th>Tanda pada mushaf</th><th>Hukum</th><th>Cara baca</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Mim ada <b>tanda sukun ( مْ )</b>, diikuti mana-mana huruf selain <b>م</b> &amp; <b>ب</b></td>
+          <td><span class="pill green">Izhar Syafawi</span></td>
+          <td>Sebut mim dengan jelas, bibir rapat sempurna.</td>
+        </tr>
+        <tr>
+          <td>Mim <b>tiada tanda sukun</b>, bertemu <b>Mim ( م )</b> bertasydid</td>
+          <td><span class="pill" style="background:#efe9fb;color:#5b3da8;border-color:#d9cdf3">Idgham Mitsli</span></td>
+          <td>Masukkan kedua mim serta <span class="hl hl-dengung">dengung</span>.</td>
+        </tr>
+        <tr>
+          <td>Mim <b>tiada tanda sukun</b>, bertemu <b>Ba ( ب )</b></td>
+          <td><span class="pill" style="background:#e7effb;color:#23508f;border-color:#cfe0f6">Ikhfa' Syafawi</span></td>
+          <td>Samarkan mim dengan dengung, bibir tidak rapat penuh.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>C · Tanda Lain yang Kerap Ditemui</h3>
+    <table class="tbl">
+      <thead><tr><th>Tanda</th><th>Maksud</th></tr></thead>
+      <tbody>
+        <tr><td class="ctr ar" style="font-size:26px">ۤ</td><td>Tanda <b>mad</b> (garis lengkung) — panjangkan bacaan 4–6 harakat.</td></tr>
+        <tr><td class="ctr ar" style="font-size:26px">ّ</td><td><b>Tasydid (sabdu)</b> — huruf dibaca berganda / ditekan.</td></tr>
+        <tr><td class="ctr ar" style="font-size:26px">ۡ</td><td><b>Sukun</b> — huruf dimatikan, tiada baris.</td></tr>
+        <tr><td class="ctr ar" style="font-size:26px">۟</td><td><b>Shifr Mustadir</b> (bulatan kecil) — huruf tidak dibaca langsung (cth: Alif pada أَنَا۠).</td></tr>
+        <tr><td class="ctr ar" style="font-size:26px">۠</td><td><b>Shifr Mustatil</b> (bujur tegak) — tidak dibaca ketika wasal, dibaca ketika waqaf.</td></tr>
+        <tr><td class="ctr" style="font-size:22px">۞</td><td>Tanda <b>bunga / hizb</b> — penanda permulaan juzuk, hizb atau suku hizb di tepi mushaf.</td></tr>
+        <tr><td class="ctr ar" style="font-size:22px">۩</td><td>Tanda <b>Sajdah</b> — disunatkan sujud tilawah.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="chapter" id="bab-17">
+  <div class="chapter-head">
+    <div class="chapter-num">17</div>
+    <div>
+      <h2>Doa Sebelum &amp; Selepas Membaca</h2>
+      <div class="ar-h">دُعَاءُ تِلَاوَةِ الْقُرْآن</div>
+    </div>
+  </div>
+  <p class="lead">Sebahagian daripada adab tilawah ialah memulakan dengan doa memohon dibuka kefahaman, dan mengakhiri dengan doa agar Al-Quran menjadi pembela. Marilah hayati maknanya, bukan sekadar menyebut.</p>
+
+  <div class="doa">
+    <div class="tag">Doa Sebelum Membaca</div>
+    <div class="quran" style="line-height:2.4">اللَّهُمَّ افْتَحْ عَلَيْنَا حِكْمَتَكَ وَانْشُرْ عَلَيْنَا مِنْ خَزَائِنِ رَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِينَ ۝ رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِنْ لِسَانِي يَفْقَهُوا قَوْلِي ۝ رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا</div>
+    <p style="margin:18px 0 0;font-size:14.5px;color:#dcece4;line-height:1.7">"Ya Allah, bukakanlah kepada kami hikmah-Mu, kurniakanlah kepada kami khazanah rahmat-Mu, wahai Tuhan Yang Maha Penyayang. Tuhanku, lapangkanlah dadaku, mudahkanlah urusanku, dan leraikanlah simpulan dari lidahku supaya mereka memahami kata-kataku. Tuhanku, tambahkanlah ilmuku dan kurniakanlah aku kefahaman."</p>
+  </div>
+
+  <div class="doa">
+    <div class="tag">Doa Selepas Membaca</div>
+    <div class="quran" style="line-height:2.4">اللَّهُمَّ ارْحَمْنَا بِالْقُرْآنِ، وَاجْعَلْهُ لَنَا إِمَامًا وَنُورًا وَهُدًى وَرَحْمَةً ۝ اللَّهُمَّ ذَكِّرْنَا مِنْهُ مَا نَسِينَا وَعَلِّمْنَا مِنْهُ مَا جَهِلْنَا، وَارْزُقْنَا تِلَاوَتَهُ آنَاءَ اللَّيْلِ وَأَطْرَافَ النَّهَارِ، وَاجْعَلْهُ لَنَا حُجَّةً يَا رَبَّ الْعَالَمِينَ</div>
+    <p style="margin:18px 0 0;font-size:14.5px;color:#dcece4;line-height:1.7">"Ya Allah, rahmatilah kami dengan Al-Quran. Jadikanlah ia bagi kami sebagai pemimpin, cahaya, petunjuk dan rahmat. Ya Allah, ingatkanlah kami apa yang kami lupa daripadanya, ajarkanlah kami apa yang kami jahil daripadanya, kurniakanlah kami membacanya pada waktu malam dan siang, dan jadikanlah ia hujah pembela bagi kami, wahai Tuhan sekalian alam."</p>
+  </div>
+
+  <div class="tip">
+    <b>Penutup:</b> Semoga setiap huruf yang dibaca dengan betul tajwidnya menjadi saksi &amp; pemberat amal di akhirat kelak. Teruskan berlatih bersama guru bertauliah agar bacaan kita kekal sahih dan bersanad.
+  </div>
+</section>
+
+<!-- ===== LATIHAN ===== -->
+<section class="chapter" id="latihan">
+  <div class="chapter-head">
+    <div class="chapter-num">18</div>
+    <div>
+      <h2>Latihan Setiap Bab</h2>
+      <div class="ar-h">تَدْرِيبَات</div>
+    </div>
+  </div>
+  <p class="lead">Jawab latihan ini selepas mempelajari setiap bab. Tanda <b>(O)</b> objektif, <b>(I)</b> isi tempat kosong, <b>(P)</b> padankan. Skema jawapan ada di bahagian akhir buku.</p>
+
+  <div class="card">
+    <h3>Bab 1 · Isti'azah &amp; Basmalah</h3>
+    <ol class="steps">
+      <li><b>(O)</b> Lafaz <span class="ar">أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ</span> dinamakan:<span class="opsi"><b>A.</b> Basmalah &nbsp;&nbsp; <b>B.</b> Isti'azah &nbsp;&nbsp; <b>C.</b> Hamdalah</span></li>
+      <li><b>(I)</b> Surah yang tidak dimulakan dengan basmalah ialah Surah ____________.</li>
+      <li><b>(I)</b> Terdapat ______ cara membaca ta'awwudz, basmalah dan awal surah.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 2 · Ghunnah</h3>
+    <ol class="steps">
+      <li><b>(I)</b> Ghunnah ialah dengung pada huruf ______ dan ______ yang bertasydid.</li>
+      <li><b>(O)</b> Kadar dengung ghunnah:<span class="opsi"><b>A.</b> 1 harakat &nbsp;&nbsp; <b>B.</b> 2 harakat &nbsp;&nbsp; <b>C.</b> 4 harakat</span></li>
+      <li><b>(I)</b> Suara dengung keluar daripada rongga ______.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 3 · Nun Sukun atau Tanwin</h3>
+    <ol class="steps">
+      <li><b>(O)</b> Bilangan hukum nun sukun &amp; tanwin:<span class="opsi"><b>A.</b> 2 &nbsp;&nbsp; <b>B.</b> 3 &nbsp;&nbsp; <b>C.</b> 4</span></li>
+      <li><b>(I)</b> Huruf izhar halqi berjumlah ______ huruf.</li>
+      <li><b>(P)</b> Padankan huruf dengan hukumnya:<span class="opsi">(i) <span class="ar">ء</span> &nbsp; (ii) <span class="ar">ب</span> &nbsp; (iii) <span class="ar">ي</span> &nbsp; (iv) <span class="ar">ت</span></span><div class="bank"><b>Pilihan:</b> Izhar &middot; Iqlab &middot; Idgham &middot; Ikhfa'</div></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 4 · Hukum Mim Sukun</h3>
+    <ol class="steps">
+      <li><b>(O)</b> Mim sukun bertemu Ba <span class="ar">( ب )</span> ialah:<span class="opsi"><b>A.</b> Izhar Syafawi &nbsp;&nbsp; <b>B.</b> Ikhfa' Syafawi &nbsp;&nbsp; <b>C.</b> Idgham</span></li>
+      <li><b>(I)</b> Mim sukun bertemu Mim dinamakan Idgham ____________.</li>
+      <li><b>(I)</b> Mim sukun bertemu huruf selain <span class="ar">م</span> dan <span class="ar">ب</span> dinamakan ____________.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 5 · Hukum Idgham</h3>
+    <ol class="steps">
+      <li><b>(P)</b> Padankan jenis idgham dengan maksudnya:<span class="opsi">(i) Mutamatsilain &nbsp; (ii) Mutaqaribain &nbsp; (iii) Mutajanisain</span><div class="bank"><b>Pilihan:</b> sama makhraj &amp; sifat &middot; hampir sama makhraj/sifat &middot; sama makhraj beza sifat</div></li>
+      <li><b>(I)</b> Idgham Mutajanisain mempunyai ______ pasangan.</li>
+      <li><b>(O)</b> <span class="ar">قَد تَّبَيَّنَ</span> (د → ت) ialah contoh:<span class="opsi"><b>A.</b> Mutamatsilain &nbsp;&nbsp; <b>B.</b> Mutajanisain &nbsp;&nbsp; <b>C.</b> Mutaqaribain</span></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 6 · Qalqalah</h3>
+    <ol class="steps">
+      <li><b>(I)</b> Huruf qalqalah <span class="ar">ق ط ب ج د</span> dihimpun dalam rangkai kata ____________.</li>
+      <li><b>(O)</b> Qalqalah pada huruf bertasydid di hujung ayat &amp; berhenti:<span class="opsi"><b>A.</b> Sughra &nbsp;&nbsp; <b>B.</b> Kubra &nbsp;&nbsp; <b>C.</b> Akbar</span></li>
+      <li><b>(I)</b> Qalqalah bermaksud bunyi ______ (anjal).</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 7 · Lafaz Jalalah</h3>
+    <ol class="steps">
+      <li><b>(O)</b> Lafaz <span class="ar">اللّٰه</span> selepas baris kasrah dibaca:<span class="opsi"><b>A.</b> Tebal (tafkhim) &nbsp;&nbsp; <b>B.</b> Nipis (tarqiq)</span></li>
+      <li><b>(I)</b> <span class="ar">نَصْرُ اللّٰه</span> — lafaz Allah dibaca ______ kerana sebelumnya baris dhommah.</li>
+      <li><b>(I)</b> <span class="ar">بِسْمِ اللّٰه</span> — lafaz Allah dibaca ______ kerana sebelumnya baris kasrah.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 8 · Alif Lam</h3>
+    <ol class="steps">
+      <li><b>(O)</b> Pada Alif Lam Syamsiah, huruf Lam:<span class="opsi"><b>A.</b> dibaca jelas &nbsp;&nbsp; <b>B.</b> tidak dibaca (dimasukkan)</span></li>
+      <li><b>(I)</b> Bilangan huruf syamsiah ______ dan huruf qamariah ______.</li>
+      <li><b>(P)</b> Padankan:<span class="opsi">(i) <span class="ar">الشَّمْس</span> &nbsp; (ii) <span class="ar">الْقَمَر</span></span><div class="bank"><b>Pilihan:</b> Syamsiah &middot; Qamariah</div></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 9 · Izhar Wajib</h3>
+    <ol class="steps">
+      <li><b>(O)</b> Izhar Wajib berlaku apabila nun sukun bertemu Wau/Ya' dalam:<span class="opsi"><b>A.</b> satu kalimah &nbsp;&nbsp; <b>B.</b> dua kalimah</span></li>
+      <li><b>(I)</b> Izhar Wajib hanya berlaku pada ______ kalimah dalam Al-Quran.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 10 · Hukum Ra'</h3>
+    <ol class="steps">
+      <li><b>(O)</b> Ra' berbaris kasrah dibaca:<span class="opsi"><b>A.</b> Tebal &nbsp;&nbsp; <b>B.</b> Nipis</span></li>
+      <li><b>(I)</b> Ra' berbaris fathah atau dhommah dibaca ______ (tafkhim).</li>
+      <li><b>(P)</b> Padankan:<span class="opsi">(i) Tafkhim &nbsp; (ii) Tarqiq</span><div class="bank"><b>Pilihan:</b> Tebal &middot; Nipis</div></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 11 · Hukum Mad</h3>
+    <ol class="steps">
+      <li><b>(I)</b> Kadar bacaan mad asli (tabii) ialah ______ harakat.</li>
+      <li><b>(O)</b> Bilangan mad far'i:<span class="opsi"><b>A.</b> 10 &nbsp;&nbsp; <b>B.</b> 13 &nbsp;&nbsp; <b>C.</b> 15</span></li>
+      <li><b>(I)</b> Mad bertemu hamzah dalam satu kalimah dinamakan Mad ______ Muttasil.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 12 · Waqaf</h3>
+    <ol class="steps">
+      <li><b>(P)</b> Padankan tanda waqaf dengan hukumnya:<span class="opsi">(i) <span class="ar">مـ</span> &nbsp; (ii) <span class="ar">ج</span> &nbsp; (iii) <span class="ar">لا</span></span><div class="bank"><b>Pilihan:</b> Wajib berhenti &middot; Harus berhenti/sambung &middot; Larangan berhenti</div></li>
+      <li><b>(O)</b> Tanda <span class="ar">قلى</span> bermaksud:<span class="opsi"><b>A.</b> berhenti lebih utama &nbsp;&nbsp; <b>B.</b> sambung lebih utama</span></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 13 · Tingkatan Bacaan</h3>
+    <ol class="steps">
+      <li><b>(P)</b> Padankan tingkatan dengan kelajuannya:<span class="opsi">(i) Tahqiq &nbsp; (ii) Tartil &nbsp; (iii) Tadwir &nbsp; (iv) Hadar</span><div class="bank"><b>Pilihan:</b> sangat perlahan &middot; perlahan &amp; elok &middot; sederhana &middot; cepat</div></li>
+      <li><b>(I)</b> Bacaan yang paling sesuai untuk belajar dan memahami ialah ______.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 14 · Hamzah Qata' &amp; Wasal</h3>
+    <ol class="steps">
+      <li><b>(O)</b> Hamzah Wasal:<span class="opsi"><b>A.</b> sentiasa dibaca &nbsp;&nbsp; <b>B.</b> gugur apabila disambung (washal)</span></li>
+      <li><b>(I)</b> Hamzah Qata' <span class="ar">( ء )</span> sentiasa ______ sama ada di awal, tengah atau hujung perkataan.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 15 · Gharib &amp; Musykilat</h3>
+    <ol class="steps">
+      <li><b>(P)</b> Padankan istilah dengan maksudnya:<span class="opsi">(i) Saktah &nbsp; (ii) Imalah &nbsp; (iii) Tashil</span><div class="bank"><b>Pilihan:</b> berhenti seketika tanpa nafas &middot; condong fathah ke kasrah &middot; ringankan hamzah</div></li>
+      <li><b>(I)</b> Saktah bermaksud berhenti seketika ______ bernafas, dengan niat menyambung bacaan.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 16 · Tanda Bacaan Mushaf</h3>
+    <ol class="steps">
+      <li><b>(O)</b> Tanwin yang lurus/sejajar menunjukkan hukum:<span class="opsi"><b>A.</b> Izhar &nbsp;&nbsp; <b>B.</b> Idgham</span></li>
+      <li><b>(O)</b> Tanda mim kecil <span class="ar">( ۢ )</span> sebelum Ba menunjukkan:<span class="opsi"><b>A.</b> Ikhfa' &nbsp;&nbsp; <b>B.</b> Iqlab</span></li>
+      <li><b>(I)</b> Tanwin berjenjang (tidak sejajar) menunjukkan idgham atau ______.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Bab 17 · Doa Sebelum &amp; Selepas Membaca</h3>
+    <ol class="steps">
+      <li><b>(I)</b> Antara adab tilawah ialah memulakan bacaan dengan ______.</li>
+      <li><b>(O)</b> <span class="ar">رَبِّ زِدْنِي عِلْمًا</span> bermaksud:<span class="opsi"><b>A.</b> Tuhanku, tambahkanlah ilmuku &nbsp;&nbsp; <b>B.</b> Tuhanku, ampunkanlah aku</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== SKEMA JAWAPAN ===== -->
+<section class="chapter" id="skema">
+  <div class="chapter-head">
+    <div class="chapter-num">19</div>
+    <div>
+      <h2>Skema Jawapan</h2>
+      <div class="ar-h">الإِجَابَات</div>
+    </div>
+  </div>
+  <p class="lead">Semak jawapan latihan di sini. Galakkan murid mencuba sendiri terlebih dahulu sebelum menyemak.</p>
+
+  <div class="card">
+    <table class="tbl">
+      <thead><tr><th>Bab</th><th>Jawapan</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b></td><td>1) B (Isti'azah) &nbsp; 2) At-Taubah &nbsp; 3) 4 cara</td></tr>
+        <tr><td><b>2</b></td><td>1) Nun <span class="ar">نّ</span> &amp; Mim <span class="ar">مّ</span> &nbsp; 2) B (2 harakat) &nbsp; 3) hidung (khaisyum)</td></tr>
+        <tr><td><b>3</b></td><td>1) C (4) &nbsp; 2) 6 huruf &nbsp; 3) <span class="ar">ء</span>=Izhar, <span class="ar">ب</span>=Iqlab, <span class="ar">ي</span>=Idgham, <span class="ar">ت</span>=Ikhfa'</td></tr>
+        <tr><td><b>4</b></td><td>1) B (Ikhfa' Syafawi) &nbsp; 2) Mitsli (Mutamatsilain) &nbsp; 3) Izhar Syafawi</td></tr>
+        <tr><td><b>5</b></td><td>1) i=sama makhraj &amp; sifat, ii=hampir sama, iii=sama makhraj beza sifat &nbsp; 2) 7 &nbsp; 3) B (Mutajanisain)</td></tr>
+        <tr><td><b>6</b></td><td>1) <span class="ar">قُطْبُ جَدٍّ</span> &nbsp; 2) C (Akbar) &nbsp; 3) lantun / anjal</td></tr>
+        <tr><td><b>7</b></td><td>1) B (Nipis) &nbsp; 2) tebal &nbsp; 3) nipis</td></tr>
+        <tr><td><b>8</b></td><td>1) B (tidak dibaca) &nbsp; 2) 14 &amp; 14 &nbsp; 3) <span class="ar">الشَّمْس</span>=Syamsiah, <span class="ar">الْقَمَر</span>=Qamariah</td></tr>
+        <tr><td><b>9</b></td><td>1) A (satu kalimah) &nbsp; 2) 4 kalimah</td></tr>
+        <tr><td><b>10</b></td><td>1) B (Nipis) &nbsp; 2) tebal &nbsp; 3) Tafkhim=Tebal, Tarqiq=Nipis</td></tr>
+        <tr><td><b>11</b></td><td>1) 2 harakat &nbsp; 2) B (13) &nbsp; 3) Wajib</td></tr>
+        <tr><td><b>12</b></td><td>1) <span class="ar">مـ</span>=Wajib berhenti, <span class="ar">ج</span>=Harus, <span class="ar">لا</span>=Larangan berhenti &nbsp; 2) A (berhenti lebih utama)</td></tr>
+        <tr><td><b>13</b></td><td>1) Tahqiq=sangat perlahan, Tartil=perlahan &amp; elok, Tadwir=sederhana, Hadar=cepat &nbsp; 2) Tartil</td></tr>
+        <tr><td><b>14</b></td><td>1) B (gugur apabila disambung) &nbsp; 2) dibaca</td></tr>
+        <tr><td><b>15</b></td><td>1) Saktah=berhenti tanpa nafas, Imalah=condong fathah ke kasrah, Tashil=ringankan hamzah &nbsp; 2) tanpa</td></tr>
+        <tr><td><b>16</b></td><td>1) A (Izhar) &nbsp; 2) B (Iqlab) &nbsp; 3) ikhfa'</td></tr>
+        <tr><td><b>17</b></td><td>1) doa (memohon dibuka kefahaman) &nbsp; 2) A</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <svg class="star" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M50 4 61 28 86 16 76 41 96 50 76 59 86 84 61 72 50 96 39 72 14 84 24 59 4 50 24 41 14 16 39 28Z" fill="#B5862B"/>
+  </svg>
+  <p style="margin:0 0 6px;font-weight:700;color:#fdfcf6;font-size:15px">Nota Tajwid &middot; SRI Iqra' Al-Hafiz</p>
+  <p style="margin:0 0 4px">Disusun oleh <b>Ustaz Syed Muhammad Syukran bin Syed Noah</b></p>
+  <p style="margin:0 0 14px;color:#9fbcb0">Sekolah Rendah Islam Iqra' Al-Hafiz, Denai Alam, Shah Alam, Selangor</p>
+  <p style="margin:0;font-size:12.5px;color:#88a89c">Edisi disemak &amp; dimodenkan &middot; Sistem warna tajwid untuk memudahkan pembelajaran generasi kini.<br>وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا</p>
+</footer>
+
+<button class="totop" aria-label="Kembali ke atas" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+  const btn=document.querySelector('.totop');
+  addEventListener('scroll',()=>{btn.classList.toggle('show',scrollY>700)});
+</script>
+</body>
+</html>
