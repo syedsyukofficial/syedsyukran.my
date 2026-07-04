@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="ms" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panduan Umrah — Langkah Demi Langkah dari Miqat hingga Tahallul</title>
+<meta name="description" content="Panduan Umrah interaktif untuk jemaah kali pertama: niat ihram, talbiah, tawaf, saie dan tahallul — lengkap dengan dalil, doa penuh, infografik, peta lokasi Kaabah dan nota mutawwif.">
+<meta name="keywords" content="panduan umrah, cara umrah, niat umrah, tawaf, saie, tahallul, miqat, talbiah, ihram">
+<meta name="theme-color" content="#0B3D2E">
+<meta property="og:title" content="Panduan Umrah">
+<meta property="og:description" content="Panduan langkah demi langkah ibadah Umrah dari Miqat hingga Tahallul — mesra warga emas dan jemaah kali pertama.">
+<meta property="og:type" content="website">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --hijau-tua:#0B3D2E;
+  --hijau:#14663F;
+  --hijau-muda:#E6F0E9;
+  --emas:#B8912A;
+  --emas-terang:#D9B84A;
+  --emas-muda:#F3EBD3;
+  --putih:#FBFAF5;
+  --kad:#FFFFFF;
+  --teks:#1E2A24;
+  --teks-2:#4A5A52;
+  --garis:#DCE5DF;
+  --merah:#9C3B2E;
+  --merah-muda:#F9ECE9;
+  --biru:#2E5B9C;
+  --biru-muda:#EAF0F9;
+  --bayang:0 2px 10px rgba(11,61,46,.08);
+  --radius:18px;
+}
+[data-theme="dark"]{
+  --hijau-tua:#0A1F18;
+  --hijau:#1E7A4E;
+  --hijau-muda:#12291F;
+  --emas:#D9B84A;
+  --emas-terang:#E8CE7A;
+  --emas-muda:#2A2410;
+  --putih:#0D1A14;
+  --kad:#13241C;
+  --teks:#EDEAE0;
+  --teks-2:#A8B5AD;
+  --garis:#24382E;
+  --merah:#E08575;
+  --merah-muda:#2E1A16;
+  --biru:#8AB0E8;
+  --biru-muda:#14202E;
+  --bayang:0 2px 12px rgba(0,0,0,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+body{
+  font-family:'Atkinson Hyperlegible',system-ui,sans-serif;
+  background:var(--putih);color:var(--teks);
+  font-size:1.125rem;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{font-family:'Marcellus',serif;font-weight:400;line-height:1.25}
+.arab{font-family:'Amiri',serif;direction:rtl;text-align:center;line-height:2.3;font-size:1.7rem;color:var(--hijau);}
+[data-theme="dark"] .arab{color:var(--emas-terang)}
+img{max-width:100%;display:block}
+a{color:var(--hijau)}
+button{font-family:inherit;cursor:pointer}
+
+/* ===== Progress bar ===== */
+#progress{position:fixed;top:0;left:0;height:5px;width:0%;z-index:60;
+  background:linear-gradient(90deg,var(--emas),var(--emas-terang));transition:width .1s linear}
+
+/* ===== App bar ===== */
+header.appbar{
+  position:sticky;top:0;z-index:50;
+  background:var(--hijau-tua);color:#F6F2E4;
+  padding:.7rem 1rem;box-shadow:0 2px 12px rgba(0,0,0,.25);
+}
+.appbar-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:.75rem}
+.logo{display:flex;align-items:center;gap:.6rem;flex:1;min-width:0}
+.logo svg{flex:none}
+.logo-teks{min-width:0}
+.logo-teks b{font-family:'Marcellus',serif;font-weight:400;font-size:1.15rem;display:block;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo-teks span{font-size:.72rem;opacity:.85;letter-spacing:.14em;text-transform:uppercase;color:var(--emas-terang)}
+.ikon-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  color:#F6F2E4;width:44px;height:44px;border-radius:12px;font-size:1.2rem;
+  display:grid;place-items:center;transition:background .2s}
+.ikon-btn:hover,.ikon-btn:focus-visible{background:rgba(255,255,255,.25)}
+.ikon-btn:focus-visible{outline:2px solid var(--emas-terang);outline-offset:2px}
+
+/* Search */
+#panelCari{max-width:1000px;margin:.6rem auto 0;display:none}
+#panelCari.buka{display:block}
+#kotakCari{width:100%;padding:.8rem 1rem;font-size:1.05rem;border-radius:12px;
+  border:2px solid var(--emas);background:var(--kad);color:var(--teks)}
+#infoCari{font-size:.85rem;margin-top:.35rem;color:var(--emas-terang)}
+
+/* ===== Step chips nav ===== */
+nav.langkah{
+  position:sticky;top:64px;z-index:45;background:var(--putih);
+  border-bottom:1px solid var(--garis);padding:.5rem 0;
+}
+.langkah-trek{display:flex;gap:.5rem;overflow-x:auto;padding:.25rem 1rem;
+  max-width:1000px;margin:0 auto;scrollbar-width:none}
+.langkah-trek::-webkit-scrollbar{display:none}
+.cip{flex:none;display:flex;align-items:center;gap:.45rem;
+  padding:.5rem .95rem;border-radius:999px;border:1.5px solid var(--garis);
+  background:var(--kad);color:var(--teks-2);font-size:.95rem;font-weight:700;
+  text-decoration:none;transition:all .2s;white-space:nowrap}
+.cip .no{width:24px;height:24px;border-radius:50%;background:var(--hijau-muda);
+  color:var(--hijau);display:grid;place-items:center;font-size:.8rem}
+.cip:hover{border-color:var(--hijau)}
+.cip.aktif{background:var(--hijau);border-color:var(--hijau);color:#fff}
+.cip.aktif .no{background:var(--emas-terang);color:var(--hijau-tua)}
+
+/* ===== Layout ===== */
+main{max-width:1000px;margin:0 auto;padding:0 1rem 5rem}
+section.seksyen{padding-top:2.2rem;scroll-margin-top:135px}
+.kepala-seksyen{display:flex;align-items:center;gap:1rem;margin-bottom:.4rem}
+.no-besar{font-family:'Marcellus',serif;font-size:2.6rem;color:var(--emas);line-height:1}
+.kepala-seksyen h2{font-size:1.7rem;color:var(--hijau)}
+.subtajuk{color:var(--teks-2);margin-bottom:1.2rem;font-size:1.02rem}
+
+/* ===== Hero ===== */
+.hero{background:linear-gradient(160deg,var(--hijau-tua) 0%,#0F5238 70%,#14663F 100%);
+  color:#F6F2E4;border-radius:0 0 32px 32px;padding:2.5rem 1.4rem 2.8rem;
+  margin:0 -1rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;opacity:.07;
+  background-image:radial-gradient(circle at 2px 2px,#fff 1.5px,transparent 0);background-size:26px 26px}
+.hero>*{position:relative}
+.hero .bismillah{font-family:'Amiri',serif;font-size:1.9rem;color:var(--emas-terang);margin-bottom:.6rem}
+.hero h1{font-size:clamp(1.9rem,6vw,3rem);margin-bottom:.5rem}
+.hero p{max-width:560px;margin:0 auto 1.4rem;font-size:1.05rem;opacity:.92}
+.hero .cta{display:inline-block;background:var(--emas-terang);color:#3A2E08;
+  font-weight:700;padding:.85rem 1.8rem;border-radius:999px;text-decoration:none;
+  font-size:1.05rem;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.hero .cta:hover{filter:brightness(1.06)}
+
+/* ===== Cards ===== */
+.kad{background:var(--kad);border:1px solid var(--garis);border-radius:var(--radius);
+  padding:1.4rem 1.3rem;margin-bottom:1.1rem;box-shadow:var(--bayang)}
+.kad h3{color:var(--hijau);font-size:1.35rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.55rem}
+.kad h3 .titik{width:10px;height:10px;border-radius:3px;background:var(--emas);transform:rotate(45deg);flex:none}
+.kad p{margin-bottom:.8rem}
+.kad p:last-child{margin-bottom:0}
+.kad ul,.kad ol{padding-left:1.4rem;margin-bottom:.8rem}
+.kad li{margin-bottom:.5rem}
+.grid2{display:grid;gap:1.1rem}
+@media(min-width:720px){.grid2{grid-template-columns:1fr 1fr}}
+
+/* ===== Dalil box ===== */
+.dalil{background:var(--hijau-muda);border:1px solid var(--garis);
+  border-right:5px solid var(--emas);border-radius:14px;padding:1.2rem 1.1rem;margin:1rem 0}
+.dalil .arab{margin-bottom:.7rem}
+.dalil .rumi{text-align:center;font-style:italic;color:var(--teks-2);font-size:1rem;margin-bottom:.5rem}
+.dalil .makna{text-align:center;font-weight:700}
+.dalil .sumber{text-align:center;font-size:.9rem;color:var(--emas);margin-top:.4rem;font-weight:700}
+.label-dalil{display:inline-block;background:var(--emas);color:#fff;font-size:.72rem;
+  font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:.2rem .7rem;border-radius:999px;margin-bottom:.6rem}
+
+/* ===== Info boxes ===== */
+.nota,.salah,.tip{border-radius:14px;padding:1rem 1.1rem;margin:1rem 0;border:1px solid}
+.nota{background:var(--emas-muda);border-color:var(--emas)}
+.salah{background:var(--merah-muda);border-color:var(--merah)}
+.tip{background:var(--biru-muda);border-color:var(--biru)}
+.nota b:first-child,.salah b:first-child,.tip b:first-child{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;font-size:1.02rem}
+.nota b:first-child{color:var(--emas)}
+.salah b:first-child{color:var(--merah)}
+.tip b:first-child{color:var(--biru)}
+.salah ul,.tip ul{margin:0;padding-left:1.3rem}
+.salah li,.tip li{margin-bottom:.35rem}
+
+/* ===== Figures / gallery ===== */
+figure.foto{margin:1.1rem 0;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--garis);background:var(--kad);box-shadow:var(--bayang)}
+figure.foto img{width:100%;height:240px;object-fit:cover;cursor:zoom-in;transition:transform .3s}
+@media(min-width:720px){figure.foto img{height:320px}}
+figure.foto:hover img{transform:scale(1.02)}
+figure.foto figcaption{padding:.7rem 1rem;font-size:.95rem;color:var(--teks-2);
+  border-top:3px solid var(--emas)}
+figure.foto figcaption b{color:var(--teks)}
+figure.foto .kredit{font-size:.75rem;opacity:.7;display:block}
+figure.foto.foto-penuh img{height:auto;object-fit:contain;cursor:default;background:#F7F4EA}
+figure.foto.foto-penuh:hover img{transform:none}
+.galeri{display:grid;gap:1rem}
+@media(min-width:720px){.galeri{grid-template-columns:1fr 1fr}}
+.svg-rajah{margin:1rem 0;border-radius:var(--radius);border:1px solid var(--garis);
+  background:var(--kad);padding:.6rem;box-shadow:var(--bayang)}
+.svg-rajah svg{width:100%;height:auto;display:block}
+.svg-cap{font-size:.92rem;color:var(--teks-2);text-align:center;padding:.4rem .6rem .3rem}
+
+/* ===== Lightbox ===== */
+#lightbox{position:fixed;inset:0;background:rgba(5,20,14,.93);z-index:100;
+  display:none;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+#lightbox.buka{display:flex}
+#lbImg{max-width:95vw;max-height:66vh;border-radius:12px;object-fit:contain;
+  transition:transform .2s;cursor:zoom-in}
+#lbImg.zum{transform:scale(1.8);cursor:zoom-out}
+#lbTajuk{color:var(--emas-terang);font-family:'Marcellus',serif;font-size:1.3rem;margin-top:1rem;text-align:center}
+#lbTeks{color:#E8E4D6;max-width:640px;text-align:center;font-size:1rem;margin-top:.4rem;line-height:1.6}
+#lbTutup{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.15);
+  border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem}
+#lbZoom{margin-top:.9rem;background:var(--emas-terang);border:none;color:#3A2E08;
+  font-weight:700;padding:.55rem 1.3rem;border-radius:999px;font-size:.95rem}
+
+/* ===== Denah Kaabah hotspots ===== */
+.hotspot{cursor:pointer}
+.hotspot circle.pin{fill:var(--emas);stroke:#fff;stroke-width:2.5;transition:r .2s}
+.hotspot:hover circle.pin,.hotspot:focus circle.pin{fill:var(--merah)}
+.hotspot text{font-family:'Atkinson Hyperlegible',sans-serif;font-weight:700;pointer-events:none}
+.denyut{animation:denyut 2s infinite}
+@keyframes denyut{0%,100%{opacity:1}50%{opacity:.35}}
+.anak-panah{animation:pusing 14s linear infinite;transform-origin:300px 250px}
+@keyframes pusing{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+
+/* ===== Info panel (hotspot) ===== */
+#panelInfo{position:fixed;left:0;right:0;bottom:0;z-index:90;
+  background:var(--kad);border-radius:24px 24px 0 0;box-shadow:0 -6px 30px rgba(0,0,0,.3);
+  padding:1.3rem 1.3rem 2rem;transform:translateY(110%);transition:transform .3s ease;
+  max-width:640px;margin:0 auto;max-height:70vh;overflow-y:auto}
+#panelInfo.buka{transform:translateY(0)}
+#panelInfo h3{color:var(--hijau);font-size:1.4rem;margin-bottom:.5rem;padding-right:3rem}
+#panelInfo .arab{font-size:1.4rem;margin:.6rem 0}
+#piTutup{position:absolute;top:1rem;right:1rem;background:var(--hijau-muda);border:none;
+  color:var(--hijau);width:42px;height:42px;border-radius:50%;font-size:1.2rem}
+
+/* ===== Sa'i counter ===== */
+.saie-kaunter{text-align:center;padding:1.2rem 0 .4rem}
+.saie-nombor{font-family:'Marcellus',serif;font-size:4.2rem;color:var(--emas);line-height:1}
+.saie-arah{font-size:1.25rem;font-weight:700;color:var(--hijau);margin:.4rem 0 .9rem}
+.saie-butang{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+.saie-butang button{padding:.85rem 1.6rem;border-radius:999px;font-size:1.05rem;font-weight:700;border:none}
+#btnSaieTambah{background:var(--hijau);color:#fff}
+#btnSaieSemula{background:var(--kad);color:var(--teks-2);border:1.5px solid var(--garis)}
+.saie-titik{display:flex;gap:.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+.saie-titik span{width:34px;height:34px;border-radius:50%;border:2px solid var(--garis);
+  display:grid;place-items:center;font-weight:700;font-size:.9rem;color:var(--teks-2);background:var(--kad)}
+.saie-titik span.siap{background:var(--hijau);border-color:var(--hijau);color:#fff}
+.saie-siap-mesej{display:none;margin-top:1rem;font-weight:700;color:var(--hijau);font-size:1.15rem}
+.saie-siap-mesej.tunjuk{display:block}
+
+/* ===== Talbiah / audio ===== */
+.talbiah-kad{background:linear-gradient(150deg,var(--hijau-tua),#125A3C);color:#F6F2E4;
+  border-radius:var(--radius);padding:1.8rem 1.3rem;text-align:center;margin:1rem 0}
+.talbiah-kad .arab{color:var(--emas-terang);font-size:2rem}
+.talbiah-kad .rumi{font-style:italic;opacity:.9;margin:.8rem 0 .5rem}
+.talbiah-kad .makna{font-weight:700;max-width:560px;margin:0 auto}
+audio{width:100%;margin-top:1rem;border-radius:999px}
+.audio-nota{font-size:.85rem;opacity:.75;margin-top:.5rem}
+
+/* ===== Checklist ===== */
+.senarai-semak{list-style:none;padding:0}
+.senarai-semak li{display:flex;align-items:flex-start;gap:.8rem;padding:.75rem .9rem;
+  border:1.5px solid var(--garis);border-radius:12px;margin-bottom:.6rem;background:var(--kad);cursor:pointer;transition:all .2s}
+.senarai-semak li.semak{background:var(--hijau-muda);border-color:var(--hijau)}
+.senarai-semak .kotak{flex:none;width:28px;height:28px;border-radius:8px;border:2px solid var(--emas);
+  display:grid;place-items:center;font-size:1rem;color:#fff;background:transparent;margin-top:.15rem}
+.senarai-semak li.semak .kotak{background:var(--hijau);border-color:var(--hijau)}
+.senarai-semak li.semak .teks-semak{text-decoration:none;color:var(--hijau);font-weight:700}
+
+/* ===== Flow infographic ===== */
+.aliran{display:flex;gap:.4rem;overflow-x:auto;padding:1rem .2rem;scrollbar-width:thin}
+.aliran-item{flex:none;width:118px;text-align:center}
+.aliran-item .bulat{width:74px;height:74px;margin:0 auto .45rem;border-radius:50%;
+  background:var(--hijau-muda);border:2.5px solid var(--hijau);display:grid;place-items:center}
+.aliran-item .bulat svg{width:40px;height:40px}
+.aliran-item b{display:block;font-size:.88rem;line-height:1.3;color:var(--hijau)}
+.aliran-item small{color:var(--teks-2);font-size:.76rem}
+.aliran-panah{flex:none;align-self:center;color:var(--emas);font-size:1.5rem;margin-top:-1.6rem}
+
+/* ===== Tables ===== */
+table.jadual{width:100%;border-collapse:collapse;margin:.8rem 0;font-size:1rem}
+.jadual th{background:var(--hijau);color:#fff;padding:.6rem .7rem;text-align:left}
+.jadual td{padding:.6rem .7rem;border-bottom:1px solid var(--garis)}
+.jadual tr:nth-child(even) td{background:var(--hijau-muda)}
+
+/* ===== Footer ===== */
+footer{background:var(--hijau-tua);color:#D8E2DA;padding:2.2rem 1.2rem;text-align:center;font-size:.95rem}
+footer b{color:var(--emas-terang);font-family:'Marcellus',serif;font-weight:400;font-size:1.1rem}
+footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin-left:auto;margin-right:auto}
+
+.tersembunyi-cari{display:none!important}
+.sorot-cari{outline:3px solid var(--emas);outline-offset:3px}
+#btnAtas{position:fixed;bottom:1.2rem;right:1.2rem;z-index:40;width:52px;height:52px;
+  border-radius:50%;border:none;background:var(--hijau);color:#fff;font-size:1.3rem;
+  box-shadow:0 4px 14px rgba(0,0,0,.3);display:none}
+#btnAtas.tunjuk{display:block}
+@media(min-width:720px){body{font-size:1.15rem}.arab{font-size:1.9rem}}
+</style>
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="appbar">
+  <div class="appbar-inner">
+    <div class="logo">
+      <svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true">
+        <rect x="12" y="14" width="24" height="24" rx="2" fill="#0B3D2E" stroke="#D9B84A" stroke-width="2"/>
+        <rect x="12" y="18" width="24" height="4" fill="#D9B84A"/>
+        <path d="M24 4l2.2 4.6 5 .7-3.6 3.5.9 5L24 15.4l-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="#D9B84A"/>
+      </svg>
+      <div class="logo-teks">
+        <b>Panduan Umrah</b>
+        <span>Miqat → Tahallul</span>
+      </div>
+    </div>
+    <button class="ikon-btn" id="btnCari" aria-label="Carian" title="Cari">&#128269;</button>
+    <button class="ikon-btn" id="btnPasang" aria-label="Pasang aplikasi" title="Pasang sebagai Aplikasi" style="display:none">&#128241;</button>
+    <button class="ikon-btn" id="btnTema" aria-label="Tukar mod gelap atau terang" title="Mod Gelap/Terang">&#127769;</button>
+  </div>
+  <div id="panelCari">
+    <input type="search" id="kotakCari" placeholder="Cari... contoh: niat, tawaf, saie, zamzam" aria-label="Cari kandungan">
+    <div id="infoCari"></div>
+  </div>
+</header>
+
+<nav class="langkah" aria-label="Langkah umrah">
+  <div class="langkah-trek" id="trekLangkah">
+    <a class="cip" href="#s1"><span class="no">1</span>Pengenalan</a>
+    <a class="cip" href="#s2"><span class="no">2</span>Persediaan</a>
+    <a class="cip" href="#s3"><span class="no">3</span>Miqat &amp; Niat</a>
+    <a class="cip" href="#s4"><span class="no">4</span>Talbiah</a>
+    <a class="cip" href="#s5"><span class="no">5</span>Masjidil Haram</a>
+    <a class="cip" href="#s6"><span class="no">6</span>Tawaf</a>
+    <a class="cip" href="#s7"><span class="no">7</span>Solat &amp; Zamzam</a>
+    <a class="cip" href="#s8"><span class="no">8</span>Saie</a>
+    <a class="cip" href="#s9"><span class="no">9</span>Tahallul</a>
+    <a class="cip" href="#s10"><span class="no">✓</span>Selesai</a>
+  </div>
+</nav>
+
+<main id="kandungan">
+
+<div class="hero">
+  <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+  <h1>Panduan Umrah<br>Langkah Demi Langkah</h1>
+  <p>Ikuti perjalanan ibadah Umrah anda dari niat ihram di Miqat sehingga Tahallul — bergambar, mudah difahami, dan mesra warga emas serta jemaah kali pertama.</p>
+  <a class="cta" href="#s1">Mula Belajar &darr;</a>
+</div>
+
+<!-- ============ 1. PENGENALAN ============ -->
+<section class="seksyen" id="s1" data-cari="pengenalan maksud umrah hukum syarat sah rukun wajib perjalanan">
+  <div class="kepala-seksyen"><span class="no-besar">1</span><h2>Pengenalan Umrah</h2></div>
+  <p class="subtajuk">Fahami dahulu apa itu Umrah, hukumnya, serta rukun dan wajibnya sebelum berangkat.</p>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Maksud Umrah</h3>
+    <p>Umrah menurut bahasa ialah <b>ziarah atau berkunjung</b>. Menurut istilah syarak, Umrah ialah mengunjungi Baitullah untuk mengerjakan ibadat umrah dengan niat dan syarat-syarat tertentu. Umrah meliputi <b>tawaf</b> mengelilingi Kaabah, <b>saie</b> antara Safa dan Marwah, dan <b>tahallul</b> (bercukur atau bergunting).</p>
+    <div class="dalil">
+      <span class="label-dalil">Dalil Al-Quran</span>
+      <div class="arab">وَأَتِمُّوا الْحَجَّ وَالْعُمْرَةَ لِلَّهِ</div>
+      <div class="makna">"Dan sempurnakanlah ibadat haji serta umrah kerana Allah."</div>
+      <div class="sumber">Surah al-Baqarah 2:196</div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Hukum &amp; Waktu Umrah</h3>
+    <p>Hukum umrah adalah <b>sunnah muakkad</b> (sangat dituntut) menurut satu pandangan, dan wajib <b>sekali seumur hidup</b> bagi yang mampu menurut pandangan yang lain. Umrah boleh dilakukan <b>sepanjang tahun</b>, berbeza dengan haji yang mempunyai waktu tertentu — kecuali ketika seseorang sedang berada dalam ihram haji sehinggalah selesai kerja-kerja hajinya.</p>
+    <div class="dalil">
+      <span class="label-dalil">Hadis</span>
+      <div class="makna">"Aisyah RA bertanya: 'Wahai Rasulullah, adakah diwajibkan jihad ke atas wanita?' Baginda ﷺ menjawab: 'Ya, jihad yang tiada peperangan di dalamnya, iaitu haji dan umrah.'"</div>
+      <div class="sumber">Riwayat Ibn Majah</div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Syarat Sah Umrah</h3>
+    <p>Syarat-syarat asas yang mesti ada pada setiap jemaah:</p>
+    <ul>
+      <li><b>Islam</b> — ibadat umrah hanya disyariatkan kepada orang Islam.</li>
+      <li><b>Berakal</b> — tidak sah umrah orang yang hilang akal.</li>
+      <li><b>Baligh</b> — kanak-kanak yang belum baligh tidak diwajibkan (jika dilakukan, sah sebagai sunat tetapi tidak menggugurkan umrah wajib).</li>
+      <li><b>Merdeka</b> — bukan hamba.</li>
+      <li><b>Istita'ah</b> — berkemampuan dari segi tubuh badan, kewangan dan keamanan perjalanan.</li>
+    </ul>
+  </div>
+
+  <div class="grid2">
+    <div class="kad">
+      <h3><span class="titik"></span>Rukun Umrah (5)</h3>
+      <p><b>MESTI</b> dilakukan. Jika tertinggal satu, umrah <b style="color:var(--merah)">TIDAK SAH</b>:</p>
+      <ol>
+        <li><b>Niat Ihram</b> — di miqat.</li>
+        <li><b>Tawaf</b> — 7 pusingan mengelilingi Kaabah.</li>
+        <li><b>Saie</b> — 7 perjalanan antara Safa dan Marwah.</li>
+        <li><b>Tahallul</b> — bercukur atau bergunting.</li>
+        <li><b>Tertib</b> — mengikut urutan di atas.</li>
+      </ol>
+    </div>
+    <div class="kad">
+      <h3><span class="titik"></span>Wajib Umrah (2)</h3>
+      <p>Jika tertinggal, umrah <b>tetap sah</b> tetapi dikenakan <b>Dam</b> dan berdosa jika sengaja:</p>
+      <ol>
+        <li><b>Berniat ihram di miqat</b> — tidak melepasi miqat tanpa niat.</li>
+        <li><b>Meninggalkan pantang larang ihram</b> sepanjang tempoh ihram.</li>
+      </ol>
+      <div class="nota"><b>✎ Nota Mutawwif</b>Beza mudah: <b>Rukun</b> = tiada ganti, mesti buat. <b>Wajib</b> = boleh ditampung dengan Dam, tetapi jangan sengaja tinggalkan.</div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Infografik: Perjalanan Umrah Anda</h3>
+    <p>Tujuh peringkat mudah dari mula hingga selesai. Skrol ke kanan untuk lihat semua &rarr;</p>
+    <div class="aliran" aria-label="Carta aliran perjalanan umrah">
+      <div class="aliran-item"><div class="bulat"><svg viewBox="0 0 48 48"><path d="M14 40V22l10-8 10 8v18h-7v-10h-6v10z" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M24 6v6M20 9h8" stroke="#B8912A" stroke-width="2.5"/></svg></div><b>1. Persediaan</b><small>Mandi &amp; pakai ihram</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><svg viewBox="0 0 48 48"><path d="M10 38h28M14 38V20l10-9 10 9v18" fill="none" stroke="#14663F" stroke-width="2.5"/><circle cx="24" cy="26" r="3.5" fill="#B8912A"/></svg></div><b>2. Miqat</b><small>Niat &amp; solat sunat</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><svg viewBox="0 0 48 48"><path d="M24 8c-6 7-6 14 0 18 6-4 6-11 0-18z" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M12 32c4 5 8 7 12 7s8-2 12-7" fill="none" stroke="#B8912A" stroke-width="2.5"/></svg></div><b>3. Talbiah</b><small>Sepanjang perjalanan</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><svg viewBox="0 0 48 48"><rect x="16" y="18" width="16" height="16" fill="#0B3D2E"/><rect x="16" y="21" width="16" height="3" fill="#B8912A"/><circle cx="24" cy="26" r="16" fill="none" stroke="#14663F" stroke-width="2" stroke-dasharray="4 3"/><path d="M38 16l3-4M40.5 17.5L44 15" stroke="#B8912A" stroke-width="2"/></svg></div><b>4. Tawaf</b><small>7 pusingan Kaabah</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><svg viewBox="0 0 48 48"><path d="M8 34c4-8 8-8 12 0M28 34c4-8 8-8 12 0" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M16 22h16M28 18l6 4-6 4M20 30l-6-4 6-4" fill="none" stroke="#B8912A" stroke-width="2.2"/></svg></div><b>5. Saie</b><small>Safa ↔ Marwah ×7</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><svg viewBox="0 0 48 48"><circle cx="24" cy="20" r="8" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M30 32l8 8M38 32l-8 8" stroke="#B8912A" stroke-width="2.5" stroke-linecap="round"/><path d="M12 38c2-4 5-6 8-6" stroke="#14663F" stroke-width="2.5" fill="none"/></svg></div><b>6. Tahallul</b><small>Cukur / gunting</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M15 24l6 6 12-12" fill="none" stroke="#B8912A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><b>7. Selesai</b><small>Umrah sempurna</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. PERSEDIAAN ============ -->
+<section class="seksyen" id="s2" data-cari="persediaan sebelum miqat mandi sunat ihram pakaian solat sunat kain potong kuku wangian">
+  <div class="kepala-seksyen"><span class="no-besar">2</span><h2>Persediaan Sebelum Miqat</h2></div>
+  <p class="subtajuk">Amalan sunat dan cara berpakaian ihram sebelum tiba di miqat.</p>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Perkara Sunat Sebelum Memakai Ihram</h3>
+    <ul class="senarai-semak" data-simpan="sedia">
+      <li><span class="kotak">✓</span><span class="teks-semak">Memotong kuku</span></li>
+      <li><span class="kotak">✓</span><span class="teks-semak">Menanggalkan bulu ketiak dan ari-ari</span></li>
+      <li><span class="kotak">✓</span><span class="teks-semak">Mengandam misai, janggut dan rambut</span></li>
+      <li><span class="kotak">✓</span><span class="teks-semak">Mandi sunat ihram</span></li>
+      <li><span class="kotak">✓</span><span class="teks-semak">Memakai minyak rambut</span></li>
+      <li><span class="kotak">✓</span><span class="teks-semak">Memakai wangian pada badan sahaja (bukan pada kain ihram). Wanita: wangian yang tidak kuat baunya</span></li>
+    </ul>
+    <div class="nota"><b>✎ Nota Mutawwif</b>Cara mandi sunat ihram sama seperti mandi wajib — yang berbeza hanyalah <b>niatnya</b>. Lakukan di hotel Madinah (jika melalui Bir Ali) atau sebelum ke lapangan terbang.</div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Cara Memakai Pakaian Ihram</h3>
+    <div class="grid2">
+      <div>
+        <figure class="foto foto-penuh" style="margin:0">
+          <img src="imej/ihram-lelaki.png" alt="Ilustrasi cara pemakaian ihram lelaki - kain rida' di bahu dan izar di pinggang" loading="lazy">
+          <figcaption><b>Ihram lelaki:</b> 2 helai kain putih tidak berjahit (rida' &amp; izar)</figcaption>
+        </figure>
+      </div>
+      <div>
+        <figure class="foto foto-penuh" style="margin:0">
+          <img src="imej/ihram-muslimah.png" alt="Ilustrasi cara pemakaian ihram muslimah - pakaian longgar menutup aurat, muka dan tapak tangan terbuka" loading="lazy">
+          <figcaption><b>Ihram muslimah:</b> pakaian biasa menutup aurat, tanpa purdah &amp; sarung tangan</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="salah"><b>⚠ Kesalahan Yang Sering Berlaku</b>
+      <ul>
+        <li>Lelaki memakai seluar dalam atau tali pinggang berjahit melingkari badan — pakaian berjahit membentuk anggota dilarang. (Beg pinggang / tali pinggang duit dibenarkan.)</li>
+        <li>Lelaki menutup kepala dengan topi atau kain ihram semasa tidur.</li>
+        <li>Menyapu wangian pada kain ihram — sunat hanya pada <b>badan sebelum niat</b>.</li>
+        <li>Wanita memakai sarung tangan atau purdah yang menyentuh muka.</li>
+      </ul>
+    </div>
+    <div class="tip"><b>♥ Tip Untuk Warga Emas</b>
+      <ul>
+        <li>Pakai kasut sukan sebelum berniat ihram, kemudian tukar ke selipar selesa yang tidak menutup jari dan tumit (lelaki).</li>
+        <li>Sediakan pin penyangkut / klip kain untuk mengetatkan izar — mudah untuk ke tandas.</li>
+        <li>Bawa kerusi roda sewa atau maklumkan mutawwif awal jika sukar berjalan jauh.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Solat Sunat Ihram (2 Rakaat)</h3>
+    <p>Selepas memakai pakaian ihram dengan sempurna, disunatkan mendirikan solat sunat ihram dua rakaat. Lafaz niatnya:</p>
+    <div class="dalil">
+      <span class="label-dalil">Niat Solat Sunat Ihram</span>
+      <div class="arab">أُصَلِّي سُنَّةَ الإِحْرَامِ رَكْعَتَيْنِ لِلَّهِ تَعَالَى</div>
+      <div class="rumi">Usalli sunnatal-ihrami rak'ataini lillahi Ta'ala</div>
+      <div class="makna">"Sahaja aku solat sunat ihram dua rakaat kerana Allah Taala."</div>
+    </div>
+    <p><b>Rakaat 1:</b> al-Fatihah + Surah al-Kafirun &nbsp;|&nbsp; <b>Rakaat 2:</b> al-Fatihah + Surah al-Ikhlas.</p>
+    <div class="nota"><b>✎ Nota Mutawwif</b>Elakkan solat sunat ini pada lima waktu tahrim: selepas Subuh hingga matahari naik, ketika matahari baru naik (± 20 minit), ketika matahari tegak (istiwa'), selepas Asar hingga terbenam, dan ketika matahari kekuningan hingga terbenam.</div>
+  </div>
+</section>
+
+<!-- ============ 3. MIQAT & NIAT ============ -->
+<section class="seksyen" id="s3" data-cari="miqat niat umrah bir ali zulhulaifah qarnul manazil pesawat niat bersyarat badal haid">
+  <div class="kepala-seksyen"><span class="no-besar">3</span><h2>Miqat &amp; Niat Umrah</h2></div>
+  <p class="subtajuk">Titik permulaan ihram anda. Selepas berniat, bermulalah semua pantang larang ihram.</p>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Dua Laluan Jemaah Malaysia</h3>
+    <table class="jadual">
+      <tr><th>Laluan</th><th>Miqat</th><th>Cara Berniat</th></tr>
+      <tr><td>Malaysia → <b>Madinah</b> → Makkah</td><td><b>Zulhulaifah (Bir Ali)</b></td><td>Berhenti &amp; berniat di Masjid Bir Ali</td></tr>
+      <tr><td>Malaysia → <b>Makkah</b> terus</td><td><b>Qarnul Manazil</b></td><td>Berniat <b>di atas pesawat</b> sebelum melepasi miqat — pengumuman akan dibuat dalam pesawat</td></tr>
+    </table>
+    <div class="salah"><b>⚠ Kesalahan Yang Sering Berlaku</b>
+      <ul>
+        <li>Tertidur di pesawat dan terlepas pengumuman miqat — berniat SELEPAS melepasi miqat mewajibkan Dam.</li>
+        <li>Menyangka niat hanya sah jika dilafazkan kuat — niat ialah <b>di hati</b>; lafaz hanya membantu.</li>
+      </ul>
+    </div>
+    <div class="tip"><b>♥ Tip Untuk Warga Emas</b>
+      <ul>
+        <li>Pakai terus pakaian ihram dari lapangan terbang KLIA jika penerbangan terus ke Jeddah — tidak perlu bersalin dalam tandas pesawat yang sempit.</li>
+        <li>Minta kru kabin atau mutawwif mengingatkan anda 30 minit sebelum tiba di miqat.</li>
+      </ul>
+    </div>
+  </div>
+
+  <figure class="foto">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_Dzulhulaifah_%281%29.jpg?width=1200"
+         alt="Masjid Zulhulaifah (Bir Ali), miqat bagi jemaah dari Madinah" loading="lazy"
+         data-lb="Masjid Bir Ali (Zulhulaifah)"
+         data-desc="Miqat bagi jemaah yang bertolak dari Madinah, terletak kira-kira 11 km dari Masjid Nabawi. Di sinilah Rasulullah ﷺ berniat ihram. Jemaah biasanya mandi/berwuduk, solat sunat ihram dua rakaat dan berniat umrah di sini sebelum meneruskan perjalanan ke Makkah."
+         onerror="this.closest('figure').style.display='none'">
+    <figcaption><b>Masjid Bir Ali (Zulhulaifah)</b> — miqat jemaah dari Madinah, ± 11 km dari Masjid Nabawi.
+    <span class="kredit">Foto: Wikimedia Commons (CC BY-SA)</span></figcaption>
+  </figure>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Lafaz Niat Umrah</h3>
+    <p>Niat umrah ketika di miqat adalah seperti berikut:</p>
+    <div class="dalil">
+      <span class="label-dalil">Niat Umrah</span>
+      <div class="arab">نَوَيْتُ الْعُمْرَةَ وَأَحْرَمْتُ بِهَا لِلَّهِ تَعَالَى</div>
+      <div class="rumi">Nawaitul-'umrata wa ahramtu biha lillahi Ta'ala</div>
+      <div class="makna">"Sahaja aku mengerjakan Umrah dan berihram aku dengannya kerana Allah Taala."</div>
+    </div>
+    <p>Selepas berniat, <b>bermulalah pantang larang ihram</b> ke atas diri anda sehingga selesai tahallul.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="kad">
+      <h3><span class="titik"></span>Niat Bersyarat (Wanita)</h3>
+      <p>Bagi wanita yang menjangkakan haid mungkin datang sebelum sempat menyempurnakan umrah, digalakkan berniat <b>secara bersyarat</b>:</p>
+      <div class="dalil">
+        <div class="makna">"Sahaja aku berniat umrah dan berihram dengannya kerana Allah Taala; sekiranya aku didatangi haid, maka aku menjadi halal (bertahallul)."</div>
+      </div>
+      <p>Jika haid datang, terlepaslah dia daripada pantang larang ihram dan tidak terikat dengan kerja-kerja umrah lagi.</p>
+    </div>
+    <div class="kad">
+      <h3><span class="titik"></span>Niat Umrah Badal</h3>
+      <p>Bagi yang mengerjakan umrah untuk pihak lain (yang telah meninggal dunia atau uzur kekal):</p>
+      <div class="dalil">
+        <div class="arab">نَوَيْتُ العُمْرَةَ عَنْ فُلَانٍ وَأَحْرَمْتُ بِهَا للهِ تَعَالَى</div>
+        <div class="rumi">Nawaitul-'umrata 'an fulan(in) wa ahramtu biha lillahi Ta'ala</div>
+        <div class="makna">"Sahaja aku mengerjakan ibadah umrah untuk si fulan (sebut namanya) dan aku berihram dengannya kerana Allah Taala."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Pantang Larang Ihram</h3>
+    <p>Bermula sebaik sahaja anda berniat, sehinggalah selesai tahallul:</p>
+    <table class="jadual">
+      <tr><th>Kategori</th><th>Larangan</th></tr>
+      <tr><td><b>Lelaki sahaja</b></td><td>Memakai pakaian berjahit/bersarung membentuk anggota (seluar, baju kemeja, stokin, kasut menutup jari &amp; tumit); menutup kepala atau sebahagiannya (songkok, kopiah, serban, kain).</td></tr>
+      <tr><td><b>Wanita sahaja</b></td><td>Menutup muka (purdah/niqab).</td></tr>
+      <tr><td><b>Umum (semua)</b></td><td>Memakai sarung tangan; memakai wangian pada badan, makanan atau minuman; memakai minyak pada kepala/janggut; menanggalkan rambut atau bulu; memotong kuku; memotong pokok di Tanah Haram; memburu binatang darat; mukadimah persetubuhan; bersetubuh; berkahwin, mengahwinkan atau menerima wakil kahwin.</td></tr>
+    </table>
+    <div class="nota"><b>✎ Nota Mutawwif</b>Mandi, bersabun tanpa wangian kuat, menukar kain ihram, berpayung dan bernaung di bawah bumbung — semuanya <b>dibenarkan</b>. Jangan terlalu was-was.</div>
+  </div>
+</section>
+
+<!-- ============ 4. TALBIAH ============ -->
+<section class="seksyen" id="s4" data-cari="talbiah labbaik allahumma bacaan zikir perjalanan makkah audio">
+  <div class="kepala-seksyen"><span class="no-besar">4</span><h2>Talbiah</h2></div>
+  <p class="subtajuk">Seruan menyahut panggilan Allah — dibaca berulang-ulang selepas niat sehingga hendak memulakan tawaf.</p>
+
+  <div class="talbiah-kad">
+    <div class="arab">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ،<br>إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ</div>
+    <div class="rumi">Labbaikallahumma labbaik. Labbaika la syarika laka labbaik.<br>Innal-hamda wan-ni'mata laka wal-mulk. La syarika lak.</div>
+    <div class="makna">"Hamba-Mu datang menyahut panggilan-Mu, ya Allah, hamba-Mu datang menyahut panggilan-Mu. Hamba-Mu datang menyahut panggilan-Mu, tiada sekutu bagi-Mu. Sesungguhnya segala pujian, nikmat dan pemerintahan adalah kepunyaan-Mu. Tiada sekutu bagi-Mu."</div>
+    <audio controls preload="none" aria-label="Audio bacaan talbiah">
+      <source src="audio/talbiah.mp3" type="audio/mpeg">
+    </audio>
+    <div class="audio-nota">🔊 Letakkan fail <b>audio/talbiah.mp3</b> dalam folder website untuk mengaktifkan pemain audio ini.</div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Bila Mula &amp; Bila Tamat?</h3>
+    <ul>
+      <li><b>Mula:</b> sejurus selepas niat ihram di miqat.</li>
+      <li><b>Sepanjang perjalanan:</b> disunatkan membanyakkan talbiah menuju ke Makkah — lelaki dengan suara nyaring, wanita dengan suara perlahan.</li>
+      <li><b>Tamat:</b> apabila jemaah mula hendak melakukan tawaf.</li>
+    </ul>
+    <div class="nota"><b>✎ Nota Mutawwif</b>Talbiah adalah manifestasi kerinduan dan ketundukan hati kepada Allah SWT. Hayatilah maknanya — anda sedang menjawab jemputan Allah ke Rumah-Nya.</div>
+  </div>
+</section>
+
+<!-- ============ 5. MASUK MASJIDIL HARAM ============ -->
+<section class="seksyen" id="s5" data-cari="masjidil haram babussalam doa masuk masjid melihat kaabah pertama kali">
+  <div class="kepala-seksyen"><span class="no-besar">5</span><h2>Masuk ke Masjidil Haram</h2></div>
+  <p class="subtajuk">Detik pertama menatap Kaabah — masuk dengan adab, langkah kanan dan doa.</p>
+
+  <div class="galeri">
+    <figure class="foto">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Masjid_al-Haram_panorama.JPG?width=1200"
+           alt="Pemandangan Masjidil Haram dan Kaabah" loading="lazy"
+           data-lb="Masjidil Haram"
+           data-desc="Masjid paling suci umat Islam di Makkah al-Mukarramah. Di tengahnya berdiri Kaabah, kiblat seluruh umat Islam. Solat di dalamnya diganjari 100,000 kali ganda berbanding masjid lain."
+           onerror="this.closest('figure').style.display='none'">
+      <figcaption><b>Masjidil Haram</b> — solat di sini 100,000 kali ganda pahalanya.
+      <span class="kredit">Foto: Wikimedia Commons (CC BY)</span></figcaption>
+    </figure>
+    <figure class="foto">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Kaaba_during_Hajj.jpg?width=1200"
+           alt="Kaabah di tengah Masjidil Haram dikelilingi jemaah" loading="lazy"
+           data-lb="Kaabah (Baitullah)"
+           data-desc="Rumah Allah yang pertama dibina untuk manusia, diasaskan oleh Nabi Ibrahim AS dan Nabi Ismail AS. Kiblat solat seluruh umat Islam dan pusat ibadah tawaf."
+           onerror="this.closest('figure').style.display='none'">
+      <figcaption><b>Kaabah al-Musyarrafah</b> — kiblat umat Islam seluruh dunia.
+      <span class="kredit">Foto: Wikimedia Commons (CC BY-SA 4.0)</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Doa Masuk Masjidil Haram (Babussalam)</h3>
+    <p>Ketika masuk buat pertama kali, disunatkan melalui pintu <b>Babussalam</b> dengan mendahulukan kaki kanan, sambil berdoa:</p>
+    <div class="dalil">
+      <div class="arab">اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ فَحَيِّنَا رَبَّنَا بِالسَّلَامِ، وَأَدْخِلْنَا الْجَنَّةَ دَارَ السَّلَامِ، تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ، اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ وَمَغْفِرَتِكَ</div>
+      <div class="rumi">Allahumma antas-salam wa minkas-salam, fahayyina Rabbana bis-salam, wa adkhilnal-jannata daras-salam, tabarakta Rabbana wa ta'alayta ya dhal-jalali wal-ikram. Allahummaftah li abwaba rahmatika wa maghfiratik.</div>
+      <div class="makna">"Ya Allah, Engkaulah yang bersifat sejahtera, dari-Mu sahajalah segala kesejahteraan; maka hidupkanlah kami dalam kesejahteraan dan masukkanlah kami ke dalam syurga tempat yang selamat sejahtera. Maha Suci dan Maha Tinggi Tuhan yang mempunyai kebesaran dan kemuliaan. Ya Allah, bukakanlah untukku pintu-pintu rahmat dan keampunan-Mu."</div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Doa Ketika Melihat Kaabah</h3>
+    <p>Angkat tangan dan panjatkan doa — ini antara <b>waktu mustajab doa</b>:</p>
+    <div class="dalil">
+      <div class="arab">اللهُ أَكْبَرُ، اللهُ أَكْبَرُ، اللهُ أَكْبَرُ، لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، اللَّهُمَّ زِدْ هَذَا الْبَيْتَ تَشْرِيفًا وَتَعْظِيمًا وَتَكْرِيمًا وَمَهَابَةً، وَزِدْ مَنْ شَرَّفَهُ وَكَرَّمَهُ مِمَّنْ حَجَّهُ أَوِ اعْتَمَرَهُ تَشْرِيفًا وَتَكْرِيمًا وَتَعْظِيمًا وَبِرًّا</div>
+      <div class="rumi">Allahu akbar, Allahu akbar, Allahu akbar, la ilaha illallahu wahdahu la syarika lah. Allahumma zid hadzal-baita tasyrifan wa ta'ziman wa takriman wa mahabah, wa zid man syarrafahu wa karramahu mimman hajjahu awi'tamarahu tasyrifan wa takriman wa ta'ziman wa birra.</div>
+      <div class="makna">"Allah Maha Besar (3×). Tiada Tuhan yang disembah dengan sebenarnya melainkan Allah Yang Maha Esa, tiada sekutu bagi-Nya. Ya Allah, tambahkanlah Baitullah ini dengan kemuliaan, kebesaran, keagungan dan kebaikan, dan tambahkanlah kurnia-Mu kepada sesiapa yang memuliakannya dari kalangan mereka yang menunaikan haji dan umrah."</div>
+    </div>
+    <div class="tip"><b>♥ Tip Untuk Warga Emas</b>
+      <ul>
+        <li>Berhenti seketika di anak tangga / laluan rata, jangan berdiri di tengah arus jemaah ketika berdoa.</li>
+        <li>Kenal pasti <b>nombor pintu</b> tempat anda masuk (cth: Pintu 1 – King Abdul Aziz) untuk memudahkan keluar semula.</li>
+        <li>Tetapkan lokasi berkumpul dengan kumpulan jika terpisah — biasanya di tiang jam Zam-Zam Tower.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. TAWAF ============ -->
+<section class="seksyen" id="s6" data-cari="tawaf hajarul aswad rukun yamani hijr ismail multazam maqam ibrahim mataf istilam niat tawaf tujuh pusingan arah lawan jam">
+  <div class="kepala-seksyen"><span class="no-besar">6</span><h2>Tawaf Umrah</h2></div>
+  <p class="subtajuk">Tujuh pusingan mengelilingi Kaabah, arah lawan jam, bermula dan berakhir di Hajarul Aswad.</p>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Peta Interaktif: Denah Kaabah &amp; Kawasan Mataf</h3>
+    <p><b>Ketik pada mana-mana penanda emas ⬤</b> untuk mengenali setiap lokasi penting. Anak panah menunjukkan arah tawaf (lawan jam) — Kaabah sentiasa di <b>sebelah kiri</b> anda.</p>
+    <div class="svg-rajah">
+      <svg viewBox="0 0 600 520" role="img" aria-label="Peta interaktif kawasan tawaf di sekeliling Kaabah">
+        <!-- Mataf floor -->
+        <circle cx="300" cy="250" r="228" fill="#F3EFE2" stroke="#DCD3B8" stroke-width="2"/>
+        <circle cx="300" cy="250" r="228" fill="none" stroke="#C9BE9C" stroke-width="1" stroke-dasharray="3 6"/>
+        <text x="300" y="470" text-anchor="middle" font-size="15" fill="#8A8266" font-family="sans-serif" letter-spacing="3">KAWASAN MATAF</text>
+
+        <!-- Tawaf direction ring (counter-clockwise) -->
+        <g class="anak-panah">
+          <path d="M300 78 A172 172 0 0 0 128 250" fill="none" stroke="#14663F" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+          <path d="M128 250 A172 172 0 0 0 300 422" fill="none" stroke="#14663F" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+          <path d="M300 422 A172 172 0 0 0 472 250" fill="none" stroke="#14663F" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+          <path d="M472 250 A172 172 0 0 0 300 78" fill="none" stroke="#14663F" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+          <path d="M300 78 l-16 -12 M300 78 l-14 14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
+          <path d="M128 250 l-12 16 M128 250 l14 14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
+          <path d="M300 422 l16 12 M300 422 l14 -14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
+          <path d="M472 250 l12 -16 M472 250 l-14 -14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
+        </g>
+        <text x="300" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#14663F" font-family="sans-serif">ARAH TAWAF: LAWAN JAM ↺</text>
+
+        <!-- Start line at Hajarul Aswad -->
+        <line x1="384" y1="250" x2="520" y2="250" stroke="#2E9C4F" stroke-width="4" stroke-dasharray="9 6" class="denyut"/>
+        <text x="452" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="#2E9C4F" font-family="sans-serif">GARIS MULA / KIRA</text>
+
+        <!-- Kaabah (diamond: corners = rukun) -->
+        <g transform="rotate(45 300 250)">
+          <rect x="240" y="190" width="120" height="120" fill="#101010"/>
+          <rect x="240" y="205" width="120" height="16" fill="#B8912A"/>
+        </g>
+        <text x="300" y="256" text-anchor="middle" font-size="15" fill="#E8CE7A" font-family="serif" font-weight="bold">KAABAH</text>
+
+        <!-- Hijr Ismail: semicircle on NW wall (upper-left) -->
+        <path d="M 244.4 194.4 A 58 58 0 0 1 355.6 194.4" transform="rotate(-45 300 250)" fill="none" stroke="#B8912A" stroke-width="7" stroke-linecap="round"/>
+
+        <!-- Kiswah door mark on NE wall -->
+        <rect x="352" y="176" width="14" height="22" rx="3" transform="rotate(45 359 187)" fill="#D9B84A"/>
+
+        <!-- HOTSPOTS -->
+        <g class="hotspot" data-spot="hajar" tabindex="0" role="button" aria-label="Hajarul Aswad">
+          <circle class="pin" cx="385" cy="250" r="15"/><text x="385" y="255" text-anchor="middle" font-size="12" fill="#fff">1</text>
+          <text x="404" y="272" font-size="13" fill="#1E2A24">Hajarul Aswad</text>
+        </g>
+        <g class="hotspot" data-spot="pintu" tabindex="0" role="button" aria-label="Pintu Kaabah dan Multazam">
+          <circle class="pin" cx="368" cy="178" r="15"/><text x="368" y="183" text-anchor="middle" font-size="12" fill="#fff">2</text>
+          <text x="388" y="172" font-size="13" fill="#1E2A24">Multazam &amp; Pintu</text>
+        </g>
+        <g class="hotspot" data-spot="maqam" tabindex="0" role="button" aria-label="Maqam Ibrahim">
+          <circle class="pin" cx="452" cy="128" r="15"/><text x="452" y="133" text-anchor="middle" font-size="12" fill="#fff">3</text>
+          <text x="452" y="106" text-anchor="middle" font-size="13" fill="#1E2A24">Maqam Ibrahim</text>
+        </g>
+        <g class="hotspot" data-spot="hijr" tabindex="0" role="button" aria-label="Hijr Ismail">
+          <circle class="pin" cx="240" cy="185" r="15"/><text x="240" y="190" text-anchor="middle" font-size="12" fill="#fff">4</text>
+          <text x="228" y="162" text-anchor="middle" font-size="13" fill="#1E2A24">Hijr Ismail</text>
+        </g>
+        <g class="hotspot" data-spot="yamani" tabindex="0" role="button" aria-label="Rukun Yamani">
+          <circle class="pin" cx="300" cy="336" r="15"/><text x="300" y="341" text-anchor="middle" font-size="12" fill="#fff">5</text>
+          <text x="300" y="368" text-anchor="middle" font-size="13" fill="#1E2A24">Rukun Yamani</text>
+        </g>
+        <g class="hotspot" data-spot="mataf" tabindex="0" role="button" aria-label="Kawasan Mataf">
+          <circle class="pin" cx="140" cy="360" r="15"/><text x="140" y="365" text-anchor="middle" font-size="12" fill="#fff">6</text>
+          <text x="140" y="390" text-anchor="middle" font-size="13" fill="#1E2A24">Mataf</text>
+        </g>
+        <g class="hotspot" data-spot="doa" tabindex="0" role="button" aria-label="Kawasan doa antara Rukun Yamani dan Hajarul Aswad">
+          <circle class="pin" cx="405" cy="330" r="15"/><text x="405" y="335" text-anchor="middle" font-size="12" fill="#fff">7</text>
+          <text x="435" y="356" text-anchor="middle" font-size="13" fill="#1E2A24">Zon Doa</text>
+        </g>
+      </svg>
+      <div class="svg-cap">Denah kawasan tawaf (pandangan atas). Penjuru Kaabah: Hajarul Aswad (timur), Rukun Yamani (selatan), Rukun Syami (barat), Rukun Iraqi (utara).</div>
+    </div>
+    <div class="tip"><b>♥ Tip Untuk Warga Emas</b>
+      <ul>
+        <li>Garis <b>lampu hijau di dinding masjid</b> selari dengan Hajarul Aswad menandakan tempat mula dan kiraan pusingan.</li>
+        <li>Tawaf di tingkat atas atau dengan kerusi roda dibenarkan dan sah — pusingan lebih jauh, tetapi lebih lapang dan selamat.</li>
+        <li>Jangan berhenti mengira jika terputus wuduk — keluar, berwuduk, dan <b>sambung dari pusingan yang terhenti</b> (tidak perlu mula semula).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Maksud &amp; Kedudukan Tawaf</h3>
+    <p>Tawaf ialah mengelilingi Kaabah <b>7 kali arah lawan jam</b>, bermula dan berakhir di Hajarul Aswad, dengan Kaabah sentiasa di <b>sebelah kiri</b>. Ibadah tawaf sifatnya seperti solat — mesti suci daripada hadas dan najis.</p>
+    <div class="dalil">
+      <span class="label-dalil">Hadis</span>
+      <div class="makna">"Tawaf di sekeliling Baitullah adalah seperti solat."</div>
+      <div class="sumber">Riwayat al-Tirmizi</div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Niat Tawaf Umrah</h3>
+    <p><b>Perhatian:</b> Bagi tawaf rukun umrah, niat tawaf <b>sudah terkandung</b> dalam niat umrah di miqat. Lafaz berikut adalah bagi menghadirkan hati:</p>
+    <div class="dalil">
+      <div class="arab">اللَّهُمَّ إِنِّي أُرِيدُ طَوَافَ بَيْتِكَ الْحَرَامِ سَبْعَةَ أَشْوَاطٍ طَوَافَ الْعُمْرَةِ لِلَّهِ تَعَالَى</div>
+      <div class="rumi">Allahumma inni uridu tawafa baitikal-harami sab'ata asywatin tawafal-'umrati lillahi Ta'ala</div>
+      <div class="makna">"Ya Allah, sesungguhnya aku hendak mengerjakan tawaf Baitullah al-Haram tujuh pusingan, tawaf umrah, kerana Allah Taala."</div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Syarat Sah Tawaf</h3>
+    <ul>
+      <li>Menutup aurat.</li>
+      <li>Suci daripada hadas besar dan kecil; suci badan, pakaian dan tempat daripada najis.</li>
+      <li>Kaabah di <b>sebelah kiri</b> — jika bahu terpesong menghadap Kaabah atau memasuki Hijr Ismail, pusingan itu terbatal dan hendaklah diulang.</li>
+      <li>Bermula dari Hajarul Aswad dan berakhir di Hajarul Aswad, cukup <b>7 pusingan dengan yakin</b>.</li>
+      <li>Dilakukan di dalam Masjidil Haram.</li>
+      <li>Dilakukan semata-mata kerana tawaf, bukan tujuan lain.</li>
+    </ul>
+    <div class="salah"><b>⚠ Kesalahan Yang Sering Berlaku</b>
+      <ul>
+        <li><b>Memotong laluan melalui Hijr Ismail</b> — pusingan itu tidak dikira kerana Hijr Ismail sebahagian daripada Kaabah.</li>
+        <li>Berhenti berlama-lama di garisan Hajarul Aswad sehingga menyekat arus jemaah.</li>
+        <li>Menolak dan berasak untuk mencium Hajarul Aswad hingga menyakiti orang lain — isyarat tangan (istilam) sudah memadai.</li>
+        <li>Ragu-ragu bilangan pusingan lalu mengagak yang lebih — ambil bilangan yang <b>paling sedikit</b> (yakin).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Cara Melakukan Tawaf (Ringkasan)</h3>
+    <ol>
+      <li>Berwuduk, masuk Masjidil Haram dan pergi ke <b>penjuru Hajarul Aswad</b> (cari lampu hijau di dinding masjid).</li>
+      <li><b>Istilam</b>: mengadap Hajarul Aswad, angkat tangan memberi isyarat dan kucup tangan sambil menyebut:
+        <div class="dalil" style="margin:.6rem 0">
+          <div class="arab">بِسْمِ اللهِ وَاللهُ أَكْبَرُ وَلِلَّهِ الْحَمْدُ</div>
+          <div class="rumi">Bismillahi wallahu akbar wa lillahil-hamd</div>
+          <div class="makna">"Dengan nama Allah, Allah Maha Besar, dan segala pujian milik Allah."</div>
+        </div>
+      </li>
+      <li>Mula berjalan mengelilingi Kaabah — <b>ulang istilam pada setiap pusingan</b> apabila tiba semula di penjuru Hajarul Aswad.</li>
+      <li>Setiba di <b>Rukun Yamani</b>: usap dengan tangan jika mampu; jika tidak, cukup isyarat <em>tanpa</em> mengucup tangan.</li>
+      <li>Antara <b>Rukun Yamani dan Hajarul Aswad</b>, bacalah pada setiap pusingan:
+        <div class="dalil" style="margin:.6rem 0">
+          <div class="arab">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div>
+          <div class="rumi">Rabbana atina fid-dunya hasanah, wa fil-akhirati hasanah, waqina 'azaban-nar</div>
+          <div class="makna">"Wahai Tuhan kami, kurniakanlah kepada kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami daripada azab api neraka."</div>
+        </div>
+      </li>
+      <li>Selesai <b>7 pusingan</b>, keluar dari arus tawaf dan dirikan Solat Sunat Tawaf di belakang Maqam Ibrahim.</li>
+    </ol>
+    <div class="nota"><b>✎ Nota Mutawwif</b>Rasulullah ﷺ tidak mengkhususkan bacaan tertentu bagi setiap pusingan — berdoa dan berzikirlah dengan apa sahaja yang dihafal, dalam bahasa apa pun. Doa yang khusus daripada Baginda ialah doa antara Rukun Yamani dan Hajarul Aswad di atas. Lelaki disunatkan <b>berlari-lari anak (ramal)</b> pada pusingan 1–3 dan berjalan biasa pada pusingan 4–7 (jika keadaan mengizinkan).</div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Penanda Pusingan Tawaf Anda</h3>
+    <p>Gunakan pembilang ini semasa amali atau latihan. Ketik <b>+ Tambah</b> setiap kali tiba semula di penjuru Hajarul Aswad (lampu hijau):</p>
+    <div class="saie-kaunter">
+      <div class="saie-nombor" id="tawafNombor">0</div>
+      <div class="saie-arah" id="tawafArah">Sedia di Hajarul Aswad — mula pusingan pertama</div>
+      <div class="saie-butang">
+        <button id="btnTawafTambah">+ Tambah Pusingan</button>
+        <button id="btnTawafSemula">Set Semula</button>
+      </div>
+      <div class="saie-titik" id="tawafTitik">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+      </div>
+      <div class="saie-siap-mesej" id="tawafSiap">✓ Alhamdulillah, 7 pusingan lengkap — teruskan ke Solat Sunat Tawaf di belakang Maqam Ibrahim.</div>
+    </div>
+  </div>
+
+  <figure class="foto">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kaaba%2C_Masjid_Al-Haram%2C_Mecca%2C_Saudi_Arabia_-_panoramio.jpg?width=1200"
+         alt="Jemaah bertawaf mengelilingi Kaabah di kawasan mataf" loading="lazy"
+         data-lb="Suasana Tawaf di Mataf"
+         data-desc="Jemaah bergerak arah lawan jam mengelilingi Kaabah. Perhatikan arus pergerakan — masuk ke arus dari tepi secara perlahan, kekal bersama kumpulan, dan Kaabah sentiasa di sebelah kiri."
+         onerror="this.closest('figure').style.display='none'">
+    <figcaption><b>Suasana tawaf di kawasan Mataf</b> — jemaah bergerak lawan arah jam.
+    <span class="kredit">Foto: Wikimedia Commons (CC BY-SA)</span></figcaption>
+  </figure>
+</section>
+
+<!-- ============ 7. SOLAT SUNAT TAWAF & ZAMZAM ============ -->
+<section class="seksyen" id="s7" data-cari="solat sunat tawaf maqam ibrahim zamzam doa minum air">
+  <div class="kepala-seksyen"><span class="no-besar">7</span><h2>Solat Sunat Tawaf &amp; Air Zamzam</h2></div>
+  <p class="subtajuk">Dua ibadah selepas selesai tujuh pusingan tawaf.</p>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Solat Sunat Tawaf (2 Rakaat)</h3>
+    <p>Tempat terbaik: <b>di belakang Maqam Ibrahim</b>. Jika penuh, boleh di dalam Hijr Ismail (di bawah pancuran emas), berhampiran Kaabah, atau <b>di mana-mana tempat dalam Masjidil Haram</b>.</p>
+    <div class="svg-rajah" data-lb="Kedudukan Solat Sunat Tawaf" data-desc="Keutamaan tempat solat sunat tawaf: (1) belakang Maqam Ibrahim, (2) dalam Hijr Ismail, (3) mana-mana tempat dalam Masjidil Haram. Jangan solat di tengah arus tawaf.">
+      <svg viewBox="0 0 600 300" role="img" aria-label="Rajah kedudukan solat sunat tawaf">
+        <circle cx="200" cy="150" r="130" fill="#F3EFE2"/>
+        <g transform="rotate(45 200 150)"><rect x="165" y="115" width="70" height="70" fill="#101010"/><rect x="165" y="124" width="70" height="10" fill="#B8912A"/></g>
+        <path d="M 168 118 A 34 34 0 0 1 232 118" transform="rotate(-45 200 150)" fill="none" stroke="#B8912A" stroke-width="5"/>
+        <rect x="292" y="70" width="34" height="42" rx="8" fill="#D9B84A" stroke="#B8912A" stroke-width="2"/>
+        <text x="309" y="96" text-anchor="middle" font-size="18">🕌</text>
+        <text x="309" y="60" text-anchor="middle" font-size="12" font-weight="bold" fill="#1E2A24" font-family="sans-serif">Maqam Ibrahim</text>
+        <circle cx="380" cy="96" r="17" fill="#14663F"/><text x="380" y="101" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold" font-family="sans-serif">1</text>
+        <text x="410" y="100" font-size="13" fill="#1E2A24" font-family="sans-serif">Belakang Maqam Ibrahim</text>
+        <circle cx="152" cy="98" r="17" fill="#14663F"/><text x="152" y="103" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold" font-family="sans-serif">2</text>
+        <text x="118" y="70" font-size="13" fill="#1E2A24" font-family="sans-serif">Dalam Hijr Ismail</text>
+        <circle cx="420" cy="220" r="17" fill="#14663F"/><text x="420" y="225" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold" font-family="sans-serif">3</text>
+        <text x="446" y="218" font-size="13" fill="#1E2A24" font-family="sans-serif">Mana-mana tempat</text>
+        <text x="446" y="234" font-size="13" fill="#1E2A24" font-family="sans-serif">dalam Masjidil Haram</text>
+      </svg>
+      <div class="svg-cap">Turutan keutamaan tempat Solat Sunat Tawaf — ketik untuk penerangan</div>
+    </div>
+    <div class="dalil">
+      <span class="label-dalil">Niat</span>
+      <div class="arab">أُصَلِّي سُنَّةَ الطَّوَافِ رَكْعَتَيْنِ لِلَّهِ تَعَالَى</div>
+      <div class="rumi">Usolli sunnatat-tawafi rak'ataini lillahi Ta'ala</div>
+      <div class="makna">"Sahaja aku solat sunat tawaf dua rakaat kerana Allah Taala."</div>
+    </div>
+    <p><b>Rakaat 1:</b> al-Fatihah + al-Kafirun &nbsp;|&nbsp; <b>Rakaat 2:</b> al-Fatihah + al-Ikhlas.</p>
+    <div class="tip"><b>♥ Tip Untuk Warga Emas</b>
+      <ul>
+        <li>Tidak perlu berebut ruang tepat di belakang Maqam Ibrahim — mundur jauh sedikit ke kawasan lapang, pahalanya sama.</li>
+        <li>Boleh solat sambil duduk di atas kerusi jika uzur.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Minum Air Zamzam</h3>
+    <p>Selepas solat sunat tawaf, disunatkan minum air Zamzam — dalam keadaan <b>berdiri menghadap kiblat</b> sambil berdoa dengan hajat masing-masing.</p>
+    <div class="dalil">
+      <span class="label-dalil">Hadis</span>
+      <div class="makna">"Sesungguhnya ia (Zamzam) penuh keberkatan; ia makanan yang mengenyangkan dan penawar penyakit."</div>
+      <div class="sumber">Riwayat Abu Daud / Muslim</div>
+    </div>
+    <div class="dalil">
+      <span class="label-dalil">Doa Minum Zamzam</span>
+      <div class="arab">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا وَاسِعًا وَشِفَاءً مِنْ كُلِّ دَاءٍ</div>
+      <div class="rumi">Allahumma inni as-aluka 'ilman nafi'an, wa rizqan wasi'an, wa syifa-an min kulli da'</div>
+      <div class="makna">"Ya Allah, aku memohon kepada-Mu ilmu yang bermanfaat, rezeki yang luas, dan kesembuhan daripada segala penyakit."</div>
+    </div>
+    <div class="nota"><b>✎ Nota Mutawwif</b>Bekas air Zamzam kini disediakan di sekeliling ruang masjid (kawasan tong dan kolah). Iringi minuman dengan niat dan hajat tertentu — zuriat, kesihatan, keluasan rezeki — kerana air Zamzam adalah menurut niat peminumnya.</div>
+  </div>
+</section>
+
+<!-- ============ 8. SAIE ============ -->
+<section class="seksyen" id="s8" data-cari="saie safa marwah tujuh pusingan lampu hijau berlari anak kiraan mas'a doa">
+  <div class="kepala-seksyen"><span class="no-besar">8</span><h2>Saie (Safa ↔ Marwah)</h2></div>
+  <p class="subtajuk">Berjalan ulang-alik antara Bukit Safa dan Bukit Marwah sebanyak tujuh perjalanan — mengenang perjuangan Sayyidatina Hajar mencari air untuk Nabi Ismail AS.</p>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Rukun &amp; Syarat Sah Saie</h3>
+    <ul>
+      <li><b>Bermula di Safa, berakhir di Marwah</b> — jika mula di Marwah, perjalanan pertama itu tidak dikira.</li>
+      <li>Cukup <b>7 perjalanan</b>: Safa → Marwah = 1, Marwah → Safa = 2, dan seterusnya.</li>
+      <li>Dilakukan <b>selepas tawaf</b> yang sah.</li>
+      <li>Melalui laluan yang ditetapkan (mas'a) sepenuhnya hingga ke penghujung setiap bukit.</li>
+      <li><b>Yakin bilangan</b> — jika was-was, ambil bilangan paling sedikit.</li>
+    </ul>
+    <div class="dalil">
+      <span class="label-dalil">Dalil Al-Quran</span>
+      <div class="arab">إِنَّ الصَّفَا وَالْمَرْوَةَ مِن شَعَائِرِ اللَّهِ</div>
+      <div class="makna">"Sesungguhnya Safa dan Marwah itu adalah sebahagian daripada syiar (lambang) agama Allah."</div>
+      <div class="sumber">Surah al-Baqarah 2:158</div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Infografik: Kiraan 7 Perjalanan Saie</h3>
+    <div class="svg-rajah" data-lb="Kiraan Tujuh Perjalanan Saie" data-desc="Setiap perjalanan sehala dikira satu. Bermula di Safa: Safa ke Marwah = 1, Marwah ke Safa = 2, Safa ke Marwah = 3, Marwah ke Safa = 4, Safa ke Marwah = 5, Marwah ke Safa = 6, dan Safa ke Marwah = 7. Perjalanan ketujuh TAMAT DI MARWAH.">
+      <svg viewBox="0 0 600 430" role="img" aria-label="Rajah kiraan tujuh perjalanan saie antara Safa dan Marwah">
+        <path d="M60 76 q18 -26 44 -14 q22 -18 40 2 q-6 22 -84 12z" fill="#DCD3B8"/>
+        <path d="M456 76 q18 -26 44 -14 q22 -18 40 2 q-6 22 -84 12z" fill="#DCD3B8"/>
+        <text x="102" y="46" text-anchor="middle" font-size="17" font-weight="bold" fill="#14663F" font-family="sans-serif">BUKIT SAFA</text>
+        <text x="102" y="62" text-anchor="middle" font-size="12" fill="#8A8266" font-family="sans-serif">MULA di sini</text>
+        <text x="498" y="46" text-anchor="middle" font-size="17" font-weight="bold" fill="#14663F" font-family="sans-serif">BUKIT MARWAH</text>
+        <text x="498" y="62" text-anchor="middle" font-size="12" fill="#8A8266" font-family="sans-serif">TAMAT di sini</text>
+        <line x1="102" y1="86" x2="102" y2="410" stroke="#C9BE9C" stroke-width="2" stroke-dasharray="5 5"/>
+        <line x1="498" y1="86" x2="498" y2="410" stroke="#C9BE9C" stroke-width="2" stroke-dasharray="5 5"/>
+        <g font-family="sans-serif">
+          <line x1="112" y1="110" x2="472" y2="110" stroke="#14663F" stroke-width="4"/><path d="M488 110l-18-9v18z" fill="#14663F"/><circle cx="292" cy="110" r="15" fill="#B8912A"/><text x="292" y="115" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">1</text>
+          <line x1="488" y1="155" x2="128" y2="155" stroke="#14663F" stroke-width="4"/><path d="M112 155l18-9v18z" fill="#14663F"/><circle cx="308" cy="155" r="15" fill="#B8912A"/><text x="308" y="160" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">2</text>
+          <line x1="112" y1="200" x2="472" y2="200" stroke="#14663F" stroke-width="4"/><path d="M488 200l-18-9v18z" fill="#14663F"/><circle cx="292" cy="200" r="15" fill="#B8912A"/><text x="292" y="205" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">3</text>
+          <line x1="488" y1="245" x2="128" y2="245" stroke="#14663F" stroke-width="4"/><path d="M112 245l18-9v18z" fill="#14663F"/><circle cx="308" cy="245" r="15" fill="#B8912A"/><text x="308" y="250" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">4</text>
+          <line x1="112" y1="290" x2="472" y2="290" stroke="#14663F" stroke-width="4"/><path d="M488 290l-18-9v18z" fill="#14663F"/><circle cx="292" cy="290" r="15" fill="#B8912A"/><text x="292" y="295" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">5</text>
+          <line x1="488" y1="335" x2="128" y2="335" stroke="#14663F" stroke-width="4"/><path d="M112 335l18-9v18z" fill="#14663F"/><circle cx="308" cy="335" r="15" fill="#B8912A"/><text x="308" y="340" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">6</text>
+          <line x1="112" y1="380" x2="472" y2="380" stroke="#2E9C4F" stroke-width="5"/><path d="M488 380l-18-10v20z" fill="#2E9C4F"/><circle cx="292" cy="380" r="16" fill="#2E9C4F"/><text x="292" y="385" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">7</text>
+          <text x="292" y="412" text-anchor="middle" font-size="13" fill="#2E9C4F" font-weight="bold">Perjalanan ke-7 TAMAT DI MARWAH ✓</text>
+        </g>
+      </svg>
+      <div class="svg-cap">Safa → Marwah = 1 &nbsp;•&nbsp; Marwah → Safa = 2 &nbsp;•&nbsp; ... sehingga 7 (tamat di Marwah)</div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Penanda Pusingan Saie Anda</h3>
+    <p>Gunakan pembilang ini semasa amali atau latihan. Ketik <b>+ Tambah</b> setiap kali tiba di penghujung bukit:</p>
+    <div class="saie-kaunter">
+      <div class="saie-nombor" id="saieNombor">0</div>
+      <div class="saie-arah" id="saieArah">Sedia di Bukit Safa — mula berjalan ke Marwah</div>
+      <div class="saie-butang">
+        <button id="btnSaieTambah">+ Tambah Perjalanan</button>
+        <button id="btnSaieSemula">Set Semula</button>
+      </div>
+      <div class="saie-titik" id="saieTitik">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+      </div>
+      <div class="saie-siap-mesej" id="saieSiap">✓ Alhamdulillah, 7 perjalanan lengkap — anda kini di Marwah. Teruskan ke Tahallul.</div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Bacaan &amp; Amalan Sunat Saie</h3>
+    <p><b>Di atas Bukit Safa</b> sebelum memulakan perjalanan — mengadap ke arah Kaabah, angkat tangan dan baca <b>3 kali</b> (diulang juga di atas Marwah):</p>
+    <div class="dalil">
+      <div class="arab">اللهُ أَكْبَرُ، اللهُ أَكْبَرُ، اللهُ أَكْبَرُ، لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</div>
+      <div class="rumi">Allahu akbar, Allahu akbar, Allahu akbar, la ilaha illallahu wahdahu la syarika lah, lahul-mulku wa lahul-hamdu yuhyi wa yumitu wa huwa 'ala kulli syai'in qadir. La ilaha illallahu wahdah, anjaza wa'dah, wa nasara 'abdah, wa hazamal-ahzaba wahdah.</div>
+      <div class="makna">"Allah Maha Besar (3×). Tiada Tuhan yang berhak disembah melainkan Allah semata-mata, tiada sekutu bagi-Nya; bagi-Nya kerajaan dan bagi-Nya segala pujian, Dia menghidupkan dan mematikan, dan Dia berkuasa atas segala sesuatu. Tiada Tuhan melainkan Allah semata-mata; Dia menepati janji-Nya, menolong hamba-Nya, dan mengalahkan tentera bersekutu (Ahzab) dengan kekuasaan-Nya sendiri."</div>
+      <div class="sumber">Riwayat Jabir bin Abdullah RA — Sahih Muslim (hadis sifat Haji Wada' Rasulullah ﷺ)</div>
+    </div>
+    <p>Selepas zikir ini, angkat tangan dan berdoalah dengan hajat masing-masing, kemudian ulangi zikir dan doa sebanyak <b>3 kali</b> sebelum turun memulakan perjalanan. Di atas Bukit Safa juga dibaca:</p>
+    <div class="dalil">
+      <div class="arab">اللهُ أَكْبَرُ، اللهُ أَكْبَرُ، اللهُ أَكْبَرُ وَلِلَّهِ الْحَمْدُ</div>
+      <div class="rumi">Allahu akbar, Allahu akbar, Allahu akbar, wa lillahil-hamd</div>
+      <div class="makna">"Allah Maha Besar (3×) dan bagi Allah segala pujian" — kemudian berdoalah dengan hajat masing-masing.</div>
+    </div>
+    <p><b>Di kawasan lampu hijau</b> (bekas lembah tempat Sayyidatina Hajar berlari): lelaki disunatkan <b>berlari-lari anak</b>; wanita berjalan biasa. Di situ dibaca:</p>
+    <div class="dalil">
+      <div class="arab">رَبِّ اغْفِرْ وَارْحَمْ إِنَّكَ أَنْتَ الْأَعَزُّ الْأَكْرَمُ</div>
+      <div class="rumi">Rabbighfir warham, innaka antal-a'azzul-akram</div>
+      <div class="makna">"Ya Tuhanku, ampunilah dan rahmatilah; sesungguhnya Engkaulah Yang Maha Mulia lagi Maha Pemurah."</div>
+    </div>
+    <p>Amalan sunat lain: keluar ke tempat saie melalui <b>pintu Safa</b>, mendaki sedikit di kedua-dua bukit sambil menghadap Kaabah, sentiasa berzikir, dan berkeadaan berwuduk (saie tetap sah tanpa wuduk).</p>
+    <div class="salah"><b>⚠ Kesalahan Yang Sering Berlaku</b>
+      <ul>
+        <li>Memulakan saie di <b>Marwah</b> — perjalanan pertama tidak dikira; pastikan bermula di Safa (ikut papan tanda الصفا).</li>
+        <li>Mengira satu ulang-alik (pergi-balik) sebagai satu — sebenarnya ia dikira <b>DUA</b> perjalanan.</li>
+        <li>Wanita turut berlari di kawasan lampu hijau — sunat lari-lari anak hanya untuk lelaki.</li>
+        <li>Membuat saie sebelum tawaf, atau saie untuk umrah tanpa tawaf yang sah.</li>
+      </ul>
+    </div>
+    <div class="tip"><b>♥ Tip Untuk Warga Emas</b>
+      <ul>
+        <li>Jumlah jarak saie ± 3.15 km — gunakan <b>laluan tengah berkerusi roda / skuter elektrik</b> yang disediakan jika perlu.</li>
+        <li>Berhenti rehat di penghujung bukit seketika; tiada larangan duduk berehat semasa saie.</li>
+        <li>Kawasan mas'a berhawa dingin, tetapi bawa botol air Zamzam bersama.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="galeri">
+    <figure class="foto">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bukit_Shafa.jpg?width=1200"
+           alt="Bukit Safa, tempat bermula saie" loading="lazy"
+           data-lb="Bukit Safa"
+           data-desc="Tempat BERMULA saie. Batu asal bukit masih kelihatan di dalam kubah. Di sini jemaah mengadap Kaabah, bertakbir dan berdoa sebelum memulakan perjalanan pertama ke Marwah."
+           onerror="this.closest('figure').style.display='none'">
+      <figcaption><b>Bukit Safa</b> — titik permulaan saie.
+      <span class="kredit">Foto: Wikimedia Commons (CC BY-SA 3.0)</span></figcaption>
+    </figure>
+    <figure class="foto">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Al-Marwah_6.JPG?width=1200"
+           alt="Bukit Marwah, tempat berakhir saie" loading="lazy"
+           data-lb="Bukit Marwah"
+           data-desc="Tempat BERAKHIR saie pada perjalanan ketujuh. Bukit batu putih ini kini berada di dalam bangunan Masjidil Haram. Selepas tamat di sini, jemaah terus melakukan tahallul."
+           onerror="this.closest('figure').style.display='none'">
+      <figcaption><b>Bukit Marwah</b> — perjalanan ke-7 tamat di sini.
+      <span class="kredit">Foto: Wikimedia Commons (CC BY-SA 3.0)</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 9. TAHALLUL ============ -->
+<section class="seksyen" id="s9" data-cari="tahallul bercukur bergunting halq taqsir tiga helai rambut keluar ihram">
+  <div class="kepala-seksyen"><span class="no-besar">9</span><h2>Tahallul (Bercukur / Bergunting)</h2></div>
+  <p class="subtajuk">Rukun terakhir — tanda keluar daripada keadaan ihram. Dilakukan sejurus selepas menyempurnakan tujuh perjalanan saie.</p>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Dua Pilihan Tahallul</h3>
+    <div class="svg-rajah" data-lb="Halq dan Taqsir" data-desc="Halq: mencukur keseluruhan rambut kepala — lebih afdal bagi lelaki. Taqsir: menggunting sekurang-kurangnya 3 helai rambut — pilihan bagi wanita dan dibenarkan bagi lelaki. Kadar minimum yang sah: 3 helai rambut dari kepala.">
+      <svg viewBox="0 0 600 300" role="img" aria-label="Infografik pilihan tahallul halq dan taqsir">
+        <rect x="20" y="20" width="270" height="260" rx="16" fill="#E6F0E9" stroke="#14663F" stroke-width="2"/>
+        <circle cx="155" cy="110" r="42" fill="#E8C9A8"/>
+        <path d="M113 110 a42 42 0 0 1 84 0" fill="#F3EFE2" stroke="#C9BE9C" stroke-width="2"/>
+        <path d="M205 70 l34 -20 M205 82 l38 -8" stroke="#14663F" stroke-width="3" stroke-linecap="round"/>
+        <text x="155" y="196" text-anchor="middle" font-size="19" font-weight="bold" fill="#14663F" font-family="sans-serif">HALQ ✂</text>
+        <text x="155" y="220" text-anchor="middle" font-size="13" fill="#4A5A52" font-family="sans-serif">Cukur seluruh kepala</text>
+        <text x="155" y="240" text-anchor="middle" font-size="13" font-weight="bold" fill="#B8912A" font-family="sans-serif">Lebih AFDAL bagi lelaki</text>
+        <rect x="310" y="20" width="270" height="260" rx="16" fill="#F3EBD3" stroke="#B8912A" stroke-width="2"/>
+        <circle cx="445" cy="110" r="42" fill="#E8C9A8"/>
+        <path d="M403 108 a42 44 0 0 1 84 0 l4 34 -10 2 -4 -20 -64 0 -4 20 -10 -2 z" fill="#3A2E1A"/>
+        <path d="M498 132 l30 14 M498 140 l32 4 M498 148 l30 -6" stroke="#B8912A" stroke-width="3" stroke-linecap="round"/>
+        <text x="445" y="196" text-anchor="middle" font-size="19" font-weight="bold" fill="#B8912A" font-family="sans-serif">TAQSIR ✄</text>
+        <text x="445" y="220" text-anchor="middle" font-size="13" fill="#4A5A52" font-family="sans-serif">Gunting sebahagian rambut</text>
+        <text x="445" y="240" text-anchor="middle" font-size="13" font-weight="bold" fill="#9C3B2E" font-family="sans-serif">Minimum: 3 HELAI rambut</text>
+        <text x="445" y="258" text-anchor="middle" font-size="12" fill="#4A5A52" font-family="sans-serif">(pilihan bagi wanita)</text>
+      </svg>
+      <div class="svg-cap">Halq (cukur) atau Taqsir (gunting) — kadar minimum yang sah ialah <b>3 helai rambut</b></div>
+    </div>
+    <p><b>Tahallul bukan sunat dan bukan pilihan</b> — ia adalah <b>rukun Umrah</b>. Meninggalkannya dengan sengaja menyebabkan umrah tidak sah (belum sempurna) dan pantang larang ihram kekal berjalan.</p>
+    <div class="salah"><b>⚠ Kesalahan Yang Sering Berlaku</b>
+      <ul>
+        <li>Menggunting rambut <b>sendiri atau pasangan sebelum</b> dirinya sendiri bertahallul — orang yang masih berihram tidak boleh menanggalkan rambut sesiapa. Mintalah orang yang <b>sudah halal</b> (selesai tahallul) menggunting untuk anda dahulu.</li>
+        <li>Wanita menggunting rambut di khalayak terbuka hingga terdedah aurat — lakukan di tempat tertutup atau di dalam kumpulan wanita.</li>
+        <li>Menyangka memotong 1–2 helai sudah memadai — pastikan sekurang-kurangnya <b>3 helai</b>.</li>
+        <li>Terus menukar pakaian biasa <b>sebelum</b> bergunting — pantang larang ihram masih berjalan sehingga selesai tahallul.</li>
+      </ul>
+    </div>
+    <div class="nota"><b>✎ Nota Mutawwif</b>Selepas tahallul, <b>semua pantang larang ihram tamat</b> — anda kembali halal sepenuhnya. Kedai gunting rambut berhampiran pintu Marwah menyediakan khidmat cukur bagi lelaki yang memilih halq. Alhamdulillah, umrah anda telah sempurna!</div>
+  </div>
+</section>
+
+<!-- ============ 10. UMRAH SELESAI ============ -->
+<section class="seksyen" id="s10" data-cari="umrah selesai ringkasan checklist semakan rukun wajib tempat mustajab doa">
+  <div class="kepala-seksyen"><span class="no-besar">✓</span><h2>Umrah Selesai — Semakan Akhir</h2></div>
+  <p class="subtajuk">Tahniah! Semak semula setiap rukun dan wajib umrah anda.</p>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Ringkasan Umrah Dalam Satu Infografik</h3>
+    <div class="aliran" aria-label="Ringkasan penuh umrah">
+      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">١</b></div><b>Niat di Miqat</b><small>Ihram bermula</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">٢</b></div><b>Talbiah</b><small>Hingga mula tawaf</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">٣</b></div><b>Tawaf 7×</b><small>Lawan jam, mula Hajarul Aswad</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">٤</b></div><b>Solat 2 Rakaat</b><small>+ minum Zamzam</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">٥</b></div><b>Saie 7×</b><small>Mula Safa, tamat Marwah</small></div>
+      <div class="aliran-panah">&rarr;</div>
+      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">٦</b></div><b>Tahallul</b><small>Ihram tamat ✓</small></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="kad">
+      <h3><span class="titik"></span>Checklist Rukun Umrah</h3>
+      <ul class="senarai-semak" data-simpan="rukun">
+        <li><span class="kotak">✓</span><span class="teks-semak">Niat ihram (di miqat)</span></li>
+        <li><span class="kotak">✓</span><span class="teks-semak">Tawaf — 7 pusingan lengkap &amp; yakin</span></li>
+        <li><span class="kotak">✓</span><span class="teks-semak">Saie — 7 perjalanan, mula Safa tamat Marwah</span></li>
+        <li><span class="kotak">✓</span><span class="teks-semak">Tahallul — cukur / gunting minimum 3 helai</span></li>
+        <li><span class="kotak">✓</span><span class="teks-semak">Tertib — mengikut urutan</span></li>
+      </ul>
+    </div>
+    <div class="kad">
+      <h3><span class="titik"></span>Checklist Wajib Umrah</h3>
+      <ul class="senarai-semak" data-simpan="wajib">
+        <li><span class="kotak">✓</span><span class="teks-semak">Niat ihram dilakukan DI miqat (tidak melepasinya)</span></li>
+        <li><span class="kotak">✓</span><span class="teks-semak">Pantang larang ihram terpelihara sepanjang ihram</span></li>
+      </ul>
+      <div class="nota"><b>✎ Nota Mutawwif</b>Jika ada wajib yang tertinggal, rujuk mutawwif anda segera untuk urusan Dam. Jika ada <b>rukun</b> yang diragui, umrah perlu disempurnakan semula bahagian itu.</div>
+    </div>
+  </div>
+
+  <div class="kad">
+    <h3><span class="titik"></span>Tempat &amp; Waktu Mustajab Doa</h3>
+    <p>Rebutlah peluang berdoa di lokasi-lokasi ini sepanjang berada di Tanah Haram:</p>
+    <ul>
+      <li>Ketika mula melihat Kaabah</li>
+      <li>Multazam (antara Hajarul Aswad dan pintu Kaabah)</li>
+      <li>Di dalam Hijr Ismail</li>
+      <li>Di belakang Maqam Ibrahim</li>
+      <li>Di Rukun Yamani</li>
+      <li>Di dalam Kaabah</li>
+      <li>Ketika melaksanakan tawaf dan saie</li>
+      <li>Di atas Bukit Safa dan Marwah</li>
+    </ul>
+  </div>
+
+  <div class="kad" style="background:linear-gradient(135deg,var(--hijau-tua),var(--hijau));color:#F3EBD3;border:2px solid var(--emas)">
+    <h3 style="color:var(--emas-terang)"><span class="titik" style="background:var(--emas-terang)"></span>Doa Penutup — Memohon Umrah Diterima</h3>
+    <p style="color:#F3EBD3">Selepas tahallul, umrah telah pun sempurna. Rebutlah saat ini untuk bermunajat memohon agar ibadah diterima Allah SWT — sepertimana doa Nabi Ibrahim AS dan Nabi Ismail AS selepas membina Kaabah:</p>
+    <div class="dalil" style="background:rgba(0,0,0,.15);border-color:var(--emas)">
+      <div class="arab" style="color:var(--emas-terang)">رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ</div>
+      <div class="rumi" style="color:#F3EBD3">Rabbana taqabbal minna innaka antas-Sami'ul-'Alim</div>
+      <div class="makna" style="color:#F3EBD3">"Wahai Tuhan kami! Terimalah daripada kami (amalan kami ini), sesungguhnya Engkaulah Yang Maha Mendengar lagi Maha Mengetahui."</div>
+      <div class="sumber" style="color:var(--emas-terang)">Surah al-Baqarah 2:127</div>
+    </div>
+    <p style="color:#F3EBD3;text-align:center;margin-top:.8rem">اللَّهُمَّ اجْعَلْهَا عُمْرَةً مَبْرُورَةً وَذَنْبًا مَغْفُورًا وَسَعْيًا مَشْكُورًا</p>
+    <p style="color:var(--emas-muda);text-align:center;font-size:.95rem"><i>Allahummaj-'alha 'umratan mabruratan, wa dzanban maghfuran, wa sa'yan masykura</i><br>"Ya Allah, jadikanlah ini umrah yang mabrur, dosa yang diampunkan, dan usaha yang diberkati."</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <b>Panduan Umrah</b>
+  <p>Langkah demi langkah dari Miqat hingga Tahallul — untuk jemaah kali pertama &amp; warga emas.</p>
+  <p style="margin-top:.5rem">Disusun oleh <b>Ustaz Syed Syukran</b> · Mutawwif Mursyid Al-Haramain</p>
+  <p class="kecil">Foto-foto sebenar diambil daripada Wikimedia Commons di bawah lesen Creative Commons (CC BY / CC BY-SA) dan Domain Awam; kredit dinyatakan pada setiap gambar. Ilustrasi dan infografik adalah karya asli panduan ini. Rujuk mutawwif anda bagi sebarang persoalan fiqh yang khusus.</p>
+</footer>
+
+<button id="btnAtas" aria-label="Kembali ke atas">&uarr;</button>
+
+<!-- Lightbox -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Paparan gambar">
+  <button id="lbTutup" aria-label="Tutup">&times;</button>
+  <img id="lbImg" src="" alt="">
+  <div id="lbTajuk"></div>
+  <div id="lbTeks"></div>
+  <button id="lbZoom">🔍 Zoom</button>
+</div>
+
+<!-- Panel info hotspot -->
+<div id="panelInfo" role="dialog" aria-modal="false" aria-label="Maklumat lokasi">
+  <button id="piTutup" aria-label="Tutup panel">&times;</button>
+  <div id="piIsi"></div>
+</div>
+
+<script>
+/* ===== Storan selamat (fallback memori jika localStorage disekat) ===== */
+var storanMemori = {};
+function simpan(k,v){ try{localStorage.setItem(k,v);}catch(e){storanMemori[k]=v;} }
+function baca(k){ try{return localStorage.getItem(k);}catch(e){return storanMemori[k]||null;} }
+
+/* ===== Mod Gelap / Terang ===== */
+var btnTema = document.getElementById('btnTema');
+function setTema(t){
+  document.documentElement.setAttribute('data-theme', t);
+  btnTema.innerHTML = (t === 'dark') ? '&#9728;&#65039;' : '&#127769;';
+  simpan('tema', t);
+}
+setTema(baca('tema') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+btnTema.addEventListener('click', function(){
+  setTema(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+/* ===== Progress bacaan ===== */
+var barProgress = document.getElementById('progress');
+var btnAtas = document.getElementById('btnAtas');
+window.addEventListener('scroll', function(){
+  var h = document.documentElement;
+  var p = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+  barProgress.style.width = p + '%';
+  btnAtas.classList.toggle('tunjuk', h.scrollTop > 600);
+  sorotCip();
+}, {passive:true});
+btnAtas.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+/* ===== Cip langkah aktif ikut skrol ===== */
+var seksyenSemua = Array.prototype.slice.call(document.querySelectorAll('section.seksyen'));
+var cipSemua = Array.prototype.slice.call(document.querySelectorAll('.cip'));
+var cipAktifSemasa = -1;
+var trekLangkah = document.getElementById('trekLangkah');
+function sorotCip(){
+  var y = window.scrollY + 160, aktif = 0;
+  seksyenSemua.forEach(function(s,i){ if (s.offsetTop <= y) aktif = i; });
+  if (aktif === cipAktifSemasa) return; // elak ganggu skrol halaman jika tiada perubahan
+  cipAktifSemasa = aktif;
+  cipSemua.forEach(function(c,i){ c.classList.toggle('aktif', i === aktif); });
+  var cipAktif = cipSemua[aktif];
+  if (cipAktif && trekLangkah){
+    // gerakkan HANYA jalur navigasi mendatar (bukan seluruh halaman)
+    var sasaran = cipAktif.offsetLeft - (trekLangkah.clientWidth - cipAktif.clientWidth) / 2;
+    trekLangkah.scrollTo({left: Math.max(0, sasaran), behavior:'smooth'});
+  }
+}
+sorotCip();
+
+/* ===== Carian ===== */
+var btnCari = document.getElementById('btnCari');
+var panelCari = document.getElementById('panelCari');
+var kotakCari = document.getElementById('kotakCari');
+var infoCari = document.getElementById('infoCari');
+btnCari.addEventListener('click', function(){
+  panelCari.classList.toggle('buka');
+  if (panelCari.classList.contains('buka')) kotakCari.focus();
+  else { kotakCari.value=''; tapis(''); }
+});
+kotakCari.addEventListener('input', function(){ tapis(this.value); });
+function tapis(q){
+  q = q.trim().toLowerCase();
+  var jumpa = 0;
+  seksyenSemua.forEach(function(s){
+    var padan = !q || (s.dataset.cari + ' ' + s.textContent).toLowerCase().indexOf(q) !== -1;
+    s.classList.toggle('tersembunyi-cari', !padan);
+    if (padan) jumpa++;
+  });
+  document.querySelectorAll('.kad').forEach(function(k){
+    k.classList.remove('sorot-cari');
+    if (q && q.length > 2 && !k.closest('.tersembunyi-cari') && k.textContent.toLowerCase().indexOf(q) !== -1) k.classList.add('sorot-cari');
+  });
+  infoCari.textContent = q ? (jumpa ? jumpa + ' bahagian ditemui — bahagian berkaitan disorot emas.' : 'Tiada padanan. Cuba kata lain: tawaf, niat, saie...') : '';
+}
+
+/* ===== Lightbox ===== */
+var lightbox = document.getElementById('lightbox');
+var lbImg = document.getElementById('lbImg');
+var lbTajuk = document.getElementById('lbTajuk');
+var lbTeks = document.getElementById('lbTeks');
+document.querySelectorAll('img[data-lb]').forEach(function(im){
+  im.addEventListener('click', function(){
+    lbImg.src = im.src; lbImg.alt = im.alt; lbImg.style.display='block';
+    lbTajuk.textContent = im.dataset.lb; lbTeks.textContent = im.dataset.desc || '';
+    document.getElementById('lbZoom').style.display='inline-block';
+    lightbox.classList.add('buka');
+  });
+});
+document.querySelectorAll('.svg-rajah[data-lb]').forEach(function(r){
+  r.addEventListener('click', function(e){
+    if (e.target.closest('.hotspot')) return;
+    lbImg.style.display='none';
+    document.getElementById('lbZoom').style.display='none';
+    lbTajuk.textContent = r.dataset.lb; lbTeks.textContent = r.dataset.desc || '';
+    lightbox.classList.add('buka');
+  });
+});
+function tutupLB(){ lightbox.classList.remove('buka'); lbImg.classList.remove('zum'); }
+document.getElementById('lbTutup').addEventListener('click', tutupLB);
+lightbox.addEventListener('click', function(e){ if (e.target === lightbox) tutupLB(); });
+document.getElementById('lbZoom').addEventListener('click', function(){ lbImg.classList.toggle('zum'); });
+lbImg.addEventListener('click', function(){ lbImg.classList.toggle('zum'); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ tutupLB(); tutupPanel(); } });
+
+/* ===== Hotspot Denah Kaabah ===== */
+var dataSpot = {
+  hajar: {t:'① Hajarul Aswad (الحجر الأسود)', h:'<p><b>Batu Hitam</b> di penjuru timur Kaabah — titik <b>MULA dan TAMAT</b> setiap pusingan tawaf. Sunat mencium atau mengusapnya jika mampu; jika sesak, cukup <b>istilam</b> (isyarat tangan dari jauh sambil mengucup tangan) — jangan berasak sehingga menyakiti jemaah lain.</p><div class="arab">بِسْمِ اللهِ وَاللهُ أَكْبَرُ وَلِلَّهِ الْحَمْدُ</div><p style="text-align:center"><i>Bismillahi wallahu akbar wa lillahil-hamd</i></p>'},
+  pintu: {t:'② Multazam & Pintu Kaabah', h:'<p><b>Multazam</b> ialah ruang antara Hajarul Aswad dan pintu Kaabah — antara <b>tempat paling mustajab doa</b>. Jemaah yang berpeluang mendekatinya boleh menampal dada dan pipi sambil bermunajat. Jika tidak mampu, doa dari jauh sambil mengadapnya juga baik.</p>'},
+  maqam: {t:'③ Maqam Ibrahim (مقام إبراهيم)', h:'<p>Batu bekas <b>tapak kaki Nabi Ibrahim AS</b> ketika membina Kaabah, kini dalam bekas kaca keemasan. Selepas tawaf, dirikan <b>Solat Sunat Tawaf 2 rakaat di belakangnya</b> — jika penuh, di mana-mana dalam Masjidil Haram.</p>'},
+  hijr: {t:'④ Hijr Ismail (حجر إسماعيل)', h:'<p>Kawasan berpagar tembok separa bulat di sisi Kaabah. Ia <b>sebahagian daripada Kaabah asal</b> — kerana itu <b style="color:var(--merah)">tawaf mesti DI LUAR Hijr Ismail</b>; memotong melaluinya membatalkan pusingan itu. Solat di dalamnya seumpama solat di dalam Kaabah — tempat mustajab doa.</p>'},
+  yamani: {t:'⑤ Rukun Yamani (الركن اليماني)', h:'<p>Penjuru sebelum Hajarul Aswad, menghadap arah Yaman. Sunat <b>mengusap dengan tangan</b> jika mampu (tanpa mengucup); jika tidak, teruskan berjalan tanpa isyarat kucupan. Dari sini hingga Hajarul Aswad, bacalah:</p><div class="arab">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div>'},
+  mataf: {t:'⑥ Mataf (المطاف)', h:'<p>Ruang lapang <b>tempat tawaf dilakukan</b> di sekeliling Kaabah. Semakin hampir dengan Kaabah, semakin pendek pusingan tetapi semakin sesak. Warga emas dan pengguna kerusi roda digalakkan bertawaf di lingkaran luar atau di tingkat atas — sah dan lebih selamat.</p>'},
+  doa: {t:'⑦ Zon Doa Ma\'thur', h:'<p>Kawasan antara <b>Rukun Yamani → Hajarul Aswad</b> — satu-satunya bahagian tawaf yang Rasulullah ﷺ khususkan bacaan padanya, iaitu doa <i>"Rabbana atina fid-dunya hasanah..."</i>. Pusingan lain: bebas berdoa dan berzikir dalam apa jua bahasa.</p>'}
+};
+var panelInfo = document.getElementById('panelInfo');
+var piIsi = document.getElementById('piIsi');
+document.querySelectorAll('.hotspot').forEach(function(hs){
+  function bukaSpot(){
+    var d = dataSpot[hs.dataset.spot];
+    if (!d) return;
+    piIsi.innerHTML = '<h3>' + d.t + '</h3>' + d.h;
+    panelInfo.classList.add('buka');
+  }
+  hs.addEventListener('click', bukaSpot);
+  hs.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); bukaSpot(); } });
+});
+function tutupPanel(){ panelInfo.classList.remove('buka'); }
+document.getElementById('piTutup').addEventListener('click', tutupPanel);
+
+/* ===== Kaunter Saie ===== */
+var saie = 0;
+var saieNombor = document.getElementById('saieNombor');
+var saieArah = document.getElementById('saieArah');
+var saieTitik = document.getElementById('saieTitik').children;
+var saieSiap = document.getElementById('saieSiap');
+function lukisSaie(){
+  saieNombor.textContent = saie;
+  for (var i = 0; i < 7; i++) saieTitik[i].classList.toggle('siap', i < saie);
+  saieSiap.classList.toggle('tunjuk', saie >= 7);
+  if (saie >= 7) saieArah.textContent = 'Selesai di Bukit Marwah ✓';
+  else if (saie === 0) saieArah.textContent = 'Sedia di Bukit Safa — mula berjalan ke Marwah';
+  else saieArah.textContent = (saie % 2 === 1)
+    ? 'Anda di MARWAH — perjalanan seterusnya: Marwah → Safa (kiraan ke-' + (saie+1) + ')'
+    : 'Anda di SAFA — perjalanan seterusnya: Safa → Marwah (kiraan ke-' + (saie+1) + ')';
+}
+document.getElementById('btnSaieTambah').addEventListener('click', function(){ if (saie < 7){ saie++; lukisSaie(); } });
+document.getElementById('btnSaieSemula').addEventListener('click', function(){ saie = 0; lukisSaie(); });
+lukisSaie();
+
+/* ===== Kaunter Tawaf ===== */
+var tawaf = 0;
+var tawafNombor = document.getElementById('tawafNombor');
+var tawafArah = document.getElementById('tawafArah');
+var tawafTitik = document.getElementById('tawafTitik').children;
+var tawafSiap = document.getElementById('tawafSiap');
+function lukisTawaf(){
+  tawafNombor.textContent = tawaf;
+  for (var i = 0; i < 7; i++) tawafTitik[i].classList.toggle('siap', i < tawaf);
+  tawafSiap.classList.toggle('tunjuk', tawaf >= 7);
+  if (tawaf >= 7) tawafArah.textContent = 'Selesai 7 pusingan di Hajarul Aswad ✓';
+  else if (tawaf === 0) tawafArah.textContent = 'Sedia di Hajarul Aswad — mula pusingan pertama';
+  else tawafArah.textContent = 'Dalam pusingan ke-' + (tawaf+1) + ' — teruskan hingga kembali ke Hajarul Aswad';
+}
+document.getElementById('btnTawafTambah').addEventListener('click', function(){ if (tawaf < 7){ tawaf++; lukisTawaf(); } });
+document.getElementById('btnTawafSemula').addEventListener('click', function(){ tawaf = 0; lukisTawaf(); });
+lukisTawaf();
+
+/* ===== Checklist ===== */
+document.querySelectorAll('.senarai-semak').forEach(function(sen){
+  var kunci = 'semak_' + (sen.dataset.simpan || 'x');
+  var keadaan = [];
+  try{ keadaan = JSON.parse(baca(kunci) || '[]'); }catch(e){}
+  Array.prototype.forEach.call(sen.children, function(li, i){
+    if (keadaan[i]) li.classList.add('semak');
+    li.addEventListener('click', function(){
+      li.classList.toggle('semak');
+      var s = Array.prototype.map.call(sen.children, function(x){ return x.classList.contains('semak') ? 1 : 0; });
+      simpan(kunci, JSON.stringify(s));
+    });
+  });
+});
+
+/* ===== Audio: sembunyikan pemain jika fail tiada ===== */
+document.querySelectorAll('audio').forEach(function(a){
+  a.addEventListener('error', function(){}, true);
+});
+
+/* ===== Pasang Aplikasi (PWA) ===== */
+var btnPasang = document.getElementById('btnPasang');
+var eventPasangTertangguh = null;
+
+window.addEventListener('beforeinstallprompt', function(e){
+  e.preventDefault();
+  eventPasangTertangguh = e;
+  btnPasang.style.display = 'inline-flex';
+});
+
+function iosSafari(){
+  var ua = window.navigator.userAgent;
+  var iOS = /iPad|iPhone|iPod/.test(ua);
+  var webkit = /WebKit/.test(ua);
+  var bukanChrome = !/CriOS/.test(ua);
+  return iOS && webkit && bukanChrome;
+}
+function sudahDipasang(){
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
+// Untuk iOS (Safari tidak sokong beforeinstallprompt) - tunjuk butang dengan arahan manual
+if (iosSafari() && !sudahDipasang()) {
+  btnPasang.style.display = 'inline-flex';
+}
+
+btnPasang.addEventListener('click', function(){
+  if (eventPasangTertangguh) {
+    eventPasangTertangguh.prompt();
+    eventPasangTertangguh.userChoice.then(function(){ eventPasangTertangguh = null; btnPasang.style.display = 'none'; });
+    return;
+  }
+  if (iosSafari()) {
+    piIsi.innerHTML = '<h3>📲 Pasang di iPhone/iPad</h3>' +
+      '<p>1. Tekan ikon <b>Kongsi (Share) ⬆️</b> di bar bawah Safari.</p>' +
+      '<p>2. Skrol dan pilih <b>"Add to Home Screen" (Tambah ke Skrin Utama)"</b>.</p>' +
+      '<p>3. Tekan <b>"Add"</b> di penjuru kanan atas.</p>' +
+      '<p style="color:var(--teks-2);font-size:.95rem">Aplikasi akan muncul di skrin utama seperti apps biasa, boleh dibuka tanpa buka browser.</p>';
+    panelInfo.classList.add('buka');
+    return;
+  }
+  piIsi.innerHTML = '<h3>📲 Pasang Aplikasi</h3><p>Buka menu pilihan (⋮ tiga titik) di penjuru atas browser, kemudian pilih <b>"Add to Home screen"</b> atau <b>"Install app"</b>.</p>';
+  panelInfo.classList.add('buka');
+});
+
+window.addEventListener('appinstalled', function(){ btnPasang.style.display = 'none'; });
+
+/* ===== PWA: daftar service worker (hanya jika dilayan melalui http/https) ===== */
+if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>
