@@ -263,6 +263,10 @@ audio{width:100%;margin-top:1rem;border-radius:999px}
   display:grid;place-items:center;font-size:1rem;color:#fff;background:transparent;margin-top:.15rem}
 .senarai-semak li.semak .kotak{background:var(--hijau);border-color:var(--hijau)}
 .senarai-semak li.semak .teks-semak{text-decoration:none;color:var(--hijau);font-weight:700}
+.btn-reset-semak{display:inline-flex;align-items:center;gap:.4rem;margin-top:.7rem;padding:.55rem 1.1rem;
+  border-radius:999px;font-size:.9rem;font-weight:700;border:1.5px solid var(--garis);
+  background:var(--kad);color:var(--teks-2);cursor:pointer}
+.btn-reset-semak:hover{border-color:var(--merah);color:var(--merah)}
 
 /* ===== Flow infographic ===== */
 .aliran{display:flex;gap:.4rem;overflow-x:auto;padding:1rem .2rem;scrollbar-width:thin}
@@ -341,7 +345,6 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
   <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
   <h1>Panduan Umrah<br>Langkah Demi Langkah</h1>
   <p>Ikuti perjalanan ibadah Umrah anda dari niat ihram di Miqat sehingga Tahallul — bergambar, mudah difahami, dan mesra warga emas serta jemaah kali pertama.</p>
-  <a class="cta" href="#s1">Mula Belajar &darr;</a>
 </div>
 
 <!-- ============ 1. PENGENALAN ============ -->
@@ -584,7 +587,6 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
     <audio controls preload="none" aria-label="Audio bacaan talbiah">
       <source src="audio/talbiah.mp3" type="audio/mpeg">
     </audio>
-    <div class="audio-nota">🔊 Letakkan fail <b>audio/talbiah.mp3</b> dalam folder website untuk mengaktifkan pemain audio ini.</div>
   </div>
 
   <div class="kad">
@@ -673,10 +675,10 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
           <path d="M128 250 A172 172 0 0 0 300 422" fill="none" stroke="#14663F" stroke-width="5" stroke-linecap="round" opacity=".8"/>
           <path d="M300 422 A172 172 0 0 0 472 250" fill="none" stroke="#14663F" stroke-width="5" stroke-linecap="round" opacity=".8"/>
           <path d="M472 250 A172 172 0 0 0 300 78" fill="none" stroke="#14663F" stroke-width="5" stroke-linecap="round" opacity=".8"/>
-          <path d="M300 78 l-16 -12 M300 78 l-14 14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
-          <path d="M128 250 l-12 16 M128 250 l14 14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
-          <path d="M300 422 l16 12 M300 422 l14 -14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
-          <path d="M472 250 l12 -16 M472 250 l-14 -14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
+          <path d="M300 78 l16 12 M300 78 l14 -14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
+          <path d="M128 250 l12 -16 M128 250 l-14 -14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
+          <path d="M300 422 l-16 -12 M300 422 l-14 14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
+          <path d="M472 250 l-12 16 M472 250 l14 14" stroke="#14663F" stroke-width="5" stroke-linecap="round"/>
         </g>
         <text x="300" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#14663F" font-family="sans-serif">ARAH TAWAF: LAWAN JAM ↺</text>
 
@@ -1135,6 +1137,7 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
   <p>Langkah demi langkah dari Miqat hingga Tahallul — untuk jemaah kali pertama &amp; warga emas.</p>
   <p style="margin-top:.5rem">Disusun oleh <b>Ustaz Syed Syukran</b> · Mutawwif Mursyid Al-Haramain</p>
   <p class="kecil">Foto-foto sebenar diambil daripada Wikimedia Commons di bawah lesen Creative Commons (CC BY / CC BY-SA) dan Domain Awam; kredit dinyatakan pada setiap gambar. Ilustrasi dan infografik adalah karya asli panduan ini. Rujuk mutawwif anda bagi sebarang persoalan fiqh yang khusus.</p>
+  <button id="btnResetSemua" class="btn-reset-semak" style="margin-top:1rem;background:transparent;border-color:var(--emas);color:var(--emas)">&#8635; Set Semula Keseluruhan (untuk Umrah Seterusnya)</button>
 </footer>
 
 <button id="btnAtas" aria-label="Kembali ke atas">&uarr;</button>
@@ -1322,7 +1325,7 @@ document.getElementById('btnTawafTambah').addEventListener('click', function(){ 
 document.getElementById('btnTawafSemula').addEventListener('click', function(){ tawaf = 0; lukisTawaf(); });
 lukisTawaf();
 
-/* ===== Checklist ===== */
+/* ===== Checklist (dengan Butang Set Semula automatik untuk setiap senarai) ===== */
 document.querySelectorAll('.senarai-semak').forEach(function(sen){
   var kunci = 'semak_' + (sen.dataset.simpan || 'x');
   var keadaan = [];
@@ -1335,6 +1338,31 @@ document.querySelectorAll('.senarai-semak').forEach(function(sen){
       simpan(kunci, JSON.stringify(s));
     });
   });
+  // Butang "Set Semula" — sedia untuk umrah/haji seterusnya
+  var btnReset = document.createElement('button');
+  btnReset.className = 'btn-reset-semak';
+  btnReset.type = 'button';
+  btnReset.innerHTML = '&#8635; Set Semula Senarai Ini';
+  btnReset.addEventListener('click', function(){
+    Array.prototype.forEach.call(sen.children, function(li){ li.classList.remove('semak'); });
+    simpan(kunci, JSON.stringify([]));
+  });
+  sen.insertAdjacentElement('afterend', btnReset);
+});
+
+/* Butang induk: Set Semula Keseluruhan (checklist + kaunter tawaf/saie) untuk sedia umrah seterusnya */
+document.getElementById('btnResetSemua').addEventListener('click', function(){
+  if (!confirm('Set semula SEMUA senarai semak dan kaunter (tawaf & saie) untuk umrah/haji seterusnya?')) return;
+  document.querySelectorAll('.senarai-semak').forEach(function(sen){
+    var kunci = 'semak_' + (sen.dataset.simpan || 'x');
+    Array.prototype.forEach.call(sen.children, function(li){ li.classList.remove('semak'); });
+    simpan(kunci, JSON.stringify([]));
+  });
+  saie = 0; lukisSaie();
+  tawaf = 0; lukisTawaf();
+  this.textContent = '✓ Selesai Diset Semula';
+  var btnIni = this;
+  setTimeout(function(){ btnIni.innerHTML = '&#8635; Set Semula Keseluruhan (untuk Umrah Seterusnya)'; }, 2200);
 });
 
 /* ===== Audio: sembunyikan pemain jika fail tiada ===== */
