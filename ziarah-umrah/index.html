@@ -502,15 +502,42 @@ function openModal(idx){
     </div>`;
   document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
   const backdrop = document.getElementById('modalBackdrop');
+  const wasOpen = backdrop.classList.contains('open');
   backdrop.classList.add('open');
   document.body.style.overflow = 'hidden';
   backdrop.scrollTop = 0;
+
+  // Register this modal view as a history entry so the phone's back
+  // button / swipe-back gesture closes the modal first instead of
+  // leaving the page entirely.
+  if (wasOpen) {
+    // switching between cards while modal is already open: replace, don't stack
+    history.replaceState({ galleryModal: true, idx }, '', '#' + card.id);
+  } else {
+    history.pushState({ galleryModal: true, idx }, '', '#' + card.id);
+  }
 }
 
-function closeModal(){
+function hideModalUI(){
   document.getElementById('modalBackdrop').classList.remove('open');
   document.body.style.overflow = '';
 }
+
+function closeModal(){
+  // If we have a history entry for the modal, go back to consume it —
+  // this keeps the Back button / swipe-back gesture working intuitively
+  // on mobile (closes modal instead of exiting the page).
+  if (history.state && history.state.galleryModal) {
+    history.back();
+  } else {
+    hideModalUI();
+  }
+}
+
+// Fires on Back button, swipe-back gesture, or history.back() above.
+window.addEventListener('popstate', (e) => {
+  hideModalUI();
+});
 
 document.getElementById('modalBackdrop').addEventListener('click', (e) => {
   if(e.target.id === 'modalBackdrop') closeModal();
@@ -520,6 +547,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal();
 document.getElementById('searchInput').addEventListener('input', e => {
   query = e.target.value.trim();
   render();
+
 });
 
 const toTopBtn = document.getElementById('toTop');
