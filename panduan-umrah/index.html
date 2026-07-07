@@ -151,6 +151,16 @@ section.seksyen{padding-top:2.2rem;scroll-margin-top:135px}
 .kad ul,.kad ol{padding-left:1.4rem;margin-bottom:.8rem}
 .kad li{margin-bottom:.5rem}
 .grid2{display:grid;gap:1.1rem}
+.toc-kad{background:linear-gradient(180deg,var(--kad),var(--hijau-muda));border:1.5px solid var(--emas)}
+.toc-grid{display:grid;grid-template-columns:1fr;gap:.7rem}
+@media(min-width:560px){.toc-grid{grid-template-columns:1fr 1fr}}
+.toc-btn{display:flex;align-items:center;gap:.9rem;background:var(--kad);border:1.5px solid var(--garis);
+  border-radius:14px;padding:.8rem 1rem;text-decoration:none;color:var(--teks);transition:border-color .2s,transform .2s}
+.toc-btn:hover{border-color:var(--emas);transform:translateY(-2px)}
+.toc-no{flex:none;width:36px;height:36px;border-radius:10px;background:var(--hijau);color:#fff;
+  font-weight:800;font-size:1.05rem;display:flex;align-items:center;justify-content:center}
+.toc-teks{display:flex;flex-direction:column;font-weight:700}
+.toc-teks small{font-weight:400;color:var(--teks-2);font-size:.82rem;margin-top:.15rem}
 @media(min-width:720px){.grid2{grid-template-columns:1fr 1fr}}
 
 /* ===== Dalil box ===== */
@@ -295,6 +305,10 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
   border-radius:50%;border:none;background:var(--hijau);color:#fff;font-size:1.3rem;
   box-shadow:0 4px 14px rgba(0,0,0,.3);display:none}
 #btnAtas.tunjuk{display:block}
+#btnIsiKandungan{position:fixed;bottom:4.9rem;right:1.2rem;z-index:40;width:52px;height:52px;
+  border-radius:50%;border:none;background:var(--emas);color:#1A1204;font-size:1.35rem;
+  box-shadow:0 4px 14px rgba(0,0,0,.3);display:none}
+#btnIsiKandungan.tunjuk{display:block}
 @media(min-width:720px){body{font-size:1.15rem}.arab{font-size:1.9rem}}
 </style>
 </head>
@@ -345,6 +359,23 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
   <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
   <h1>Panduan Umrah<br>Langkah Demi Langkah</h1>
   <p>Ikuti perjalanan ibadah Umrah anda dari niat ihram di Miqat sehingga Tahallul — bergambar, mudah difahami, dan mesra warga emas serta jemaah kali pertama.</p>
+</div>
+
+<div class="kad toc-kad" id="isiKandungan">
+  <h3><span class="titik"></span>Isi Kandungan</h3>
+  <p>Ketik mana-mana bahagian di bawah untuk terus ke topik berkenaan:</p>
+  <div class="toc-grid">
+    <a class="toc-btn" href="#s1"><span class="toc-no">1</span><span class="toc-teks">Pengenalan Umrah<small>Maksud, hukum, rukun &amp; wajib</small></span></a>
+    <a class="toc-btn" href="#s2"><span class="toc-no">2</span><span class="toc-teks">Persediaan Sebelum Miqat<small>Mandi sunat, pakaian ihram</small></span></a>
+    <a class="toc-btn" href="#s3"><span class="toc-no">3</span><span class="toc-teks">Miqat &amp; Niat<small>Laluan, lafaz niat umrah</small></span></a>
+    <a class="toc-btn" href="#s4"><span class="toc-no">4</span><span class="toc-teks">Talbiah<small>Bacaan &amp; audio</small></span></a>
+    <a class="toc-btn" href="#s5"><span class="toc-no">5</span><span class="toc-teks">Masuk Masjidil Haram<small>Doa Babussalam &amp; melihat Kaabah</small></span></a>
+    <a class="toc-btn" href="#s6"><span class="toc-no">6</span><span class="toc-teks">Tawaf<small>Peta interaktif &amp; kaunter pusingan</small></span></a>
+    <a class="toc-btn" href="#s7"><span class="toc-no">7</span><span class="toc-teks">Solat Sunat &amp; Zamzam<small>Niat solat, doa zamzam</small></span></a>
+    <a class="toc-btn" href="#s8"><span class="toc-no">8</span><span class="toc-teks">Saie<small>Kaunter interaktif Safa-Marwah</small></span></a>
+    <a class="toc-btn" href="#s9"><span class="toc-no">9</span><span class="toc-teks">Tahallul<small>Halq &amp; taqsir</small></span></a>
+    <a class="toc-btn" href="#s10"><span class="toc-no">✓</span><span class="toc-teks">Umrah Selesai<small>Checklist &amp; doa penutup</small></span></a>
+  </div>
 </div>
 
 <!-- ============ 1. PENGENALAN ============ -->
@@ -1140,6 +1171,7 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
   <button id="btnResetSemua" class="btn-reset-semak" style="margin-top:1rem;background:transparent;border-color:var(--emas);color:var(--emas)">&#8635; Set Semula Keseluruhan (untuk Umrah Seterusnya)</button>
 </footer>
 
+<button id="btnIsiKandungan" aria-label="Ke Isi Kandungan" title="Isi Kandungan">&#128220;</button>
 <button id="btnAtas" aria-label="Kembali ke atas">&uarr;</button>
 
 <!-- Lightbox -->
@@ -1178,14 +1210,18 @@ btnTema.addEventListener('click', function(){
 /* ===== Progress bacaan ===== */
 var barProgress = document.getElementById('progress');
 var btnAtas = document.getElementById('btnAtas');
+var btnIsiKandungan = document.getElementById('btnIsiKandungan');
+var isiKandunganEl = document.getElementById('isiKandungan');
 window.addEventListener('scroll', function(){
   var h = document.documentElement;
   var p = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
   barProgress.style.width = p + '%';
   btnAtas.classList.toggle('tunjuk', h.scrollTop > 600);
+  btnIsiKandungan.classList.toggle('tunjuk', h.scrollTop > 600);
   sorotCip();
 }, {passive:true});
 btnAtas.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+btnIsiKandungan.addEventListener('click', function(){ isiKandunganEl.scrollIntoView({behavior:'smooth', block:'start'}); });
 
 /* ===== Cip langkah aktif ikut skrol ===== */
 var seksyenSemua = Array.prototype.slice.call(document.querySelectorAll('section.seksyen'));
