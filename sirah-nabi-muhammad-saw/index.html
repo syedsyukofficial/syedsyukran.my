@@ -243,6 +243,38 @@
   .prevnext button:hover{background:var(--emerald-deep);}
   .prevnext button:disabled{opacity:.35; cursor:default;}
 
+  /* ===== Back-to-top floating button ===== */
+  #backToTop{
+    position:fixed;
+    right:18px; bottom:22px;
+    z-index:199;
+    width:52px; height:52px;
+    border-radius:50%;
+    background:var(--emerald-deep);
+    border:1px solid var(--gold-soft);
+    color:var(--gold-soft);
+    box-shadow:0 6px 18px rgba(0,0,0,0.3);
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transform:translateY(10px) scale(.9);
+    pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease, background .2s ease;
+  }
+  #backToTop.show{
+    opacity:1; transform:translateY(0) scale(1);
+    pointer-events:auto;
+  }
+  #backToTop:hover{background:var(--emerald);}
+  #backToTop:active{transform:scale(.93);}
+  #backToTop svg{width:22px; height:22px;}
+
+  @media (max-width:600px){
+    #backToTop{
+      right:14px; bottom:18px;
+      width:48px; height:48px;
+    }
+  }
+
   footer{
     text-align:center; padding:34px 20px 50px; color:#7a7259; font-size:.82rem;
     border-top:1px solid var(--line); background:var(--parchment-deep);
@@ -699,6 +731,13 @@
 
 </main>
 
+<button id="backToTop" aria-label="Ke atas">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5"></line>
+    <polyline points="6 11 12 5 18 11"></polyline>
+  </svg>
+</button>
+
 <footer>
   <div class="arabic">اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ</div>
   Disusun sebagai bahan rujukan ringkas sirah Nabi Muhammad ﷺ, berdasarkan sumber-sumber sirah muktabar.
@@ -715,6 +754,19 @@
   const tocToggle  = document.getElementById('tocToggle');
   const tocPanel   = document.getElementById('tocPanel');
   const tocOverlay = document.getElementById('tocOverlay');
+  const backToTop  = document.getElementById('backToTop');
+
+  /* ---------- Back-to-top floating button ----------
+     Simpler and more reliable than trying to auto-scroll on every
+     section change (which some mobile browsers/WebViews ignore or
+     override). The button appears once the reader has scrolled down,
+     and always does a plain, direct window scroll to the very top. */
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior:'smooth'});
+  });
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 300);
+  }, {passive:true});
 
   /* ---------- TOC open / close ---------- */
   function openToc(){
