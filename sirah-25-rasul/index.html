@@ -905,15 +905,44 @@ function openModal(no){
     </div>
   `;
   overlay.classList.add('show');
-  document.getElementById('closeBtn').addEventListener('click', closeModal);
+  document.getElementById('closeBtn').addEventListener('click', requestCloseModal);
   document.body.style.overflow='hidden';
+
+  // Daftar satu "panel" dalam sejarah pelayar supaya butang back/swipe
+  // hanya menutup modal ini, bukan keluar terus dari laman/tab.
+  if(history.state && history.state.rasulModal){
+    history.replaceState({rasulModal:no}, '', '#rasul-'+no);
+  } else {
+    history.pushState({rasulModal:no}, '', '#rasul-'+no);
+  }
 }
-function closeModal(){
+
+// Dipanggil oleh butang ✕, klik luar modal, atau kekunci Escape.
+// Guna history.back() supaya panel "back" pelayar/swipe sentiasa selari
+// dengan panel yang dilihat pengguna — tidak terus tertutup semua/keluar laman.
+function requestCloseModal(){
+  if(history.state && history.state.rasulModal){
+    history.back();
+  } else {
+    hideModalPanel();
+  }
+}
+
+function hideModalPanel(){
   overlay.classList.remove('show');
   document.body.style.overflow='';
 }
-overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModal(); });
-document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+// Butang back fizikal, gesture swipe-back mobile, dan butang back pelayar
+// semuanya mencetuskan popstate — kita hanya tutup modal (panel semasa),
+// bukan navigasi keluar dari laman.
+window.addEventListener('popstate', (e)=>{
+  if(!e.state || !e.state.rasulModal){
+    hideModalPanel();
+  }
+});
+overlay.addEventListener('click', (e)=>{ if(e.target===overlay) requestCloseModal(); });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && overlay.classList.contains('show')) requestCloseModal(); });
 
 // ---------- Floating side buttons ----------
 const fabStack = document.getElementById('fabStack');
