@@ -1,1 +1,797 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sirah Nabi Muhammad ﷺ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2a22;
+    --parchment:#f6f1e4;
+    --parchment-deep:#efe6d1;
+    --emerald:#0f3d2e;
+    --emerald-deep:#0a2b20;
+    --gold:#b8892b;
+    --gold-soft:#d9b45f;
+    --line:#d8c8a0;
+    --maroon:#6e2f2a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(184,137,43,0.10), transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%, rgba(15,61,46,0.10), transparent 55%),
+      var(--parchment);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    line-height:1.75;
+  }
+  a{color:var(--emerald);}
 
+  /* ===== Header ===== */
+  header{
+    position:relative;
+    background:linear-gradient(180deg,var(--emerald-deep) 0%, var(--emerald) 70%, #0e3a2c 100%);
+    color:var(--parchment);
+    padding:64px 24px 56px;
+    text-align:center;
+    overflow:hidden;
+    border-bottom:6px solid var(--gold);
+  }
+  header::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(216,180,95,0.06) 0 2px, transparent 2px 26px),
+      repeating-linear-gradient(-45deg, rgba(216,180,95,0.06) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .eyebrow{
+    position:relative;
+    letter-spacing:.35em;
+    text-transform:uppercase;
+    font-size:.72rem;
+    color:var(--gold-soft);
+    font-family:'Lora',serif;
+    margin-bottom:18px;
+  }
+  header h1{
+    position:relative;
+    font-family:'Amiri',serif;
+    font-weight:700;
+    font-size:clamp(2.1rem,5vw,3.6rem);
+    margin:0 0 10px;
+    letter-spacing:.01em;
+  }
+  header .arabic{
+    position:relative;
+    font-family:'Amiri',serif;
+    font-size:clamp(1.6rem,4vw,2.4rem);
+    color:var(--gold-soft);
+    margin-bottom:18px;
+    direction:rtl;
+  }
+  header p.tagline{
+    position:relative;
+    max-width:620px;
+    margin:0 auto;
+    color:#dfe8e1;
+    font-size:1.02rem;
+    font-style:italic;
+  }
+  .salaam{
+    position:relative;
+    margin-top:22px;
+    font-size:.85rem;
+    color:var(--gold-soft);
+    letter-spacing:.06em;
+  }
+
+  /* ===== Nav ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--parchment-deep);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  }
+  .nav-inner{
+    max-width:1080px; margin:0 auto;
+    display:flex; overflow-x:auto;
+    scrollbar-width:thin;
+  }
+  .nav-inner::-webkit-scrollbar{height:6px;}
+  .nav-inner::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+  .navbtn{
+    flex:0 0 auto;
+    font-family:'Lora',serif;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:16px 18px;
+    font-size:.86rem;
+    color:#5b5442;
+    border-bottom:3px solid transparent;
+    white-space:nowrap;
+    transition:all .2s ease;
+  }
+  .navbtn .num{
+    display:inline-block;
+    font-family:'Cormorant Garamond',serif;
+    font-weight:700;
+    color:var(--gold);
+    margin-right:6px;
+  }
+  .navbtn:hover{color:var(--emerald); background:rgba(184,137,43,0.08);}
+  .navbtn.active{
+    color:var(--emerald-deep);
+    border-bottom-color:var(--gold);
+    font-weight:600;
+    background:rgba(184,137,43,0.10);
+  }
+
+  /* ===== Main ===== */
+  main{max-width:860px; margin:0 auto; padding:56px 24px 100px;}
+
+  .section{display:none; animation:fadein .35s ease;}
+  .section.active{display:block;}
+  @keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .part-head{
+    display:flex; align-items:baseline; gap:16px;
+    margin-bottom:8px;
+    border-bottom:2px solid var(--gold);
+    padding-bottom:14px;
+  }
+  .part-number{
+    font-family:'Amiri',serif;
+    font-weight:700;
+    font-size:2.6rem;
+    color:var(--gold);
+    line-height:1;
+  }
+  .part-title{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:700;
+    font-size:1.7rem;
+    color:var(--emerald-deep);
+    letter-spacing:.01em;
+  }
+  .part-sub{
+    font-size:.9rem;
+    color:#7a7259;
+    margin:6px 0 30px;
+    font-style:italic;
+  }
+
+  h3.h{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:700;
+    font-size:1.35rem;
+    color:var(--maroon);
+    margin:34px 0 10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  h3.h::before{
+    content:"";
+    width:8px; height:8px;
+    background:var(--gold);
+    transform:rotate(45deg);
+    flex:0 0 auto;
+  }
+  h4.h4{
+    font-family:'Lora',serif;
+    font-weight:600;
+    font-size:1.02rem;
+    color:var(--emerald-deep);
+    margin:22px 0 6px;
+  }
+  p{margin:0 0 14px; text-align:justify;}
+  ul, ol{margin:0 0 16px; padding-left:22px;}
+  li{margin-bottom:6px; text-align:justify;}
+
+  .note{
+    background:rgba(15,61,46,0.05);
+    border-left:3px solid var(--emerald);
+    padding:14px 18px;
+    margin:18px 0;
+    font-size:.94rem;
+    border-radius:0 4px 4px 0;
+  }
+  .quote{
+    font-family:'Amiri',serif;
+    font-style:italic;
+    color:var(--emerald-deep);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:14px 4px;
+    margin:20px 0;
+    text-align:center;
+    font-size:1.05rem;
+  }
+  .quote span{display:block; font-family:'Lora',serif; font-style:normal; font-size:.8rem; color:#7a7259; margin-top:6px;}
+
+  table.simple{
+    width:100%; border-collapse:collapse; margin:16px 0 22px; font-size:.94rem;
+  }
+  table.simple th, table.simple td{
+    border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top;
+  }
+  table.simple th{background:var(--parchment-deep); font-family:'Lora',serif; font-weight:600; color:var(--emerald-deep);}
+
+  .timeline{list-style:none; margin:0 0 20px; padding:0; border-left:2px solid var(--gold); }
+  .timeline li{
+    position:relative; padding:2px 0 18px 22px; text-align:justify;
+  }
+  .timeline li::before{
+    content:""; position:absolute; left:-6px; top:6px;
+    width:10px; height:10px; border-radius:50%;
+    background:var(--emerald); border:2px solid var(--gold-soft);
+  }
+  .timeline b{color:var(--maroon);}
+
+  .prevnext{
+    display:flex; justify-content:space-between; margin-top:50px;
+    border-top:1px solid var(--line); padding-top:20px;
+  }
+  .prevnext button{
+    font-family:'Lora',serif; background:var(--emerald); color:var(--parchment);
+    border:none; padding:10px 18px; border-radius:3px; cursor:pointer; font-size:.88rem;
+  }
+  .prevnext button:hover{background:var(--emerald-deep);}
+  .prevnext button:disabled{opacity:.35; cursor:default;}
+
+  footer{
+    text-align:center; padding:34px 20px 50px; color:#7a7259; font-size:.82rem;
+    border-top:1px solid var(--line); background:var(--parchment-deep);
+  }
+  footer .arabic{font-family:'Amiri',serif; font-size:1.1rem; color:var(--emerald-deep); margin-bottom:8px; direction:rtl;}
+
+  /* ===== Table of Contents (TOC) menu ===== */
+  #tocToggle{
+    position:fixed;
+    top:18px; right:18px;
+    z-index:200;
+    display:flex; align-items:center; gap:8px;
+    background:var(--emerald-deep);
+    color:var(--parchment);
+    border:1px solid var(--gold-soft);
+    border-radius:999px;
+    padding:9px 16px 9px 12px;
+    font-family:'Lora',serif;
+    font-size:.82rem;
+    letter-spacing:.03em;
+    cursor:pointer;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+    transition:background .2s ease, transform .15s ease;
+  }
+  #tocToggle:hover{background:var(--emerald);}
+  #tocToggle:active{transform:scale(.97);}
+  #tocToggle .bars{
+    width:16px; height:12px;
+    position:relative;
+    flex:0 0 auto;
+  }
+  #tocToggle .bars span{
+    position:absolute; left:0; width:100%; height:2px;
+    background:var(--gold-soft); border-radius:2px;
+  }
+  #tocToggle .bars span:nth-child(1){top:0;}
+  #tocToggle .bars span:nth-child(2){top:5px;}
+  #tocToggle .bars span:nth-child(3){top:10px;}
+
+  #tocOverlay{
+    position:fixed; inset:0;
+    background:rgba(10,20,15,0.35);
+    backdrop-filter:blur(1px);
+    z-index:190;
+    opacity:0; pointer-events:none;
+    transition:opacity .2s ease;
+  }
+  #tocOverlay.open{opacity:1; pointer-events:auto;}
+
+  #tocPanel{
+    position:fixed;
+    top:64px; right:18px;
+    z-index:201;
+    width:280px;
+    max-width:calc(100vw - 36px);
+    background:var(--parchment);
+    border:1px solid var(--line);
+    border-top:4px solid var(--gold);
+    border-radius:8px;
+    box-shadow:0 18px 40px rgba(0,0,0,0.28);
+    padding:10px;
+    transform-origin:top right;
+    transform:scale(.92) translateY(-6px);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease, transform .18s ease;
+    max-height:calc(100vh - 90px);
+    overflow-y:auto;
+  }
+  #tocPanel.open{
+    opacity:1; pointer-events:auto;
+    transform:scale(1) translateY(0);
+  }
+  #tocPanel .toc-title{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:700;
+    color:var(--emerald-deep);
+    font-size:1.02rem;
+    padding:8px 10px 10px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:6px;
+    letter-spacing:.02em;
+  }
+  .tocitem{
+    display:flex; align-items:flex-start; gap:10px;
+    width:100%;
+    text-align:left;
+    background:none; border:none; cursor:pointer;
+    font-family:'Lora',serif;
+    font-size:.88rem;
+    color:var(--ink);
+    padding:10px 10px;
+    border-radius:5px;
+    line-height:1.35;
+  }
+  .tocitem:hover{background:rgba(184,137,43,0.12);}
+  .tocitem.active{
+    background:rgba(15,61,46,0.10);
+    color:var(--emerald-deep);
+    font-weight:600;
+  }
+  .tocitem .tocnum{
+    font-family:'Amiri',serif;
+    font-weight:700;
+    color:var(--gold);
+    flex:0 0 auto;
+    min-width:20px;
+  }
+
+  @media (max-width:600px){
+    #tocToggle{
+      top:12px; right:12px;
+      padding:9px 13px 9px 10px;
+      font-size:0;
+    }
+    #tocToggle .label{display:none;}
+    #tocPanel{
+      top:60px; right:10px; left:10px;
+      width:auto; max-width:none;
+    }
+  }
+
+  @media (max-width:600px){
+    header{padding:48px 16px 40px;}
+    main{padding:36px 16px 70px;}
+    .part-number{font-size:2rem;}
+    .part-title{font-size:1.3rem;}
+  }
+</style>
+</head>
+<body>
+
+<button id="tocToggle" aria-haspopup="true" aria-expanded="false" aria-controls="tocPanel">
+  <span class="bars"><span></span><span></span><span></span></span>
+  <span class="label">Isi Kandungan</span>
+</button>
+<div id="tocOverlay"></div>
+<div id="tocPanel" role="menu" aria-label="Isi Kandungan">
+  <div class="toc-title">Isi Kandungan</div>
+  <button class="tocitem" data-target="p1" role="menuitem"><span class="tocnum">1</span><span>Nasab, Ahli Keluarga, Isteri &amp; Anak-Anak</span></button>
+  <button class="tocitem" data-target="p2" role="menuitem"><span class="tocnum">2</span><span>Kehidupan Sebelum Diutuskan Sebagai Rasul</span></button>
+  <button class="tocitem" data-target="p3" role="menuitem"><span class="tocnum">3</span><span>Permulaan Wahyu Sehingga Hijrah ke Habsyah</span></button>
+  <button class="tocitem" data-target="p4" role="menuitem"><span class="tocnum">4</span><span>Selepas Hijrah Habsyah Hingga Hijrah Madinah</span></button>
+  <button class="tocitem" data-target="p5" role="menuitem"><span class="tocnum">5</span><span>Hijrah Sehingga Stabil di Madinah</span></button>
+  <button class="tocitem" data-target="p6" role="menuitem"><span class="tocnum">6</span><span>Peperangan Rasulullah ﷺ</span></button>
+  <button class="tocitem" data-target="p7" role="menuitem"><span class="tocnum">7</span><span>Selepas Pembukaan Makkah Sehingga Kewafatan</span></button>
+  <button class="tocitem" data-target="p8" role="menuitem"><span class="tocnum">8</span><span>Rujukan &amp; Bacaan Lanjut</span></button>
+</div>
+
+<header>
+  <div class="eyebrow">Kajian Sirah</div>
+  <h1>Sirah Nabi Muhammad ﷺ</h1>
+  <div class="arabic">سيرة النبي محمد ﷺ</div>
+  <p class="tagline">Perjalanan hidup penghulu sekalian rasul — dari nasab yang mulia, sebelum kenabian, permulaan wahyu, hijrah, jihad, sehingga saat kewafatan Baginda.</p>
+  <div class="salaam">صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ — Semoga selawat dan salam sejahtera dilimpahkan ke atas Baginda</div>
+</header>
+
+<nav>
+  <div class="nav-inner" id="navInner">
+    <button class="navbtn active" data-target="p1"><span class="num">1</span>Nasab &amp; Keluarga</button>
+    <button class="navbtn" data-target="p2"><span class="num">2</span>Sebelum Kenabian</button>
+    <button class="navbtn" data-target="p3"><span class="num">3</span>Wahyu – Hijrah Habsyah</button>
+    <button class="navbtn" data-target="p4"><span class="num">4</span>Habsyah – Hijrah Madinah</button>
+    <button class="navbtn" data-target="p5"><span class="num">5</span>Hijrah – Stabil di Madinah</button>
+    <button class="navbtn" data-target="p6"><span class="num">6</span>Peperangan</button>
+    <button class="navbtn" data-target="p7"><span class="num">7</span>Fathu Makkah – Wafat</button>
+    <button class="navbtn" data-target="p8"><span class="num">8</span>Rujukan</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ BAHAGIAN 1 ============ -->
+<section class="section active" id="p1">
+  <div class="part-head">
+    <div class="part-number">01</div>
+    <div>
+      <div class="part-title">Nasab Rasulullah, Ahli Keluarga, Isteri dan Anak-Anak</div>
+    </div>
+  </div>
+  <p class="part-sub">Susur galur keturunan yang mulia hingga Nabi Adam a.s., dan ikatan kekeluargaan yang membentuk peribadi Baginda ﷺ.</p>
+
+  <h3 class="h">Nasab Rasulullah ﷺ</h3>
+  <p>Rasulullah ﷺ ialah <b>Muhammad bin Abdullah bin Abdul Muttalib bin Hasyim bin Abdul Manaf bin Qusai bin Kilab bin Murrah bin Ka'ab bin Lu'ay bin Ghalib bin Fihr bin Malik bin an-Nadhr bin Kinanah bin Khuzaimah bin Mudrikah bin Ilyas bin Mudhar bin Nizar bin Ma'ad bin Adnan</b>. Nasab Baginda daripada Adnan ke atas bersambung hingga kepada Nabi Ismail a.s. bin Nabi Ibrahim a.s.</p>
+  <p>Para ulama sepakat bahawa nasab Baginda dari Adnan hingga Ismail a.s. adalah sahih dan tidak diperselisihkan, manakala nasab sebelum Adnan diperselisihkan ketepatannya kerana bersumber daripada riwayat Ahli Kitab yang tidak dapat dipastikan sanadnya. Suku Quraisy dikenali sebagai kabilah Arab yang paling mulia keturunannya, dan Bani Hasyim pula adalah yang paling mulia dalam kalangan Quraisy.</p>
+
+  <div class="quote">"Sesungguhnya Allah telah memilihku daripada sebaik-baik kabilah (Quraisy), kemudian daripada sebaik-baik keluarga (Bani Hasyim)."
+    <span>— Riwayat at-Tirmizi, sanad sahih</span>
+  </div>
+
+  <h3 class="h">Ibu Bapa dan Datuk</h3>
+  <ul>
+    <li><b>Bapa:</b> Abdullah bin Abdul Muttalib — meninggal dunia ketika Rasulullah ﷺ masih dalam kandungan ibunya.</li>
+    <li><b>Ibu:</b> Aminah binti Wahab — meninggal dunia di Abwa' ketika Baginda berusia 6 tahun, dalam perjalanan pulang dari Madinah.</li>
+    <li><b>Datuk:</b> Abdul Muttalib (nama sebenar Syaibatul Hamd) — menjaga Baginda selepas kewafatan Aminah, sehingga beliau sendiri wafat ketika Baginda berusia 8 tahun.</li>
+    <li><b>Bapa saudara yang menjaga Baginda:</b> Abu Talib (Abdu Manaf) — memelihara dan membela Baginda sehingga dewasa dan sepanjang zaman dakwah di Makkah.</li>
+    <li><b>Ibu susuan:</b> Halimah as-Sa'diyyah dari kabilah Bani Sa'ad, tempat Baginda dibesarkan selama kira-kira empat tahun di padang pasir.</li>
+  </ul>
+
+  <h4 class="h4">Bapa-bapa saudara Baginda (anak-anak Abdul Muttalib)</h4>
+  <p>Antaranya ialah al-Harith, az-Zubair, Hamzah (yang kemudian syahid di Uhud), al-Abbas (moyang Bani Abbasiyyah), Abu Talib, dan Abu Lahab (yang menentang dakwah Baginda dan dicela dalam al-Qur'an).</p>
+
+  <h4 class="h4">Emak-emak saudara Baginda</h4>
+  <p>Iaitu Safiyyah, Atikah, Arwa, Umaimah, Barrah dan Ummu Hakim (al-Baidha') — kesemuanya puteri Abdul Muttalib.</p>
+
+  <h3 class="h">Isteri-Isteri Baginda ﷺ (Ummahatul Mukminin)</h3>
+  <p>Ummahatul Mukminin ialah gelaran khusus bagi isteri-isteri Rasulullah ﷺ, kerana kedudukan mereka wajib dihormati sebagaimana ibu, sepertimana firman Allah dalam Surah al-Ahzab ayat 6.</p>
+  <table class="simple">
+    <tr><th>Isteri</th><th>Catatan ringkas</th></tr>
+    <tr><td>Khadijah binti Khuwailid</td><td>Isteri pertama; berkahwin ketika Baginda berusia 25 tahun. Ibu kepada hampir semua anak Baginda kecuali Ibrahim.</td></tr>
+    <tr><td>Saudah binti Zam'ah</td><td>Dikahwini selepas kewafatan Khadijah, sebelum hijrah.</td></tr>
+    <tr><td>Aisyah binti Abu Bakar</td><td>Puteri sahabat karib Baginda, Abu Bakar as-Siddiq; dikenali keilmuannya dalam hadis dan fiqh.</td></tr>
+    <tr><td>Hafsah binti Umar</td><td>Puteri Umar al-Khattab.</td></tr>
+    <tr><td>Zainab binti Khuzaimah</td><td>Digelar "Ummul Masakin" kerana kasihnya kepada golongan miskin; wafat awal dalam perkahwinan.</td></tr>
+    <tr><td>Ummu Salamah (Hindun binti Abi Umayyah)</td><td>Balu seorang sahabat yang syahid.</td></tr>
+    <tr><td>Zainab binti Jahsy</td><td>Sepupu Baginda; ayat hijab diturunkan berkaitan perkahwinan ini.</td></tr>
+    <tr><td>Juwairiyah binti al-Harith</td><td>Daripada Bani Mustaliq; perkahwinan ini membawa pembebasan ramai tawanan.</td></tr>
+    <tr><td>Ummu Habibah (Ramlah binti Abi Sufyan)</td><td>Puteri Abu Sufyan; sebelum ini berhijrah ke Habsyah.</td></tr>
+    <tr><td>Safiyyah binti Huyay</td><td>Daripada Bani Nadhir/Khaibar.</td></tr>
+    <tr><td>Maimunah binti al-Harith</td><td>Isteri terakhir yang dikahwini Baginda.</td></tr>
+  </table>
+  <p><i>Mariah al-Qibtiyyah</i>, seorang hamba yang dihadiahkan oleh pembesar Mesir, turut tinggal bersama Baginda dan melahirkan puteranya, Ibrahim.</p>
+
+  <h3 class="h">Anak-Anak Rasulullah ﷺ</h3>
+  <p>Kesemua putera-puteri Baginda dilahirkan oleh Khadijah r.a., kecuali Ibrahim yang lahir daripada Mariah al-Qibtiyyah:</p>
+  <ol>
+    <li><b>Al-Qasim</b> — anak sulung; dari namanya diambil gelaran Abul Qasim, tetapi meninggal ketika masih kecil.</li>
+    <li><b>Zainab</b> — puteri sulung.</li>
+    <li><b>Ruqayyah</b> — pernah berkahwin dengan Utsman bin Affan.</li>
+    <li><b>Ummu Kalthum</b> — turut berkahwin dengan Utsman bin Affan selepas kewafatan Ruqayyah.</li>
+    <li><b>Fatimah az-Zahra'</b> — berkahwin dengan Ali bin Abi Talib; satu-satunya anak Baginda yang hidup lebih lama selepas kewafatan Baginda (sekitar enam bulan).</li>
+    <li><b>Abdullah</b> — digelar at-Tayyib dan at-Tahir, lahir selepas kenabian; wafat ketika kecil.</li>
+    <li><b>Ibrahim</b> — lahir di Madinah pada tahun 8H daripada Mariah al-Qibtiyyah; wafat pada usia lebih kurang satu tahun sepuluh bulan.</li>
+  </ol>
+  <div class="note">Semua putera Baginda wafat semasa kecil, dan hanya keturunan melalui Fatimah r.a. yang berterusan — dikenali sebagai <i>Ahlul Bait</i> dan zuriat <i>Sayyid/Syarifah</i>.</div>
+</section>
+
+<!-- ============ BAHAGIAN 2 ============ -->
+<section class="section" id="p2">
+  <div class="part-head">
+    <div class="part-number">02</div>
+    <div class="part-title">Kehidupan Baginda Sebelum Diutuskan Sebagai Rasul</div>
+  </div>
+  <p class="part-sub">Dari kelahiran pada Tahun Gajah sehingga usia empat puluh tahun, saat wahyu pertama diturunkan.</p>
+
+  <h3 class="h">Kelahiran</h3>
+  <p>Rasulullah ﷺ dilahirkan di Makkah pada <b>Tahun Gajah</b>, iaitu tahun tentera bergajah Abrahah cuba memusnahkan Kaabah namun dibinasakan Allah — bersamaan sekitar tahun 570 Masihi, pada hari Isnin bulan Rabiul Awal. Ayahandanya, Abdullah, telah wafat sebelum kelahirannya. Baginda dilahirkan sebagai anak yatim.</p>
+
+  <h3 class="h">Zaman Kanak-Kanak</h3>
+  <ul>
+    <li>Baginda disusukan oleh <b>Halimah as-Sa'diyyah</b> dari Bani Sa'ad dan membesar di padang pasir lebih kurang empat tahun — membentuk tubuh yang sihat, lidah yang fasih, dan jiwa yang berani.</li>
+    <li>Semasa dalam jagaan Halimah, berlaku peristiwa <b>pembelahan dada</b> Baginda oleh Malaikat Jibril untuk membersihkan hati Baginda daripada bahagian syaitan, sebelum dikembalikan kepada ibunya.</li>
+    <li>Ketika berusia 6 tahun, ibunya Aminah wafat di Abwa' dalam perjalanan pulang dari Madinah. Baginda kemudian dijaga oleh Ummu Aiman, lalu oleh datuknya, Abdul Muttalib.</li>
+    <li>Apabila Abdul Muttalib wafat ketika Baginda berusia 8 tahun, jagaan diserahkan kepada bapa saudaranya, <b>Abu Talib</b>, yang memelihara dan membela Baginda sehingga dewasa.</li>
+  </ul>
+
+  <h3 class="h">Zaman Remaja dan Dewasa</h3>
+  <ul>
+    <li>Pada usia 12 tahun, Baginda dibawa oleh Abu Talib mengikuti kafilah dagang ke Syam. Dalam perjalanan ini berlaku peristiwa pertemuan dengan pendeta <b>Bahira</b> yang mengesan tanda-tanda kenabian pada diri Baginda.</li>
+    <li>Baginda pernah mengembala kambing penduduk Makkah dengan upah beberapa qirat — sebagaimana sabda Baginda, <i>"Tidak diutus seorang nabi pun melainkan pernah menggembala kambing."</i></li>
+    <li>Baginda terkenal dengan sifat jujur dan amanah sejak muda, sehingga digelar <b>al-Amin</b> (yang dipercayai) oleh masyarakat Makkah.</li>
+    <li>Baginda turut menyertai <b>Perang Fijar</b> (peperangan antara suku Quraisy dengan Qais Ailan) dan <b>Hilful Fudhul</b>, satu perjanjian keadilan sosial yang kemudiannya dipuji oleh Baginda sendiri selepas kenabian.</li>
+    <li>Pada usia 25 tahun, Baginda berniaga membawa barangan Khadijah binti Khuwailid ke Syam. Kejujuran dan keberkatan urus niaga Baginda menarik hati Khadijah, dan mereka berkahwin — Khadijah ketika itu berusia 40 tahun.</li>
+    <li>Semasa pembinaan semula Kaabah, berlaku pertelingkahan suku-suku Quraisy tentang siapa berhak meletakkan semula <b>Hajarul Aswad</b>. Baginda, ketika berusia sekitar 35 tahun, dipilih sebagai penengah dan bijaksana menyelesaikannya dengan meletakkan batu itu di atas kain lalu setiap ketua suku memegang hujung kain bersama-sama.</li>
+    <li>Menjelang usia 40 tahun, Baginda gemar <b>bertahannuth</b> (beruzlah beribadat) di Gua Hira', menjauhi kesesatan penyembahan berhala masyarakat jahiliyah.</li>
+  </ul>
+</section>
+
+<!-- ============ BAHAGIAN 3 ============ -->
+<section class="section" id="p3">
+  <div class="part-head">
+    <div class="part-number">03</div>
+    <div class="part-title">Permulaan Wahyu Sehingga Hijrah ke Habsyah</div>
+  </div>
+  <p class="part-sub">Detik bermulanya risalah kenabian, dakwah secara rahsia dan terang-terangan, serta ujian penindasan awal.</p>
+
+  <h3 class="h">Wahyu Pertama</h3>
+  <p>Pada malam 17 Ramadan bersamaan usia Baginda 40 tahun, semasa berkhalwat di Gua Hira', Malaikat Jibril datang membawa wahyu pertama — Surah al-Alaq ayat 1–5, dimulakan dengan perintah <b>"Iqra'"</b> (bacalah). Baginda pulang dalam keadaan gementar dan diselimuti oleh isterinya, Khadijah, yang menenangkan Baginda dan membawanya menemui sepupunya, <b>Waraqah bin Naufal</b>, seorang yang arif tentang kitab-kitab terdahulu. Waraqah mengesahkan bahawa yang datang itu adalah Namus (Jibril) yang pernah turun kepada Nabi Musa a.s., dan meramalkan bahawa kaum Baginda akan menentangnya kelak.</p>
+
+  <h3 class="h">Dakwah Secara Rahsia (± 3 tahun)</h3>
+  <p>Selepas selang beberapa waktu wahyu terputus (fatratul wahyi), wahyu turun semula dan Baginda mula berdakwah secara sulit dalam kalangan keluarga dan sahabat terdekat. Golongan yang mula-mula memeluk Islam (as-Sabiqun al-Awwalun) termasuklah:</p>
+  <ul>
+    <li><b>Khadijah binti Khuwailid</b> — wanita pertama yang beriman.</li>
+    <li><b>Ali bin Abi Talib</b> — kanak-kanak pertama yang beriman.</li>
+    <li><b>Zaid bin Harithah</b> — hamba yang dimerdekakan Baginda.</li>
+    <li><b>Abu Bakar as-Siddiq</b> — lelaki merdeka pertama yang beriman, kemudiannya berjasa besar mengajak ramai lagi memeluk Islam seperti Utsman bin Affan, Zubair bin Awwam, Abdul Rahman bin Auf, Sa'ad bin Abi Waqqas dan Talhah bin Ubaidillah.</li>
+  </ul>
+
+  <h3 class="h">Dakwah Secara Terang-Terangan</h3>
+  <p>Setelah turun perintah Allah dalam Surah al-Hijr ayat 94 agar berdakwah secara terbuka, Baginda menyeru kaumnya di Bukit Safa dan mengisytiharkan risalah tauhid secara terang-terangan. Ini mencetuskan penentangan hebat daripada pembesar Quraisy, termasuk bapa saudaranya sendiri, Abu Lahab.</p>
+
+  <h3 class="h">Penindasan Terhadap Kaum Muslimin</h3>
+  <p>Golongan Quraisy mula menyeksa pengikut Baginda, khususnya hamba-hamba dan orang miskin yang tiada perlindungan kabilah, seperti <b>Bilal bin Rabah</b>, <b>Ammar bin Yasir</b> dan ibu bapanya, <b>Yasir</b> dan <b>Sumayyah</b>. Sumayyah binti Khayyat menjadi syahidah pertama dalam Islam, dibunuh kerana keteguhan imannya. Baginda sendiri turut menerima pelbagai gangguan dan penghinaan, namun tetap tabah menyampaikan dakwah.</p>
+
+  <h3 class="h">Hijrah Pertama ke Habsyah</h3>
+  <p>Kerana tekanan yang semakin memuncak, pada tahun kelima kenabian Rasulullah ﷺ mengarahkan sebahagian sahabat berhijrah ke Habsyah (Ethiopia), sebuah negeri Kristian yang diperintah oleh raja yang adil, <b>an-Najashi</b> (Negus). Rombongan ini diketuai oleh <b>Ja'far bin Abi Talib</b>. Apabila utusan Quraisy datang meminta agar mereka dihantar pulang, Ja'far membacakan ayat-ayat al-Qur'an tentang Nabi Isa a.s. yang menyentuh hati Raja Najashi, lalu baginda enggan menyerahkan mereka dan memberi perlindungan penuh.</p>
+</section>
+
+<!-- ============ BAHAGIAN 4 ============ -->
+<section class="section" id="p4">
+  <div class="part-head">
+    <div class="part-number">04</div>
+    <div class="part-title">Selepas Hijrah ke Habsyah Hingga Hijrah ke Madinah</div>
+  </div>
+  <p class="part-sub">Tahun-tahun penuh dugaan — pemboikotan, Tahun Kesedihan, sehingga bai'ah penduduk Madinah.</p>
+
+  <h3 class="h">Islamnya Hamzah dan Umar bin Khattab</h3>
+  <p>Dua peristiwa besar memperkukuh kedudukan umat Islam: pemelukan Islam oleh <b>Hamzah bin Abdul Muttalib</b>, bapa saudara Baginda yang gagah perkasa, dan <b>Umar bin Khattab</b>, seorang tokoh Quraisy yang mulanya keras menentang Islam namun kemudiannya menjadi salah seorang pembela utama dakwah.</p>
+
+  <h3 class="h">Pemboikotan Bani Hasyim</h3>
+  <p>Kerana gagal menghentikan dakwah Baginda, Quraisy mengisytiharkan pemboikotan menyeluruh terhadap Bani Hasyim dan Bani Muttalib — memutuskan hubungan perkahwinan, jual beli dan pergaulan — memaksa mereka mengasingkan diri di lembah <b>Syi'b Abi Talib</b> selama lebih kurang tiga tahun, hingga menderita kebuluran yang sangat berat, sebelum akhirnya perjanjian itu dibatalkan.</p>
+
+  <h3 class="h">Tahun Kesedihan (Aam al-Huzn)</h3>
+  <p>Pada tahun kesepuluh kenabian, Baginda kehilangan dua tunjang utama sokongan hidupnya dalam tempoh yang berdekatan — isterinya, <b>Khadijah binti Khuwailid</b>, dan bapa saudaranya, <b>Abu Talib</b>, yang wafat dalam keadaan masih belum memeluk Islam. Tahun ini digelar <i>Aam al-Huzn</i> (Tahun Kesedihan) kerana beratnya ujian yang menimpa Baginda.</p>
+
+  <h3 class="h">Perjalanan ke Taif</h3>
+  <p>Selepas kewafatan Abu Talib, Baginda pergi ke Taif untuk mencari sokongan dan menyampaikan dakwah, namun ditolak dengan kasar dan dilempari batu oleh penduduknya sehingga kaki Baginda berdarah. Dalam perjalanan pulang, Malaikat penjaga gunung menawarkan untuk menghempapkan dua bukit ke atas penduduk Taif, namun Baginda menolaknya dengan penuh belas kasihan, mendoakan agar zuriat mereka kelak menerima Islam.</p>
+
+  <h3 class="h">Peristiwa Isra' dan Mikraj</h3>
+  <p>Pada waktu yang penuh dugaan ini, Allah memuliakan Baginda dengan peristiwa <b>Isra'</b> (perjalanan malam dari Masjidil Haram ke Masjidil Aqsa) dan <b>Mikraj</b> (naik ke langit hingga Sidratul Muntaha), yang antara lain membawa perintah kewajipan solat lima waktu.</p>
+
+  <h3 class="h">Bai'ah Aqabah Pertama dan Kedua</h3>
+  <p>Baginda mula bertemu jemaah haji dari Madinah (kabilah Aus dan Khazraj) yang tertarik dengan dakwah Islam:</p>
+  <ul>
+    <li><b>Bai'ah Aqabah Pertama</b> (tahun ke-11 kenabian) — dihadiri sekumpulan kecil penduduk Madinah yang berjanji setia menerima Islam.</li>
+    <li><b>Bai'ah Aqabah Kedua</b> (tahun ke-13 kenabian) — dihadiri lebih ramai, sekitar 73 orang lelaki dan 2 wanita, yang berjanji untuk melindungi Baginda sebagaimana mereka melindungi keluarga sendiri. Bai'ah ini membuka jalan kepada hijrah ke Madinah.</li>
+  </ul>
+</section>
+
+<!-- ============ BAHAGIAN 5 ============ -->
+<section class="section" id="p5">
+  <div class="part-head">
+    <div class="part-number">05</div>
+    <div class="part-title">Hijrah Sehingga Nabi Stabil di Madinah</div>
+  </div>
+  <p class="part-sub">Titik peralihan besar sejarah Islam — dari perancangan hijrah kepada pembinaan sebuah negara Madinah.</p>
+
+  <h3 class="h">Perancangan dan Perjalanan Hijrah</h3>
+  <p>Apabila Quraisy merancang membunuh Baginda dengan melibatkan wakil setiap kabilah agar darah Baginda tidak dapat dituntut oleh Bani Hasyim, Allah memerintahkan Baginda berhijrah. Ali bin Abi Talib tidur di tempat tidur Baginda sebagai pengalih perhatian, manakala Baginda keluar bersama <b>Abu Bakar as-Siddiq</b> menuju arah selatan, bersembunyi di <b>Gua Thur</b> selama tiga malam. Ketika Quraisy mengejar dan sampai ke mulut gua, Allah melindungi mereka dengan sarang labah-labah dan sarang burung merpati di pintu gua sehingga para pengejar tidak menyangka ada sesiapa di dalamnya.</p>
+  <p>Dalam perjalanan, <b>Suraqah bin Malik</b> yang cuba mengejar untuk mendapatkan ganjaran akhirnya menyerah dan berjanji merahsiakan lokasi Baginda selepas kudanya beberapa kali terperosok ke dalam pasir — satu tanda kekuasaan Allah.</p>
+
+  <h3 class="h">Ketibaan di Quba' dan Madinah</h3>
+  <ul>
+    <li>Baginda singgah dahulu di <b>Quba'</b>, sebuah perkampungan di pinggir Madinah, dan mendirikan <b>Masjid Quba'</b> — masjid pertama dibina dalam Islam.</li>
+    <li>Baginda kemudian meneruskan perjalanan ke Madinah, disambut meriah oleh penduduknya. Unta Baginda dibiarkan berjalan sendiri hingga berhenti di tapak milik Bani Najjar, dekat rumah <b>Abu Ayyub al-Ansari</b>, yang menjadi tempat Baginda tinggal buat sementara.</li>
+  </ul>
+
+  <h3 class="h">Pembinaan Masjid Nabawi</h3>
+  <p>Di tapak unta itu berhenti, Baginda membina <b>Masjid Nabawi</b>, yang turut berfungsi sebagai pusat pentadbiran, pendidikan dan hal ehwal masyarakat Muslim Madinah.</p>
+
+  <h3 class="h">Ukhuwwah Muhajirin dan Ansar</h3>
+  <p>Baginda mempersaudarakan golongan <b>Muhajirin</b> (yang berhijrah dari Makkah) dengan golongan <b>Ansar</b> (penduduk Madinah yang menyambut mereka), sehingga mereka saling berkongsi harta dan tempat tinggal — satu ikatan persaudaraan yang menjadi asas perpaduan ummah.</p>
+
+  <h3 class="h">Piagam Madinah</h3>
+  <p>Baginda merangka <b>Sahifah Madinah</b> (Piagam Madinah), sebuah perlembagaan yang mengatur hubungan antara kaum Muslimin, Yahudi dan penduduk lain di Madinah — meletakkan asas sebuah negara berdaulat yang menjamin hak dan tanggungjawab setiap golongan.</p>
+
+  <h3 class="h">Pertukaran Kiblat</h3>
+  <p>Pada bulan Sya'ban tahun ke-2 Hijrah, Allah memerintahkan penukaran arah kiblat solat daripada Masjidil Aqsa di Baitulmaqdis kepada <b>Kaabah</b> di Makkah, sebagaimana termaktub dalam Surah al-Baqarah.</p>
+</section>
+
+<!-- ============ BAHAGIAN 6 ============ -->
+<section class="section" id="p6">
+  <div class="part-head">
+    <div class="part-number">06</div>
+    <div class="part-title">Peperangan Rasulullah ﷺ</div>
+  </div>
+  <p class="part-sub">Siri jihad dalam mempertahankan agama dan komuniti Muslim Madinah daripada ancaman luar.</p>
+
+  <ul class="timeline">
+    <li><b>Perang Badar (2H)</b> — pertempuran besar pertama antara kaum Muslimin (± 313 orang) menentang tentera Quraisy (± 1000 orang) yang jauh lebih ramai. Kemenangan besar diraih dengan pertolongan Allah, termasuk bantuan para malaikat, dan menjadi titik perubahan penting kedudukan umat Islam.</li>
+    <li><b>Perang Bani Qainuqa' (2H)</b> — susulan pengkhianatan perjanjian oleh puak Yahudi Bani Qainuqa', lalu mereka diusir dari Madinah.</li>
+    <li><b>Perang Uhud (3H)</b> — Quraisy membalas kekalahan Badar. Kaum Muslimin pada mulanya mendapat kelebihan, namun sebahagian pemanah meninggalkan kedudukan strategik di bukit demi harta rampasan, menyebabkan kekalahan sementara; Baginda sendiri tercedera. Peristiwa ini menjadi pengajaran besar tentang ketaatan kepada arahan pemimpin.</li>
+    <li><b>Perang Bani Nadhir (4H)</b> — puak Yahudi Bani Nadhir yang merancang membunuh Baginda diusir keluar dari Madinah.</li>
+    <li><b>Perang Khandaq / Ahzab (5H)</b> — gabungan pasukan Quraisy dan sekutu mengepung Madinah dengan kekuatan besar. Atas cadangan Salman al-Farisi, kaum Muslimin menggali parit (khandaq) mengelilingi Madinah — strategi pertahanan yang berjaya menggagalkan kepungan, disusuli angin ribut yang menghalau tentera musuh.</li>
+    <li><b>Perang Bani Quraizah (5H)</b> — susulan pengkhianatan Bani Quraizah semasa Perang Khandaq yang bersekongkol dengan musuh, mereka dikepung dan dihakimi mengikut hukum Taurat mereka sendiri, atas persetujuan hakim yang mereka lantik sendiri, Sa'ad bin Mu'az.</li>
+    <li><b>Perjanjian Hudaibiyah (6H)</b> — Baginda dan para sahabat keluar untuk menunaikan umrah, namun disekat oleh Quraisy di Hudaibiyah. Termeterailah satu perjanjian damai selama sepuluh tahun yang pada zahirnya kelihatan berat sebelah, namun al-Qur'an menggelarnya sebagai "kemenangan yang nyata" (fathan mubina) kerana membuka ruang dakwah yang luas.</li>
+    <li><b>Perang Khaibar (7H)</b> — kubu-kubu Yahudi di Khaibar yang menjadi pusat hasutan terhadap Madinah ditakluki, membawa banyak harta rampasan dan keamanan wilayah utara.</li>
+    <li><b>Pembukaan Kota Makkah / Fathu Makkah (8H)</b> — susulan pencabulan Perjanjian Hudaibiyah oleh sekutu Quraisy, Baginda memasuki Makkah dengan pasukan besar tanpa pertumpahan darah yang ketara. Baginda mengisytiharkan pengampunan umum, dan berhala-berhala di sekeliling Kaabah dimusnahkan.</li>
+    <li><b>Perang Hunain (8H)</b> — sejurus selepas pembukaan Makkah, kaum Muslimin menghadapi gabungan Bani Hawazin dan Thaqif. Pada mulanya terdesak akibat serangan mengejut, namun akhirnya meraih kemenangan besar.</li>
+    <li><b>Pengepungan Taif (8H)</b> — susulan Hunain, kaum Muslimin mengepung Taif namun tidak berjaya menawannya ketika itu; penduduknya kemudiannya memeluk Islam tidak lama selepas itu.</li>
+    <li><b>Perang Tabuk (9H)</b> — ekspedisi besar ke utara sempadan Rom bagi membendung ancaman tentera Byzantine; berlaku tanpa pertempuran besar, namun menunjukkan kekuatan dan kesediaan umat Islam.</li>
+  </ul>
+
+  <div class="note">Setiap peperangan Rasulullah ﷺ bersifat pertahanan atau tindak balas terhadap pengkhianatan dan ancaman, bukan didorong ketamakan harta — sebagaimana dijelaskan dalam kitab-kitab sirah muktabar.</div>
+</section>
+
+<!-- ============ BAHAGIAN 7 ============ -->
+<section class="section" id="p7">
+  <div class="part-head">
+    <div class="part-number">07</div>
+    <div class="part-title">Peristiwa Penting Selepas Pembukaan Makkah Sehingga Kewafatan Rasulullah ﷺ</div>
+  </div>
+  <p class="part-sub">Detik kegemilangan dakwah Islam sehingga saat perpisahan yang paling menyayat hati umat.</p>
+
+  <h3 class="h">Tahun Perutusan (Aam al-Wufud)</h3>
+  <p>Tahun ke-9 Hijrah digelar <b>Aam al-Wufud</b> (Tahun Perutusan), kerana ramai delegasi dari serata pelosok Semenanjung Arab datang berduyun-duyun ke Madinah untuk mengisytiharkan keislaman kabilah masing-masing, susulan kejatuhan Makkah dan kekuatan Islam yang semakin nyata.</p>
+
+  <h3 class="h">Haji Wida' (Haji Perpisahan)</h3>
+  <p>Pada tahun ke-10 Hijrah, Baginda menunaikan haji buat kali pertama dan terakhir bersama lebih seratus ribu jemaah, dikenali sebagai <b>Haji Wida'</b>. Di Padang Arafah, Baginda menyampaikan <b>Khutbah Wida'</b> yang masyhur — menegaskan persamaan taraf manusia tanpa mengira bangsa, hak-hak wanita, larangan riba, kesucian darah dan harta sesama Muslim, serta berpesan agar umat berpegang teguh kepada al-Qur'an dan Sunnah. Ketika itu turun ayat terakhir yang menyempurnakan agama:</p>
+  <div class="quote">"Pada hari ini telah Aku sempurnakan bagi kamu agama kamu, dan telah Aku cukupkan nikmat-Ku kepada kamu, dan telah Aku redai Islam menjadi agama bagi kamu."
+    <span>— Surah al-Ma'idah, ayat 3</span>
+  </div>
+
+  <h3 class="h">Sakit dan Detik-Detik Akhir</h3>
+  <p>Sekembalinya ke Madinah, tidak lama kemudian Baginda mula jatuh sakit demam yang berpanjangan. Dalam tempoh sakit ini, Baginda mengarahkan <b>Abu Bakar as-Siddiq</b> mengimamkan solat berjemaah sebagai wakil Baginda — satu petunjuk halus akan kelayakan Abu Bakar meneruskan kepimpinan umat.</p>
+
+  <h3 class="h">Kewafatan Rasulullah ﷺ</h3>
+  <p>Rasulullah ﷺ wafat pada <b>12 Rabiul Awal tahun 11 Hijrah</b> (bersamaan 632 Masihi), di rumah isterinya Aisyah r.a., dalam pangkuannya, ketika berusia 63 tahun. Berita kewafatan Baginda menggemparkan seluruh Madinah. Umar bin Khattab pada mulanya menafikan berita itu kerana terlalu sedih, sehingga Abu Bakar tampil menenangkan orang ramai dengan kata-kata yang masyhur:</p>
+  <div class="quote">"Sesiapa yang menyembah Muhammad, maka sesungguhnya Muhammad telah wafat. Namun sesiapa yang menyembah Allah, maka sesungguhnya Allah itu Maha Hidup, tidak akan mati."
+    <span>— Abu Bakar as-Siddiq, memetik maksud Surah Ali-Imran ayat 144</span>
+  </div>
+
+  <h3 class="h">Pengebumian dan Peralihan Kepimpinan</h3>
+  <p>Jenazah Baginda dimandikan dan dikafankan oleh keluarga terdekat, kemudian dikebumikan di bilik Aisyah r.a. di Madinah — kini menjadi sebahagian daripada Masjid Nabawi. Sebelum pengebumian, para sahabat berkumpul di Saqifah Bani Sa'idah dan sebulat suara melantik <b>Abu Bakar as-Siddiq</b> sebagai khalifah pertama, meneruskan kesinambungan urusan agama dan pentadbiran umat Islam.</p>
+
+  <div class="note">Dengan kewafatan Baginda ﷺ, berakhirlah zaman wahyu dan kenabian, namun risalah yang dibawa Baginda — al-Qur'an dan Sunnah — kekal terpelihara sebagai panduan umat Islam sehingga hari kiamat.</div>
+</section>
+
+<!-- ============ BAHAGIAN 8 : RUJUKAN ============ -->
+<section class="section" id="p8">
+  <div class="part-head">
+    <div class="part-number">08</div>
+    <div class="part-title">Rujukan &amp; Bacaan Lanjut</div>
+  </div>
+  <p class="part-sub">Kitab-kitab sirah muktabar yang menjadi asas susunan bahan ini, sesuai untuk kajian lanjut.</p>
+
+  <h3 class="h">Kitab Turath (Klasik)</h3>
+  <ul>
+    <li><b>Zaadul Ma'ad fi Hadyi Khairil 'Ibad</b> — Ibnu Qayyim al-Jauziyyah</li>
+    <li><b>Al-Bidayah wan Nihayah</b> (bahagian sirah) — Ibnu Katsir</li>
+    <li><b>Sirah Nabi Muhammad ﷺ</b> — Ibnu Katsir (himpunan nasab, jihad, dan kekhususan Nabi ﷺ)</li>
+    <li><b>Ar-Rahiq al-Makhtum</b> — Syafiyyurrahman al-Mubarakfuri</li>
+    <li><b>Nur al-Yaqin fi Sirah Sayyid al-Mursalin</b> — Syeikh Muhammad al-Khudhori</li>
+    <li><b>As-Sirah an-Nabawiyyah</b> — Ibnu Hisyam (riwayat daripada Ibnu Ishaq)</li>
+  </ul>
+
+  <h3 class="h">Bahan Pengajian Tempatan</h3>
+  <ul>
+    <li>Modul Sirah Tahap Asas — bahan pengajian sirah peringkat asas dalam Bahasa Melayu</li>
+    <li>Sejarah Nabi Muhammad ﷺ — himpunan peristiwa dan pengajaran sirah dalam Bahasa Melayu</li>
+  </ul>
+
+  <div class="note">Bahan dalam laman ini disusun secara ringkas untuk tujuan pengenalan dan pengajaran. Untuk kajian yang lebih terperinci berserta sanad dan rujukan hadis penuh, disarankan agar merujuk terus kepada kitab-kitab asal di atas atau berguru dengan ahli sirah yang muktabar.</div>
+</section>
+
+<div class="prevnext">
+  <button id="prevBtn">← Bahagian Sebelum</button>
+  <button id="nextBtn">Bahagian Seterusnya →</button>
+</div>
+
+</main>
+
+<footer>
+  <div class="arabic">اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ</div>
+  Disusun sebagai bahan rujukan ringkas sirah Nabi Muhammad ﷺ, berdasarkan sumber-sumber sirah muktabar.
+</footer>
+
+<script>
+  const buttons  = document.querySelectorAll('.navbtn');
+  const tocItems = document.querySelectorAll('.tocitem');
+  const sections = document.querySelectorAll('.section');
+  const order    = ['p1','p2','p3','p4','p5','p6','p7','p8'];
+  const prevBtn  = document.getElementById('prevBtn');
+  const nextBtn  = document.getElementById('nextBtn');
+
+  const tocToggle  = document.getElementById('tocToggle');
+  const tocPanel   = document.getElementById('tocPanel');
+  const tocOverlay = document.getElementById('tocOverlay');
+
+  /* ---------- TOC open / close ---------- */
+  function openToc(){
+    tocPanel.classList.add('open');
+    tocOverlay.classList.add('open');
+    tocToggle.setAttribute('aria-expanded','true');
+  }
+  function closeToc(){
+    tocPanel.classList.remove('open');
+    tocOverlay.classList.remove('open');
+    tocToggle.setAttribute('aria-expanded','false');
+  }
+  tocToggle.addEventListener('click', () => {
+    tocPanel.classList.contains('open') ? closeToc() : openToc();
+  });
+  tocOverlay.addEventListener('click', closeToc);
+
+  /* ---------- Render a section (visual only, no history write) ---------- */
+  function renderSection(id){
+    sections.forEach(s => s.classList.toggle('active', s.id === id));
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+    tocItems.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+    updateNavButtons(id);
+    closeToc();
+    window.scrollTo({top: document.querySelector('nav').offsetTop - 1, behavior:'instant'});
+  }
+
+  function updateNavButtons(id){
+    const idx = order.indexOf(id);
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === order.length - 1;
+  }
+
+  function currentSection(){
+    return order.find(id => document.getElementById(id).classList.contains('active')) || 'p1';
+  }
+
+  /* ---------- Navigate: pushes a new history entry so that the
+     browser / swipe "back" gesture moves between bahagian instead
+     of leaving or closing the page entirely ---------- */
+  function goTo(id, replace){
+    renderSection(id);
+    const state = {sirahSection: id};
+    if(replace){
+      history.replaceState(state, '', '#' + id);
+    } else {
+      history.pushState(state, '', '#' + id);
+    }
+  }
+
+  buttons.forEach(btn  => btn.addEventListener('click', () => goTo(btn.dataset.target)));
+  tocItems.forEach(btn => btn.addEventListener('click', () => goTo(btn.dataset.target)));
+
+  prevBtn.addEventListener('click', () => {
+    const idx = order.indexOf(currentSection());
+    if(idx > 0) goTo(order[idx-1]);
+  });
+  nextBtn.addEventListener('click', () => {
+    const idx = order.indexOf(currentSection());
+    if(idx < order.length - 1) goTo(order[idx+1]);
+  });
+
+  /* ---------- Respond to the physical/gesture back & forward button ----------
+     Instead of navigating away from the page, popstate just re-renders
+     whichever bahagian is recorded in that history entry. */
+  window.addEventListener('popstate', (e) => {
+    const id = (e.state && e.state.sirahSection) || (location.hash ? location.hash.slice(1) : 'p1');
+    if(order.includes(id)){
+      renderSection(id);
+    }
+  });
+
+  /* Escape key closes the TOC panel without affecting history */
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeToc();
+  });
+
+  /* ---------- Initial load ---------- */
+  const initial = (location.hash && order.includes(location.hash.slice(1))) ? location.hash.slice(1) : 'p1';
+  goTo(initial, true);
+</script>
+
+</body>
+</html>
