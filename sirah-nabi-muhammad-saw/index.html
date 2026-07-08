@@ -740,18 +740,31 @@
     updateNavButtons(id);
     closeToc();
     scrollActiveTabIntoView(id);
-    window.scrollTo({top: document.querySelector('nav').offsetTop - 1, behavior:'instant'});
+    scrollPageToTop();
+  }
+
+  /* Scrolls the reader back to the top of the content (just below the
+     sticky nav) every time the bahagian changes, so a new section
+     always starts fully visible instead of leaving the reader wherever
+     they happened to be — e.g. at the bottom, after tapping "Seterusnya". */
+  function scrollPageToTop(){
+    const navTop = document.querySelector('nav').getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({top: navTop - 1, behavior:'instant'});
   }
 
   /* Keeps the horizontal tab bar in sync with whichever bahagian is
      showing — e.g. jumping straight to Bahagian 8 via the TOC menu
      or the Next button must also bring the "8" tab into view,
-     otherwise the top bar still shows an earlier, unrelated tab. */
+     otherwise the top bar still shows an earlier, unrelated tab.
+     IMPORTANT: this only scrolls the tab strip itself (scrollLeft),
+     never the page — using scrollIntoView() here would also drag the
+     page's vertical scroll and fight with scrollPageToTop() above. */
   function scrollActiveTabIntoView(id){
     const activeBtn = document.querySelector('.navbtn[data-target="' + id + '"]');
-    if(activeBtn){
-      activeBtn.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-    }
+    const track = document.getElementById('navInner');
+    if(!activeBtn || !track) return;
+    const targetLeft = activeBtn.offsetLeft - (track.clientWidth - activeBtn.clientWidth) / 2;
+    track.scrollTo({left: Math.max(0, targetLeft), behavior:'smooth'});
   }
 
   function updateNavButtons(id){
