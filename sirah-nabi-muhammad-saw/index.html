@@ -750,14 +750,28 @@
 
   /* ---------- Navigate: pushes a new history entry so that the
      browser / swipe "back" gesture moves between bahagian instead
-     of leaving or closing the page entirely ---------- */
+     of leaving or closing the page entirely.
+     NOTE: we deliberately do NOT pass a URL/hash to pushState/replaceState.
+     This artifact runs inside a sandboxed iframe on a different origin
+     than the parent page, and asking the browser to change the URL
+     there throws "SecurityError: ... cannot be created in a document
+     with origin ...". Passing no URL keeps the current address and
+     avoids that error while still giving us a history entry to catch
+     on popstate. ---------- */
   function goTo(id, replace){
     renderSection(id);
     const state = {sirahSection: id};
-    if(replace){
-      history.replaceState(state, '', '#' + id);
-    } else {
-      history.pushState(state, '', '#' + id);
+    try{
+      if(replace){
+        history.replaceState(state, '');
+      } else {
+        history.pushState(state, '');
+      }
+    } catch(err){
+      /* If the sandbox still refuses history writes for any reason,
+         fail silently — the section still renders correctly, we just
+         lose back-button support in that environment. */
+      console.warn('Sirah: history API unavailable in this context', err);
     }
   }
 
@@ -777,7 +791,7 @@
      Instead of navigating away from the page, popstate just re-renders
      whichever bahagian is recorded in that history entry. */
   window.addEventListener('popstate', (e) => {
-    const id = (e.state && e.state.sirahSection) || (location.hash ? location.hash.slice(1) : 'p1');
+    const id = (e.state && e.state.sirahSection) || 'p1';
     if(order.includes(id)){
       renderSection(id);
     }
@@ -789,8 +803,7 @@
   });
 
   /* ---------- Initial load ---------- */
-  const initial = (location.hash && order.includes(location.hash.slice(1))) ? location.hash.slice(1) : 'p1';
-  goTo(initial, true);
+  goTo('p1', true);
 </script>
 
 </body>
