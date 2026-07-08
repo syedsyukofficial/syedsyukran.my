@@ -337,7 +337,7 @@ const SCALE_LABELS = ["Jarang / Tidak Pernah","Kadang-kadang","Kerap / Istiqamah
 const sections = [
   { id:'A', title:'Hubungan Dengan Allah', tier:1,
     note:'Fondasi kepada segala-galanya. Amalan di bahagian ini adalah punca utama saluran Ghair Iktisab — rezeki dan ketenangan yang datang tanpa disangka.',
-    dalil:{meaning:'"Barangsiapa bertaqwa kepada Allah, nescaya Dia akan mengadakan baginya jalan keluar, dan memberinya rezeki dari arah yang tidak disangka-sangka."', source:'QS Ath-Thalaq 65:2-3'},
+    dalils:[{meaning:'"Barangsiapa bertaqwa kepada Allah, nescaya Dia akan mengadakan baginya jalan keluar, dan memberinya rezeki dari arah yang tidak disangka-sangka."', source:'QS Ath-Thalaq 65:2-3'}],
     items:[
       {text:'Aku menunaikan solat di awal waktu'},
       {text:'Aku solat dengan khusyuk'},
@@ -351,7 +351,7 @@ const sections = [
       {text:'Aku menjaga amanah dalam ibadahku (wuduk sempurna, ikhlas, tidak riak)'},
     ]},
   { id:'B', title:'Hubungan Dengan Ibu Bapa', tier:2, optional:true,
-    dalil:{meaning:'"Janganlah engkau katakan kepada keduanya perkataan \'ah\', dan janganlah engkau membentak mereka, tetapi ucapkanlah kepada mereka perkataan yang mulia."', source:'QS Al-Isra\' 17:23'},
+    dalils:[{meaning:'"Janganlah engkau katakan kepada keduanya perkataan \'ah\', dan janganlah engkau membentak mereka, tetapi ucapkanlah kepada mereka perkataan yang mulia."', source:'QS Al-Isra\' 17:23'}],
     items:[
       {text:'Aku menjaga tutur kata apabila berbicara dengan ibu bapa'},
       {text:'Aku bertanya khabar mereka'},
@@ -361,7 +361,7 @@ const sections = [
     ]},
   { id:'C', title:'Suami / Isteri', tier:2, optional:true,
     sensitive:'Jika bahagian ini menyentuh isu peribadi yang berat dalam rumah tangga, pertimbangkan untuk berbincang dengan kaunselor keluarga atau ustaz/ustazah berdaftar. Jawapan di sini semata-mata untuk renungan sendiri.',
-    dalil:{meaning:'"Sebaik-baik kamu ialah yang paling baik terhadap keluarganya."', source:'HR Tirmizi'},
+    dalils:[{meaning:'"Sebaik-baik kamu ialah yang paling baik terhadap keluarganya."', source:'HR Tirmizi'}],
     items:[
       {text:'Aku menghargai pasanganku'},
       {text:'Aku memaafkan kesilapan pasanganku'},
@@ -370,7 +370,7 @@ const sections = [
       {text:'Aku menunaikan nafkah dan hak pasanganku dengan baik'},
     ]},
   { id:'D', title:'Anak-anak', tier:2, optional:true,
-    dalil:{meaning:'"Tiada pemberian yang lebih utama daripada seorang bapa kepada anaknya melainkan adab yang baik."', source:'HR Tirmizi'},
+    dalils:[{meaning:'"Tiada pemberian yang lebih utama daripada seorang bapa kepada anaknya melainkan adab yang baik."', source:'HR Tirmizi'}],
     items:[
       {text:'Aku meluangkan masa berkualiti dengan anak-anak'},
       {text:'Aku mengajar mereka solat'},
@@ -379,7 +379,10 @@ const sections = [
     ]},
   { id:'E', title:'Rezeki', tier:2,
     note:'Iktisab (usaha zahir) dan Ghair Iktisab (kurniaan Allah) adalah dua saluran yang saling melengkapi — usaha semata-mata tidak menjamin keberkatan.',
-    dalil:{meaning:'"Wahai Sa\'ad, perbaikilah makananmu, nescaya doamu dimakbulkan."', source:'HR Muslim, riwayat Sa\'ad bin Abi Waqqas'},
+    dalils:[
+      {meaning:'"Wahai Sa\'ad, perbaikilah makananmu, nescaya doamu dimakbulkan."', source:'HR Muslim, riwayat Sa\'ad bin Abi Waqqas'},
+      {meaning:'"Setiap daging yang tumbuh dari yang haram maka Neraka lebih layak baginya."', source:'HR At-Thabrani'},
+    ],
     items:[
       {text:'Sumber pendapatanku jelas halal'},
       {text:'Aku menjauhi rasuah dalam urusan kerja atau perniagaan'},
@@ -392,7 +395,7 @@ const sections = [
       {text:'Aku berusaha bersungguh-sungguh tanpa melupakan doa dan tawakkal kepada Allah'},
     ]},
   { id:'F', title:'Ke Mana Duit Dibelanjakan', tier:2,
-    dalil:{meaning:'"Perumpamaan orang yang membelanjakan hartanya di jalan Allah seperti sebutir benih yang menumbuhkan tujuh tangkai, pada setiap tangkai ada seratus biji. Allah melipatgandakan bagi siapa yang Dia kehendaki, dan Allah Maha Luas (kurnia-Nya) lagi Maha Mengetahui."', source:'QS Al-Baqarah 2:261'},
+    dalils:[{meaning:'"Perumpamaan orang yang membelanjakan hartanya di jalan Allah seperti sebutir benih yang menumbuhkan tujuh tangkai, pada setiap tangkai ada seratus biji. Allah melipatgandakan bagi siapa yang Dia kehendaki, dan Allah Maha Luas (kurnia-Nya) lagi Maha Mengetahui."', source:'QS Al-Baqarah 2:261'}],
     items:[
       {text:'Aku bersedekah'},
       {text:'Aku menunaikan zakat'},
@@ -404,7 +407,10 @@ const sections = [
       {text:'Aku menjauhi perbelanjaan ke arah perkara haram', critical:true},
     ]},
   { id:'G', title:'Hubungan Dengan Manusia', tier:2,
-    dalil:{meaning:'"Janganlah kamu mengumpat sebahagian yang lain. Adakah seseorang di antara kamu suka memakan daging saudaranya yang telah mati?"', source:'QS Al-Hujurat 49:12'},
+    dalils:[
+      {meaning:'"Bertakwalah kepada Allah di mana jua kamu berada, dan iringilah keburukan dengan kebaikan yang dapat menghapusnya, dan pergauilah manusia dengan akhlak yang baik."', source:'HR At-Tirmizi'},
+      {meaning:'"Tidak beriman (sempurna iman) seseorang itu sehingga dia kasih kepada saudaranya sebagaimana dia kasih kepada dirinya sendiri."', source:'HR Bukhari'},
+    ],
     items:[
       {text:'Aku menjaga lidah daripada perkara sia-sia'},
       {text:'Aku menjauhi mengumpat'},
@@ -416,7 +422,7 @@ const sections = [
       {text:'Aku menjauhi menghina orang lain'},
     ]},
   { id:'H', title:'Amanah Pekerjaan', tier:2,
-    dalil:{meaning:'"Setiap kamu adalah pemimpin (penjaga amanah), dan setiap kamu akan dipertanggungjawabkan atas apa yang kamu pimpin."', source:'HR Bukhari & Muslim'},
+    dalils:[{meaning:'"Setiap kamu adalah pemimpin (penjaga amanah), dan setiap kamu akan dipertanggungjawabkan atas apa yang kamu pimpin."', source:'HR Bukhari & Muslim'}],
     items:[
       {text:'Aku datang tepat waktu ke tempat kerja'},
       {text:'Aku tidak mencuri masa bekerja'},
@@ -427,7 +433,11 @@ const sections = [
       {text:'Aku berlaku jujur terhadap pelanggan'},
     ]},
   { id:'I', title:'Hak Makhluk', tier:2,
-    dalil:{meaning:'"Jibril sentiasa berpesan kepadaku tentang jiran, sehingga aku menyangka jiran akan mewarisi harta."', source:'HR Bukhari & Muslim'},
+    dalils:[
+      {meaning:'"Jibril sentiasa berpesan kepadaku tentang jiran, sehingga aku menyangka jiran akan mewarisi harta."', source:'HR Bukhari & Muslim'},
+      {meaning:'"Sesiapa yang beriman kepada Allah dan hari akhirat, maka hendaklah dia memuliakan jirannya."', source:'HR Bukhari & Muslim'},
+      {meaning:'"Takutlah kamu kepada Allah dalam menguruskan haiwan-haiwan yang tidak mampu berbicara ini." — teguran Nabi ﷺ kepada pemilik unta yang dibiarkan kelaparan', source:'HR Abu Daud'},
+    ],
     items:[
       {text:'Aku menjaga hubungan baik dengan jiran'},
       {text:'Aku berlaku baik terhadap haiwan'},
@@ -437,7 +447,7 @@ const sections = [
     ]},
   { id:'J', title:'Penyakit Hati', tier:3,
     note:'Semua manusia memiliki penyakit hati dalam pelbagai tahap — ini bukan penghakiman, tetapi cermin untuk penyucian jiwa (tazkiyatun nafs).',
-    dalil:{meaning:'"Ketahuilah, dalam diri ada seketul daging; jika ia baik maka baiklah seluruh tubuh, jika ia rosak maka rosaklah seluruh tubuh. Ketahuilah, itulah hati."', source:'HR Bukhari & Muslim'},
+    dalils:[{meaning:'"Ketahuilah, dalam diri ada seketul daging; jika ia baik maka baiklah seluruh tubuh, jika ia rosak maka rosaklah seluruh tubuh. Ketahuilah, itulah hati."', source:'HR Bukhari & Muslim'}],
     items:[
       {text:'Aku mudah marah'},
       {text:'Aku berasa hasad terhadap kelebihan orang lain'},
@@ -617,8 +627,8 @@ function categorize(average, invert){
 }
 
 function dalilHtml(sec){
-  if(!sec.dalil) return '';
-  return `<span class="dalil-mini">"${sec.dalil.meaning.replace(/^"|"$/g,'')}" — ${sec.dalil.source}</span>`;
+  if(!sec.dalils || !sec.dalils.length) return '';
+  return sec.dalils.map(d => `<span class="dalil-mini">"${d.meaning.replace(/^"|"$/g,'')}" — ${d.source}</span>`).join('');
 }
 
 function renderResults(){
@@ -646,6 +656,11 @@ function renderResults(){
   const tier3avg = sectionAverage('J');
   const tier3cat = tier3avg===null ? null : categorize(tier3avg,true);
 
+  // Bahagian yang langsung tiada jawapan (sama ada dilangkau atau tidak disentuh) —
+  // dalilnya tetap dipaparkan sebagai rujukan berasingan supaya sesiapa yang terus
+  // ke Rumusan tanpa menjawab masih dapat manfaat daripada dalil-dalil ini.
+  let unansweredSections = sections.filter(sec => sectionAverage(sec.id) === null);
+
   // critical items scan (skip excluded sections and unanswered items)
   let criticalHits = [];
   sections.forEach(sec=>{
@@ -668,6 +683,16 @@ function renderResults(){
     <h1 class="title" style="font-size:34px;">Cermin Anda Hari Ini</h1>
     <div class="divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l2.5 7H22l-6 4.5L18.5 21 12 16.5 5.5 21 8 13.5 2 9h7.5z" stroke-width="0.8"/></svg></div>
   `;
+
+  if(unansweredSections.length === sections.length){
+    html += `<p style="font-size:14.5px; font-style:italic; color:var(--ink-soft); text-align:center;">Anda belum menjawab mana-mana bahagian — tidak mengapa. Berikut dalil-dalil rujukan bagi setiap bahagian untuk renungan anda sendiri, bila-bila anda sedia.</p>`;
+  }
+
+  if(unansweredSections.length){
+    html += `<div class="resblock"><h3>Dalil Rujukan — Bahagian Belum Dijawab</h3><ul>`;
+    unansweredSections.forEach(sec=> html += `<li>${sec.title}${dalilHtml(sec)}</li>`);
+    html += `</ul></div>`;
+  }
 
   if(gateActive){
     html += `<div class="gate-box">Amalan sesama manusia anda kelihatan baik — namun eloklah perkukuh dahulu hubungan dengan Allah sebagai asas, kerana daripada situ lahir kekuatan untuk yang lain bertahan.</div>`;
@@ -732,9 +757,10 @@ function renderResults(){
     </div>
 
     <div class="quranbox">
-      <div class="arabic">اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا</div>
-      <div class="translit">"Allahumma barik lana fima razaqtana"</div>
-      <div class="meaning">"Ya Allah, berkatilah kami pada apa yang Engkau rezekikan kepada kami."</div>
+      <div class="arabic">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div>
+      <div class="translit">"Rabbana atina fid-dunya hasanatan wa fil akhirati hasanatan wa qina 'adhaban-nar"</div>
+      <div class="meaning">"Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami daripada azab neraka."</div>
+      <div class="source">QS Al-Baqarah 2:201</div>
     </div>
 
     <div class="lock-note">
