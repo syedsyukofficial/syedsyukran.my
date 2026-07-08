@@ -355,12 +355,16 @@
   @media (max-width:600px){
     #tocToggle{
       top:12px; right:12px;
-      padding:9px 13px 9px 10px;
+      width:50px; height:50px;
+      padding:0;
+      justify-content:center;
+      border-radius:50%;
       font-size:0;
     }
+    #tocToggle .bars{width:20px; height:15px;}
     #tocToggle .label{display:none;}
     #tocPanel{
-      top:60px; right:10px; left:10px;
+      top:70px; right:10px; left:10px;
       width:auto; max-width:none;
     }
   }
@@ -735,7 +739,19 @@
     tocItems.forEach(b => b.classList.toggle('active', b.dataset.target === id));
     updateNavButtons(id);
     closeToc();
+    scrollActiveTabIntoView(id);
     window.scrollTo({top: document.querySelector('nav').offsetTop - 1, behavior:'instant'});
+  }
+
+  /* Keeps the horizontal tab bar in sync with whichever bahagian is
+     showing — e.g. jumping straight to Bahagian 8 via the TOC menu
+     or the Next button must also bring the "8" tab into view,
+     otherwise the top bar still shows an earlier, unrelated tab. */
+  function scrollActiveTabIntoView(id){
+    const activeBtn = document.querySelector('.navbtn[data-target="' + id + '"]');
+    if(activeBtn){
+      activeBtn.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+    }
   }
 
   function updateNavButtons(id){
