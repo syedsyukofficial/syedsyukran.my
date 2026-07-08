@@ -1,1 +1,763 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cermin Muhasabah Keberkatan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0a1626;
+    --navy:#0f1e35;
+    --navy-mid:#16294a;
+    --navy-soft:#1e3358;
+    --gold:#c9a227;
+    --gold-bright:#e0bc4a;
+    --gold-dim:#8a7024;
+    --paper:#f4efe1;
+    --paper-dim:#e7dfc9;
+    --ink:#241d0f;
+    --ink-soft:#4a4230;
+    --line: rgba(201,162,39,0.28);
+    --shadow: 0 30px 60px -20px rgba(0,0,0,0.55);
+  }
 
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(201,162,39,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 100%, rgba(201,162,39,0.06), transparent 60%),
+      linear-gradient(180deg, var(--navy-deep), var(--navy) 40%, #0c1930 100%);
+    color: var(--paper);
+    font-family:'Lora', serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 40px 16px;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  /* ambient stars */
+  .stars{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.5;}
+  .stars span{
+    position:absolute; width:2px;height:2px;border-radius:50%;
+    background:var(--gold-bright);
+    animation: twinkle 5s ease-in-out infinite;
+  }
+  @keyframes twinkle{0%,100%{opacity:0.15;}50%{opacity:0.8;}}
+
+  .stage{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:720px;
+  }
+
+  .card{
+    background: linear-gradient(180deg, var(--paper), var(--paper-dim));
+    color: var(--ink);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    padding: 48px 40px;
+    position:relative;
+    border: 1px solid rgba(201,162,39,0.5);
+  }
+  .card::before{
+    content:"";
+    position:absolute; inset:10px;
+    border:1px solid rgba(36,29,15,0.12);
+    pointer-events:none;
+    border-radius:3px;
+  }
+
+  @media (max-width:600px){
+    .card{padding:32px 22px;}
+  }
+
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color: var(--gold-dim);
+    font-weight:600;
+    margin:0 0 14px;
+  }
+
+  h1.title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:44px;
+    line-height:1.08;
+    margin:0 0 6px;
+    letter-spacing:0.01em;
+  }
+  h2.subtitle{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:22px;
+    color: var(--ink-soft);
+    margin:0 0 26px;
+    line-height:1.4;
+  }
+
+  .divider{
+    display:flex; align-items:center; gap:12px;
+    margin: 26px 0;
+    color: var(--gold-dim);
+  }
+  .divider::before,.divider::after{
+    content:""; flex:1; height:1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  }
+  .divider svg{width:16px;height:16px;flex-shrink:0;}
+
+  p{ line-height:1.75; font-size:16.5px; margin: 0 0 16px; color: var(--ink);}
+  .lead{font-size:17.5px;}
+
+  .quranbox{
+    background: rgba(36,29,15,0.045);
+    border-left: 3px solid var(--gold);
+    padding: 18px 20px;
+    border-radius: 3px;
+    margin: 22px 0;
+  }
+  .quranbox .arabic{
+    font-family:'Amiri', serif;
+    font-size:22px;
+    line-height:2;
+    direction:rtl;
+    color: var(--ink);
+    margin-bottom:8px;
+  }
+  .quranbox .translit{ font-style:italic; color:var(--ink-soft); font-size:14.5px; margin-bottom:6px;}
+  .quranbox .meaning{ font-size:14.5px; color:var(--ink-soft); margin-bottom:4px;}
+  .quranbox .source{ font-family:'Inter',sans-serif; font-size:11.5px; letter-spacing:0.05em; color:var(--gold-dim); text-transform:uppercase;}
+
+  .notebox{
+    background: rgba(15,30,53,0.06);
+    border: 1px solid rgba(15,30,53,0.12);
+    border-radius:4px;
+    padding: 16px 18px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 20px 0;
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .notebox svg{flex-shrink:0; margin-top:2px; width:18px;height:18px; color:var(--gold-dim);}
+
+  .btn{
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    padding: 14px 28px;
+    border-radius: 3px;
+    border:none;
+    cursor:pointer;
+    background: var(--navy);
+    color: var(--paper);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:hover{ background: var(--navy-soft); transform: translateY(-1px); }
+  .btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+  .btn-gold{ background: var(--gold); color: var(--navy-deep); }
+  .btn-gold:hover{ background: var(--gold-bright); }
+  .btn[disabled]{ opacity:0.35; cursor:not-allowed; transform:none; }
+  .btn-ghost{
+    background:transparent; color: var(--ink-soft);
+    border: 1px solid rgba(36,29,15,0.25);
+  }
+  .btn-ghost:hover{ background: rgba(36,29,15,0.05); }
+
+  .actions{ display:flex; justify-content:space-between; align-items:center; margin-top:32px; gap:12px; flex-wrap:wrap;}
+  .actions.center{ justify-content:center; }
+
+  /* progress dots */
+  .progress{
+    display:flex; gap:6px; justify-content:center; margin-bottom:26px; flex-wrap:wrap;
+  }
+  .progress .dot{
+    width:24px; height:24px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Inter',sans-serif; font-size:10.5px; font-weight:600;
+    border:1px solid rgba(36,29,15,0.25);
+    color: var(--ink-soft);
+    background:transparent;
+    transition: all .2s ease;
+  }
+  .progress .dot.done{ background: var(--gold-dim); color:var(--paper); border-color:var(--gold-dim);}
+  .progress .dot.current{ background: var(--gold); color:var(--navy-deep); border-color:var(--gold); transform:scale(1.15);}
+
+  /* section heading in quiz */
+  .sectitle{ font-family:'Cormorant Garamond', serif; font-size:30px; font-weight:600; margin: 0 0 4px;}
+  .sectier{ font-family:'Inter',sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:18px; font-weight:600;}
+  .secnote{ font-size:14.5px; font-style:italic; color:var(--ink-soft); margin-bottom:22px; padding-bottom:18px; border-bottom:1px dashed rgba(36,29,15,0.2);}
+
+  .item{ margin-bottom:26px; }
+  .item .qtext{ font-size:16px; margin-bottom:12px; color:var(--ink); font-weight:500;}
+  .scale{ display:flex; gap:10px; flex-wrap:wrap; }
+  .scale button{
+    flex:1 1 0; min-width:150px;
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    padding: 14px 12px;
+    border-radius:4px;
+    border:1px solid rgba(36,29,15,0.22);
+    background: rgba(255,255,255,0.4);
+    color: var(--ink-soft);
+    cursor:pointer;
+    text-align:center;
+    transition: all .15s ease;
+  }
+  .scale button:hover{ border-color:var(--gold); }
+  .scale button:focus-visible{ outline:2px solid var(--gold); outline-offset:2px;}
+  .scale button.sel{
+    background: var(--navy);
+    color: var(--paper);
+    border-color: var(--navy);
+    font-weight:600;
+  }
+
+  .soft-hint{
+    font-family:'Inter',sans-serif; font-size:12px; color: var(--ink-soft);
+    opacity:0.75; margin: -6px 0 18px; font-style:italic;
+  }
+
+  .skip-row{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Inter',sans-serif; font-size:13px; color:var(--ink-soft);
+    background: rgba(36,29,15,0.04);
+    border:1px dashed rgba(36,29,15,0.25);
+    padding:12px 14px; border-radius:4px; margin-bottom:22px; cursor:pointer;
+  }
+  .skip-row input{ width:16px; height:16px; accent-color: var(--gold-dim); cursor:pointer; flex-shrink:0; }
+
+  .dalil-mini{
+    display:block; font-size:12px; font-style:italic; color:var(--gold-dim);
+    margin-top:3px; line-height:1.5;
+  }
+
+  .warn-inline{
+    font-size:13.5px; color:#7a4a1f; background:rgba(201,122,39,0.09);
+    border:1px solid rgba(201,122,39,0.25); padding:12px 14px; border-radius:4px; margin-bottom:20px;
+  }
+
+  /* results */
+  .resblock{ margin-bottom:26px; }
+  .resblock h3{
+    font-family:'Cormorant Garamond', serif; font-size:21px; font-weight:600;
+    margin:0 0 10px; color: var(--ink);
+    display:flex; align-items:center; gap:8px;
+  }
+  .resblock ul{ margin:0; padding-left:20px; }
+  .resblock li{ margin-bottom:6px; font-size:15px; color:var(--ink-soft); line-height:1.6;}
+  .tag-good{color:#3d6b3f;}
+  .tag-attn{color:#8a5a1f;}
+  .critical-box{
+    background: rgba(139,32,32,0.06);
+    border:1px solid rgba(139,32,32,0.25);
+    border-radius:4px;
+    padding:18px 20px;
+    margin: 20px 0;
+  }
+  .critical-box h3{ color:#7a2626; }
+  .critical-box li{ color:#6b2f2f; }
+
+  .gate-box{
+    background: rgba(15,30,53,0.06);
+    border-left:3px solid var(--navy);
+    padding:16px 18px;
+    border-radius:3px;
+    margin: 20px 0;
+    font-size:15px;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+
+  .reminder{
+    font-size:15px; line-height:1.8; color:var(--ink-soft); font-style:italic;
+    padding:18px 0; border-top:1px dashed rgba(36,29,15,0.2); border-bottom:1px dashed rgba(36,29,15,0.2);
+    margin:26px 0;
+  }
+
+  .hidden{ display:none !important; }
+
+  .lock-note{
+    display:flex; gap:10px; align-items:flex-start;
+    font-family:'Inter',sans-serif; font-size:12.5px; color: var(--gold-dim);
+    margin-top:22px; opacity:0.85;
+  }
+  .lock-note svg{ flex-shrink:0; margin-top:1px; width:15px;height:15px;}
+
+  footer.tagline{
+    text-align:center; margin-top:22px; font-family:'Inter',sans-serif;
+    font-size:11.5px; letter-spacing:0.08em; color: rgba(244,239,225,0.35);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .stars span{ animation:none; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="stage">
+  <div class="card" id="card">
+    <!-- content injected by JS -->
+  </div>
+  <footer class="tagline">cermin muhasabah keberkatan — untuk renungan diri sendiri</footer>
+</div>
+
+<script>
+/* ---------- ambient stars ---------- */
+(function(){
+  const wrap = document.getElementById('stars');
+  for(let i=0;i<50;i++){
+    const s = document.createElement('span');
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.animationDelay = (Math.random()*5)+'s';
+    s.style.animationDuration = (4+Math.random()*4)+'s';
+    wrap.appendChild(s);
+  }
+})();
+
+/* ---------- data ---------- */
+const SCALE_LABELS = ["Jarang / Tidak Pernah","Kadang-kadang","Kerap / Istiqamah"];
+
+const sections = [
+  { id:'A', title:'Hubungan Dengan Allah', tier:1,
+    note:'Fondasi kepada segala-galanya. Amalan di bahagian ini adalah punca utama saluran Ghair Iktisab — rezeki dan ketenangan yang datang tanpa disangka.',
+    dalil:{meaning:'"Barangsiapa bertaqwa kepada Allah, nescaya Dia akan mengadakan baginya jalan keluar, dan memberinya rezeki dari arah yang tidak disangka-sangka."', source:'QS Ath-Thalaq 65:2-3'},
+    items:[
+      {text:'Aku menunaikan solat di awal waktu'},
+      {text:'Aku solat dengan khusyuk'},
+      {text:'Aku solat secara berjemaah'},
+      {text:'Aku membaca Al-Quran'},
+      {text:'Aku berzikir mengingati Allah'},
+      {text:'Aku beristighfar memohon ampun'},
+      {text:'Aku bertaubat apabila tersilap'},
+      {text:'Aku berdoa memohon kepada Allah'},
+      {text:'Aku bersedekah'},
+      {text:'Aku menjaga amanah dalam ibadahku (wuduk sempurna, ikhlas, tidak riak)'},
+    ]},
+  { id:'B', title:'Hubungan Dengan Ibu Bapa', tier:2, optional:true,
+    dalil:{meaning:'"Janganlah engkau katakan kepada keduanya perkataan \'ah\', dan janganlah engkau membentak mereka, tetapi ucapkanlah kepada mereka perkataan yang mulia."', source:'QS Al-Isra\' 17:23'},
+    items:[
+      {text:'Aku menjaga tutur kata apabila berbicara dengan ibu bapa'},
+      {text:'Aku bertanya khabar mereka'},
+      {text:'Aku melapangkan hati, tidak menyimpan rasa terhadap mereka'},
+      {text:'Aku mendoakan kesejahteraan mereka'},
+      {text:'Aku segera meminta maaf apabila bersalah kepada mereka'},
+    ]},
+  { id:'C', title:'Suami / Isteri', tier:2, optional:true,
+    sensitive:'Jika bahagian ini menyentuh isu peribadi yang berat dalam rumah tangga, pertimbangkan untuk berbincang dengan kaunselor keluarga atau ustaz/ustazah berdaftar. Jawapan di sini semata-mata untuk renungan sendiri.',
+    dalil:{meaning:'"Sebaik-baik kamu ialah yang paling baik terhadap keluarganya."', source:'HR Tirmizi'},
+    items:[
+      {text:'Aku menghargai pasanganku'},
+      {text:'Aku memaafkan kesilapan pasanganku'},
+      {text:'Aku menjaga tutur kata dengan pasanganku'},
+      {text:'Aku berlaku adil terhadap pasanganku'},
+      {text:'Aku menunaikan nafkah dan hak pasanganku dengan baik'},
+    ]},
+  { id:'D', title:'Anak-anak', tier:2, optional:true,
+    dalil:{meaning:'"Tiada pemberian yang lebih utama daripada seorang bapa kepada anaknya melainkan adab yang baik."', source:'HR Tirmizi'},
+    items:[
+      {text:'Aku meluangkan masa berkualiti dengan anak-anak'},
+      {text:'Aku mengajar mereka solat'},
+      {text:'Aku mendidik akhlak mereka'},
+      {text:'Aku menjadi contoh yang baik buat mereka'},
+    ]},
+  { id:'E', title:'Rezeki', tier:2,
+    note:'Iktisab (usaha zahir) dan Ghair Iktisab (kurniaan Allah) adalah dua saluran yang saling melengkapi — usaha semata-mata tidak menjamin keberkatan.',
+    dalil:{meaning:'"Wahai Sa\'ad, perbaikilah makananmu, nescaya doamu dimakbulkan."', source:'HR Muslim, riwayat Sa\'ad bin Abi Waqqas'},
+    items:[
+      {text:'Sumber pendapatanku jelas halal'},
+      {text:'Aku menjauhi rasuah dalam urusan kerja atau perniagaan'},
+      {text:'Aku berlaku jujur, menjauhi penipuan'},
+      {text:'Aku menjaga amanah yang dipertanggungjawabkan kepadaku'},
+      {text:'Aku menjauhi riba dalam urusan kewanganku', critical:true},
+      {text:'Aku berurusan tanpa manipulasi'},
+      {text:'Aku menunaikan hak pekerjaku dengan adil', critical:true},
+      {text:'Aku menjauhi mengambil hak orang lain', critical:true},
+      {text:'Aku berusaha bersungguh-sungguh tanpa melupakan doa dan tawakkal kepada Allah'},
+    ]},
+  { id:'F', title:'Ke Mana Duit Dibelanjakan', tier:2,
+    dalil:{meaning:'"Perumpamaan orang yang membelanjakan hartanya di jalan Allah seperti sebutir benih yang menumbuhkan tujuh tangkai, pada setiap tangkai ada seratus biji. Allah melipatgandakan bagi siapa yang Dia kehendaki, dan Allah Maha Luas (kurnia-Nya) lagi Maha Mengetahui."', source:'QS Al-Baqarah 2:261'},
+    items:[
+      {text:'Aku bersedekah'},
+      {text:'Aku menunaikan zakat'},
+      {text:'Aku membantu ibu bapa dari segi kewangan'},
+      {text:'Aku membantu ahli keluarga yang memerlukan'},
+      {text:'Aku membelanjakan untuk menuntut ilmu'},
+      {text:'Aku berbelanja secara berhemah, tidak membazir'},
+      {text:'Aku mengawal diri daripada hiburan yang melampau'},
+      {text:'Aku menjauhi perbelanjaan ke arah perkara haram', critical:true},
+    ]},
+  { id:'G', title:'Hubungan Dengan Manusia', tier:2,
+    dalil:{meaning:'"Janganlah kamu mengumpat sebahagian yang lain. Adakah seseorang di antara kamu suka memakan daging saudaranya yang telah mati?"', source:'QS Al-Hujurat 49:12'},
+    items:[
+      {text:'Aku menjaga lidah daripada perkara sia-sia'},
+      {text:'Aku menjauhi mengumpat'},
+      {text:'Aku menjauhi memfitnah'},
+      {text:'Aku menjaga aib orang lain, tidak membukanya'},
+      {text:'Aku menjauhi rasa dengki dan iri hati'},
+      {text:'Aku menyambung silaturrahim'},
+      {text:'Aku mengelak permusuhan'},
+      {text:'Aku menjauhi menghina orang lain'},
+    ]},
+  { id:'H', title:'Amanah Pekerjaan', tier:2,
+    dalil:{meaning:'"Setiap kamu adalah pemimpin (penjaga amanah), dan setiap kamu akan dipertanggungjawabkan atas apa yang kamu pimpin."', source:'HR Bukhari & Muslim'},
+    items:[
+      {text:'Aku datang tepat waktu ke tempat kerja'},
+      {text:'Aku tidak mencuri masa bekerja'},
+      {text:'Aku tidak menyalahgunakan harta pejabat untuk kegunaan peribadi'},
+      {text:'Aku bersikap jujur dalam kerja'},
+      {text:'Aku bersikap profesional'},
+      {text:'Aku melayan rakan sekerja atau pekerja bawahanku dengan adil', critical:true},
+      {text:'Aku berlaku jujur terhadap pelanggan'},
+    ]},
+  { id:'I', title:'Hak Makhluk', tier:2,
+    dalil:{meaning:'"Jibril sentiasa berpesan kepadaku tentang jiran, sehingga aku menyangka jiran akan mewarisi harta."', source:'HR Bukhari & Muslim'},
+    items:[
+      {text:'Aku menjaga hubungan baik dengan jiran'},
+      {text:'Aku berlaku baik terhadap haiwan'},
+      {text:'Aku menjaga alam sekitar'},
+      {text:'Aku menjaga kebersihan'},
+      {text:'Aku mengelak menyakiti orang lain'},
+    ]},
+  { id:'J', title:'Penyakit Hati', tier:3,
+    note:'Semua manusia memiliki penyakit hati dalam pelbagai tahap — ini bukan penghakiman, tetapi cermin untuk penyucian jiwa (tazkiyatun nafs).',
+    dalil:{meaning:'"Ketahuilah, dalam diri ada seketul daging; jika ia baik maka baiklah seluruh tubuh, jika ia rosak maka rosaklah seluruh tubuh. Ketahuilah, itulah hati."', source:'HR Bukhari & Muslim'},
+    items:[
+      {text:'Aku mudah marah'},
+      {text:'Aku berasa hasad terhadap kelebihan orang lain'},
+      {text:'Aku menunjuk-nunjuk amal (riak)'},
+      {text:'Aku berasa bangga dengan diri sendiri (ujub)'},
+      {text:'Aku memandang rendah orang lain (takabbur)'},
+      {text:'Aku menyimpan dendam', critical:true, invert:true},
+      {text:'Aku terlalu mencintai dunia'},
+      {text:'Aku suka dipuji'},
+      {text:'Aku mudah menghukum atau menilai orang lain'},
+    ]},
+];
+// mark invert (tier 3, high freq = concern) for all J items except explicit ones already flagged
+sections.find(s=>s.id==='J').items.forEach(it => it.invert = true);
+
+/* ---------- state ---------- */
+let screen = 'intro'; // intro, note, quiz, results, closing
+let secIndex = 0;
+let answers = {}; // answers[sectionId] = [values]
+let skipped = {}; // skipped[sectionId] = true/false
+
+function initAnswers(){
+  sections.forEach(s=>{
+    answers[s.id] = new Array(s.items.length).fill(null);
+    skipped[s.id] = false;
+  });
+}
+initAnswers();
+
+/* ---------- render ---------- */
+const card = document.getElementById('card');
+
+function render(){
+  window.scrollTo({top:0,behavior:'instant'});
+  if(screen==='intro') renderIntro();
+  else if(screen==='note') renderNote();
+  else if(screen==='quiz') renderQuiz();
+  else if(screen==='results') renderResults();
+}
+
+function renderIntro(){
+  card.innerHTML = `
+    <p class="eyebrow">Ruang Peribadi &middot; Bukan Kuiz atau Ujian</p>
+    <h1 class="title">Cermin Muhasabah<br>Keberkatan</h1>
+    <h2 class="subtitle">"Mengapa hidup terasa sempit sedangkan rezeki kelihatan banyak?"</h2>
+
+    <div class="quranbox">
+      <div class="arabic">وَلَوْ أَنَّ أَهْلَ الْقُرَىٰ آمَنُوا وَاتَّقَوْا لَفَتَحْنَا عَلَيْهِم بَرَكَاتٍ مِّنَ السَّمَاءِ وَالْأَرْضِ</div>
+      <div class="translit">"Wa lau anna ahlal qura aamanu wattaqau lafatahna 'alaihim barakatin minas-sama'i wal-ard"</div>
+      <div class="meaning">"Sekiranya penduduk negeri itu beriman dan bertaqwa, nescaya Kami bukakan kepada mereka keberkatan dari langit dan bumi."</div>
+      <div class="source">Surah Al-A'raf 7:96</div>
+    </div>
+
+    <p class="lead">Ini bukan kuiz atau ujian, dan tidak mengukur keberkatan secara mutlak. Ia sekadar cermin — membantu kita bermuhasabah terhadap faktor-faktor yang disebut dalam Al-Quran dan hadis sebagai pembuka atau penghalang keberkatan hidup.</p>
+    <p>Allah sahaja yang mengetahui hakikat sebenar keadaan seorang hamba. Tiada markah, tiada peratus — hanya renungan.</p>
+
+    <div class="notebox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      <div>Tiada sebarang jawapan direkod atau disimpan di mana-mana. Semua data kekal di peranti anda sahaja dan hilang sebaik tab ini ditutup.</div>
+    </div>
+
+    <div class="actions center">
+      <button class="btn btn-gold" onclick="goNote()">Mula Bermuhasabah</button>
+    </div>
+  `;
+}
+
+function renderNote(){
+  card.innerHTML = `
+    <p class="eyebrow">Sebelum Bermula</p>
+    <h1 class="title" style="font-size:32px;">Dua Saluran Rezeki</h1>
+    <div class="divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v20M2 12h20" stroke-width="1"/></svg></div>
+
+    <p><strong>Saluran Iktisab</strong> — rezeki yang diperoleh melalui usaha zahir: bekerja, berniaga, kemahiran yang dipelajari. Manusia mendapat apa yang diusahakan, namun usaha semata-mata tidak menjamin keberkatan.</p>
+
+    <p><strong>Saluran Ghair Iktisab</strong> — rezeki yang datang daripada sumber tidak disangka: melalui doa ibu bapa, sedekah, istighfar, tawakkal, dan hubungan dengan Allah.</p>
+
+    <p style="font-style:italic; color:var(--ink-soft); font-size:15px;">Bahagian A hingga J yang seterusnya sebenarnya menyentuh kedua-dua saluran ini — bukan berasingan, tetapi saling berkait.</p>
+
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="goIntro()">Kembali</button>
+      <button class="btn btn-gold" onclick="startQuiz()">Teruskan</button>
+    </div>
+  `;
+}
+
+function goIntro(){ screen='intro'; render(); }
+function goNote(){ screen='note'; render(); }
+function startQuiz(){ screen='quiz'; secIndex=0; render(); }
+
+function renderQuiz(){
+  const s = sections[secIndex];
+  const isSkipped = s.optional && skipped[s.id];
+
+  let dots = sections.map((sec,i)=>{
+    let cls = 'dot';
+    if(i < secIndex) cls += ' done';
+    else if(i === secIndex) cls += ' current';
+    return `<div class="${cls}">${sec.id}</div>`;
+  }).join('');
+
+  let skipToggle = s.optional ? `
+    <label class="skip-row">
+      <input type="checkbox" ${isSkipped?'checked':''} onchange="toggleSkip('${s.id}', this.checked)">
+      <span>Bahagian ini tidak berkaitan dengan situasi saya sekarang — langkau</span>
+    </label>` : '';
+
+  let itemsHtml = '';
+  if(!isSkipped){
+    itemsHtml = s.items.map((it,idx)=>{
+      let btns = SCALE_LABELS.map((lab,vi)=>{
+        const v = vi+1;
+        const sel = answers[s.id][idx] === v ? ' sel' : '';
+        return `<button class="${sel.trim()}" onclick="selectAnswer('${s.id}',${idx},${v})">${lab}</button>`;
+      }).join('');
+      return `<div class="item"><div class="qtext">${it.text}</div><div class="scale">${btns}</div></div>`;
+    }).join('');
+  } else {
+    itemsHtml = `<div class="notebox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M2 12h20"/></svg><div>Bahagian ini dilangkau dan tidak akan dikira dalam rumusan.</div></div>`;
+  }
+
+  card.innerHTML = `
+    <div class="progress">${dots}</div>
+    <div class="sectier">${s.tier===1?'Tier 1 — Asas':(s.tier===3?'Tier 3 — Kerohanian Dalaman':'Tier 2 — Muamalat')} &middot; Bahagian ${s.id}</div>
+    <div class="sectitle">${s.title}</div>
+    ${s.note ? `<div class="secnote">${s.note}</div>` : ''}
+    ${s.sensitive ? `<div class="warn-inline">${s.sensitive}</div>` : ''}
+    ${!isSkipped ? `<p class="soft-hint">Jawapan tidak wajib — anda boleh langkau mana-mana soalan yang tidak berkenaan dan terus ke bahagian seterusnya.</p>` : ''}
+    ${skipToggle}
+    ${itemsHtml}
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="prevSection()">${secIndex===0?'Kembali ke Nota':'Bahagian Sebelum'}</button>
+      <button class="btn btn-gold" onclick="nextSection()">${secIndex===sections.length-1?'Lihat Rumusan':'Seterusnya'}</button>
+    </div>
+  `;
+}
+
+function selectAnswer(secId, idx, val){
+  answers[secId][idx] = val;
+  renderQuiz();
+}
+
+function toggleSkip(secId, val){
+  skipped[secId] = val;
+  renderQuiz();
+}
+
+function prevSection(){
+  if(secIndex===0){ screen='note'; render(); return; }
+  secIndex--; render();
+}
+function nextSection(){
+  if(secIndex === sections.length-1){ screen='results'; render(); return; }
+  secIndex++; render();
+}
+
+/* ---------- results / narrative logic ---------- */
+function avg(arr){ return arr.reduce((a,b)=>a+b,0)/arr.length; }
+
+function sectionAverage(id){
+  const answered = answers[id].filter(v => v !== null);
+  if(!answered.length) return null;
+  return avg(answered);
+}
+
+function categorize(average, invert){
+  // returns 'attn' | 'ok' | 'good' | 'great'  (scale is now 1–3)
+  if(invert){
+    if(average >= 2.4) return 'attn';
+    if(average >= 1.7) return 'ok';
+    return 'good';
+  } else {
+    if(average >= 2.4) return 'great';
+    if(average >= 1.7) return 'good';
+    return 'attn';
+  }
+}
+
+function dalilHtml(sec){
+  if(!sec.dalil) return '';
+  return `<span class="dalil-mini">"${sec.dalil.meaning.replace(/^"|"$/g,'')}" — ${sec.dalil.source}</span>`;
+}
+
+function renderResults(){
+  // Tier 1 (A)
+  const secA = sections.find(s=>s.id==='A');
+  const tier1avg = sectionAverage('A');
+  const tier1cat = tier1avg===null ? null : categorize(tier1avg,false);
+
+  // Tier 2 (B-I), excluding skipped sections and sections with no answers
+  const tier2ids = ['B','C','D','E','F','G','H','I'].filter(id => !skipped[id]);
+  let tier2goodLabels = [], tier2attnLabels = [], tier2avgs = [];
+  tier2ids.forEach(id=>{
+    const sec = sections.find(s=>s.id===id);
+    const a = sectionAverage(id);
+    if(a===null) return;
+    tier2avgs.push(a);
+    const cat = categorize(a,false);
+    if(cat==='great' || cat==='good') tier2goodLabels.push(sec);
+    else tier2attnLabels.push(sec);
+  });
+  const tier2avgAll = tier2avgs.length ? avg(tier2avgs) : 2;
+
+  // Tier 3 (J)
+  const secJ = sections.find(s=>s.id==='J');
+  const tier3avg = sectionAverage('J');
+  const tier3cat = tier3avg===null ? null : categorize(tier3avg,true);
+
+  // critical items scan (skip excluded sections and unanswered items)
+  let criticalHits = [];
+  sections.forEach(sec=>{
+    if(sec.optional && skipped[sec.id]) return;
+    sec.items.forEach((it,idx)=>{
+      if(it.critical){
+        const v = answers[sec.id][idx];
+        if(v===null) return;
+        const flagged = it.invert ? (v>=3) : (v<=2);
+        if(flagged) criticalHits.push(`${sec.title} — "${it.text}"`);
+      }
+    });
+  });
+
+  // gate: tier1 low, tier2 high
+  const gateActive = (tier1cat==='attn' || tier1cat==='ok') && (tier2avgAll >= 2.0);
+
+  let html = `
+    <p class="eyebrow">Rumusan &middot; Bukan Markah, Sekadar Renungan</p>
+    <h1 class="title" style="font-size:34px;">Cermin Anda Hari Ini</h1>
+    <div class="divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l2.5 7H22l-6 4.5L18.5 21 12 16.5 5.5 21 8 13.5 2 9h7.5z" stroke-width="0.8"/></svg></div>
+  `;
+
+  if(gateActive){
+    html += `<div class="gate-box">Amalan sesama manusia anda kelihatan baik — namun eloklah perkukuh dahulu hubungan dengan Allah sebagai asas, kerana daripada situ lahir kekuatan untuk yang lain bertahan.</div>`;
+  }
+
+  if(tier2goodLabels.length || tier1cat==='great' || tier1cat==='good'){
+    html += `<div class="resblock"><h3 class="tag-good">Yang Nampak Baik</h3><ul>`;
+    if(tier1cat==='great' || tier1cat==='good') html += `<li>Hubungan Dengan Allah${dalilHtml(secA)}</li>`;
+    tier2goodLabels.forEach(sec=> html += `<li>${sec.title}${dalilHtml(sec)}</li>`);
+    html += `</ul></div>`;
+  }
+
+  if(tier2attnLabels.length || tier1cat==='attn' || tier1cat==='ok'){
+    html += `<div class="resblock"><h3 class="tag-attn">Ruang Untuk Diberi Perhatian</h3><ul>`;
+    if(tier1cat==='attn'||tier1cat==='ok') html += `<li>Hubungan Dengan Allah${dalilHtml(secA)}</li>`;
+    tier2attnLabels.forEach(sec=> html += `<li>${sec.title}${dalilHtml(sec)}</li>`);
+    html += `</ul></div>`;
+  }
+
+  if(criticalHits.length){
+    html += `<div class="critical-box"><h3>Perlu Perhatian Segera</h3>
+      <p style="font-size:14px; color:#6b2f2f; margin-bottom:10px;">Perkara berikut kelihatan kecil dalam senarai, tetapi kesannya besar di sisi Allah — walau bahagian lain kelihatan baik:</p>
+      <ul>`;
+    criticalHits.forEach(h=> html += `<li>${h}</li>`);
+    html += `</ul></div>`;
+  }
+
+  html += `<div class="resblock"><h3>Cermin Dalaman — Penyakit Hati</h3>
+    <p style="font-size:14.5px; color:var(--ink-soft);">Ini dipaparkan berasingan kerana ia selalunya punca, bukan gejala setaraf yang lain. ${
+      tier3cat===null ? 'Anda memilih untuk tidak menjawab bahagian ini buat masa ini — tidak mengapa, kembalilah bila-bila anda rasa sedia.' :
+      tier3cat==='attn' ? 'Terdapat beberapa sifat yang kerap muncul dalam diri anda sekarang — tidak mengapa, ini adalah permulaan untuk penyucian hati (tazkiyatun nafs).' :
+      tier3cat==='ok' ? 'Sifat-sifat ini kadang-kadang muncul — wajar terus dijaga dengan zikir dan muhasabah.' :
+      'Hati anda kelihatan tenang daripada sifat-sifat ini pada masa ini — teruskan menjaganya.'
+    }</p>
+    ${tier3cat!==null ? dalilHtml(secJ) : ''}
+  </div>`;
+
+  html += `<div class="reminder">Amal yang kelihatan kecil di mata manusia boleh menjadi besar di sisi Allah — begitu juga sebaliknya. Jika anda telah berusaha sedaya upaya namun masih menghadapi kesempitan atau ujian, jangan terus menyimpulkan ia berpunca daripada kekurangan diri. Ujian juga boleh menjadi tanda kasih sayang Allah, penghapus dosa, atau sebab diangkat darjat seseorang.</div>`;
+
+  html += `<p style="text-align:center; font-size:15px;">Jika hasilnya baik, Alhamdulillah — semoga Allah kekalkan dan tingkatkan lagi. Jika ada ruang penambahbaikan, jadikan ia titik muhasabah, bukan sebab berputus asa.</p>`;
+
+  html += `
+    <div class="divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v20M2 12h20" stroke-width="1"/></svg></div>
+
+    <div class="quranbox">
+      <div class="meaning" style="font-style:normal; font-size:15px; color:var(--ink);">"Tiada sesuatu yang lebih berat dalam timbangan seorang hamba pada hari Kiamat melebihi akhlak yang baik."</div>
+      <div class="source">HR Abu Daud &amp; Tirmizi (hasan sahih)</div>
+    </div>
+
+    <div class="quranbox">
+      <div class="arabic">اللَّهُمَّ كَمَا حَسَّنْتَ خَلْقِي فَحَسِّنْ خُلُقِي</div>
+      <div class="translit">"Allahumma kama hassanta khalqi fahassin khuluqi"</div>
+      <div class="meaning">"Ya Allah, sebagaimana Engkau telah eloklan kejadianku, maka eloklah akhlakku."</div>
+      <div class="source">HR Ahmad</div>
+    </div>
+
+    <div class="quranbox">
+      <div class="arabic">اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ</div>
+      <div class="translit">"Allahumma akfini bihalalika 'an haramik, wa aghnini bifadhlika 'amman siwak"</div>
+      <div class="meaning">"Ya Allah, cukupkanlah aku dengan rezeki halal-Mu daripada yang haram, dan kayakanlah aku dengan kurnia-Mu daripada selain-Mu."</div>
+      <div class="source">HR Tirmizi</div>
+    </div>
+
+    <div class="quranbox">
+      <div class="arabic">اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا</div>
+      <div class="translit">"Allahumma barik lana fima razaqtana"</div>
+      <div class="meaning">"Ya Allah, berkatilah kami pada apa yang Engkau rezekikan kepada kami."</div>
+    </div>
+
+    <div class="lock-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      Renungan ini tidak disimpan di mana-mana. Tutup atau muat semula halaman untuk memulakan cermin yang baharu.
+    </div>
+
+    <div class="actions center">
+      <button class="btn btn-ghost" onclick="restart()">Mula Semula</button>
+    </div>
+  `;
+
+  card.innerHTML = html;
+}
+
+function restart(){
+  initAnswers();
+  secIndex = 0;
+  screen = 'intro';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
