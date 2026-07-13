@@ -1,1 +1,900 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koleksi Hadis Pilihan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2b26;
+    --paper:#faf7f0;
+    --card:#ffffff;
+    --primary:#0f5c4a;
+    --primary-dark:#0a3f32;
+    --gold:#b8862e;
+    --gold-soft:#f3e6c8;
+    --muted:#6b7570;
+    --border:#e4e0d3;
+    --sahih:#0f5c4a;
+    --hasan:#8a6a1f;
+    --daif:#a8451f;
+    --radius:16px;
+    --shadow:0 2px 10px rgba(20,30,25,.06), 0 1px 2px rgba(20,30,25,.05);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Poppins',system-ui,-apple-system,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .arabic{
+    font-family:'Amiri','Noto Naskh Arabic',serif;
+    direction:rtl;
+    text-align:right;
+    font-size:1.55rem;
+    line-height:2.1;
+    color:var(--primary-dark);
+  }
+  header{
+    background:linear-gradient(160deg,var(--primary) 0%,var(--primary-dark) 100%);
+    color:#fff;
+    padding:2.4rem 1.2rem 5.5rem;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,.06) 0, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(255,255,255,.06) 0, transparent 40%);
+    pointer-events:none;
+  }
+  header h1{
+    margin:0 0 .4rem;
+    font-size:1.85rem;
+    font-weight:700;
+    letter-spacing:.2px;
+  }
+  header p{
+    margin:0;
+    color:var(--gold-soft);
+    font-size:.95rem;
+    max-width:560px;
+    margin-inline:auto;
+    opacity:.92;
+  }
+  .wrap{
+    max-width:820px;
+    margin:0 auto;
+    padding:0 1rem 4rem;
+  }
+  .toolbar{
+    background:var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:1.1rem;
+    margin-top:-3.2rem;
+    position:relative;
+    z-index:2;
+    border:1px solid var(--border);
+  }
+  .search-box{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    background:var(--paper);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:.65rem 1.1rem;
+  }
+  .search-box svg{flex:none;color:var(--muted);}
+  .search-box input{
+    border:none;
+    background:transparent;
+    outline:none;
+    font-family:inherit;
+    font-size:.95rem;
+    width:100%;
+    color:var(--ink);
+  }
+  .cats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+    margin-top:1rem;
+  }
+  .cat-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--ink);
+    padding:.5rem .95rem;
+    border-radius:999px;
+    font-size:.82rem;
+    font-weight:500;
+    cursor:pointer;
+    transition:all .15s ease;
+    white-space:nowrap;
+  }
+  .cat-btn:hover{border-color:var(--primary);}
+  .cat-btn.active{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:#fff;
+  }
+  .count-line{
+    text-align:center;
+    color:var(--muted);
+    font-size:.82rem;
+    margin:1.4rem 0 1rem;
+  }
+  .grid{
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+  }
+  .section-title{
+    font-size:1.05rem;
+    font-weight:600;
+    color:var(--primary-dark);
+    margin:2.2rem 0 .8rem;
+    padding-bottom:.4rem;
+    border-bottom:2px solid var(--gold-soft);
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+  }
+  .section-title .emoji{font-size:1.1rem;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:1.3rem 1.3rem 1.1rem;
+    box-shadow:var(--shadow);
+    scroll-margin-top:1rem;
+  }
+  .card .no{
+    font-size:.72rem;
+    font-weight:600;
+    color:var(--gold);
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    margin-bottom:.5rem;
+  }
+  .card .terjemahan{
+    font-size:.98rem;
+    color:var(--ink);
+    margin:.9rem 0 1rem;
+    padding-inline-start:.9rem;
+    border-inline-start:3px solid var(--gold-soft);
+  }
+  .card .meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+    align-items:center;
+    font-size:.78rem;
+    color:var(--muted);
+  }
+  .badge{
+    display:inline-block;
+    padding:.22rem .65rem;
+    border-radius:999px;
+    font-size:.72rem;
+    font-weight:600;
+    color:#fff;
+  }
+  .badge.sahih{background:var(--sahih);}
+  .badge.hasan{background:var(--hasan);}
+  .badge.daif{background:var(--daif);}
+  .rujukan{font-weight:500;color:var(--ink);}
+  .note{
+    font-size:.78rem;
+    color:var(--muted);
+    font-style:italic;
+    margin-top:.55rem;
+    line-height:1.5;
+  }
+  .empty{
+    text-align:center;
+    color:var(--muted);
+    padding:3rem 1rem;
+    display:none;
+  }
+  footer{
+    max-width:820px;
+    margin:0 auto;
+    padding:0 1.2rem 3rem;
+    color:var(--muted);
+    font-size:.8rem;
+    line-height:1.7;
+  }
+  footer .box{
+    background:var(--gold-soft);
+    border-radius:var(--radius);
+    padding:1.1rem 1.3rem;
+    color:#4a3a12;
+  }
+  footer .box b{color:var(--primary-dark);}
+  @media (max-width:480px){
+    header{padding:2rem 1rem 5rem;}
+    header h1{font-size:1.5rem;}
+    .arabic{font-size:1.3rem;}
+  }
+</style>
+</head>
+<body>
 
+<header>
+  <h1>📖 Koleksi Hadis Pilihan</h1>
+  <p>Himpunan hadis-hadis sahih dan hasan merangkumi 16 tajuk — Fiqh, Al-Quran, Haji &amp; Umrah, Halal, Kekeluargaan, Iman, Akhlak, Syamail Nabi ﷺ, Akhir Zaman, Wanita, Amalan Harian, Motivasi, Haiwan dan banyak lagi — lengkap dengan teks Arab, terjemahan dan rujukan asal.</p>
+</header>
+
+<div class="wrap">
+  <div class="toolbar">
+    <div class="search-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="searchInput" type="text" placeholder="Cari hadis, kata kunci atau rujukan (cth: haji, niat, Bukhari)...">
+    </div>
+    <div class="cats" id="catButtons"></div>
+  </div>
+
+  <p class="count-line" id="countLine"></p>
+
+  <div id="results"></div>
+  <div class="empty" id="emptyState">Tiada hadis ditemui buat masa ini. Cuba kata kunci lain.</div>
+</div>
+
+<footer>
+  <div class="box">
+    <b>Nota:</b> Darjat kesahihan (Sahih / Hasan / Da'if) dirujuk daripada pentahqiqan Darussalam / muhaddithin muktabar seperti yang tercatat pada sunnah.com. Bagi hadis yang berdarjat Hasan atau yang isnadnya diperkatakan (seperti kaedah fiqh <i>"لا ضرر ولا ضرار"</i>), ia tetap diguna pakai secara meluas oleh ulama sebagai kaedah/pengajaran yang sahih maknanya walaupun isnad asal diperkatakan. Disarankan untuk sentiasa merujuk kepada asatizah bertauliah dan kitab hadis asal untuk pengesahan lanjut sebelum disebarkan sebagai bahan rasmi.
+  </div>
+  <p style="margin-top:1rem;text-align:center;">Disusun sebagai bahan rujukan dakwah &amp; pengajaran · Koleksi Hadis Pilihan © 2026</p>
+</footer>
+
+<script>
+const HADITH = [
+{
+  id:1, kategori:"Fiqh & Syariah",
+  arab:"إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى",
+  terjemahan:"Sesungguhnya setiap amalan itu bergantung pada niatnya, dan setiap orang akan mendapat balasan mengikut apa yang diniatkannya. Sesiapa yang berhijrah kerana dunia yang ingin dicapainya atau kerana wanita yang ingin dinikahinya, maka hijrahnya adalah kepada apa yang diniatkannya itu.",
+  rujukan:"Sahih al-Bukhari, no. 1", perawi:"Umar bin al-Khattab R.A.", darjat:"sahih"
+},
+{
+  id:2, kategori:"Fiqh & Syariah",
+  arab:"مَنْ أَحْدَثَ فِي أَمْرِنَا هَذَا مَا لَيْسَ مِنْهُ فَهُوَ رَدٌّ",
+  terjemahan:"Sesiapa yang mengada-adakan sesuatu perkara baru dalam urusan (agama) kami ini yang bukan daripadanya, maka ia tertolak.",
+  rujukan:"Sahih Muslim, no. 1718a", perawi:"Aisyah R.A.", darjat:"sahih"
+},
+{
+  id:3, kategori:"Fiqh & Syariah",
+  arab:"مَنْ رَأَى مِنْكُمْ مُنْكَرًا فَلْيُغَيِّرْهُ بِيَدِهِ، فَإِنْ لَمْ يَسْتَطِعْ فَبِلِسَانِهِ، فَإِنْ لَمْ يَسْتَطِعْ فَبِقَلْبِهِ، وَذَلِكَ أَضْعَفُ الإِيمَانِ",
+  terjemahan:"Sesiapa di antara kamu yang melihat kemungkaran, hendaklah dia mengubahnya dengan tangannya; jika tidak mampu, maka dengan lidahnya; jika tidak mampu (juga), maka dengan hatinya — dan yang demikian itu adalah selemah-lemah iman.",
+  rujukan:"Sahih Muslim, no. 49a", perawi:"Abu Sa'id al-Khudri R.A.", darjat:"sahih"
+},
+{
+  id:4, kategori:"Fiqh & Syariah",
+  arab:"لاَ ضَرَرَ وَلاَ ضِرَارَ",
+  terjemahan:"Tidak boleh (menimbulkan) mudarat dan tidak boleh (membalas) dengan mudarat.",
+  rujukan:"Sunan Ibn Majah, no. 2340", perawi:"Ubadah bin as-Samit R.A.", darjat:"daif",
+  nota:"Dinilai da'if dari sudut isnad oleh sesetengah muhaddithin, namun ia disokong oleh jalur-jalur lain dan diterima secara meluas sebagai salah satu kaedah fiqh (qawa'id fiqhiyyah) yang utama."
+},
+{
+  id:5, kategori:"Al-Quran & Tajwid",
+  arab:"خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ",
+  terjemahan:"Sebaik-baik kamu ialah orang yang mempelajari Al-Quran dan mengajarkannya.",
+  rujukan:"Sahih al-Bukhari, no. 5027", perawi:"Uthman bin Affan R.A.", darjat:"sahih"
+},
+{
+  id:6, kategori:"Al-Quran & Tajwid",
+  arab:"مَثَلُ الَّذِي يَقْرَأُ الْقُرْآنَ وَهْوَ حَافِظٌ لَهُ مَعَ السَّفَرَةِ الْكِرَامِ الْبَرَرَةِ، وَمَثَلُ الَّذِي يَقْرَأُ الْقُرْآنَ وَهْوَ يَتَعَاهَدُهُ وَهْوَ عَلَيْهِ شَدِيدٌ فَلَهُ أَجْرَانِ",
+  terjemahan:"Orang yang membaca Al-Quran serta menghafaznya, dia bersama para malaikat yang mulia lagi baik. Manakala orang yang membaca Al-Quran dengan tersekat-sekat kerana sukar baginya, maka dia mendapat dua pahala.",
+  rujukan:"Sahih al-Bukhari, no. 4937", perawi:"Aisyah R.A.", darjat:"sahih"
+},
+{
+  id:7, kategori:"Al-Quran & Tajwid",
+  arab:"مَنْ قَرَأَ حَرْفًا مِنْ كِتَابِ اللَّهِ فَلَهُ بِهِ حَسَنَةٌ، وَالْحَسَنَةُ بِعَشْرِ أَمْثَالِهَا، لاَ أَقُولُ الم حَرْفٌ، وَلَكِنْ أَلِفٌ حَرْفٌ وَلاَمٌ حَرْفٌ وَمِيمٌ حَرْفٌ",
+  terjemahan:"Sesiapa yang membaca satu huruf daripada Kitab Allah, maka baginya satu kebaikan, dan satu kebaikan itu digandakan sepuluh kali ganda. Aku tidak mengatakan 'Alif Lam Mim' itu satu huruf, tetapi Alif satu huruf, Lam satu huruf, dan Mim satu huruf.",
+  rujukan:"Jami' at-Tirmidzi, no. 2910", perawi:"Abdullah bin Mas'ud R.A.", darjat:"hasan"
+},
+{
+  id:8, kategori:"Al-Quran & Tajwid",
+  arab:"اقْرَءُوا الْقُرْآنَ فَإِنَّهُ يَأْتِي يَوْمَ الْقِيَامَةِ شَفِيعًا لأَصْحَابِهِ",
+  terjemahan:"Bacalah Al-Quran, kerana sesungguhnya ia akan datang pada hari Kiamat sebagai pemberi syafaat kepada pembacanya (ahlinya).",
+  rujukan:"Sahih Muslim, no. 804a", perawi:"Abu Umamah al-Bahili R.A.", darjat:"sahih"
+},
+{
+  id:9, kategori:"Al-Quran & Tajwid",
+  arab:"يُقَالُ لِصَاحِبِ الْقُرْآنِ: اقْرَأْ وَارْتَقِ وَرَتِّلْ كَمَا كُنْتَ تُرَتِّلُ فِي الدُّنْيَا، فَإِنَّ مَنْزِلَتَكَ عِنْدَ آخِرِ آيَةٍ تَقْرَؤُهَا",
+  terjemahan:"Akan dikatakan kepada ahli (penghafaz) Al-Quran: Bacalah dan naiklah (ke tingkat yang lebih tinggi) serta tartilkanlah bacaan sebagaimana engkau mentartilkannya semasa di dunia, kerana sesungguhnya kedudukanmu adalah pada akhir ayat yang engkau baca.",
+  rujukan:"Jami' at-Tirmidzi, no. 2914", perawi:"Abdullah bin Amr R.A.", darjat:"hasan"
+},
+{
+  id:10, kategori:"Haji & Umrah",
+  arab:"الْعُمْرَةُ إِلَى الْعُمْرَةِ كَفَّارَةٌ لِمَا بَيْنَهُمَا، وَالْحَجُّ الْمَبْرُورُ لَيْسَ لَهُ جَزَاءٌ إِلاَّ الْجَنَّةُ",
+  terjemahan:"Umrah ke umrah yang seterusnya adalah penghapus dosa antara kedua-duanya, dan haji yang mabrur itu tiada balasan baginya melainkan syurga.",
+  rujukan:"Sahih al-Bukhari, no. 1773", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:11, kategori:"Haji & Umrah",
+  arab:"مَنْ حَجَّ لِلَّهِ فَلَمْ يَرْفُثْ وَلَمْ يَفْسُقْ رَجَعَ كَيَوْمِ وَلَدَتْهُ أُمُّهُ",
+  terjemahan:"Sesiapa yang menunaikan haji kerana Allah, lalu dia tidak melakukan rafath (perkataan/perbuatan lucah) dan tidak berbuat fasik, maka dia akan pulang (bersih daripada dosa) seperti keadaan dia baru dilahirkan oleh ibunya.",
+  rujukan:"Sahih al-Bukhari, no. 1521", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:12, kategori:"Haji & Umrah",
+  arab:"الْحُجَّاجُ وَالْعُمَّارُ وَفْدُ اللَّهِ، إِنْ دَعَوْهُ أَجَابَهُمْ وَإِنِ اسْتَغْفَرُوهُ غَفَرَ لَهُمْ",
+  terjemahan:"Jemaah haji dan umrah itu adalah tetamu Allah; jika mereka berdoa kepada-Nya nescaya diperkenankan, dan jika mereka memohon keampunan nescaya diampunkan.",
+  rujukan:"Sunan Ibn Majah, no. 2892", perawi:"Abu Hurairah R.A.", darjat:"hasan"
+},
+{
+  id:13, kategori:"Haji & Umrah",
+  arab:"فَإِذَا كَانَ رَمَضَانُ فَاعْتَمِرِي فِيهِ، فَإِنَّ عُمْرَةً فِيهِ تَعْدِلُ حَجَّةً",
+  terjemahan:"Apabila tiba Ramadan, kerjakanlah umrah, kerana umrah pada bulan Ramadan menyamai (pahala) haji.",
+  rujukan:"Sahih al-Bukhari, no. 1782", perawi:"Ibn Abbas R.A.", darjat:"sahih"
+},
+{
+  id:14, kategori:"Halal & Pematuhan Syariah",
+  arab:"الْحَلاَلُ بَيِّنٌ وَالْحَرَامُ بَيِّنٌ وَبَيْنَهُمَا مُشَبَّهَاتٌ لاَ يَعْلَمُهَا كَثِيرٌ مِنَ النَّاسِ",
+  terjemahan:"Yang halal itu jelas dan yang haram itu jelas, dan di antara keduanya terdapat perkara-perkara syubhah (samar) yang tidak diketahui oleh kebanyakan manusia. Sesiapa yang menjaga dirinya daripada perkara syubhah, maka dia telah menyelamatkan agama dan maruahnya.",
+  rujukan:"Sahih al-Bukhari, no. 52", perawi:"An-Nu'man bin Basyir R.A.", darjat:"sahih"
+},
+{
+  id:15, kategori:"Halal & Pematuhan Syariah",
+  arab:"مَا أَكَلَ أَحَدٌ طَعَامًا قَطُّ خَيْرًا مِنْ أَنْ يَأْكُلَ مِنْ عَمَلِ يَدِهِ، وَإِنَّ نَبِيَّ اللَّهِ دَاوُدَ عَلَيْهِ السَّلاَمُ كَانَ يَأْكُلُ مِنْ عَمَلِ يَدِهِ",
+  terjemahan:"Tidak ada seseorang yang memakan makanan yang lebih baik daripada memakan hasil usaha tangannya sendiri. Sesungguhnya Nabi Allah, Daud A.S., makan daripada hasil usaha tangannya sendiri.",
+  rujukan:"Sahih al-Bukhari, no. 2072", perawi:"Al-Miqdam bin Ma'dikarib R.A.", darjat:"sahih"
+},
+{
+  id:16, kategori:"Halal & Pematuhan Syariah",
+  arab:"إِنَّهُ لاَ يَرْبُو لَحْمٌ نَبَتَ مِنْ سُحْتٍ إِلاَّ كَانَتِ النَّارُ أَوْلَى بِهِ",
+  terjemahan:"Sesungguhnya daging yang tumbuh daripada sumber yang haram, maka nerakalah yang lebih utama untuknya.",
+  rujukan:"Jami' at-Tirmidzi, no. 614", perawi:"Ka'ab bin Ujrah R.A.", darjat:"hasan"
+},
+{
+  id:17, kategori:"Halal & Pematuhan Syariah",
+  arab:"إِنَّ اللَّهَ كَتَبَ الإِحْسَانَ عَلَى كُلِّ شَىْءٍ، فَإِذَا قَتَلْتُمْ فَأَحْسِنُوا الْقِتْلَةَ، وَإِذَا ذَبَحْتُمْ فَأَحْسِنُوا الذَّبْحَ، وَلْيُحِدَّ أَحَدُكُمْ شَفْرَتَهُ فَلْيُرِحْ ذَبِيحَتَهُ",
+  terjemahan:"Sesungguhnya Allah mewajibkan ihsan (berbuat baik) dalam segala sesuatu. Maka apabila kamu membunuh, bunuhlah dengan cara yang baik; dan apabila kamu menyembelih, sembelihlah dengan cara yang baik. Hendaklah seseorang daripada kamu menajamkan pisaunya dan menyenangkan sembelihannya.",
+  rujukan:"Sahih Muslim, no. 1955a", perawi:"Syaddad bin Aus R.A.", darjat:"sahih"
+},
+{
+  id:18, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"خَيْرُكُمْ خَيْرُكُمْ لأَهْلِهِ وَأَنَا خَيْرُكُمْ لأَهْلِي",
+  terjemahan:"Sebaik-baik kamu ialah yang paling baik terhadap ahli keluarganya, dan aku adalah yang terbaik di antara kamu terhadap ahli keluargaku.",
+  rujukan:"Jami' at-Tirmidzi, no. 3895", perawi:"Aisyah R.A.", darjat:"sahih"
+},
+{
+  id:19, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"إِنَّ الرَّحِمَ شُجْنَةٌ مِنَ الرَّحْمَنِ، فَقَالَ اللَّهُ: مَنْ وَصَلَكِ وَصَلْتُهُ، وَمَنْ قَطَعَكِ قَطَعْتُهُ",
+  terjemahan:"Sesungguhnya rahim (hubungan kekeluargaan) itu berasal daripada Ar-Rahman. Allah berfirman: Sesiapa yang menghubungkanmu (silaturahim), Aku akan menghubungkannya; dan sesiapa yang memutuskanmu, Aku akan memutuskannya.",
+  rujukan:"Sahih al-Bukhari, no. 5988", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:20, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"لَيْسَ مِنَّا مَنْ لَمْ يَرْحَمْ صَغِيرَنَا وَيُوَقِّرْ كَبِيرَنَا",
+  terjemahan:"Bukanlah daripada golongan kami sesiapa yang tidak mengasihi yang muda daripada kami dan tidak menghormati yang tua daripada kami.",
+  rujukan:"Jami' at-Tirmidzi, no. 1919", perawi:"Anas bin Malik R.A.", darjat:"hasan"
+},
+{
+  id:21, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلاَ يُؤْذِ جَارَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيُكْرِمْ ضَيْفَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
+  terjemahan:"Sesiapa yang beriman kepada Allah dan Hari Akhirat, janganlah dia menyakiti jirannya; sesiapa yang beriman kepada Allah dan Hari Akhirat, hendaklah dia memuliakan tetamunya; dan sesiapa yang beriman kepada Allah dan Hari Akhirat, hendaklah dia berkata baik atau diam.",
+  rujukan:"Sahih al-Bukhari, no. 6018", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:22, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"رِضَا الرَّبِّ فِي رِضَا الْوَالِدِ، وَسَخَطُ الرَّبِّ فِي سَخَطِ الْوَالِدِ",
+  terjemahan:"Keredhaan Allah itu terletak pada keredhaan ibu bapa, dan kemurkaan Allah terletak pada kemurkaan ibu bapa.",
+  rujukan:"Jami' at-Tirmidzi, no. 1899", perawi:"Abdullah bin Amr R.A.", darjat:"hasan",
+  nota:"Sebahagian riwayat berstatus mawquf (perkataan sahabat), namun jalur yang marfu' (disandarkan kepada Nabi ﷺ) dinilai lebih kukuh oleh ulama hadis."
+},
+{
+  id:23, kategori:"Iman Tidak Sempurna",
+  arab:"لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ",
+  terjemahan:"Tidak sempurna iman seseorang daripada kamu sehingga dia mengasihi untuk saudaranya apa yang dia kasihi untuk dirinya sendiri.",
+  rujukan:"Sahih al-Bukhari, no. 13 (turut dalam Sahih Muslim, no. 45a)", perawi:"Anas bin Malik R.A.", darjat:"sahih"
+},
+{
+  id:24, kategori:"Iman Tidak Sempurna",
+  arab:"مَا هَذَا يَا صَاحِبَ الطَّعَامِ. قَالَ أَصَابَتْهُ السَّمَاءُ يَا رَسُولَ اللَّهِ. قَالَ أَفَلاَ جَعَلْتَهُ فَوْقَ الطَّعَامِ كَىْ يَرَاهُ النَّاسُ، مَنْ غَشَّ فَلَيْسَ مِنِّي",
+  terjemahan:"Nabi ﷺ bertanya, 'Apakah ini, wahai pemilik makanan?' Dia menjawab, 'Ia terkena hujan, wahai Rasulullah.' Baginda bersabda, 'Mengapa tidak engkau letakkan yang basah itu di atas supaya dapat dilihat oleh orang ramai? Sesiapa yang menipu, maka dia bukan daripada kalanganku.'",
+  rujukan:"Sahih Muslim, no. 102", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:25, kategori:"Iman Tidak Sempurna",
+  arab:"الإِيمَانُ بِضْعٌ وَسِتُّونَ شُعْبَةً، وَالْحَيَاءُ شُعْبَةٌ مِنَ الإِيمَانِ",
+  terjemahan:"Iman itu mempunyai lebih enam puluh cabang, dan malu itu adalah salah satu cabang daripada iman.",
+  rujukan:"Sahih al-Bukhari, no. 9", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:26, kategori:"Iman Tidak Sempurna",
+  arab:"لَيْسَ الْمُؤْمِنُ بِالطَّعَّانِ وَلاَ اللَّعَّانِ وَلاَ الْفَاحِشِ وَلاَ الْبَذِيءِ",
+  terjemahan:"Seorang mukmin itu bukanlah seorang yang suka mencela, bukan pula suka melaknat, bukan pula berkata keji dan bukan pula berkata kotor.",
+  rujukan:"Jami' at-Tirmidzi, no. 1977", perawi:"Abdullah bin Mas'ud R.A.", darjat:"hasan"
+},
+{
+  id:27, kategori:"Iman Tidak Sempurna",
+  arab:"وَاللَّهِ لاَ يُؤْمِنُ، وَاللَّهِ لاَ يُؤْمِنُ، وَاللَّهِ لاَ يُؤْمِنُ. قِيلَ وَمَنْ يَا رَسُولَ اللَّهِ؟ قَالَ الَّذِي لاَ يَأْمَنُ جَارُهُ بَوَايِقَهُ",
+  terjemahan:"'Demi Allah, tidak beriman! Demi Allah, tidak beriman! Demi Allah, tidak beriman!' Ditanya, 'Siapakah dia, wahai Rasulullah?' Baginda bersabda, 'Orang yang jirannya tidak berasa selamat daripada kejahatannya.'",
+  rujukan:"Sahih al-Bukhari, no. 6016", perawi:"Abu Syuraih R.A.", darjat:"sahih"
+},
+{
+  id:28, kategori:"Iman Tidak Sempurna",
+  arab:"الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ، وَالْمُهَاجِرُ مَنْ هَجَرَ مَا نَهَى اللَّهُ عَنْهُ",
+  terjemahan:"Seorang Muslim ialah orang yang orang Islam lain selamat daripada gangguan lidah dan tangannya; dan seorang Muhajir ialah orang yang meninggalkan segala apa yang dilarang oleh Allah.",
+  rujukan:"Sahih al-Bukhari, no. 10", perawi:"Abdullah bin Amr R.A.", darjat:"sahih"
+},
+{
+  id:29, kategori:"Akhlak yang Baik",
+  arab:"بُعِثْتُ لِأُتَمِّمَ حُسْنَ الأَخْلاَقِ",
+  terjemahan:"Aku diutuskan untuk menyempurnakan akhlak yang baik.",
+  rujukan:"Muwatta' Malik, no. 1614", perawi:"riwayat mursal, disandarkan kepada Rasulullah ﷺ", darjat:"sahih",
+  nota:"Dinilai sahih oleh Ibn Abdul Barr. Lafaz hampir sama ('...صَالِحَ الأَخْلاقِ') turut terdapat dalam Al-Adab Al-Mufrad no. 273 melalui Abu Hurairah R.A."
+},
+{
+  id:30, kategori:"Akhlak yang Baik",
+  arab:"أَكْمَلُ الْمُؤْمِنِينَ إِيمَانًا أَحْسَنُهُمْ خُلُقًا وَخِيَارُكُمْ خِيَارُكُمْ لِنِسَائِهِمْ خُلُقًا",
+  terjemahan:"Mukmin yang paling sempurna imannya ialah yang paling baik akhlaknya, dan sebaik-baik kamu ialah yang paling baik akhlaknya terhadap isteri-isteri kamu.",
+  rujukan:"Jami' at-Tirmidzi, no. 1162", perawi:"Abu Hurairah R.A.", darjat:"hasan"
+},
+{
+  id:31, kategori:"Akhlak yang Baik",
+  arab:"مَا شَيْءٌ أَثْقَلُ فِي مِيزَانِ الْمُؤْمِنِ يَوْمَ الْقِيَامَةِ مِنْ خُلُقٍ حَسَنٍ وَإِنَّ اللَّهَ لَيَبْغَضُ الْفَاحِشَ الْبَذِيءَ",
+  terjemahan:"Tiada sesuatu yang lebih berat pada timbangan seorang mukmin pada hari Kiamat berbanding akhlak yang baik. Sesungguhnya Allah amat murka kepada orang yang berkata keji dan kotor.",
+  rujukan:"Jami' at-Tirmidzi, no. 2002", perawi:"Abu ad-Darda' R.A.", darjat:"sahih"
+},
+{
+  id:32, kategori:"Akhlak yang Baik",
+  arab:"لَمْ يَكُنْ رَسُولُ اللَّهِ صلى الله عليه وسلم فَاحِشًا وَلاَ مُتَفَحِّشًا، وَإِنَّهُ كَانَ يَقُولُ إِنَّ خِيَارَكُمْ أَحَاسِنُكُمْ أَخْلاَقًا",
+  terjemahan:"Rasulullah ﷺ bukanlah seorang yang berkata keji mahupun berbuat keji, dan baginda pernah bersabda: Sesungguhnya sebaik-baik kamu ialah yang paling baik akhlaknya.",
+  rujukan:"Sahih al-Bukhari, no. 6035", perawi:"Abdullah bin Amr R.A.", darjat:"sahih"
+},
+{
+  id:33, kategori:"Akhlak yang Baik",
+  arab:"إِنَّ الْمُؤْمِنَ لَيُدْرِكُ بِحُسْنِ خُلُقِهِ دَرَجَةَ الصَّائِمِ الْقَائِمِ",
+  terjemahan:"Sesungguhnya seorang mukmin dapat mencapai darjat orang yang berpuasa dan bersolat malam melalui kebaikan akhlaknya.",
+  rujukan:"Sunan Abi Dawud, no. 4798", perawi:"Aisyah R.A.", darjat:"sahih",
+  nota:"Dinilai sahih oleh Syeikh al-Albani."
+},
+{
+  id:34, kategori:"Syamail Nabi SAW",
+  arab:"كَانَ رَسُولُ اللهِ صلى الله عليه وسلم، لَيْسَ بِالطَّوِيلِ الْبَائِنِ، وَلاَ بِالْقَصِيرِ، وَلاَ بِالأَبْيَضِ الأَمْهَقِ، وَلاَ بِالآدَمِ، وَلاَ بِالْجَعْدِ الْقَطَطِ، وَلاَ بِالسَّبْطِ، بَعَثَهُ اللَّهُ تَعَالَى عَلَى رَأْسِ أَرْبَعِينَ سَنَةً، فَأَقَامَ بِمَكَّةَ عَشْرَ سِنِينَ، وَبِالْمَدِينَةِ عَشْرَ سِنِينَ، وَتَوَفَّاهُ اللَّهُ تَعَالَى عَلَى رَأْسِ سِتِّينَ سَنَةً، وَلَيْسَ فِي رَأْسِهِ وَلِحْيَتِهِ عِشْرُونَ شَعَرَةً بَيْضَاءَ",
+  terjemahan:"Rasulullah ﷺ bukanlah seorang yang terlalu tinggi, dan bukan pula pendek; kulitnya tidak putih pucat dan tidak pula gelap; rambutnya tidak terlalu kerinting dan tidak pula terlalu lurus. Allah mengutuskannya sebagai Rasul ketika berusia empat puluh tahun; baginda menetap di Makkah selama sepuluh tahun dan di Madinah selama sepuluh tahun, lalu Allah mewafatkannya ketika berusia enam puluh tahun, dengan kurang daripada dua puluh helai uban pada kepala dan janggutnya.",
+  rujukan:"Asy-Syama'il al-Muhammadiyyah (Imam at-Tirmidzi), no. 1", perawi:"Anas bin Malik R.A.", darjat:"sahih",
+  nota:"Dinilai sahih isnad oleh Syeikh Zubair Ali Za'i."
+},
+{
+  id:35, kategori:"Syamail Nabi SAW",
+  arab:"أَكَانَ وَجْهُ النَّبِيِّ صلى الله عليه وسلم مِثْلَ السَّيْفِ قَالَ لاَ بَلْ مِثْلَ الْقَمَرِ",
+  terjemahan:"Seseorang bertanya kepada al-Bara' bin Azib, 'Adakah wajah Nabi ﷺ seperti pedang (berkilau)?' Beliau menjawab, 'Tidak, bahkan seperti bulan.'",
+  rujukan:"Sahih al-Bukhari, no. 3552 (turut dalam Syama'il al-Muhammadiyyah, no. 11)", perawi:"Al-Bara' bin Azib R.A.", darjat:"sahih"
+},
+{
+  id:36, kategori:"Syamail Nabi SAW",
+  arab:"مَا كَانَ ضَحِكُ رَسُولِ اللهِ صلى الله عليه وسلم إِلاَّ تَبَسُّمًا",
+  terjemahan:"Ketawa Rasulullah ﷺ tidak lain hanyalah senyuman.",
+  rujukan:"Asy-Syama'il al-Muhammadiyyah, no. 227", perawi:"Abdullah bin al-Harith R.A.", darjat:"sahih",
+  nota:"Dinilai sahih isnad oleh Syeikh Zubair Ali Za'i."
+},
+{
+  id:37, kategori:"Syamail Nabi SAW",
+  arab:"كَانَ النَّبِيُّ صلى الله عليه وسلم إِذَا مَشَى، تَكَفَّأَ تَكَفُّؤًا، كَأَنَّمَا يَنْحَطُّ مِنْ صَبَبٍ",
+  terjemahan:"Apabila Nabi ﷺ berjalan, baginda melangkah dengan tegas seolah-olah sedang menuruni cerun.",
+  rujukan:"Asy-Syama'il al-Muhammadiyyah, no. 124", perawi:"Ali bin Abi Talib R.A.", darjat:"hasan"
+},
+{
+  id:38, kategori:"Syamail Nabi SAW",
+  arab:"وَلاَ رَأَيْتُ شَيْئًا أَحْسَنَ مِنْ رَسُولِ اللهِ صلى الله عليه وسلم، كَأَنَّ الشَّمْسَ تَجْرِي فِي وَجْهِهِ، وَمَا رَأَيْتُ أَحَدًا أَسْرَعَ فِي مِشْيَتِهِ مِنْ رَسُولِ اللهِ صلى الله عليه وسلم، كَأَنَّمَا الأَرْضُ تُطْوَى لَهُ",
+  terjemahan:"Aku tidak pernah melihat sesuatu yang lebih elok daripada Rasulullah ﷺ; seakan-akan matahari bersinar pada wajahnya. Dan aku tidak pernah melihat sesiapa yang lebih pantas berjalan berbanding baginda; seolah-olah bumi dilipat untuknya — kami bersungguh-sungguh untuk mengejarnya, sedangkan baginda tidak nampak tergesa-gesa.",
+  rujukan:"Asy-Syama'il al-Muhammadiyyah, no. 122", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:39, kategori:"Syamail Nabi SAW",
+  arab:"مَا حَجَبَنِي رَسُولُ اللهِ صلى الله عليه وسلم مُنْذُ أَسْلَمْتُ، وَلاَ رَآنِي إِلاَّ ضَحِكَ",
+  terjemahan:"Rasulullah ﷺ tidak pernah menghalangku daripada bertemu baginda sejak aku memeluk Islam, dan baginda tidak pernah melihatku melainkan baginda tersenyum.",
+  rujukan:"Asy-Syama'il al-Muhammadiyyah, no. 229", perawi:"Jarir bin Abdillah R.A.", darjat:"sahih",
+  nota:"Dinilai sahih isnad oleh Syeikh Zubair Ali Za'i."
+},
+{
+  id:40, kategori:"Akhir Zaman & Fitan",
+  arab:"إِنَّ اللَّهَ لاَ يَقْبِضُ الْعِلْمَ انْتِزَاعًا يَنْتَزِعُهُ مِنَ الْعِبَادِ، وَلَكِنْ يَقْبِضُ الْعِلْمَ بِقَبْضِ الْعُلَمَاءِ، حَتَّى إِذَا لَمْ يُبْقِ عَالِمًا اتَّخَذَ النَّاسُ رُءُوسًا جُهَّالًا فَسُئِلُوا فَأَفْتَوْا بِغَيْرِ عِلْمٍ فَضَلُّوا وَأَضَلُّوا",
+  terjemahan:"Sesungguhnya Allah tidak mengangkat ilmu dengan mencabutnya terus daripada hamba-hamba-Nya, tetapi Dia mengangkat ilmu dengan mewafatkan para ulama, sehingga apabila tiada lagi seorang alim pun yang tinggal, manusia akan mengangkat pemimpin-pemimpin yang jahil. Mereka akan ditanya lalu memberi fatwa tanpa ilmu, sehingga mereka sesat dan menyesatkan orang lain.",
+  rujukan:"Sahih al-Bukhari, no. 100 (turut dalam Sahih Muslim, no. 2673a)", perawi:"Abdullah bin Amr bin al-As R.A.", darjat:"sahih"
+},
+{
+  id:41, kategori:"Akhir Zaman & Fitan",
+  arab:"لاَ تَقُومُ السَّاعَةُ حَتَّى يَتَقَارَبَ الزَّمَانُ فَتَكُونُ السَّنَةُ كَالشَّهْرِ وَالشَّهْرُ كَالْجُمُعَةِ وَتَكُونُ الْجُمُعَةُ كَالْيَوْمِ وَيَكُونُ الْيَوْمُ كَالسَّاعَةِ وَتَكُونُ السَّاعَةُ كَالضَّرْمَةِ بِالنَّارِ",
+  terjemahan:"Tidak akan berlaku Kiamat sehingga masa menjadi singkat, lalu setahun terasa seperti sebulan, sebulan seperti seminggu, seminggu seperti sehari, sehari seperti sejam, dan sejam seperti kelipan bara api.",
+  rujukan:"Jami' at-Tirmidzi, no. 2332", perawi:"Anas bin Malik R.A.", darjat:"sahih"
+},
+{
+  id:42, kategori:"Akhir Zaman & Fitan",
+  arab:"إِنَّ بَيْنَ يَدَىِ السَّاعَةِ لأَيَّامًا يَنْزِلُ فِيهَا الْجَهْلُ، وَيُرْفَعُ فِيهَا الْعِلْمُ، وَيَكْثُرُ فِيهَا الْهَرْجُ، وَالْهَرْجُ الْقَتْلُ",
+  terjemahan:"Sesungguhnya sebelum berlakunya Kiamat, akan ada hari-hari di mana kejahilan agama menurun, ilmu diangkat, dan berlaku banyak al-Harj — dan al-Harj itu bermaksud pembunuhan.",
+  rujukan:"Sahih al-Bukhari, no. 7062-7063", perawi:"Abdullah bin Mas'ud & Abu Musa al-Asy'ari R.A.", darjat:"sahih"
+},
+{
+  id:43, kategori:"Akhir Zaman & Fitan",
+  arab:"إِذَا ضُيِّعَتِ الأَمَانَةُ فَانْتَظِرِ السَّاعَةَ... قِيلَ: كَيْفَ إِضَاعَتُهَا؟ قَالَ: إِذَا أُسْنِدَ الأَمْرُ إِلَى غَيْرِ أَهْلِهِ فَانْتَظِرِ السَّاعَةَ",
+  terjemahan:"'Apabila amanah telah disia-siakan, maka tunggulah Kiamat.' Ditanya, 'Bagaimana ia disia-siakan, wahai Rasulullah?' Baginda menjawab, 'Apabila sesuatu urusan diserahkan kepada orang yang bukan ahlinya, maka tunggulah Kiamat.'",
+  rujukan:"Sahih al-Bukhari, no. 6496", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:44, kategori:"Akhir Zaman & Fitan",
+  arab:"أَنْ تَلِدَ الأَمَةُ رَبَّتَهَا، وَأَنْ تَرَى الْحُفَاةَ الْعُرَاةَ الْعَالَةَ رِعَاءَ الشَّاءِ يَتَطَاوَلُونَ فِي الْبُنْيَانِ",
+  terjemahan:"...bahawa seorang hamba perempuan akan melahirkan tuannya, dan engkau akan melihat golongan yang dahulunya tidak berkasut, tidak berpakaian dan miskin (penggembala kambing) berlumba-lumba meninggikan bangunan.",
+  rujukan:"Sahih Muslim, no. 8 (petikan Hadis Jibril; turut dalam Sahih al-Bukhari, no. 4777)", perawi:"Umar bin al-Khattab R.A. (riwayat Muslim); Abu Hurairah R.A. (riwayat Bukhari)", darjat:"sahih",
+  nota:"Ini tergolong dalam tanda-tanda kecil kiamat (Asyrat as-Sa'ah as-Sughra) yang menggambarkan kerosakan susun lapis sosial, bukan tanda-tanda besar seperti Dajjal atau Ya'juj Ma'juj."
+},
+{
+  id:45, kategori:"Hadis Wanita",
+  arab:"مَنْ عَالَ جَارِيَتَيْنِ حَتَّى تَبْلُغَا جَاءَ يَوْمَ الْقِيَامَةِ أَنَا وَهُوَ",
+  terjemahan:"Sesiapa yang memelihara dua orang anak perempuan sehingga mereka dewasa, dia dan aku akan datang pada hari Kiamat seperti ini — sambil baginda merapatkan jari telunjuk dan jari tengahnya.",
+  rujukan:"Sahih Muslim, no. 2631", perawi:"Anas bin Malik R.A.", darjat:"sahih"
+},
+{
+  id:46, kategori:"Hadis Wanita",
+  arab:"لاَ يَفْرَكْ مُؤْمِنٌ مُؤْمِنَةً إِنْ كَرِهَ مِنْهَا خُلُقًا رَضِيَ مِنْهَا آخَرَ",
+  terjemahan:"Seorang mukmin (suami) tidak sepatutnya membenci isterinya sepenuhnya; jika dia tidak menyukai satu perangainya, dia akan reda dengan perangainya yang lain.",
+  rujukan:"Sahih Muslim, no. 1468b", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:47, kategori:"Hadis Wanita",
+  arab:"أَلاَ وَاسْتَوْصُوا بِالنِّسَاءِ خَيْرًا... أَلاَ وَحَقُّهُنَّ عَلَيْكُمْ أَنْ تُحْسِنُوا إِلَيْهِنَّ فِي كِسْوَتِهِنَّ وَطَعَامِهِنَّ",
+  terjemahan:"Ketahuilah, berpesan-pesanlah untuk berbuat baik kepada isteri-isteri kamu... Ketahuilah, sesungguhnya kamu mempunyai hak ke atas isteri-isteri kamu, dan isteri-isteri kamu mempunyai hak ke atas kamu. Hak mereka ke atas kamu ialah kamu berbuat baik kepada mereka dalam soal pakaian dan makanan mereka.",
+  rujukan:"Jami' at-Tirmidzi, no. 1163 (sebahagian daripada khutbah Haji Wida')", perawi:"Amr bin al-Ahwas R.A.", darjat:"sahih"
+},
+{
+  id:48, kategori:"Hadis Wanita",
+  arab:"الدُّنْيَا مَتَاعٌ وَخَيْرُ مَتَاعِ الدُّنْيَا الْمَرْأَةُ الصَّالِحَةُ",
+  terjemahan:"Dunia ini adalah kesenangan (bekalan sementara), dan sebaik-baik kesenangan dunia ialah wanita yang solehah.",
+  rujukan:"Sahih Muslim, no. 1467 (Kitab ar-Rada', Bab Khairu Mata'id Dunya al-Mar'ah as-Salihah)", perawi:"Abdullah bin Amr R.A.", darjat:"sahih"
+},
+{
+  id:49, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"مُرُوا أَوْلاَدَكُمْ بِالصَّلاَةِ وَهُمْ أَبْنَاءُ سَبْعِ سِنِينَ وَاضْرِبُوهُمْ عَلَيْهَا وَهُمْ أَبْنَاءُ عَشْرِ سِنِينَ وَفَرِّقُوا بَيْنَهُمْ فِي الْمَضَاجِعِ",
+  terjemahan:"Suruhlah anak-anak kamu mendirikan solat apabila mereka berusia tujuh tahun, dan tegurlah (dengan didikan ringan) mereka kerananya apabila berusia sepuluh tahun, serta pisahkanlah tempat tidur mereka.",
+  rujukan:"Sunan Abi Dawud, no. 495", perawi:"Amr bin Syu'aib, daripada bapanya, daripada datuknya (Abdullah bin Amr) R.A.", darjat:"hasan"
+},
+{
+  id:50, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"أَلاَ كُلُّكُمْ رَاعٍ، وَكُلُّكُمْ مَسْئُولٌ عَنْ رَعِيَّتِهِ، فَالإِمَامُ الَّذِي عَلَى النَّاسِ رَاعٍ وَهْوَ مَسْئُولٌ عَنْ رَعِيَّتِهِ، وَالرَّجُلُ رَاعٍ عَلَى أَهْلِ بَيْتِهِ وَهْوَ مَسْئُولٌ عَنْ رَعِيَّتِهِ، وَالْمَرْأَةُ رَاعِيَةٌ عَلَى أَهْلِ بَيْتِ زَوْجِهَا وَوَلَدِهِ وَهِيَ مَسْئُولَةٌ عَنْهُمْ",
+  terjemahan:"Ketahuilah, setiap kamu adalah pemimpin, dan setiap kamu akan disoal tentang kepimpinannya. Seorang pemerintah adalah pemimpin dan akan disoal tentang rakyatnya; seorang lelaki adalah pemimpin dalam keluarganya dan akan disoal tentang tanggungannya; seorang wanita adalah pemimpin di rumah suaminya serta anak-anaknya dan akan disoal tentang mereka.",
+  rujukan:"Sahih al-Bukhari, no. 7138", perawi:"Abdullah bin Umar R.A.", darjat:"sahih"
+},
+{
+  id:51, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"أَنَا وَكَافِلُ الْيَتِيمِ، فِي الْجَنَّةِ هَكَذَا",
+  terjemahan:"Aku dan orang yang memelihara anak yatim berada di syurga seperti ini — sambil baginda merapatkan jari telunjuk dan jari tengahnya.",
+  rujukan:"Sahih al-Bukhari, no. 6005", perawi:"Sahl bin Sa'd R.A.", darjat:"sahih"
+},
+{
+  id:52, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"فَاتَّقُوا اللَّهَ، وَاعْدِلُوا بَيْنَ أَوْلاَدِكُمْ",
+  terjemahan:"Bertakwalah kepada Allah, dan berlaku adillah di antara anak-anak kamu.",
+  rujukan:"Sahih al-Bukhari, no. 2587", perawi:"An-Nu'man bin Basyir R.A.", darjat:"sahih"
+},
+{
+  id:53, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"تُنْكَحُ الْمَرْأَةُ لأَرْبَعٍ لِمَالِهَا وَلِحَسَبِهَا وَجَمَالِهَا وَلِدِينِهَا، فَاظْفَرْ بِذَاتِ الدِّينِ تَرِبَتْ يَدَاكَ",
+  terjemahan:"Wanita dinikahi kerana empat perkara: hartanya, keturunannya, kecantikannya, dan agamanya. Maka pilihlah yang beragama, nescaya engkau beruntung.",
+  rujukan:"Sahih al-Bukhari, no. 5090", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:54, kategori:"Kekeluargaan & Pembangunan Insan",
+  arab:"أَتُحِبُّهُ لأُمِّكَ؟ قَالَ لاَ وَاللَّهِ... قَالَ وَلاَ النَّاسُ يُحِبُّونَهُ لأُمَّهَاتِهِمْ",
+  terjemahan:"Seorang pemuda datang kepada Nabi ﷺ dan berkata, 'Wahai Rasulullah, izinkan aku berzina.' Orang ramai menghalaunya, namun baginda bersabda, 'Dekatkanlah dia kepadaku.' Pemuda itu pun mendekat. Baginda bertanya, 'Adakah engkau redha perkara itu berlaku kepada ibumu?' Dia menjawab, 'Tidak, demi Allah.' Baginda bersabda, 'Begitu jugalah orang lain, mereka tidak redha ia berlaku kepada ibu mereka.' Baginda mengulangi soalan yang sama tentang anak perempuannya, saudara perempuannya, dan ibu saudaranya — jawapannya sama setiap kali. Kemudian baginda meletakkan tangannya ke atas pemuda itu sambil berdoa, 'Ya Allah, ampunilah dosanya, sucikanlah hatinya, dan peliharalah kemaluannya.' Selepas itu, pemuda tersebut tidak lagi cenderung kepada perkara yang keji.",
+  rujukan:"Musnad Ahmad, no. 22211", perawi:"Abu Umamah al-Bahili R.A.", darjat:"sahih",
+  nota:"Dinilai sahih oleh Syu'aib al-Arna'ut dalam takhrij Musnad Ahmad."
+},
+{
+  id:55, kategori:"Amalan Harian Rasulullah SAW", waktu:"Bangun Tidur",
+  arab:"الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+  terjemahan:"Segala puji bagi Allah yang menghidupkan kami setelah mematikan kami, dan kepada-Nya kami akan dibangkitkan semula.",
+  rujukan:"Sahih al-Bukhari, no. 6312", perawi:"Hudzaifah bin al-Yaman R.A.", darjat:"sahih"
+},
+{
+  id:56, kategori:"Amalan Harian Rasulullah SAW", waktu:"Istighfar Harian",
+  arab:"وَاللَّهِ إِنِّي لأَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ فِي الْيَوْمِ أَكْثَرَ مِنْ سَبْعِينَ مَرَّةً",
+  terjemahan:"Demi Allah, sesungguhnya aku memohon ampun kepada Allah dan bertaubat kepada-Nya lebih daripada tujuh puluh kali dalam sehari.",
+  rujukan:"Sahih al-Bukhari, no. 6307", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:57, kategori:"Amalan Harian Rasulullah SAW", waktu:"Istighfar Harian",
+  arab:"إِنَّهُ لَيُغَانُ عَلَى قَلْبِي وَإِنِّي لأَسْتَغْفِرُ اللَّهَ فِي الْيَوْمِ مِائَةَ مَرَّةٍ",
+  terjemahan:"Sesungguhnya hatiku pernah diselubungi (kelalaian yang tipis), dan aku memohon ampun kepada Allah sebanyak seratus kali dalam sehari.",
+  rujukan:"Sahih Muslim, no. 2702a", perawi:"Al-Aghar al-Muzani R.A.", darjat:"sahih"
+},
+{
+  id:58, kategori:"Amalan Harian Rasulullah SAW", waktu:"Sebelum Subuh (Qabliyah)",
+  arab:"رَكْعَتَا الْفَجْرِ خَيْرٌ مِنَ الدُّنْيَا وَمَا فِيهَا",
+  terjemahan:"Dua rakaat sebelum subuh (Fajar) itu lebih baik daripada dunia dan seisinya.",
+  rujukan:"Sahih Muslim, no. 725a", perawi:"Aisyah R.A.", darjat:"sahih"
+},
+{
+  id:59, kategori:"Amalan Harian Rasulullah SAW", waktu:"Selepas Subuh & Asar",
+  arab:"يَتَعَاقَبُونَ فِيكُمْ مَلاَئِكَةٌ بِاللَّيْلِ وَمَلاَئِكَةٌ بِالنَّهَارِ وَيَجْتَمِعُونَ فِي صَلاَةِ الْفَجْرِ وَصَلاَةِ الْعَصْرِ",
+  terjemahan:"Para malaikat malam dan siang silih berganti mengawasi kamu, dan mereka berkumpul pada waktu solat Subuh dan solat Asar.",
+  rujukan:"Sahih al-Bukhari, no. 555", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:60, kategori:"Amalan Harian Rasulullah SAW", waktu:"Dhuha",
+  arab:"يُصْبِحُ عَلَى كُلِّ سُلاَمَى مِنْ أَحَدِكُمْ صَدَقَةٌ... وَيُجْزِئُ مِنْ ذَلِكَ رَكْعَتَانِ يَرْكَعُهُمَا مِنَ الضُّحَى",
+  terjemahan:"Setiap ruas sendi tubuh kamu wajib disedekahi pada setiap hari matahari terbit... setiap tasbih adalah sedekah, setiap tahmid adalah sedekah, setiap tahlil adalah sedekah, setiap takbir adalah sedekah, menyuruh kepada kebaikan adalah sedekah, mencegah kemungkaran adalah sedekah — dan semua itu mencukupi dengan dua rakaat solat Dhuha yang dilakukan seseorang.",
+  rujukan:"Sahih Muslim, no. 720", perawi:"Abu Dzar al-Ghifari R.A.", darjat:"sahih"
+},
+{
+  id:61, kategori:"Amalan Harian Rasulullah SAW", waktu:"Qailulah (Tengah Hari)",
+  arab:"قِيلُوا فَإِنَّ الشَّيَاطِينَ لَا تَقِيلُ",
+  terjemahan:"Berqailulahlah (tidurlah sebentar waktu tengah hari), kerana sesungguhnya syaitan tidak tidur qailulah.",
+  rujukan:"Al-Mu'jam al-Awsat, at-Tabarani", perawi:"Anas bin Malik R.A.", darjat:"hasan",
+  nota:"PENTING - darjat hadis ini diperselisihkan ulama; sebahagian menilainya munkar/da'if kerana isnad dipertikaikan, manakala Al-Albani menilainya hasan. Sokongan lain berbentuk athar (perbuatan Umar R.A.) terdapat dalam Al-Adab al-Mufrad no. 1239-1240, namun ia bukan sabda Nabi ﷺ secara langsung. Disarankan disemak dengan asatizah sebelum digunakan sebagai hujah kuat."
+},
+{
+  id:62, kategori:"Amalan Harian Rasulullah SAW", waktu:"Selepas Maghrib (Wirid Petang)",
+  arab:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+  terjemahan:"Aku berlindung dengan kalimah-kalimah Allah yang sempurna daripada kejahatan apa yang Dia ciptakan. (Dibaca 3 kali pada waktu petang.)",
+  rujukan:"Riwayat Ahmad, an-Nasa'i, at-Tirmidzi & Ibn Majah (dipetik dalam Hisn al-Muslim, no. 97)", perawi:"pelbagai riwayat sahabat", darjat:"hasan",
+  nota:"Darjat bergantung kepada jalur riwayat yang digunakan (sahih pada sesetengah jalur, hasan pada yang lain)."
+},
+{
+  id:63, kategori:"Amalan Harian Rasulullah SAW", waktu:"Sebelum Tidur",
+  arab:"إِذَا أَوَيْتَ إِلَى فِرَاشِكَ فَاقْرَأْ آيَةَ الْكُرْسِيِّ لَنْ يَزَالَ عَلَيْكَ مِنَ اللَّهِ حَافِظٌ وَلاَ يَقْرَبُكَ شَيْطَانٌ حَتَّى تُصْبِحَ",
+  terjemahan:"Apabila engkau hendak tidur, bacalah Ayat al-Kursi, nescaya akan sentiasa ada penjaga daripada Allah bersamamu, dan syaitan tidak akan menghampirimu sehingga Subuh.",
+  rujukan:"Sahih al-Bukhari, no. 3275", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:64, kategori:"Amalan Harian Rasulullah SAW", waktu:"Sebelum Tidur",
+  arab:"سُبْحَانَ اللَّهِ ثَلاَثًا وَثَلاَثِينَ، وَالْحَمْدُ لِلَّهِ ثَلاَثًا وَثَلاَثِينَ، وَاللَّهُ أَكْبَرُ أَرْبَعًا وَثَلاَثِينَ",
+  terjemahan:"Nabi ﷺ mengajar Fatimah dan Ali R.A.: Bacalah Subhanallah 33 kali, Alhamdulillah 33 kali, dan Allahu Akbar 34 kali ketika hendak tidur.",
+  rujukan:"Sahih al-Bukhari, no. 5362", perawi:"Ali bin Abi Talib R.A.", darjat:"sahih"
+},
+{
+  id:65, kategori:"Amalan Harian Rasulullah SAW", waktu:"Sebelum Tidur (Witir)",
+  arab:"اجْعَلُوا آخِرَ صَلاَتِكُمْ بِاللَّيْلِ وِتْرًا",
+  terjemahan:"Jadikanlah solat Witir sebagai solat terakhir kamu pada waktu malam.",
+  rujukan:"Sahih al-Bukhari, no. 998", perawi:"Abdullah bin Umar R.A.", darjat:"sahih"
+},
+{
+  id:66, kategori:"Motivasi Kehidupan",
+  arab:"عَجَبًا لأَمْرِ الْمُؤْمِنِ إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ وَلَيْسَ ذَاكَ لأَحَدٍ إِلاَّ لِلْمُؤْمِنِ إِنْ أَصَابَتْهُ سَرَّاءُ شَكَرَ فَكَانَ خَيْرًا لَهُ وَإِنْ أَصَابَتْهُ ضَرَّاءُ صَبَرَ فَكَانَ خَيْرًا لَهُ",
+  terjemahan:"Sungguh menakjubkan urusan seorang mukmin; sesungguhnya semua urusannya adalah baik, dan itu tidak berlaku bagi sesiapa pun kecuali seorang mukmin. Jika dia ditimpa kesenangan, dia bersyukur, maka itu baik baginya; dan jika dia ditimpa kesusahan, dia bersabar, maka itu juga baik baginya.",
+  rujukan:"Sahih Muslim, no. 2999", perawi:"Suhaib R.A.", darjat:"sahih"
+},
+{
+  id:67, kategori:"Motivasi Kehidupan",
+  arab:"مَا يُصِيبُ الْمُسْلِمَ مِنْ نَصَبٍ وَلاَ وَصَبٍ وَلاَ هَمٍّ وَلاَ حُزْنٍ وَلاَ أَذًى وَلاَ غَمٍّ حَتَّى الشَّوْكَةِ يُشَاكُهَا، إِلاَّ كَفَّرَ اللَّهُ بِهَا مِنْ خَطَايَاهُ",
+  terjemahan:"Tidak ditimpa seorang Muslim itu keletihan, penyakit, kerisauan, kesedihan, gangguan mahupun kemurungan, walaupun ia hanya tertusuk duri, melainkan Allah akan menghapuskan sebahagian daripada kesalahannya dengan sebab itu.",
+  rujukan:"Sahih al-Bukhari, no. 5641-5642", perawi:"Abu Sa'id al-Khudri & Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:68, kategori:"Motivasi Kehidupan",
+  arab:"مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُصِبْ مِنْهُ",
+  terjemahan:"Sesiapa yang Allah kehendaki kebaikan padanya, nescaya Dia akan mengujinya.",
+  rujukan:"Sahih al-Bukhari, no. 5645", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:69, kategori:"Motivasi Kehidupan",
+  arab:"الْمُؤْمِنُ الْقَوِيُّ خَيْرٌ وَأَحَبُّ إِلَى اللَّهِ مِنَ الْمُؤْمِنِ الضَّعِيفِ وَفِي كُلٍّ خَيْرٌ احْرِصْ عَلَى مَا يَنْفَعُكَ وَاسْتَعِنْ بِاللَّهِ وَلاَ تَعْجِزْ",
+  terjemahan:"Mukmin yang kuat lebih baik dan lebih disukai Allah berbanding mukmin yang lemah, walaupun pada kedua-duanya ada kebaikan. Bersungguh-sungguhlah pada apa yang bermanfaat bagimu, mintalah pertolongan daripada Allah, dan janganlah berputus asa. Jika sesuatu menimpamu, janganlah berkata, 'Jika sahaja aku buat begini, tentu akan jadi begitu,' tetapi katakanlah, 'Ini telah ditakdirkan Allah dan apa yang Dia kehendaki, Dia lakukan' — kerana perkataan 'jika sahaja' itu membuka jalan kepada godaan syaitan.",
+  rujukan:"Sahih Muslim, no. 2664", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:70, kategori:"Motivasi Kehidupan",
+  arab:"أَنَا عِنْدَ ظَنِّ عَبْدِي بِي، وَأَنَا مَعَهُ إِذَا ذَكَرَنِي...وَإِنْ أَتَانِي يَمْشِي أَتَيْتُهُ هَرْوَلَةً",
+  terjemahan:"Allah SWT berfirman: Aku menurut sangkaan hamba-Ku terhadap-Ku, dan Aku bersamanya apabila dia mengingati-Ku. Jika dia mendekati-Ku sejengkal, Aku mendekatinya sehasta; jika dia mendekati-Ku sehasta, Aku mendekatinya sedepa; dan jika dia mendatangi-Ku dengan berjalan, Aku mendatanginya dengan berlari anak.",
+  rujukan:"Sahih al-Bukhari, no. 7405 (Hadis Qudsi)", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:71, kategori:"Haiwan dalam Hadis",
+  arab:"بَيْنَا رَجُلٌ بِطَرِيقٍ، اشْتَدَّ عَلَيْهِ الْعَطَشُ فَوَجَدَ بِئْرًا فَنَزَلَ فِيهَا فَشَرِبَ، ثُمَّ خَرَجَ، فَإِذَا كَلْبٌ يَلْهَثُ يَأْكُلُ الثَّرَى مِنَ الْعَطَشِ...فِي كُلِّ ذَاتِ كَبِدٍ رَطْبَةٍ أَجْرٌ",
+  terjemahan:"Seorang lelaki dalam perjalanan berasa amat dahaga, lalu dia menjumpai sebuah perigi dan turun ke dalamnya untuk minum. Apabila keluar, dia melihat seekor anjing sedang menjelirkan lidah menjilat tanah kerana dahaga. Lelaki itu berkata, 'Anjing ini sungguh dahaga seperti yang aku alami tadi.' Maka dia turun semula ke perigi, mengisi kasutnya dengan air, lalu memberi minum kepada anjing itu. Allah menghargai perbuatannya lalu mengampuninya. Para sahabat bertanya, 'Wahai Rasulullah, adakah kami mendapat pahala kerana berbuat baik kepada haiwan?' Baginda menjawab, 'Pada setiap yang bernyawa itu ada pahala.'",
+  rujukan:"Sahih al-Bukhari, no. 2466 (turut dalam Sahih Muslim, no. 2244)", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:72, kategori:"Haiwan dalam Hadis",
+  arab:"دَخَلَتِ امْرَأَةٌ النَّارَ فِي هِرَّةٍ رَبَطَتْهَا، فَلَمْ تُطْعِمْهَا، وَلَمْ تَدَعْهَا تَأْكُلُ مِنْ خِشَاشِ الأَرْضِ",
+  terjemahan:"Seorang wanita telah dimasukkan ke dalam neraka kerana seekor kucing yang diikatnya; dia tidak memberinya makan, dan tidak juga melepaskannya untuk mencari makanan sendiri daripada serangga-serangga bumi.",
+  rujukan:"Sahih al-Bukhari, no. 3318", perawi:"Ibn Umar R.A.", darjat:"sahih"
+},
+{
+  id:73, kategori:"Haiwan dalam Hadis",
+  arab:"نَزَلَ نَبِيٌّ مِنَ الأَنْبِيَاءِ تَحْتَ شَجَرَةٍ فَلَدَغَتْهُ نَمْلَةٌ، فَأَمَرَ بِجَهَازِهِ فَأُخْرِجَ مِنْ تَحْتِهَا، ثُمَّ أَمَرَ بِبَيْتِهَا فَأُحْرِقَ بِالنَّارِ، فَأَوْحَى اللَّهُ إِلَيْهِ: فَهَلاَّ نَمْلَةً وَاحِدَةً؟",
+  terjemahan:"Seorang Nabi daripada kalangan para Nabi telah singgah berteduh di bawah sepohon pokok, lalu digigit oleh seekor semut. Baginda memerintahkan agar barang-barangnya dipindahkan dari bawah pokok itu, kemudian memerintahkan agar sarang semut itu dibakar. Maka Allah mewahyukan kepadanya, 'Mengapa tidak cukup dengan seekor semut sahaja?'",
+  rujukan:"Sahih al-Bukhari, no. 3319 (turut dalam Sahih Muslim, no. 2241a)", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:74, kategori:"Haiwan dalam Hadis",
+  arab:"نَهَى النَّبِيُّ صلى الله عليه وسلم أَنْ تُصْبَرَ الْبَهَائِمُ",
+  terjemahan:"Anas bin Malik R.A. melihat beberapa orang budak mengikat seekor ayam untuk dijadikan sasaran panahan, lalu beliau berkata, 'Nabi ﷺ telah melarang haiwan diikat dan dijadikan sasaran seksaan.'",
+  rujukan:"Sahih al-Bukhari, no. 5513", perawi:"Anas bin Malik R.A.", darjat:"sahih"
+},
+{
+  id:75, kategori:"Soalan Sahabat & Jawapan",
+  arab:"سَأَلْتُ النَّبِيَّ صلى الله عليه وسلم أَىُّ الْعَمَلِ أَحَبُّ إِلَى اللَّهِ قَالَ الصَّلاَةُ عَلَى وَقْتِهَا",
+  terjemahan:"Aku bertanya kepada Nabi ﷺ, 'Amalan apakah yang paling dicintai Allah?' Baginda menjawab, 'Solat pada waktunya.' Aku bertanya lagi, 'Kemudian apa?' Baginda menjawab, 'Berbakti kepada kedua ibu bapa.' Aku bertanya lagi, 'Kemudian apa?' Baginda menjawab, 'Berjihad pada jalan Allah.'",
+  rujukan:"Sahih al-Bukhari, no. 527", perawi:"Abdullah bin Mas'ud R.A.", darjat:"sahih"
+},
+{
+  id:76, kategori:"Soalan Sahabat & Jawapan",
+  arab:"أَنَّ رَجُلاً قَالَ لِلنَّبِيِّ صلى الله عليه وسلم أَوْصِنِي قَالَ لاَ تَغْضَبْ فَرَدَّدَ مِرَارًا قَالَ لاَ تَغْضَبْ",
+  terjemahan:"Seorang lelaki berkata kepada Nabi ﷺ, 'Berilah aku wasiat.' Baginda bersabda, 'Jangan marah.' Lelaki itu mengulangi permintaannya beberapa kali, dan setiap kali baginda tetap bersabda, 'Jangan marah.'",
+  rujukan:"Sahih al-Bukhari, no. 6116", perawi:"Abu Hurairah R.A. (perawi hadis; penanya tidak dinamakan)", darjat:"sahih"
+},
+{
+  id:77, kategori:"Soalan Sahabat & Jawapan",
+  arab:"سَأَلْتُ النَّبِيَّ صلى الله عليه وسلم أَىُّ الْعَمَلِ أَفْضَلُ قَالَ إِيمَانٌ بِاللَّهِ وَجِهَادٌ فِي سَبِيلِهِ",
+  terjemahan:"Aku bertanya kepada Nabi ﷺ, 'Apakah amalan yang paling afdal?' Baginda menjawab, 'Beriman kepada Allah dan berjihad pada jalan-Nya.' Aku bertanya, 'Hamba manakah yang paling afdal untuk dimerdekakan?' Baginda menjawab, 'Yang paling mahal harganya dan paling disayangi tuannya.' Aku bertanya, 'Jika aku tidak mampu?' Baginda menjawab, 'Bantulah seorang tukang, atau buatkan kerja untuk orang yang tidak pandai bekerja.' Aku bertanya, 'Jika aku tidak mampu juga?' Baginda menjawab, 'Tahanlah dirimu daripada menyakiti orang lain, kerana itu adalah sedekah untuk dirimu sendiri.'",
+  rujukan:"Sahih al-Bukhari, no. 2518", perawi:"Abu Dzar al-Ghifari R.A.", darjat:"sahih"
+},
+{
+  id:78, kategori:"Soalan Sahabat & Jawapan",
+  arab:"مَا الْإِسْلَامُ قَالَ أَنْ يُسْلِمَ قَلْبُكَ لِلَّهِ عَزَّ وَجَلَّ وَأَنْ يَسْلَمَ الْمُسْلِمُونَ مِنْ لِسَانِكَ وَيَدِكَ",
+  terjemahan:"Seorang lelaki bertanya, 'Wahai Rasulullah, apakah itu Islam?' Baginda menjawab, 'Iaitu engkau menyerahkan hatimu kepada Allah, dan orang Islam yang lain selamat daripada gangguan lidah dan tanganmu.' Dia bertanya, 'Islam yang manakah paling afdal?' Baginda menjawab, 'Iman.' Dia bertanya, 'Apakah iman itu?' Baginda menjawab, 'Engkau beriman kepada Allah, para malaikat-Nya, kitab-kitab-Nya, rasul-rasul-Nya, dan hari kebangkitan selepas mati.'",
+  rujukan:"Musnad Ahmad, no. 17027", perawi:"Amr bin Abasah as-Sulami R.A.", darjat:"sahih",
+  nota:"Dinilai sahih oleh Syu'aib al-Arna'ut."
+},
+{
+  id:79, kategori:"Soalan Sahabat & Jawapan",
+  arab:"مَتَى السَّاعَةُ قَالَ وَمَاذَا أَعْدَدْتَ لَهَا قَالَ لاَ شَىْءَ إِلاَّ أَنِّي أُحِبُّ اللَّهَ وَرَسُولَهُ قَالَ أَنْتَ مَعَ مَنْ أَحْبَبْتَ",
+  terjemahan:"Seorang lelaki bertanya kepada Nabi ﷺ, 'Bilakah Kiamat akan berlaku?' Baginda bertanya kembali, 'Apakah yang telah engkau sediakan untuknya?' Lelaki itu menjawab, 'Tiada apa-apa, kecuali aku mencintai Allah dan Rasul-Nya.' Baginda bersabda, 'Engkau akan bersama dengan orang yang engkau cintai.'",
+  rujukan:"Sahih al-Bukhari, no. 3688", perawi:"Anas bin Malik R.A.", darjat:"sahih"
+},
+{
+  id:80, kategori:"Soalan Sahabat & Jawapan",
+  arab:"قَالَ رَجُلٌ يَا رَسُولَ اللَّهِ مَنْ أَحَقُّ بِحُسْنِ الصُّحْبَةِ قَالَ أُمُّكَ ثُمَّ أُمُّكَ ثُمَّ أُمُّكَ ثُمَّ أَبُوكَ",
+  terjemahan:"Seorang lelaki bertanya, 'Wahai Rasulullah, siapakah yang paling berhak aku layani dengan baik?' Baginda menjawab, 'Ibumu.' Dia bertanya, 'Kemudian siapa?' Baginda menjawab, 'Ibumu.' Dia bertanya, 'Kemudian siapa?' Baginda menjawab, 'Ibumu.' Dia bertanya, 'Kemudian siapa?' Baginda menjawab, 'Kemudian bapamu.'",
+  rujukan:"Sahih Muslim, no. 2548b (turut dalam Sahih al-Bukhari, no. 5971)", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:81, kategori:"Sahabat yang Mengadu",
+  arab:"كَانَ النَّبِيُّ صلى الله عليه وسلم يَقُومُ يَوْمَ الْجُمُعَةِ إِلَى شَجَرَةٍ أَوْ نَخْلَةٍ...فَصَاحَتِ النَّخْلَةُ صِيَاحَ الصَّبِيِّ، ثُمَّ نَزَلَ النَّبِيُّ صلى الله عليه وسلم فَضَمَّهُ إِلَيْهِ تَئِنُّ أَنِينَ الصَّبِيِّ",
+  terjemahan:"Nabi ﷺ dahulunya berkhutbah bersandar pada sebatang pokok atau batang kurma pada hari Jumaat. Seorang wanita Ansar berkata, 'Wahai Rasulullah, mahukah kami buatkan mimbar untukmu?' Baginda menjawab, 'Jika kamu mahu.' Maka dibuatkan sebuah mimbar untuk baginda. Apabila tiba hari Jumaat, baginda pergi ke mimbar itu, lalu batang kurma tersebut menangis seperti tangisan kanak-kanak. Nabi ﷺ pun turun dan memeluknya, lalu ia meraung seperti rengekan kanak-kanak yang sedang ditenangkan, sehingga ia diam.",
+  rujukan:"Sahih al-Bukhari, no. 3584 (versi ringkas turut pada no. 3583)", perawi:"Jabir bin Abdullah R.A.", darjat:"sahih"
+},
+{
+  id:82, kategori:"Sahabat yang Mengadu",
+  arab:"أَفَلاَ تَتَّقِي اللَّهَ فِي هَذِهِ الْبَهِيمَةِ الَّتِي مَلَّكَكَ اللَّهُ إِيَّاهَا، فَإِنَّهُ شَكَى إِلَىَّ أَنَّكَ تُجِيعُهُ وَتُدْئِبُهُ",
+  terjemahan:"Rasulullah ﷺ memasuki sebuah kebun milik seorang lelaki Ansar. Di situ terdapat seekor unta; apabila melihat Nabi ﷺ, unta itu merintih dan matanya berlinangan air mata. Baginda mendekatinya dan mengusap belakang telinganya, lalu unta itu pun tenang. Baginda bertanya, 'Siapakah pemilik unta ini?' Seorang pemuda Ansar datang dan berkata, 'Ia milikku, wahai Rasulullah.' Baginda bersabda, 'Tidakkah engkau takut kepada Allah tentang haiwan ini yang telah dikurniakan Allah kepadamu? Sesungguhnya ia telah mengadu kepadaku bahawa engkau membiarkannya lapar dan membebankannya dengan kerja yang berat.'",
+  rujukan:"Sunan Abi Dawud, no. 2549", perawi:"Abdullah bin Ja'far R.A.", darjat:"sahih",
+  nota:"Dinilai sahih oleh Al-Albani; turut disahihkan oleh al-Hakim dalam al-Mustadrak (disetujui adz-Dzahabi)."
+},
+{
+  id:83, kategori:"Sahabat yang Mengadu",
+  arab:"تَبَارَكَ الَّذِي وَسِعَ سَمْعُهُ كُلَّ شَىْءٍ، إِنِّي لأَسْمَعُ كَلاَمَ خَوْلَةَ بِنْتِ ثَعْلَبَةَ وَيَخْفَى عَلَىَّ بَعْضُهُ وَهِيَ تَشْتَكِي زَوْجَهَا إِلَى رَسُولِ اللَّهِ صلى الله عليه وسلم",
+  terjemahan:"Aisyah R.A. berkata: 'Maha Suci Allah yang pendengaran-Nya meliputi segala sesuatu — sesungguhnya aku mendengar percakapan Khaulah binti Tha'labah, walaupun sebahagiannya tersembunyi daripadaku, ketika dia mengadu tentang suaminya kepada Rasulullah ﷺ.' (Lalu Allah menurunkan ayat-ayat awal Surah al-Mujadilah, membenarkan bahawa Dia telah mendengar aduannya dari atas tujuh petala langit.)",
+  rujukan:"Sunan Ibn Majah, no. 2063", perawi:"Aisyah R.A. (melalui Urwah bin az-Zubair)", darjat:"sahih"
+},
+{
+  id:84, kategori:"Sahabat yang Mengadu",
+  arab:"أَنَّ رَجُلًا شَكَا إِلَى رَسُولِ اللهِ ﷺ قَسْوَةَ قَلْبِهِ فَقَالَ لَهُ: إِنْ أَرَدْتَ أَنْ يَلِينَ قَلْبُكَ فَأَطْعِمِ الْمِسْكِينَ وَامْسَحْ رَأْسَ الْيَتِيمِ",
+  terjemahan:"Seorang lelaki mengadu kepada Rasulullah ﷺ tentang kekerasan hatinya. Baginda bersabda kepadanya, 'Jika engkau mahu hatimu menjadi lembut, berilah makan kepada orang miskin dan usaplah kepala anak yatim.'",
+  rujukan:"Musnad Ahmad, no. 7576", perawi:"Abu Hurairah R.A.", darjat:"daif",
+  nota:"HADIS POPULAR TETAPI SANADNYA DIPERSELISIHKAN - Ibnu Hajar cenderung menilainya hasan, manakala penyemak moden Syu'aib al-Arna'ut menilainya da'if kerana terdapat perawi majhul (tidak dikenali) dalam sanad. Kandungannya (fadilat menyantuni anak yatim & memberi makan orang miskin) tetap disokong oleh dalil-dalil lain yang lebih kukuh - nyatakan dengan jelas status ini jika digunakan."
+},
+{
+  id:85, kategori:"Sahabat yang Mengadu",
+  arab:"قَدْ كَانَ مَنْ قَبْلَكُمْ يُؤْخَذُ الرَّجُلُ فَيُحْفَرُ لَهُ فِي الأَرْضِ فَيُجْعَلُ فِيهَا فَيُجَاءُ بِالْمِنْشَارِ فَيُوضَعُ عَلَى رَأْسِهِ فَيُجْعَلُ فِرْقَتَيْنِ",
+  terjemahan:"Khabbab bin al-Arat R.A. berkata: 'Kami mengadu kepada Rasulullah ﷺ tentang penindasan yang kami alami daripada kaum musyrikin, ketika baginda sedang berbaring bersandar pada jubahnya di bawah naungan Kaabah. Kami berkata, Tidakkah engkau memohon pertolongan untuk kami? Tidakkah engkau berdoa untuk kami? Baginda pun bangun duduk dengan wajah kemerah-merahan, lalu bersabda, Sesungguhnya orang-orang sebelum kamu pernah ditangkap, digalikan lubang untuknya di tanah, lalu dia dimasukkan ke dalamnya; kemudian gergaji dibawa dan diletakkan di atas kepalanya sehingga terbelah dua — namun itu semua tidak memalingkannya daripada agamanya. Sesungguhnya Allah pasti akan menyempurnakan urusan ini sehingga seorang pengembara dapat belayar dari San'a ke Hadramaut tanpa takut melainkan kepada Allah — tetapi kamu tergesa-gesa.'",
+  rujukan:"Sahih al-Bukhari, no. 3612", perawi:"Khabbab bin al-Arat R.A.", darjat:"sahih",
+  nota:"Ini adalah aduan seorang sahabat tentang penindasan, bukan aduan makhluk bukan manusia - Nabi ﷺ menjawab dengan menegur ketidaksabaran sambil memberi harapan dan memuji ketabahan umat terdahulu."
+},
+{
+  id:86, kategori:"Sahabat yang Mengadu",
+  arab:"ذَهَبَ أَهْلُ الدُّثُورِ بِالدَّرَجَاتِ الْعُلَى وَالنَّعِيمِ الْمُقِيمِ، يُصَلُّونَ كَمَا نُصَلِّي وَيَصُومُونَ كَمَا نَصُومُ وَلَهُمْ فَضْلٌ مِنْ أَمْوَالٍ",
+  terjemahan:"Golongan fakir dari kalangan Muhajirin mengadu kepada Rasulullah ﷺ, 'Golongan berharta telah mengambil semua darjat yang tinggi dan nikmat yang berkekalan; mereka bersolat sepertimana kami bersolat, mereka berpuasa sepertimana kami berpuasa, namun mereka mempunyai lebihan harta yang digunakan untuk menunaikan haji, umrah, berjihad dan bersedekah.' Baginda bersabda, 'Mahukah aku ajarkan kamu sesuatu yang dapat menyamai mereka yang telah mendahului kamu? Bacalah Subhanallah, Alhamdulillah, dan Allahu Akbar sebanyak 33 kali selepas setiap solat.' Apabila golongan berharta mendengarnya dan turut mengamalkannya, golongan fakir mengadu semula; baginda menjawab, 'Itulah kurniaan Allah yang diberikan kepada sesiapa yang dikehendaki-Nya.'",
+  rujukan:"Sahih Muslim, no. 595a", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+}
+];
+
+const CATS = [
+  {key:"semua", label:"Semua", emoji:"📚"},
+  {key:"Fiqh & Syariah", label:"Fiqh & Syariah", emoji:"⚖️"},
+  {key:"Al-Quran & Tajwid", label:"Al-Quran & Tajwid", emoji:"🕌"},
+  {key:"Haji & Umrah", label:"Haji & Umrah", emoji:"🕋"},
+  {key:"Halal & Pematuhan Syariah", label:"Halal & Pematuhan Syariah", emoji:"🥗"},
+  {key:"Kekeluargaan & Pembangunan Insan", label:"Kekeluargaan & Insan", emoji:"👨‍👩‍👧‍👦"},
+  {key:"Iman Tidak Sempurna", label:"Iman Tidak Sempurna", emoji:"💗"},
+  {key:"Akhlak yang Baik", label:"Akhlak yang Baik", emoji:"🌟"},
+  {key:"Syamail Nabi SAW", label:"Syamail Nabi SAW", emoji:"🌙"},
+  {key:"Akhir Zaman & Fitan", label:"Akhir Zaman & Fitan", emoji:"⏳"},
+  {key:"Hadis Wanita", label:"Hadis Wanita", emoji:"🌸"},
+  {key:"Amalan Harian Rasulullah SAW", label:"Amalan Harian Rasulullah", emoji:"⏰"},
+  {key:"Motivasi Kehidupan", label:"Motivasi Kehidupan", emoji:"💪"},
+  {key:"Haiwan dalam Hadis", label:"Haiwan dalam Hadis", emoji:"🐾"},
+  {key:"Soalan Sahabat & Jawapan", label:"Soalan Sahabat & Jawapan", emoji:"💬"},
+  {key:"Sahabat yang Mengadu", label:"Sahabat yang Mengadu", emoji:"😢"}
+];
+
+const badgeLabel = { sahih:"Sahih", hasan:"Hasan", daif:"Da'if (Isnad)" };
+
+let activeCat = "semua";
+let query = "";
+
+function renderCatButtons(){
+  const el = document.getElementById("catButtons");
+  el.innerHTML = CATS.map(c => `<button class="cat-btn ${c.key===activeCat?'active':''}" data-cat="${c.key}">${c.emoji} ${c.label}</button>`).join("");
+  el.querySelectorAll(".cat-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      activeCat = btn.dataset.cat;
+      renderCatButtons();
+      renderResults();
+    });
+  });
+}
+
+function matchesQuery(h, q){
+  if(!q) return true;
+  q = q.toLowerCase();
+  return h.terjemahan.toLowerCase().includes(q) ||
+         h.rujukan.toLowerCase().includes(q) ||
+         h.kategori.toLowerCase().includes(q) ||
+         h.perawi.toLowerCase().includes(q) ||
+         h.arab.includes(q);
+}
+
+function renderResults(){
+  const filtered = HADITH.filter(h => (activeCat==="semua" || h.kategori===activeCat) && matchesQuery(h, query));
+  const container = document.getElementById("results");
+  const empty = document.getElementById("emptyState");
+  const countLine = document.getElementById("countLine");
+
+  countLine.textContent = filtered.length + " hadis dipaparkan daripada jumlah " + HADITH.length + " hadis dalam koleksi";
+
+  if(filtered.length === 0){
+    container.innerHTML = "";
+    empty.style.display = "block";
+    return;
+  }
+  empty.style.display = "none";
+
+  if(activeCat !== "semua"){
+    container.innerHTML = renderCards(filtered);
+    return;
+  }
+
+  // group by category, preserving CATS order
+  let html = "";
+  CATS.slice(1).forEach(c=>{
+    const group = filtered.filter(h=>h.kategori===c.key);
+    if(group.length===0) return;
+    html += `<div class="section-title"><span class="emoji">${c.emoji}</span> ${c.label}</div>`;
+    html += `<div class="grid">${renderCards(group)}</div>`;
+  });
+  container.innerHTML = html;
+}
+
+function renderCards(list){
+  return list.map(h => `
+    <div class="card" id="hadis-${h.id}">
+      <div class="no">Hadis #${h.id} · ${h.kategori}${h.waktu ? ` · <span style="color:var(--primary);">${h.waktu}</span>` : ""}</div>
+      <div class="arabic">${h.arab}</div>
+      <div class="terjemahan">${h.terjemahan}</div>
+      <div class="meta">
+        <span class="badge ${h.darjat}">${badgeLabel[h.darjat]}</span>
+        <span class="rujukan">${h.rujukan}</span>
+        <span>· ${h.perawi}</span>
+      </div>
+      ${h.nota ? `<div class="note">ℹ️ ${h.nota}</div>` : ""}
+    </div>
+  `).join("");
+}
+
+document.getElementById("searchInput").addEventListener("input", (e)=>{
+  query = e.target.value;
+  renderResults();
+});
+
+renderCatButtons();
+renderResults();
+</script>
+
+</body>
+</html>
