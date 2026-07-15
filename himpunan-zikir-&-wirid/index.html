@@ -1,1 +1,1774 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Himpunan Wirid &amp; Hizib</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-900:#0a1f16;
+    --navy-800:#0f2c1f;
+    --navy-700:#163d2a;
+    --navy-600:#1e5038;
+    --gold-500:#c9a24a;
+    --gold-400:#dab96a;
+    --gold-300:#ecd8a0;
+    --cream:#f7f2e6;
+    --ink:#e6ead6;
+    --muted:#a8c0ac;
+    --line:rgba(201,162,74,0.25);
+  }
 
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at top, #163d2a 0%, var(--navy-900) 55%),
+      var(--navy-900);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:90px;
+  }
+
+  /* ---------- TOP TAB BAR ---------- */
+  .tabbar{
+    position:sticky; top:0; z-index:50;
+    display:flex;
+    justify-content:center;
+    gap:2px;
+    background:rgba(10,23,48,0.96);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .tabbar::-webkit-scrollbar{display:none;}
+  .tabbtn{
+    flex:0 1 auto;
+    min-width:78px;
+    text-align:center;
+    padding:13px 14px 11px;
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:13.5px;
+    letter-spacing:0.02em;
+    color:var(--muted);
+    background:none;border:none;
+    cursor:pointer;
+    border-bottom:2.5px solid transparent;
+    transition:color .2s, border-color .2s;
+    white-space:nowrap;
+  }
+  .tabbtn .ar{
+    display:block;
+    font-family:'Amiri',serif;
+    font-size:15px;
+    color:var(--gold-400);
+    margin-bottom:2px;
+    direction:rtl;
+  }
+  .tabbtn.active{color:var(--gold-300);border-bottom-color:var(--gold-500);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:44px 20px 36px;
+    text-align:center;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      repeating-linear-gradient(45deg, rgba(201,162,74,0.035) 0 2px, transparent 2px 26px),
+      repeating-linear-gradient(-45deg, rgba(201,162,74,0.035) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .mihrab{width:130px;height:165px;margin:0 auto 18px;position:relative;}
+  .mihrab svg{width:100%;height:100%;display:block;}
+  .eyebrow{
+    font-size:11px;letter-spacing:0.35em;text-transform:uppercase;
+    color:var(--gold-400);font-weight:600;margin-bottom:10px;
+  }
+  .hero h1{
+    font-family:'Amiri',serif;
+    font-size:clamp(28px,7vw,42px);
+    color:var(--gold-300);
+    margin:0 0 6px;
+    direction:rtl;
+    font-weight:700;
+  }
+  .hero h2{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:clamp(20px,5vw,28px);
+    margin:0 0 14px;
+    color:var(--cream);
+    letter-spacing:0.02em;
+  }
+  .hero p.sub{max-width:480px;margin:0 auto;font-size:13.5px;line-height:1.7;color:var(--muted);}
+  .hero .attrib{margin-top:16px;font-size:12px;color:var(--gold-400);font-style:italic;}
+
+  .divider{width:100%;height:34px;margin:0 auto;display:block;opacity:0.75;}
+  .divider path{fill:none;stroke:var(--gold-500);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;}
+  .divider circle{fill:var(--gold-500);}
+
+  .wrap{max-width:640px;margin:0 auto;padding:0 18px;}
+
+  .info-toggle{
+    display:flex;align-items:center;justify-content:space-between;
+    background:linear-gradient(180deg, var(--navy-700), var(--navy-800));
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px 18px;
+    margin:26px 0 0;
+    cursor:pointer;
+    user-select:none;
+  }
+  .info-toggle span.label{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--gold-300);}
+  .info-toggle .chev{transition:transform .3s ease;color:var(--gold-400);}
+  .info-toggle.open .chev{transform:rotate(180deg);}
+  .info-body{
+    max-height:0;overflow:hidden;transition:max-height .4s ease;
+    background:var(--navy-800);border:1px solid var(--line);border-top:none;
+    border-radius:0 0 14px 14px;margin-top:-1px;
+  }
+  .info-body .inner{padding:4px 18px 18px;font-size:13.5px;line-height:1.8;color:var(--muted);}
+  .info-body b{color:var(--ink);}
+
+  .controls{
+    position:sticky; top:44px; z-index:40;
+    background:rgba(10,23,48,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:10px 16px;
+    display:flex; align-items:center; gap:10px;
+    margin-top:20px;
+  }
+  .controls .grp{display:flex;align-items:center;gap:6px;}
+  .ctrl-btn{
+    width:34px;height:34px;border-radius:9px;
+    border:1px solid var(--line);
+    background:var(--navy-700);
+    color:var(--gold-300);
+    font-family:'Amiri',serif;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:15px;transition:background .2s;
+  }
+  .ctrl-btn:active{background:var(--gold-500);color:var(--navy-900);}
+  .toggle-switch{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);margin-left:auto;}
+  .switch{width:40px;height:22px;border-radius:20px;background:var(--navy-600);border:1px solid var(--line);position:relative;cursor:pointer;flex-shrink:0;}
+  .switch .knob{width:16px;height:16px;border-radius:50%;background:var(--gold-400);position:absolute;top:2px;left:2px;transition:left .25s ease, background .25s ease;}
+  .switch.on{background:var(--gold-500);}
+  .switch.on .knob{left:20px;background:var(--navy-900);}
+
+  .card{
+    background:linear-gradient(180deg, var(--navy-700) 0%, var(--navy-800) 100%);
+    border:1px solid var(--line);
+    border-radius:18px;
+    margin:18px 0;
+    padding:22px 18px 20px;
+    position:relative;
+    box-shadow:0 12px 30px -14px rgba(0,0,0,0.6);
+  }
+  .card .tag{
+    display:inline-block;font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--navy-900);background:var(--gold-400);padding:4px 10px;border-radius:20px;
+    font-weight:700;margin-bottom:14px;
+  }
+  .arabic{font-family:'Amiri',serif;direction:rtl;text-align:right;font-size:var(--arfs, 24px);line-height:2.15;color:var(--cream);}
+  .arabic .ayah-end{display:inline-block;font-size:0.55em;color:var(--gold-400);margin:0 3px;vertical-align:middle;}
+  .translit{margin-top:12px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold-300);font-size:14.5px;line-height:1.7;display:none;}
+  .translit.show{display:block;}
+  .terjemahan{
+    margin-top:10px;font-size:11.5px;line-height:1.65;color:var(--muted);
+    border-top:1px dashed var(--line);padding-top:10px;
+    max-height:0;overflow:hidden;opacity:0;
+    transition:max-height .35s ease, opacity .35s ease, padding .35s ease, margin .35s ease;
+  }
+  .terjemahan.show{max-height:400px;opacity:1;}
+  .terjemahan.hide-mode{max-height:0 !important;opacity:0 !important;padding-top:0;margin-top:0;border-top:none;}
+
+  .repeat-row{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);}
+  .repeat-row .rlabel{font-size:11.5px;color:var(--gold-400);letter-spacing:0.05em;}
+  .tasbih-btn{
+    display:flex;align-items:center;gap:6px;background:var(--navy-600);
+    border:1px solid var(--gold-500);color:var(--gold-300);border-radius:30px;
+    padding:6px 14px;font-size:13px;cursor:pointer;margin-left:auto;font-weight:600;
+  }
+  .tasbih-btn .count{background:var(--gold-500);color:var(--navy-900);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+  .tasbih-btn.done{opacity:0.55;}
+
+  .section-label{text-align:center;font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:0.08em;color:var(--gold-400);margin:30px 0 4px;}
+
+  .progress-wrap{display:flex;justify-content:center;gap:7px;margin:22px 0 4px;flex-wrap:wrap;}
+  .pdot{width:8px;height:8px;border-radius:50%;background:var(--navy-600);border:1px solid var(--line);transition:background .3s, transform .3s;}
+  .pdot.active{background:var(--gold-500);transform:scale(1.3);}
+
+  footer{text-align:center;margin-top:40px;padding:24px 18px 10px;font-size:11.5px;color:var(--muted);line-height:1.8;}
+  footer .amiri{font-family:'Amiri',serif;font-size:15px;color:var(--gold-400);display:block;margin-bottom:8px;direction:rtl;}
+
+  /* Placeholder for unverified sections */
+  .pending-card{
+    background:linear-gradient(180deg, var(--navy-700) 0%, var(--navy-800) 100%);
+    border:1px dashed var(--gold-500);
+    border-radius:18px;
+    margin:26px 0;
+    padding:32px 22px;
+    text-align:center;
+  }
+  .pending-card .icon{font-size:30px;margin-bottom:12px;color:var(--gold-400);}
+  .pending-card h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px;color:var(--gold-300);margin:0 0 10px;
+  }
+  .pending-card p{font-size:13.5px;line-height:1.75;color:var(--muted);max-width:420px;margin:0 auto;}
+
+  section.wirid-section{display:none;}
+  section.wirid-section.active{display:block;}
+
+  @media (max-width:380px){ .arabic{font-size:calc(var(--arfs, 24px) - 2px);} }
+  .ctrl-btn:focus-visible, .switch:focus-visible, .info-toggle:focus-visible, .tasbih-btn:focus-visible, .tabbtn:focus-visible{
+    outline:2px solid var(--gold-400); outline-offset:2px;
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important; scroll-behavior:auto !important;} }
+</style>
+</head>
+<body>
+
+<nav class="tabbar" id="tabbar">
+  <button class="tabbtn active" data-target="mathurat"><span class="ar">الْمَأْثُورَات</span>Al-Mathurat</button>
+  <button class="tabbtn" data-target="bahr"><span class="ar">الْبَحْر</span>Hizib Bahar</button>
+  <button class="tabbtn" data-target="nawawi"><span class="ar">النَّوَوِي</span>Hizib Nawawi</button>
+  <button class="tabbtn" data-target="sakran"><span class="ar">السَّكْرَان</span>Wirid Sakran</button>
+</nav>
+
+<!-- ================= WIRID SAKRAN ================= -->
+<section class="wirid-section active" id="sec-mathurat">
+
+  <div class="hero">
+    <div class="eyebrow">Himpunan Doa &amp; Zikir Pilihan</div>
+    <div class="mihrab">
+      <svg viewBox="0 0 150 190" fill="none">
+        <path d="M10 190 V90 Q10 20 75 15 Q140 20 140 90 V190" stroke="#c9a24a" stroke-width="2.2"/>
+        <path d="M28 190 V95 Q28 38 75 34 Q122 38 122 95 V190" stroke="#dab96a" stroke-width="1.3" opacity="0.7"/>
+        <circle cx="75" cy="34" r="4" fill="#c9a24a"/>
+        <path d="M75 8 L75 34 M62 20 L88 20" stroke="#c9a24a" stroke-width="1.5"/>
+        <path d="M75 4 A5 5 0 1 1 74.9 4" stroke="#dab96a" stroke-width="1.3" fill="none"/>
+      </svg>
+    </div>
+    <h1>الْمَأْثُورَات</h1>
+    <h2>Al-Mathurat Sughra</h2>
+    <p class="sub">Himpunan zikir dan doa pagi &amp; petang yang bersumber daripada Al-Qur'an dan hadis-hadis sahih, disusun oleh Imam Hasan Al-Banna untuk memelihara hubungan seorang Muslim dengan Allah SWT sepanjang hari.</p>
+    <div class="attrib">Susunan Imam Syahid Hasan Al-Banna (1906-1949), pengasas Al-Ikhwan Al-Muslimun</div>
+  </div>
+
+  <svg class="divider" viewBox="0 0 400 34" preserveAspectRatio="xMidYMid meet">
+    <path d="M0 17 H150"/>
+    <path d="M175 17 a10 10 0 1 0 10 -14 a8 8 0 1 1 -10 14 Z"/>
+    <path d="M250 17 H400"/>
+    <circle cx="200" cy="9" r="1.6"/>
+  </svg>
+
+  <div class="wrap">
+
+    <div class="info-toggle" data-info-toggle role="button" tabindex="0">
+      <span class="label">Tentang Al-Mathurat</span>
+      <span class="chev">&#9662;</span>
+    </div>
+    <div class="info-body" data-info-body>
+      <div class="inner">
+        Al-Ma'thurat bermaksud "yang diriwayatkan" &mdash; himpunan zikir dan doa yang diambil daripada Al-Qur'an yang mulia dan hadis-hadis sahih Nabi Muhammad SAW. Disusun oleh <b>Imam Hasan Al-Banna</b> sebagai wazifah harian untuk mengekalkan hubungan seorang Muslim dengan Allah SWT di tengah kesibukan kehidupan.
+        <br><br>
+        Wazifah ini dibaca secara individu atau berjemaah:
+        <br>&bull; <b>Waktu pagi</b> &mdash; selepas Subuh sehingga masuk waktu Zuhur.
+        <br>&bull; <b>Waktu petang</b> &mdash; selepas Asar sehingga masuk waktu Isyak.
+        <br><br>
+        Versi <i>Sughra</i> (ringkas) ini memuatkan bacaan asas &mdash; Al-Fatihah, Ayat Kursi, tiga Qul, dan zikir-zikir pagi/petang yang masyhur &mdash; sesuai dibaca dalam masa 10-15 minit.
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="grp">
+        <button class="ctrl-btn" data-font-down aria-label="Kecilkan tulisan Arab">A-</button>
+        <button class="ctrl-btn" data-font-up aria-label="Besarkan tulisan Arab">A+</button>
+      </div>
+      <div class="toggle-switch">
+        Terjemahan
+        <div class="switch on" data-trans-switch role="switch" aria-checked="true" tabindex="0">
+          <div class="knob"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-wrap" data-progress-wrap></div>
+
+    <!-- CARD: Isti'adzah, Basmalah, Al-Fatihah -->
+    <div class="card">
+      <span class="tag">Pembukaan</span>
+      <div class="arabic">
+        أَعُوْذُ بِاللهِ السَّمِيْعِ الْعَلِيْمِ مِنَ الشَّيْطَانِ الرَّجِيْمِ
+        <br><br>
+        بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ<span class="ayah-end">١</span> الْحَمْدُ لِلَّـهِ رَبِّ الْعَالَمِينَ<span class="ayah-end">٢</span> الرَّحْمَـٰنِ الرَّحِيمِ<span class="ayah-end">٣</span> مَالِكِ يَوْمِ الدِّينِ<span class="ayah-end">٤</span> إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<span class="ayah-end">٥</span> اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ<span class="ayah-end">٦</span> صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ<span class="ayah-end">٧</span>
+      </div>
+      <div class="translit">A'uudzu billaahis-Samii'il-'Aliimi minasy-syaithaanir-rajiim. Bismillaahir-Rahmaanir-Rahiim... (Surah Al-Fatihah, 1-7)</div>
+      <div class="terjemahan show">
+        Aku berlindung kepada Allah Yang Maha Mendengar lagi Maha Mengetahui, daripada syaitan yang direjam. Dengan nama Allah Yang Maha Pemurah lagi Maha Penyayang. Segala puji bagi Allah, Tuhan sekalian alam, Yang Maha Pemurah lagi Maha Penyayang, Pemilik hari pembalasan. Hanya kepada-Mu kami menyembah dan hanya kepada-Mu kami memohon pertolongan. Tunjukilah kami jalan yang lurus — jalan orang yang Engkau beri nikmat, bukan jalan mereka yang dimurkai dan bukan pula yang sesat.
+      </div>
+    </div>
+
+    <!-- CARD: Alif Lam Mim -->
+    <div class="card">
+      <span class="tag">Awal Surah Al-Baqarah</span>
+      <div class="arabic">
+        بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ
+        <br><br>
+        الم<span class="ayah-end">١</span> ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ<span class="ayah-end">٢</span> الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنفِقُونَ<span class="ayah-end">٣</span> وَالَّذِينَ يُؤْمِنُونَ بِمَا أُنزِلَ إِلَيْكَ وَمَا أُنزِلَ مِن قَبْلِكَ وَبِالْآخِرَةِ هُمْ يُوقِنُونَ<span class="ayah-end">٤</span> أُولَـٰئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُولَـٰئِكَ هُمُ الْمُفْلِحُونَ<span class="ayah-end">٥</span>
+      </div>
+      <div class="translit">Alif Laam Miim. Dzaalikal Kitaabu laa raiba fiihi... (Surah Al-Baqarah, 1-5)</div>
+      <div class="terjemahan show">
+        Alif Lam Mim. Inilah Kitab yang tidak ada keraguan padanya, menjadi petunjuk bagi mereka yang bertakwa — yang beriman kepada perkara ghaib, mendirikan solat, dan menafkahkan sebahagian rezeki yang Kami berikan; yang beriman kepada apa yang diturunkan kepadamu dan yang diturunkan sebelummu, serta yakin akan akhirat. Merekalah yang mendapat petunjuk daripada Tuhan mereka, dan merekalah orang yang beruntung.
+      </div>
+    </div>
+
+    <!-- CARD: Ayat Kursi -->
+    <div class="card">
+      <span class="tag">Ayat Al-Kursi</span>
+      <div class="arabic">
+        اللَّـهُ لَا إِلَـٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ وَلَا يَئُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ<span class="ayah-end">٢٥٥</span>
+        <br><br>
+        لَا إِكْرَاهَ فِي الدِّينِ قَد تَّبَيَّنَ الرُّشْدُ مِنَ الْغَيِّ فَمَن يَكْفُرْ بِالطَّاغُوتِ وَيُؤْمِن بِاللَّـهِ فَقَدِ اسْتَمْسَكَ بِالْعُرْوَةِ الْوُثْقَىٰ لَا انفِصَامَ لَهَا وَاللَّـهُ سَمِيعٌ عَلِيمٌ<span class="ayah-end">٢٥٦</span>
+        <br><br>
+        اللَّـهُ وَلِيُّ الَّذِينَ آمَنُوا يُخْرِجُهُم مِّنَ الظُّلُمَاتِ إِلَى النُّورِ وَالَّذِينَ كَفَرُوا أَوْلِيَاؤُهُمُ الطَّاغُوتُ يُخْرِجُونَهُم مِّنَ النُّورِ إِلَى الظُّلُمَاتِ أُولَـٰئِكَ أَصْحَابُ النَّارِ هُمْ فِيهَا خَالِدُونَ<span class="ayah-end">٢٥٧</span>
+      </div>
+      <div class="translit">Allaahu laa ilaaha illaa huwal Hayyul Qayyuum... (Surah Al-Baqarah, 255-257)</div>
+      <div class="terjemahan show">
+        Allah, tiada Tuhan selain Dia, Yang Maha Hidup lagi Maha Berdiri Sendiri (yang mentadbir makhluk-Nya). Tidak mengantuk dan tidak tidur. Kepunyaan-Nya apa yang di langit dan di bumi. Tiada siapa yang boleh memberi syafaat di sisi-Nya melainkan dengan izin-Nya. Dia mengetahui apa yang di hadapan dan di belakang mereka, sedangkan mereka tidak mengetahui sesuatu pun daripada ilmu-Nya melainkan apa yang Dia kehendaki. Kursi-Nya meliputi langit dan bumi, dan Dia tidak berat memeliharanya. Dialah Yang Maha Tinggi lagi Maha Besar.
+        <br><br>
+        Tiada paksaan dalam agama; sesungguhnya telah jelas jalan yang benar daripada jalan yang sesat. Maka sesiapa yang kufur kepada taghut dan beriman kepada Allah, sesungguhnya dia telah berpegang kepada tali yang teguh yang tidak akan putus. Dan Allah Maha Mendengar lagi Maha Mengetahui.
+        <br><br>
+        Allah pelindung orang yang beriman; Dia mengeluarkan mereka daripada kegelapan kepada cahaya. Dan orang yang kufur, pelindung mereka ialah taghut, yang mengeluarkan mereka daripada cahaya kepada kegelapan. Mereka itulah ahli neraka; mereka kekal di dalamnya.
+      </div>
+    </div>
+
+    <!-- CARD: Akhir Al-Baqarah -->
+    <div class="card">
+      <span class="tag">Penutup Surah Al-Baqarah</span>
+      <div class="arabic">
+        لِّلَّـهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ وَإِن تُبْدُوا مَا فِي أَنفُسِكُمْ أَوْ تُخْفُوهُ يُحَاسِبْكُم بِهِ اللَّـهُ فَيَغْفِرُ لِمَن يَشَاءُ وَيُعَذِّبُ مَن يَشَاءُ وَاللَّـهُ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ<span class="ayah-end">٢٨٤</span>
+        <br><br>
+        آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ وَالْمُؤْمِنُونَ كُلٌّ آمَنَ بِاللَّـهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِّن رُّسُلِهِ وَقَالُوا سَمِعْنَا وَأَطَعْنَا غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ<span class="ayah-end">٢٨٥</span>
+        <br><br>
+        لَا يُكَلِّفُ اللَّـهُ نَفْسًا إِلَّا وُسْعَهَا لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنتَ مَوْلَانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ<span class="ayah-end">٢٨٦</span>
+      </div>
+      <div class="translit">Lillaahi maa fis-samaawaati wa maa fil ardh... (Surah Al-Baqarah, 284-286)</div>
+      <div class="terjemahan show">
+        Kepunyaan Allah apa yang di langit dan apa yang di bumi. Jika kamu melahirkan apa yang ada dalam hatimu atau kamu menyembunyikannya, nescaya Allah akan menghitungnya bagimu. Dia mengampuni sesiapa yang Dia kehendaki dan mengazab sesiapa yang Dia kehendaki. Dan Allah Maha Berkuasa atas segala sesuatu.
+        <br><br>
+        Rasul (Muhammad) beriman kepada apa yang diturunkan kepadanya daripada Tuhannya, demikian pula orang-orang yang beriman. Semuanya beriman kepada Allah, para malaikat-Nya, kitab-kitab-Nya dan rasul-rasul-Nya. (Mereka berkata) "Kami tidak membeza-bezakan antara seorang pun daripada rasul-rasul-Nya." Dan mereka berkata: "Kami dengar dan kami taat. Ampunilah kami ya Tuhan kami, dan kepada-Mu tempat kembali."
+        <br><br>
+        Allah tidak membebani seseorang melainkan menurut kesanggupannya. Dia mendapat pahala daripada apa yang diusahakannya dan dia mendapat seksa daripada apa yang dikerjakannya. "Ya Tuhan kami, janganlah Engkau hukum kami jika kami lupa atau tersalah. Ya Tuhan kami, janganlah Engkau bebankan kepada kami beban yang berat sebagaimana Engkau bebankan kepada orang sebelum kami. Ya Tuhan kami, janganlah Engkau pikulkan kepada kami apa yang kami tidak terdaya memikulnya. Maafkanlah kami, ampunilah kami, dan rahmatilah kami. Engkaulah Pelindung kami, maka tolonglah kami menghadapi kaum yang kafir."
+      </div>
+    </div>
+
+    <!-- CARD: Al-Ikhlas -->
+    <div class="card">
+      <span class="tag">Surah Al-Ikhlas</span>
+      <div class="arabic">
+        بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ
+        <br><br>
+        قُلْ هُوَ اللَّـهُ أَحَدٌ<span class="ayah-end">١</span> اللَّـهُ الصَّمَدُ<span class="ayah-end">٢</span> لَمْ يَلِدْ وَلَمْ يُولَدْ<span class="ayah-end">٣</span> وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ<span class="ayah-end">٤</span>
+      </div>
+      <div class="translit">Qul huwallaahu ahad... (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Katakanlah: Dialah Allah, Yang Maha Esa. Allah tempat bergantung segala sesuatu. Dia tiada beranak dan tiada diperanakkan, dan tiada sesuatu pun yang setara dengan-Nya.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Al-Ikhlas</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Al-Falaq -->
+    <div class="card">
+      <span class="tag">Surah Al-Falaq</span>
+      <div class="arabic">
+        بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ
+        <br><br>
+        قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ<span class="ayah-end">١</span> مِن شَرِّ مَا خَلَقَ<span class="ayah-end">٢</span> وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ<span class="ayah-end">٣</span> وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ<span class="ayah-end">٤</span> وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ<span class="ayah-end">٥</span>
+      </div>
+      <div class="translit">Qul a'uudzu birabbil falaq... (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Katakanlah: Aku berlindung kepada Tuhan yang menguasai subuh, daripada kejahatan makhluk-Nya, daripada kejahatan malam apabila gelap gelita, daripada kejahatan tukang sihir yang menghembus pada buhul-buhul, dan daripada kejahatan orang yang dengki apabila dia dengki.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Al-Falaq</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: An-Nas -->
+    <div class="card">
+      <span class="tag">Surah An-Nas</span>
+      <div class="arabic">
+        بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ
+        <br><br>
+        قُلْ أَعُوذُ بِرَبِّ النَّاسِ<span class="ayah-end">١</span> مَلِكِ النَّاسِ<span class="ayah-end">٢</span> إِلَـٰهِ النَّاسِ<span class="ayah-end">٣</span> مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ<span class="ayah-end">٤</span> الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ<span class="ayah-end">٥</span> مِنَ الْجِنَّةِ وَالنَّاسِ<span class="ayah-end">٦</span>
+      </div>
+      <div class="translit">Qul a'uudzu birabbin naas... (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Katakanlah: Aku berlindung kepada Tuhan sekalian manusia, Raja sekalian manusia, Tuhan sekalian manusia, daripada kejahatan bisikan syaitan yang tersembunyi, yang membisikkan (kejahatan) ke dalam dada manusia, daripada golongan jin dan manusia.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">An-Nas</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <div class="section-label">﴾ Zikir Pagi &amp; Petang ﴿</div>
+
+    <!-- CARD: Milik Allah kekuasaan -->
+    <div class="card">
+      <span class="tag">Kepunyaan Allah Kerajaan</span>
+      <div class="arabic">
+        أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا شَرِيْكَ لَهُ، لَا إِلٰهَ إِلَّا هُوَ وَإِلَيْهِ النُّشُوْرُ.
+      </div>
+      <div class="translit">Ashbahnaa wa ashbahal mulku lillaah, wal hamdu lillaah, laa syariika lah, laa ilaaha illaa huwa wa ilaihin-nusyuur. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Kami memasuki waktu pagi, dan kerajaan hanya milik Allah. Segala puji bagi Allah, tiada sekutu bagi-Nya, tiada Tuhan selain Dia, dan kepada-Nya tempat kembali.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Fitrah Islam -->
+    <div class="card">
+      <span class="tag">Fitrah Islam</span>
+      <div class="arabic">
+        أَصْبَحْنَا عَلٰى فِطْرَةِ الْإِسْلَامِ، وَكَلِمَةِ الْإِخْلَاصِ، وَعَلٰى دِيْنِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَعَلٰى مِلَّةِ أَبِيْنَا إِبْرَاهِيْمَ حَنِيْفًا وَمَا كَانَ مِنَ الْمُشْرِكِيْنَ.
+      </div>
+      <div class="translit">Ashbahnaa 'alaa fithratil Islaam... wa maa kaana minal musyrikiin. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Kami memasuki waktu pagi di atas fitrah Islam, kalimah ikhlas, agama Nabi kami Muhammad SAW, dan agama ayah kami Ibrahim yang lurus, dan beliau bukan daripada golongan musyrik.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Nikmat, afiat, perlindungan -->
+    <div class="card">
+      <span class="tag">Nikmat &amp; Perlindungan</span>
+      <div class="arabic">
+        اَللَّهُمَّ إِنِّى أَصْبَحْتُ مِنْكَ فِى نِعْمَةٍ وَعَافِيَةٍ وَسِتْرٍ، فَأَتِمَّ عَلَيَّ نِعْمَتَكَ وَعَافِيَتَكَ وَسِتْرَكَ فِى الدُّنْيَا وَالْآخِرَةِ.
+      </div>
+      <div class="translit">Allahumma innii ashbahtu minka fii ni'matin wa 'aafiyatin wa sitr... (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Ya Allah, aku memasuki waktu pagi dengan nikmat, kesihatan dan perlindungan daripada-Mu, maka sempurnakanlah nikmat, kesihatan dan perlindungan-Mu ke atasku di dunia dan akhirat.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Segala nikmat dari Allah -->
+    <div class="card">
+      <span class="tag">Segala Nikmat Dari-Mu</span>
+      <div class="arabic">
+        اَللَّهُمَّ مَا أَصْبَحَ بِى مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ، فَمِنْكَ وَحْدَكَ لَا شَرِيْكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ.
+      </div>
+      <div class="translit">Allahumma maa ashbaha bii min ni'matin... falakal hamdu wa lakasy-syukr. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Ya Allah, apa jua nikmat yang aku atau mana-mana makhluk-Mu peroleh pada pagi ini, semuanya daripada-Mu semata, tiada sekutu bagi-Mu; maka bagi-Mu segala puji dan syukur.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Segala puji layak bagiMu -->
+    <div class="card">
+      <span class="tag">Kebesaran &amp; Kekuasaan-Mu</span>
+      <div class="arabic">
+        يَا رَبِّ لَكَ الْحَمْدُ كَمَا يَنْبَغِى لِجَلَالِ وَجْهِكَ وَعَظِيْمِ سُلْطَانِكَ.
+      </div>
+      <div class="translit">Yaa Rabbi lakal hamdu kamaa yanbaghii li jalaali wajhika wa 'azhiimi sulthaanik. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Wahai Tuhanku, bagi-Mu segala puji sebagaimana layak bagi keagungan wajah-Mu dan kebesaran kekuasaan-Mu.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Redha -->
+    <div class="card">
+      <span class="tag">Keredhaan</span>
+      <div class="arabic">
+        رَضِيْتُ بِاللهِ رَبًّا، وَبِالْإِسْلَامِ دِيْنًا، وَبِمُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا وَرَسُوْلًا.
+      </div>
+      <div class="translit">Radhiitu billaahi rabbaa... nabiyyaw wa rasuulaa. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Aku redha Allah sebagai Tuhanku, Islam sebagai agamaku, dan Muhammad SAW sebagai Nabi dan Rasulku.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Subhanallah bihamdih -->
+    <div class="card">
+      <span class="tag">Tasbih Agung</span>
+      <div class="arabic">
+        سُبْحَانَ اللهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.
+      </div>
+      <div class="translit">Subhaanallaahi wa bihamdihi 'adada khalqihi... wa midaada kalimaatih. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Maha Suci Allah dan dengan memuji-Nya, sebanyak bilangan makhluk-Nya, seluas keredhaan diri-Nya, seberat timbangan Arasy-Nya, dan sebanyak tinta bagi kalimah-kalimah-Nya.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Bismillah tak mudharat -->
+    <div class="card">
+      <span class="tag">Perlindungan Nama Allah</span>
+      <div class="arabic">
+        بِسْمِ اللهِ الَّذِى لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِى الْأَرْضِ وَلَا فِى السَّمَاءِ وَهُوَ السَّمِيْعُ الْعَلِيْمُ.
+      </div>
+      <div class="translit">Bismillaahil ladzii laa yadhurru ma'asmihii syai-un fil ardhi wa laa fis-samaa-i wa huwas Samii'ul 'Aliim. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Dengan nama Allah, yang bersama nama-Nya tiada sesuatu pun boleh membahayakan di bumi mahupun di langit, dan Dialah Yang Maha Mendengar lagi Maha Mengetahui.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Perlindungan syirik -->
+    <div class="card">
+      <span class="tag">Perlindungan Daripada Syirik</span>
+      <div class="arabic">
+        اَللَّهُمَّ إِنَّا نَعُوْذُ بِكَ مِنْ أَنْ نُشْرِكَ بِكَ شَيْئًا نَعْلَمُهُ، وَنَسْتَغْفِرُكَ لِمَا لَا نَعْلَمُهُ.
+      </div>
+      <div class="translit">Allahumma innaa na'uudzu bika min an nusyrika bika syai-an na'lamuhu, wa nastaghfiruka limaa laa na'lamuh. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Ya Allah, kami berlindung kepada-Mu daripada mempersekutukan-Mu dengan sesuatu yang kami ketahui, dan kami memohon ampun daripada-Mu bagi apa yang tidak kami ketahui.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Kalimat Allah yang sempurna -->
+    <div class="card">
+      <span class="tag">Kalimah Allah yang Sempurna</span>
+      <div class="arabic">
+        أَعُوْذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.
+      </div>
+      <div class="translit">A'uudzu bikalimaatillaahit-taammaati min syarri maa khalaq. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Aku berlindung dengan kalimah-kalimah Allah yang sempurna daripada kejahatan apa yang Dia ciptakan.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Perlindungan gelisah sedih -->
+    <div class="card">
+      <span class="tag">Perlindungan Gelisah &amp; Hutang</span>
+      <div class="arabic">
+        اَللَّهُمَّ إِنِّى أَعُوْذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوْذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوْذُ بِكَ مِنَ الْجُبْنِ وَالْبُخْلِ، وَأَعُوْذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ وَقَهْرِ الرِّجَالِ.
+      </div>
+      <div class="translit">Allahumma innii a'uudzu bika minal hammi wal hazan... wa qahrir-rijaal.</div>
+      <div class="terjemahan show">
+        Ya Allah, aku berlindung kepada-Mu daripada rasa gelisah dan sedih, daripada lemah dan malas, daripada bersifat pengecut dan bakhil, serta daripada tekanan hutang dan penindasan orang.
+      </div>
+    </div>
+
+    <!-- CARD: Afiat badan -->
+    <div class="card">
+      <span class="tag">Kesihatan &amp; Keimanan</span>
+      <div class="arabic">
+        اَللَّهُمَّ عَافِنِى فِى بَدَنِى، اَللَّهُمَّ عَافِنِى فِى سَمْعِى، اَللَّهُمَّ عَافِنِى فِى بَصَرِى، لَا إِلٰهَ إِلَّا أَنْتَ.
+      </div>
+      <div class="translit">Allahumma 'aafinii fii badanii... laa ilaaha illaa anta. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Ya Allah, sihatkanlah badanku. Ya Allah, sihatkanlah pendengaranku. Ya Allah, sihatkanlah penglihatanku. Tiada Tuhan yang berhak disembah selain-Mu.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Perlindungan kufur fakir -->
+    <div class="card">
+      <span class="tag">Perlindungan Kufur &amp; Azab Kubur</span>
+      <div class="arabic">
+        اَللَّهُمَّ إِنِّى أَعُوْذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، اَللَّهُمَّ إِنِّى أَعُوْذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلٰهَ إِلَّا أَنْتَ.
+      </div>
+      <div class="translit">Allahumma innii a'uudzu bika minal kufri wal faqr... laa ilaaha illaa anta. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Ya Allah, aku berlindung kepada-Mu daripada kekufuran dan kefakiran. Ya Allah, aku berlindung kepada-Mu daripada azab kubur. Tiada Tuhan yang berhak disembah selain-Mu.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Sayyidul Istighfar -->
+    <div class="card">
+      <span class="tag">Sayyidul Istighfar</span>
+      <div class="arabic">
+        اَللَّهُمَّ أَنْتَ رَبِّى لَا إِلٰهَ إِلَّا أَنْتَ، خَلَقْتَنِى وَأَنَا عَبْدُكَ، وَأَنَا عَلٰى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوْذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوْءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوْءُ بِذَنْبِى، فَاغْفِرْ لِى، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوْبَ إِلَّا أَنْتَ.
+      </div>
+      <div class="translit">Allahumma anta rabbii laa ilaaha illaa anta... laa yaghfirudz-dzunuuba illaa anta. (dibaca 1×)</div>
+      <div class="terjemahan show">
+        Ya Allah, Engkau Tuhanku, tiada Tuhan selain-Mu. Engkau ciptakan aku dan aku hamba-Mu. Aku berpegang pada janji-Mu semampu aku. Aku berlindung kepada-Mu daripada kejahatan yang aku lakukan. Aku mengakui nikmat-Mu ke atasku dan aku mengakui dosaku, maka ampunilah aku, kerana tiada yang mengampuni dosa melainkan Engkau.
+      </div>
+    </div>
+
+    <!-- CARD: Istighfar -->
+    <div class="card">
+      <span class="tag">Istighfar</span>
+      <div class="arabic">
+        أَسْتَغْفِرُ اللهَ الَّذِى لَا إِلٰهَ إِلَّا هُوَ الْحَىَّ الْقَيُّوْمَ وَأَتُوْبُ إِلَيْهِ.
+      </div>
+      <div class="translit">Astaghfirullaahal-ladzii laa ilaaha illaa huwal Hayyal Qayyuuma wa atuubu ilaih. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Aku memohon ampun kepada Allah, yang tiada Tuhan selain Dia, Yang Maha Hidup lagi Maha Berdiri Sendiri, dan aku bertaubat kepada-Nya.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Subhanakallahumma -->
+    <div class="card">
+      <span class="tag">Penutup Majlis</span>
+      <div class="arabic">
+        سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ وَأَتُوْبُ إِلَيْكَ.
+      </div>
+      <div class="translit">Subhaanakallaahumma wa bihamdika... astaghfiruka wa atuubu ilaik. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Maha Suci Engkau ya Allah, dan dengan memuji-Mu, aku bersaksi tiada Tuhan selain-Mu, aku memohon ampun dan bertaubat kepada-Mu.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+
+    <!-- CARD: Selawat Ibrahimiyah -->
+    <div class="card">
+      <span class="tag">Selawat Ibrahimiyah</span>
+      <div class="arabic">
+        اَللَّهُمَّ صَلِّ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَعَلٰى آلِ سَيِّدِنَا مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلٰى سَيِّدِنَا إِبْرَاهِيْمَ وَعَلٰى آلِ سَيِّدِنَا إِبْرَاهِيْمَ، وَبَارِكْ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَعَلٰى آلِ سَيِّدِنَا مُحَمَّدٍ، كَمَا بَارَكْتَ عَلٰى سَيِّدِنَا إِبْرَاهِيْمَ وَعَلٰى آلِ سَيِّدِنَا إِبْرَاهِيْمَ فِى الْعَالَمِيْنَ إِنَّكَ حَمِيْدٌ مَجِيْدٌ.
+      </div>
+      <div class="translit">Allahumma shalli 'alaa sayyidinaa Muhammad... innaka Hamiidum Majiid.</div>
+      <div class="terjemahan show">
+        Ya Allah, limpahkanlah rahmat ke atas junjungan kami Muhammad dan keluarganya, sebagaimana Engkau limpahkan rahmat ke atas junjungan kami Ibrahim dan keluarganya. Berkatilah junjungan kami Muhammad dan keluarganya, sebagaimana Engkau berkati junjungan kami Ibrahim dan keluarganya di sekalian alam. Sesungguhnya Engkau Maha Terpuji lagi Maha Mulia.
+      </div>
+    </div>
+
+    <!-- CARD: Selawat Nabi Ummi -->
+    <div class="card">
+      <span class="tag">Selawat &amp; Redha Sahabat</span>
+      <div class="arabic">
+        اَللَّهُمَّ صَلِّ عَلٰى سَيِّدِنَا مُحَمَّدٍ عَبْدِكَ وَنَبِيِّكَ وَرَسُوْلِكَ النَّبِيِّ الْأُمِّيِّ، وَعَلٰى آلِهِ وَصَحْبِهِ وَسَلِّمْ تَسْلِيْمًا، عَدَدَ مَا أَحَاطَ بِهِ عِلْمُكَ، وَخَطَّ بِهِ قَلَمُكَ، وَأَحْصَاهُ كِتَابُكَ، وَارْضَ اللَّهُمَّ عَنْ سَادَاتِنَا أَبِى بَكْرٍ وَعُمَرَ وَعُثْمَانَ وَعَلِىٍّ، وَعَنِ الصَّحَابَةِ أَجْمَعِيْنَ، وَعَنِ التَّابِعِيْنَ وَتَابِعِيْهِمْ بِإِحْسَانٍ إِلٰى يَوْمِ الدِّيْنِ.
+      </div>
+      <div class="translit">Allahumma shalli 'alaa sayyidinaa Muhammadin 'abdika wa nabiyyika wa rasuulikan-nabiyyil ummiyyi... ilaa yaumid diin.</div>
+      <div class="terjemahan show">
+        Ya Allah, limpahkanlah rahmat ke atas junjungan kami Muhammad, hamba-Mu, nabi-Mu dan rasul-Mu — Nabi yang ummi — serta ke atas keluarga dan sahabatnya, sebanyak yang diliputi ilmu-Mu, dicatat oleh pena-Mu, dan dirakam oleh kitab-Mu. Redhailah ya Allah para pemimpin kami Abu Bakar, Umar, Uthman dan Ali, seluruh sahabat, para tabi'in dan yang mengikuti mereka dengan baik hingga hari pembalasan.
+      </div>
+    </div>
+
+    <!-- CARD: Subhana rabbika -->
+    <div class="card">
+      <span class="tag">Penutup Wirid</span>
+      <div class="arabic">
+        سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُوْنَ، وَسَلَامٌ عَلَى الْمُرْسَلِيْنَ، وَالْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ.
+      </div>
+      <div class="translit">Subhaana Rabbika Rabbil 'izzati 'ammaa yashifuun, wa salaamun 'alal mursaliin, wal hamdu lillaahi Rabbil 'aalamiin.</div>
+      <div class="terjemahan show">
+        Maha Suci Tuhanmu, Tuhan yang mempunyai keperkasaan, daripada apa yang mereka sifatkan; sejahtera ke atas para rasul; dan segala puji bagi Allah, Tuhan sekalian alam. <span style="color:var(--gold-400)">(Surah As-Saffat, 180-182)</span>
+      </div>
+    </div>
+
+    <div class="section-label">﴾ Wirid Ar-Rabithah — Doa Ukhuwah ﴿</div>
+
+    <!-- CARD: Rabithah -->
+    <div class="card">
+      <span class="tag">Doa Ukhuwah</span>
+      <div class="arabic">
+        قُلِ اللَّهُمَّ مَالِكَ الْمُلْكِ تُؤْتِى الْمُلْكَ مَنْ تَشَاءُ وَتَنْزِعُ الْمُلْكَ مِمَّنْ تَشَاءُ، وَتُعِزُّ مَنْ تَشَاءُ وَتُذِلُّ مَنْ تَشَاءُ، بِيَدِكَ الْخَيْرُ إِنَّكَ عَلٰى كُلِّ شَيْءٍ قَدِيْرٌ، تُوْلِجُ اللَّيْلَ فِى النَّهَارِ وَتُوْلِجُ النَّهَارَ فِى اللَّيْلِ، وَتُخْرِجُ الْحَىَّ مِنَ الْمَيِّتِ وَتُخْرِجُ الْمَيِّتَ مِنَ الْحَىِّ، وَتَرْزُقُ مَنْ تَشَاءُ بِغَيْرِ حِسَابٍ.
+        <br><br>
+        اَللَّهُمَّ إِنَّ هٰذَا إِقْبَالُ نَهَارِكَ وَإِدْبَارُ لَيْلِكَ وَأَصْوَاتُ دُعَاتِكَ فَاغْفِرْ لِى.
+        <br><br>
+        اَللَّهُمَّ إِنَّكَ تَعْلَمُ أَنَّ هٰذِهِ الْقُلُوْبَ قَدِ اجْتَمَعَتْ عَلٰى مَحَبَّتِكَ، وَالْتَقَتْ عَلٰى طَاعَتِكَ، وَتَوَحَّدَتْ عَلٰى دَعْوَتِكَ، وَتَعَاهَدَتْ عَلٰى نُصْرَةِ شَرِيْعَتِكَ، فَوَثِّقِ اللَّهُمَّ رَابِطَتَهَا، وَأَدِمْ وُدَّهَا، وَاهْدِهَا سُبُلَهَا، وَامْلَأْهَا بِنُوْرِكَ الَّذِى لَا يَخْبُوْ، وَاشْرَحْ صُدُوْرَهَا بِفَيْضِ الْإِيْمَانِ بِكَ وَجَمِيْلِ التَّوَكُّلِ عَلَيْكَ، وَأَحْيِهَا بِمَعْرِفَتِكَ، وَأَمِتْهَا عَلَى الشَّهَادَةِ فِى سَبِيْلِكَ، إِنَّكَ نِعْمَ الْمَوْلٰى وَنِعْمَ النَّصِيْرُ. اَللَّهُمَّ آمِيْنْ. وَصَلِّ اللَّهُمَّ عَلٰى مُحَمَّدٍ وَعَلٰى آلِهِ وَصَحْبِهِ وَسَلِّمْ.
+      </div>
+      <div class="translit">Qulillaahumma maalikal mulki... wa shahbihii wa sallim.</div>
+      <div class="terjemahan show">
+        Katakanlah: Ya Allah, Pemilik segala kerajaan, Engkau berikan kerajaan kepada sesiapa yang Engkau kehendaki dan Engkau cabut daripada sesiapa yang Engkau kehendaki; Engkau muliakan sesiapa yang Engkau kehendaki dan Engkau hina sesiapa yang Engkau kehendaki. Di tangan-Mu segala kebaikan; sesungguhnya Engkau Maha Berkuasa atas segala sesuatu. Engkau masukkan malam ke dalam siang dan Engkau masukkan siang ke dalam malam; Engkau keluarkan yang hidup daripada yang mati dan Engkau keluarkan yang mati daripada yang hidup; dan Engkau beri rezeki kepada sesiapa yang Engkau kehendaki tanpa hitungan. <span style="color:var(--gold-400)">(Surah Ali 'Imran, 26-27)</span>
+        <br><br>
+        Ya Allah, ini waktu masuknya siang-Mu, berlalunya malam-Mu, dan suara para penyeru-Mu, maka ampunilah aku. Ya Allah, Engkau mengetahui bahawa hati-hati ini telah berhimpun kerana mencintai-Mu, bertemu dalam taat kepada-Mu, bersatu dalam dakwah-Mu, dan berjanji menegakkan syariat-Mu — maka eratkanlah ikatannya, kekalkanlah kasih sayangnya, tunjukilah jalannya, penuhilah ia dengan cahaya-Mu yang tidak pudar, dan lapangkanlah dadanya dengan limpahan iman dan tawakal yang indah kepada-Mu. Hidupkanlah ia dengan ma'rifat-Mu, dan matikanlah ia dalam syahid pada jalan-Mu. Sesungguhnya Engkaulah sebaik-baik Pelindung dan sebaik-baik Penolong. Ya Allah, perkenankanlah. Dan limpahkanlah rahmat ke atas Muhammad, keluarga dan sahabatnya.
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="amiri">وَاللهُ الْمُسْتَعَانُ وَعَلَيْهِ التُّكْلَان</span>
+    Dikongsi dengan penuh kasih sayang
+  </footer>
+
+</section>
+
+<section class="wirid-section" id="sec-bahr">
+
+  <div class="hero">
+    <div class="eyebrow">Himpunan Doa &amp; Zikir Pilihan</div>
+    <div class="mihrab">
+      <svg viewBox="0 0 150 190" fill="none">
+        <path d="M10 190 V90 Q10 20 75 15 Q140 20 140 90 V190" stroke="#c9a24a" stroke-width="2.2"/>
+        <path d="M28 190 V95 Q28 38 75 34 Q122 38 122 95 V190" stroke="#dab96a" stroke-width="1.3" opacity="0.7"/>
+        <circle cx="75" cy="34" r="4" fill="#c9a24a"/>
+        <path d="M75 8 L75 34 M62 20 L88 20" stroke="#c9a24a" stroke-width="1.5"/>
+        <path d="M75 4 A5 5 0 1 1 74.9 4" stroke="#dab96a" stroke-width="1.3" fill="none"/>
+      </svg>
+    </div>
+    <h1>حِزْبُ الْبَحْر</h1>
+    <h2>Hizib Bahr</h2>
+    <p class="sub">Litani lautan yang diajarkan Rasulullah SAW kepada Imam Abul Hasan Asy-Syadzili dalam mimpi, memohon ketetapan hati, kemenangan dan perlindungan daripada segala kejahatan.</p>
+    <div class="attrib">Susunan Imam Abul Hasan Ali bin Abdillah Asy-Syadzili (571H-656H), pengasas Tarekat Syadziliyah</div>
+  </div>
+
+  <svg class="divider" viewBox="0 0 400 34" preserveAspectRatio="xMidYMid meet">
+    <path d="M0 17 H150"/>
+    <path d="M175 17 a10 10 0 1 0 10 -14 a8 8 0 1 1 -10 14 Z"/>
+    <path d="M250 17 H400"/>
+    <circle cx="200" cy="9" r="1.6"/>
+  </svg>
+
+  <div class="wrap">
+
+    <div class="info-toggle" data-info-toggle role="button" tabindex="0">
+      <span class="label">Tentang Hizib Bahr</span>
+      <span class="chev">&#9662;</span>
+    </div>
+    <div class="info-body" data-info-body>
+      <div class="inner">
+        Hizib Bahr (<i>Litani Lautan</i>) disusun oleh <b>Imam Abul Hasan Asy-Syadzili</b>, pengasas Tarekat Syadziliyah. Dinamakan "Bahr" (laut) kerana disebut dalam teksnya dan diriwayatkan pernah diletakkan di laut. Ia juga dikenali sebagai <i>Al-Hizib Ash-Shaghir</i>.
+        <br><br>
+        Menurut Imam Syadzili sendiri, sesiapa yang membacanya ketika ketakutan akan beroleh ketenangan, yang sakit beroleh kesembuhan, dan yang bersedih akan hilang kesedihannya.
+        <br><br>
+        <b>Waktu bacaan:</b> selepas solat Subuh dan selepas solat Asar. Digalakkan turut membaca Al-Fatihah 7&times; dan Surah Quraisy 21&times; sebelum memulakan hizib ini ketika ada hajat besar.
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="grp">
+        <button class="ctrl-btn" data-font-down aria-label="Kecilkan tulisan Arab">A-</button>
+        <button class="ctrl-btn" data-font-up aria-label="Besarkan tulisan Arab">A+</button>
+      </div>
+      <div class="toggle-switch">
+        Terjemahan
+        <div class="switch on" data-trans-switch role="switch" aria-checked="true" tabindex="0">
+          <div class="knob"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-wrap" data-progress-wrap></div>
+
+    <!-- 1 -->
+    <div class="card">
+      <span class="tag">1 &middot; Seruan</span>
+      <div class="arabic">
+        يَا اللهُ يَا عَلِيُّ يَا عَظِيْمُ يَا حَلِيْمُ يَا عَلِيْمُ، أَنْتَ رَبِّي وَعِلْمُكَ حَسْبِي، فَنِعْمَ الرَّبُّ رَبِّي وَنِعْمَ الْحَسْبُ حَسْبِي، تَنْصُرُ مَنْ تَشَاءُ وَأَنْتَ الْعَزِيْزُ الرَّحِيْمُ.
+      </div>
+      <div class="translit">Yaa Allaahu yaa 'Aliyyu yaa 'Azhiimu yaa Haliimu yaa 'Aliim, anta Rabbii wa 'ilmuka hasbii...</div>
+      <div class="terjemahan show">
+        Wahai Allah, Yang Maha Tinggi, Yang Maha Besar, Yang Maha Penyantun, Yang Maha Mengetahui; Engkaulah Tuhanku dan ilmu-Mu cukup bagiku. Alangkah baiknya Tuhan yang menjadi Tuhanku, alangkah cukupnya yang mencukupiku. Engkau memberi kemenangan kepada sesiapa yang Engkau kehendaki, dan Engkaulah Yang Maha Perkasa lagi Maha Penyayang.
+      </div>
+    </div>
+    <!-- 2 -->
+    <div class="card">
+      <span class="tag">2 &middot; Memohon Perlindungan</span>
+      <div class="arabic">
+        نَسْأَلُكَ الْعِصْمَةَ فِى الْحَرَكَاتِ وَالسَّكَنَاتِ وَالْكَلِمَاتِ وَالْإِرَادَاتِ وَالْخَطَرَاتِ، مِنَ الشُّكُوْكِ وَالظُّنُوْنِ وَالْأَوْهَامِ السَّاتِرَةِ لِلْقُلُوْبِ عَنْ مُطَالَعَةِ الْغُيُوْبِ.
+      </div>
+      <div class="translit">Nas-aluka al-'ishmata fil harakaati was-sakanaati...</div>
+      <div class="terjemahan show">
+        Kami memohon penjagaan-Mu dalam gerak dan diam, dalam perkataan, kehendak dan lintasan hati; daripada keraguan, sangkaan dan khayalan yang menutup hati daripada memandang perkara ghaib.
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="card">
+      <span class="tag">3 &middot; Ayat 33:11-12</span>
+      <div class="arabic">
+        فَقَدِ ابْتُلِيَ الْمُؤْمِنُوْنَ وَزُلْزِلُوْا زِلْزَالًا شَدِيْدًا، وَإِذْ يَقُوْلُ الْمُنَافِقُوْنَ وَالَّذِيْنَ فِى قُلُوْبِهِمْ مَرَضٌ مَا وَعَدَنَا اللهُ وَرَسُوْلُهُ إِلَّا غُرُوْرًا.
+      </div>
+      <div class="translit">Faqadibtuliyal mu'minuuna wa zulziluu zilzaalan syadiidaa...</div>
+      <div class="terjemahan show">
+        Sesungguhnya orang-orang beriman telah diuji dan digoncangkan dengan goncangan yang dahsyat, dan (ingatlah) ketika orang munafik dan yang berpenyakit dalam hatinya berkata: "Allah dan Rasul-Nya tidak menjanjikan kepada kami melainkan tipu daya."
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="card">
+      <span class="tag">4 &middot; Tundukkan Laut Ini</span>
+      <div class="arabic">
+        فَثَبِّتْنَا وَانْصُرْنَا وَسَخِّرْ لَنَا هٰذَا الْبَحْرَ كَمَا سَخَّرْتَ الْبَحْرَ لِمُوْسٰى، وَسَخَّرْتَ النَّارَ لِإِبْرَاهِيْمَ، وَسَخَّرْتَ الْجِبَالَ وَالْحَدِيْدَ لِدَاوُدَ، وَسَخَّرْتَ الرِّيْحَ وَالشَّيَاطِيْنَ وَالْجِنَّ لِسُلَيْمَانَ.
+      </div>
+      <div class="translit">Fa tsabbitnaa wan-shurnaa wa sakhkhir lanaa haadzal bahra kamaa sakhkharta...</div>
+      <div class="terjemahan show">
+        Maka teguhkanlah kami, tolonglah kami, dan tundukkanlah laut ini kepada kami sebagaimana Engkau tundukkan laut kepada Musa, api kepada Ibrahim, gunung-ganang dan besi kepada Daud, angin, syaitan dan jin kepada Sulaiman.
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="card">
+      <span class="tag">5 &middot; Tundukkan Segala Lautan</span>
+      <div class="arabic">
+        وَسَخِّرْ لَنَا كُلَّ بَحْرٍ هُوَ لَكَ فِى الْأَرْضِ وَالسَّمَاءِ وَالْمُلْكِ وَالْمَلَكُوْتِ، وَبَحْرَ الدُّنْيَا وَبَحْرَ الْآخِرَةِ، وَسَخِّرْ لَنَا كُلَّ شَيْءٍ، يَا مَنْ بِيَدِهِ مَلَكُوْتُ كُلِّ شَيْءٍ.
+      </div>
+      <div class="translit">Wa sakhkhir lanaa kulla bahrin huwa laka fil ardhi was-samaa-i...</div>
+      <div class="terjemahan show">
+        Tundukkanlah kepada kami segala lautan yang Engkau miliki, di bumi mahupun di langit, kerajaan dan alam malakut, lautan dunia dan lautan akhirat. Tundukkanlah segala sesuatu kepada kami, wahai Yang di tangan-Nya kekuasaan atas segala sesuatu.
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="card" style="text-align:center;">
+      <span class="tag">6 &middot; Fawatih</span>
+      <div class="arabic">كٓهٰيٰعٓصٓ</div>
+      <div class="translit">Kaaf Haa Yaa 'Ain Shaad. (dibaca 3×) — Surah Maryam, 1</div>
+      <div class="terjemahan show" style="text-align:center;">Huruf muqatta'ah pembuka Surah Maryam.</div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 7 -->
+    <div class="card">
+      <span class="tag">7 &middot; Sebaik-baik Penolong</span>
+      <div class="arabic">
+        انْصُرْنَا فَإِنَّكَ خَيْرُ النَّاصِرِيْنَ، وَافْتَحْ لَنَا فَإِنَّكَ خَيْرُ الْفَاتِحِيْنَ، وَاغْفِرْ لَنَا فَإِنَّكَ خَيْرُ الْغَافِرِيْنَ، وَارْحَمْنَا فَإِنَّكَ خَيْرُ الرَّاحِمِيْنَ، وَارْزُقْنَا فَإِنَّكَ خَيْرُ الرَّازِقِيْنَ، وَاهْدِنَا وَنَجِّنَا مِنَ الْقَوْمِ الظَّالِمِيْنَ.
+      </div>
+      <div class="translit">Unshurnaa fa innaka khairun-naashiriin...</div>
+      <div class="terjemahan show">
+        Tolonglah kami, kerana Engkaulah sebaik-baik Penolong. Berikanlah kemenangan kepada kami, kerana Engkaulah sebaik-baik Pembuka. Ampunilah kami, kerana Engkaulah sebaik-baik Pengampun. Rahmatilah kami, kerana Engkaulah sebaik-baik Penyayang. Berilah kami rezeki, kerana Engkaulah sebaik-baik Pemberi rezeki. Tunjukilah kami dan selamatkanlah kami daripada kaum yang zalim.
+      </div>
+    </div>
+    <!-- 8 -->
+    <div class="card">
+      <span class="tag">8 &middot; Angin yang Baik</span>
+      <div class="arabic">
+        وَهَبْ لَنَا رِيْحًا طَيِّبَةً كَمَا هِىَ فِى عِلْمِكَ، وَانْشُرْهَا عَلَيْنَا مِنْ خَزَائِنِ رَحْمَتِكَ، وَاحْمِلْنَا بِهَا حَمْلَ الْكَرَامَةِ مَعَ السَّلَامَةِ وَالْعَافِيَةِ فِى الدِّيْنِ وَالدُّنْيَا وَالْآخِرَةِ، إِنَّكَ عَلٰى كُلِّ شَيْءٍ قَدِيْرٌ.
+      </div>
+      <div class="translit">Wa hab lanaa riihan thayyibatan kamaa hiya fii 'ilmik...</div>
+      <div class="terjemahan show">
+        Kurniakanlah kepada kami angin yang baik sebagaimana yang ada dalam ilmu-Mu, hembuskanlah ia ke atas kami daripada khazanah rahmat-Mu, dan bawalah kami dengannya dalam kemuliaan bersama keselamatan dan kesejahteraan dalam agama, dunia dan akhirat. Sesungguhnya Engkau berkuasa atas segala sesuatu.
+      </div>
+    </div>
+    <!-- 9 -->
+    <div class="card">
+      <span class="tag">9 &middot; Kemudahan Urusan</span>
+      <div class="arabic">
+        اَللَّهُمَّ يَسِّرْ لَنَا أُمُوْرَنَا مَعَ الرَّاحَةِ لِقُلُوْبِنَا وَأَبْدَانِنَا وَالسَّلَامَةِ وَالْعَافِيَةِ فِى دِيْنِنَا وَدُنْيَانَا، وَكُنْ لَنَا صَاحِبًا فِى سَفَرِنَا وَخَلِيْفَةً فِى أَهْلِنَا، وَاطْمِسْ عَلٰى وُجُوْهِ أَعْدَائِنَا وَامْسَخْهُمْ عَلٰى مَكَانَتِهِمْ فَلَا يَسْتَطِيْعُوْنَ الْمُضِيَّ وَلَا الْمَجِيْءَ إِلَيْنَا.
+      </div>
+      <div class="translit">Allahumma yassir lanaa umuuranaa ma'ar-raahati li quluubinaa...</div>
+      <div class="terjemahan show">
+        Ya Allah, mudahkanlah urusan kami dengan ketenangan bagi hati dan tubuh kami, serta keselamatan dan kesejahteraan dalam agama dan dunia kami. Jadilah teman kami dalam perjalanan dan pelindung keluarga kami. Kaburkanlah wajah musuh kami dan bekukanlah mereka di tempat mereka, sehingga mereka tidak dapat maju mahupun sampai kepada kami.
+      </div>
+    </div>
+    <!-- 10 -->
+    <div class="card">
+      <span class="tag">10 &middot; Ayat 36:66-67</span>
+      <div class="arabic">
+        وَلَوْ نَشَاءُ لَطَمَسْنَا عَلٰى أَعْيُنِهِمْ فَاسْتَبَقُوا الصِّرَاطَ فَأَنّٰى يُبْصِرُوْنَ، وَلَوْ نَشَاءُ لَمَسَخْنَاهُمْ عَلٰى مَكَانَتِهِمْ فَمَا اسْتَطَاعُوْا مُضِيًّا وَلَا يَرْجِعُوْنَ.
+      </div>
+      <div class="translit">Wa lau nasyaa-u lathamasnaa 'alaa a'yunihim...</div>
+      <div class="terjemahan show">
+        Dan kalau Kami kehendaki, pasti Kami hapuskan penglihatan mereka, lalu mereka berlumba-lumba mencari jalan, maka bagaimanakah mereka dapat melihat? Dan kalau Kami kehendaki, pasti Kami ubah keadaan mereka di tempat mereka berada, sehingga mereka tidak sanggup maju dan tidak (pula) sanggup kembali.
+      </div>
+    </div>
+    <!-- 11 -->
+    <div class="card">
+      <span class="tag">11 &middot; Awal Surah Yasin</span>
+      <div class="arabic">
+        يٰسٓ، وَالْقُرْآنِ الْحَكِيْمِ، إِنَّكَ لَمِنَ الْمُرْسَلِيْنَ، عَلٰى صِرَاطٍ مُسْتَقِيْمٍ، تَنْزِيْلَ الْعَزِيْزِ الرَّحِيْمِ، لِتُنْذِرَ قَوْمًا مَا أُنْذِرَ آبَاؤُهُمْ فَهُمْ غَافِلُوْنَ، لَقَدْ حَقَّ الْقَوْلُ عَلٰى أَكْثَرِهِمْ فَهُمْ لَا يُؤْمِنُوْنَ، إِنَّا جَعَلْنَا فِى أَعْنَاقِهِمْ أَغْلَالًا فَهِىَ إِلَى الْأَذْقَانِ فَهُمْ مُقْمَحُوْنَ، وَجَعَلْنَا مِنْ بَيْنِ أَيْدِيْهِمْ سَدًّا وَمِنْ خَلْفِهِمْ سَدًّا فَأَغْشَيْنَاهُمْ فَهُمْ لَا يُبْصِرُوْنَ.
+      </div>
+      <div class="translit">Yaasiin, wal Qur-aanil hakiim... (Surah Yasin, 1-9)</div>
+      <div class="terjemahan show">
+        Yasin. Demi Al-Quran yang penuh hikmah, sesungguhnya engkau salah seorang daripada rasul-rasul, di atas jalan yang lurus. (Al-Quran ini) diturunkan oleh Yang Maha Perkasa lagi Maha Penyayang, agar engkau memberi peringatan kepada kaum yang bapa mereka belum pernah diberi peringatan. Sesungguhnya Kami jadikan belenggu di leher mereka hingga ke dagu sehingga mereka tertengadah. Kami adakan pula dinding di hadapan dan di belakang mereka, lalu Kami tutup (mata) mereka sehingga mereka tidak dapat melihat.
+      </div>
+    </div>
+    <!-- 12 -->
+    <div class="card" style="text-align:center;">
+      <span class="tag">12 &middot; Kehinaan Musuh</span>
+      <div class="arabic">شَاهَتِ الْوُجُوْهُ</div>
+      <div class="translit">Syaahatil wujuuh. (dibaca 3×)</div>
+      <div class="terjemahan show" style="text-align:center;">Rosaklah wajah-wajah (musuh) itu!</div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 13 -->
+    <div class="card">
+      <span class="tag">13 &middot; Ayat 20:111</span>
+      <div class="arabic">
+        وَعَنَتِ الْوُجُوْهُ لِلْحَىِّ الْقَيُّوْمِ وَقَدْ خَابَ مَنْ حَمَلَ ظُلْمًا.
+      </div>
+      <div class="translit">Wa 'anatil wujuuhu lil Hayyil Qayyuum wa qad khaaba man hamala zhulmaa.</div>
+      <div class="terjemahan show">
+        Dan tunduklah segala wajah dengan penuh hina kepada Allah Yang Maha Hidup lagi Maha Berdiri Sendiri. Dan sesungguhnya rugilah orang yang melakukan kezaliman.
+      </div>
+    </div>
+    <!-- 14 -->
+    <div class="card" style="text-align:center;">
+      <span class="tag">14 &middot; Fawatih</span>
+      <div class="arabic">طٰسٓ، حٰمٓ، عٓسٓقٓ</div>
+      <div class="translit">Thaa Siin, Haa Miim, 'Ain Siin Qaaf.</div>
+      <div class="terjemahan show" style="text-align:center;">Huruf-huruf muqatta'ah pembuka beberapa surah Al-Quran.</div>
+    </div>
+    <!-- 15 -->
+    <div class="card">
+      <span class="tag">15 &middot; Ayat 55:19-20</span>
+      <div class="arabic">
+        مَرَجَ الْبَحْرَيْنِ يَلْتَقِيَانِ، بَيْنَهُمَا بَرْزَخٌ لَا يَبْغِيَانِ.
+      </div>
+      <div class="translit">Marajal bahraini yaltaqiyaan, bainahumaa barzakhul laa yabghiyaan.</div>
+      <div class="terjemahan show">
+        Dia membiarkan dua laut mengalir, keduanya kemudian bertemu; di antara keduanya ada batas yang tidak dilampaui oleh masing-masing.
+      </div>
+    </div>
+    <!-- 16 -->
+    <div class="card" style="text-align:center;">
+      <span class="tag">16 &middot; Fawatih</span>
+      <div class="arabic">حٰمٓ</div>
+      <div class="translit">Haa Miim. (dibaca 7×)</div>
+      <div class="terjemahan show" style="text-align:center;">Huruf muqatta'ah pembuka Surah Ha-Mim (Ghafir dan lain-lain).</div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="7"><span>7×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 17 -->
+    <div class="card">
+      <span class="tag">17 &middot; Perkara Telah Selesai</span>
+      <div class="arabic">
+        حُمَّ الْأَمْرُ وَجَاءَ النَّصْرُ فَعَلَيْنَا لَا يُنْصَرُوْنَ.
+      </div>
+      <div class="translit">Hummal amru wa jaa-an-nashru fa 'alainaa laa yunsharuun.</div>
+      <div class="terjemahan show">
+        Telah ditetapkan perkara itu dan telah tiba kemenangan, maka mereka tidak akan mendapat pertolongan untuk melawan kami.
+      </div>
+    </div>
+    <!-- 18 -->
+    <div class="card">
+      <span class="tag">18 &middot; Awal Surah Ghafir</span>
+      <div class="arabic">
+        حٰمٓ، تَنْزِيْلُ الْكِتَابِ مِنَ اللهِ الْعَزِيْزِ الْعَلِيْمِ، غَافِرِ الذَّنْبِ وَقَابِلِ التَّوْبِ شَدِيْدِ الْعِقَابِ ذِى الطَّوْلِ لَا إِلٰهَ إِلَّا هُوَ إِلَيْهِ الْمَصِيْرُ.
+      </div>
+      <div class="translit">Haa Miim, tanziilul kitaabi minallaahil 'Aziizil 'Aliim... (Surah Ghafir, 1-3)</div>
+      <div class="terjemahan show">
+        Ha Mim. Diturunkan Kitab ini dari Allah Yang Maha Perkasa lagi Maha Mengetahui, Yang Mengampuni dosa dan Menerima taubat, yang keras hukuman-Nya, yang mempunyai kurnia. Tiada Tuhan selain Dia, kepada-Nyalah tempat kembali.
+      </div>
+    </div>
+    <!-- 19-23 grouped -->
+    <div class="card" style="text-align:center;">
+      <span class="tag">19-23 &middot; Pintu, Tembok, Atap, Kecukupan, Perlindungan</span>
+      <div class="arabic" style="line-height:2.6;">
+        بِسْمِ اللهِ بَابُنَا
+        <br>تَبَارَكَ حِيْطَانُنَا
+        <br>يٰسٓ سَقْفُنَا
+        <br>كٓهٰيٰعٓصٓ كِفَايَتُنَا
+        <br>حٰمٓ عٓسٓقٓ حِمَايَتُنَا
+      </div>
+      <div class="translit">Bismillaahi baabunaa. Tabaaraka hiithaanunaa. Yaasiin saqfunaa. Kaaf Haa Yaa 'Ain Shaad kifaayatunaa. Haa Miim 'Ain Siin Qaaf himaayatunaa.</div>
+      <div class="terjemahan show" style="text-align:center;">
+        <i>Bismillah</i> pintu kami. <i>Tabaraka</i> tembok-tembok kami. <i>Yasin</i> atap kami. <i>Kaf Ha Ya 'Ain Sad</i> kecukupan kami. <i>Ha Mim 'Ain Sin Qaf</i> perlindungan kami.
+      </div>
+    </div>
+    <!-- 24 -->
+    <div class="card">
+      <span class="tag">24 &middot; Ayat 2:137</span>
+      <div class="arabic">
+        فَسَيَكْفِيْكَهُمُ اللهُ وَهُوَ السَّمِيْعُ الْعَلِيْمُ.
+      </div>
+      <div class="translit">Fasayakfiikahumullaahu wa huwas Samii'ul 'Aliim. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Maka Allah akan memelihara engkau daripada mereka. Dan Dialah Yang Maha Mendengar lagi Maha Mengetahui.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 25 -->
+    <div class="card">
+      <span class="tag">25 &middot; Tirai 'Arasy</span>
+      <div class="arabic">
+        سِتْرُ الْعَرْشِ مَسْبُوْلٌ عَلَيْنَا، وَعَيْنُ اللهِ نَاظِرَةٌ إِلَيْنَا، بِحَوْلِ اللهِ لَا يُقْدَرُ عَلَيْنَا.
+      </div>
+      <div class="translit">Sitrul 'arsyi masbuulun 'alainaa, wa 'ainullaahi naazhiratun ilainaa...</div>
+      <div class="terjemahan show">
+        Tirai 'Arasy dilabuhkan ke atas kami, mata Allah memerhati kami, dengan kekuasaan Allah tiada siapa dapat mengalahkan kami.
+      </div>
+    </div>
+    <!-- 26 -->
+    <div class="card">
+      <span class="tag">26 &middot; Ayat 85:20-22</span>
+      <div class="arabic">
+        وَاللهُ مِنْ وَرَائِهِمْ مُحِيْطٌ، بَلْ هُوَ قُرْآنٌ مَجِيْدٌ، فِى لَوْحٍ مَحْفُوْظٍ.
+      </div>
+      <div class="translit">Wallaahu miw waraa-ihim muhiith, bal huwa Qur-aanum majiid, fii lauhim mahfuuzh.</div>
+      <div class="terjemahan show">
+        Dan Allah meliputi mereka dari belakang mereka. Bahkan itu ialah Al-Quran yang mulia, yang (tersimpan) dalam Lauh Mahfuz.
+      </div>
+    </div>
+    <!-- 27 -->
+    <div class="card">
+      <span class="tag">27 &middot; Ayat 12:64</span>
+      <div class="arabic">
+        فَاللهُ خَيْرٌ حَافِظًا وَهُوَ أَرْحَمُ الرَّاحِمِيْنَ.
+      </div>
+      <div class="translit">Fallaahu khairun haafizhaw wa huwa arhamur-raahimiin. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Maka Allah sebaik-baik Penjaga, dan Dialah Yang Maha Penyayang di antara para penyayang.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 28 -->
+    <div class="card">
+      <span class="tag">28 &middot; Ayat 7:196</span>
+      <div class="arabic">
+        إِنَّ وَلِيِّىَ اللهُ الَّذِى نَزَّلَ الْكِتَابَ وَهُوَ يَتَوَلَّى الصَّالِحِيْنَ.
+      </div>
+      <div class="translit">Inna waliyyiyallaahul-ladzii nazzalal Kitaaba wa huwa yatawallash-shaalihiin. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Sesungguhnya pelindungku ialah Allah yang menurunkan Al-Kitab (Al-Quran), dan Dialah yang melindungi orang-orang yang soleh.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 29 -->
+    <div class="card">
+      <span class="tag">29 &middot; Ayat 9:129</span>
+      <div class="arabic">
+        حَسْبِيَ اللهُ لَا إِلٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيْمِ.
+      </div>
+      <div class="translit">Hasbiyallaahu laa ilaaha illaa huwa 'alaihi tawakkaltu wa huwa Rabbul 'Arsyil 'Azhiim. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Cukuplah Allah bagiku, tiada Tuhan selain Dia. Hanya kepada-Nya aku bertawakal, dan Dialah Tuhan yang memiliki 'Arasy yang agung.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 30 -->
+    <div class="card">
+      <span class="tag">30 &middot; Perlindungan Nama Allah</span>
+      <div class="arabic">
+        بِسْمِ اللهِ الَّذِى لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِى الْأَرْضِ وَلَا فِى السَّمَاءِ وَهُوَ السَّمِيْعُ الْعَلِيْمُ.
+      </div>
+      <div class="translit">Bismillaahil-ladzii laa yadhurru ma'asmihii syai-un fil ardhi wa laa fis-samaa-i wa huwas Samii'ul 'Aliim. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Dengan nama Allah, yang bersama nama-Nya tiada sesuatu pun boleh membahayakan di bumi mahupun di langit; dan Dialah Yang Maha Mendengar lagi Maha Mengetahui.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 31 -->
+    <div class="card">
+      <span class="tag">31 &middot; Kalimah Allah yang Sempurna</span>
+      <div class="arabic">
+        أَعُوْذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.
+      </div>
+      <div class="translit">A'uudzu bikalimaatillaahit-taammaati min syarri maa khalaq. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Aku berlindung dengan kalimah-kalimah Allah yang sempurna daripada kejahatan apa yang Dia ciptakan.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 32 -->
+    <div class="card">
+      <span class="tag">32 &middot; Tiada Daya Melainkan Dengan Allah</span>
+      <div class="arabic">
+        وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِىِّ الْعَظِيْمِ.
+      </div>
+      <div class="translit">Wa laa hawla wa laa quwwata illaa billaahil 'Aliyyil 'Azhiim. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Dan tiada daya dan tiada kekuatan melainkan dengan pertolongan Allah Yang Maha Tinggi lagi Maha Besar.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 33 -->
+    <div class="card">
+      <span class="tag">33 &middot; Penutup</span>
+      <div class="arabic">
+        وَصَلَّى اللهُ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَعَلٰى آلِهِ وَصَحْبِهِ وَسَلَّمَ.
+      </div>
+      <div class="translit">Wa shallallaahu 'alaa Sayyidinaa Muhammadin wa 'alaa aalihii wa shahbihii wa sallam.</div>
+      <div class="terjemahan show">
+        Dan semoga Allah mencurahkan rahmat ke atas junjungan kami Muhammad, keluarga dan sahabat baginda, serta memberikan kesejahteraan ke atas mereka.
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="amiri">وَاللهُ الْمُسْتَعَانُ وَعَلَيْهِ التُّكْلَان</span>
+    Dikongsi dengan penuh kasih sayang
+  </footer>
+
+</section>
+
+<section class="wirid-section" id="sec-nawawi">
+
+  <div class="hero">
+    <div class="eyebrow">Himpunan Doa &amp; Zikir Pilihan</div>
+    <div class="mihrab">
+      <svg viewBox="0 0 150 190" fill="none">
+        <path d="M10 190 V90 Q10 20 75 15 Q140 20 140 90 V190" stroke="#c9a24a" stroke-width="2.2"/>
+        <path d="M28 190 V95 Q28 38 75 34 Q122 38 122 95 V190" stroke="#dab96a" stroke-width="1.3" opacity="0.7"/>
+        <circle cx="75" cy="34" r="4" fill="#c9a24a"/>
+        <path d="M75 8 L75 34 M62 20 L88 20" stroke="#c9a24a" stroke-width="1.5"/>
+        <path d="M75 4 A5 5 0 1 1 74.9 4" stroke="#dab96a" stroke-width="1.3" fill="none"/>
+      </svg>
+    </div>
+    <h1>حِزْبُ النَّوَوِي</h1>
+    <h2>Hizib Nawawi</h2>
+    <p class="sub">Himpunan doa perlindungan yang disusun dan diamalkan sendiri oleh Imam An-Nawawi, masyhur sebagai penjaga daripada sihir, pandangan jahat dan kejahatan syaitan serta jin.</p>
+    <div class="attrib">Susunan Imam Abu Zakaria Yahya bin Syaraf An-Nawawi Asy-Syafi'i</div>
+  </div>
+
+  <svg class="divider" viewBox="0 0 400 34" preserveAspectRatio="xMidYMid meet">
+    <path d="M0 17 H150"/>
+    <path d="M175 17 a10 10 0 1 0 10 -14 a8 8 0 1 1 -10 14 Z"/>
+    <path d="M250 17 H400"/>
+    <circle cx="200" cy="9" r="1.6"/>
+  </svg>
+
+  <div class="wrap">
+
+    <div class="info-toggle" data-info-toggle role="button" tabindex="0">
+      <span class="label">Tentang Hizib Nawawi</span>
+      <span class="chev">&#9662;</span>
+    </div>
+    <div class="info-body" data-info-body>
+      <div class="inner">
+        Hizib Nawawi disusun oleh <b>Imam An-Nawawi</b> &mdash; ulama fiqh mazhab Syafi'i dan ahli hadis, penyusun kitab <i>Riyadhus Shalihin</i> dan <i>Al-Arba'in An-Nawawiyah</i>. Hizib ini masyhur diamalkan dalam pelbagai tarekat termasuk Syadziliyah dan Qadiriyah.
+        <br><br>
+        Menurut kitab <i>Al-Kunuz An-Nuraniyah</i>, hizib ini terbukti berkesan untuk menjaga diri daripada sihir, pandangan jahat, dan kejahatan syaitan serta jin, di samping melapangkan kesusahan dan menolak tipu daya orang zalim.
+        <br><br>
+        <b>Cara mengamalkan</b> (pilih salah satu):
+        <br>&bull; 2&times; sehari &mdash; selepas Subuh hingga Dhuha, dan selepas Maghrib hingga Isyak
+        <br>&bull; 5&times; sehari &mdash; selepas setiap solat fardu
+        <br>&bull; 7&times; sehari &mdash; 5&times; selepas solat fardu, ditambah selepas Dhuha dan sebelum tidur
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="grp">
+        <button class="ctrl-btn" data-font-down aria-label="Kecilkan tulisan Arab">A-</button>
+        <button class="ctrl-btn" data-font-up aria-label="Besarkan tulisan Arab">A+</button>
+      </div>
+      <div class="toggle-switch">
+        Terjemahan
+        <div class="switch on" data-trans-switch role="switch" aria-checked="true" tabindex="0">
+          <div class="knob"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-wrap" data-progress-wrap></div>
+
+    <!-- 1 -->
+    <div class="card">
+      <span class="tag">1 &middot; Seribu Kali</span>
+      <div class="arabic">
+        بِسْمِ اللهِ، اَللهُ أَكْبَرُ، أَقُوْلُ عَلٰى نَفْسِى وَعَلٰى دِيْنِى وَعَلٰى أَهْلِى وَعَلٰى أَوْلَادِى وَعَلٰى مَالِى وَعَلٰى أَصْحَابِى وَعَلٰى أَدْيَانِهِمْ وَعَلٰى أَمْوَالِهِمْ أَلْفَ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِىِّ الْعَظِيْمِ.
+      </div>
+      <div class="translit">Bismillaahi Allaahu Akbar, aquulu 'alaa nafsii wa 'alaa diinii wa 'alaa ahlii...</div>
+      <div class="terjemahan show">
+        Dengan nama Allah; Allah Maha Besar. Aku berkata atas diriku, agamaku, keluargaku, anak-anakku, hartaku dan para sahabatku beserta agama dan harta mereka, seribu kali <i>lā ḥawla wa lā quwwata illā billāhil-'Aliyyil-'Aẓīm</i>.
+      </div>
+    </div>
+    <!-- 2 -->
+    <div class="card">
+      <span class="tag">2 &middot; Sejuta Kali</span>
+      <div class="arabic">
+        بِسْمِ اللهِ، اَللهُ أَكْبَرُ، اَللهُ أَكْبَرُ، أَقُوْلُ عَلٰى نَفْسِى وَعَلٰى دِيْنِى وَعَلٰى أَهْلِى وَعَلٰى أَوْلَادِى وَعَلٰى مَالِى وَعَلٰى أَصْحَابِى وَعَلٰى أَدْيَانِهِمْ وَعَلٰى أَمْوَالِهِمْ أَلْفَ أَلْفِ أَلْفِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِىِّ الْعَظِيْمِ.
+      </div>
+      <div class="translit">Bismillaahi Allaahu Akbar, Allaahu Akbar, aquulu 'alaa nafsii...</div>
+      <div class="terjemahan show">
+        Dengan nama Allah; Allah Maha Besar, Allah Maha Besar. Aku berkata atas diriku, agamaku, keluargaku, anak-anakku, hartaku dan para sahabatku beserta agama dan harta mereka, sejuta kali <i>lā ḥawla wa lā quwwata illā billāhil-'Aliyyil-'Aẓīm</i>.
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="card">
+      <span class="tag">3 &middot; Dengan Allah, Dari Allah</span>
+      <div class="arabic">
+        بِسْمِ اللهِ وَبِاللهِ وَمِنَ اللهِ وَإِلَى اللهِ وَعَلَى اللهِ وَفِى اللهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِىِّ الْعَظِيْمِ.
+      </div>
+      <div class="translit">Bismillaahi wa billaahi wa minallaahi wa ilallaahi wa 'alallaahi wa fillaahi...</div>
+      <div class="terjemahan show">
+        Dengan nama Allah; dengan Allah; dari Allah; kepada Allah; atas Allah; dan di dalam Allah; serta tiada daya dan tiada kekuatan melainkan dengan pertolongan Allah Yang Maha Tinggi lagi Maha Agung.
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="card">
+      <span class="tag">4 &middot; Atas Agama dan Diri</span>
+      <div class="arabic">
+        بِسْمِ اللهِ عَلٰى دِيْنِى وَعَلٰى نَفْسِى، بِسْمِ اللهِ عَلٰى مَالِى وَعَلٰى أَهْلِى وَعَلٰى أَوْلَادِى وَعَلٰى أَصْحَابِى، بِسْمِ اللهِ عَلٰى كُلِّ شَيْءٍ أَعْطَانِيْهِ رَبِّى.
+      </div>
+      <div class="translit">Bismillaahi 'alaa diinii wa 'alaa nafsii...</div>
+      <div class="terjemahan show">
+        Dengan nama Allah atas agamaku dan diriku. Dengan nama Allah atas hartaku, keluargaku, anak-anakku dan sahabat-sahabatku. Dengan nama Allah atas segala sesuatu yang dikurniakan Tuhanku kepadaku.
+      </div>
+    </div>
+    <!-- 5 -->
+    <div class="card">
+      <span class="tag">5 &middot; Tuhan Tujuh Petala Langit</span>
+      <div class="arabic">
+        بِسْمِ اللهِ رَبِّ السَّمٰوَاتِ السَّبْعِ، وَرَبِّ الْأَرَضِيْنَ السَّبْعِ، وَرَبِّ الْعَرْشِ الْعَظِيْمِ.
+      </div>
+      <div class="translit">Bismillaahi Rabbis-samaawaatis-sab'i, wa Rabbil ardhiinas-sab'i, wa Rabbil 'Arsyil 'Azhiim.</div>
+      <div class="terjemahan show">
+        Dengan nama Allah, Tuhan tujuh petala langit, Tuhan tujuh petala bumi, dan Tuhan 'Arasy yang agung.
+      </div>
+    </div>
+    <!-- 6 -->
+    <div class="card">
+      <span class="tag">6 &middot; Nama yang Tidak Membahayakan</span>
+      <div class="arabic">
+        بِسْمِ اللهِ الَّذِى لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِى الْأَرْضِ وَلَا فِى السَّمَاءِ وَهُوَ السَّمِيْعُ الْعَلِيْمُ.
+      </div>
+      <div class="translit">Bismillaahil-ladzii laa yadhurru ma'asmihii syai-un fil ardhi wa laa fis-samaa-i wahuwas-Samii'ul-'Aliim. (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Dengan nama Allah yang bersama nama-Nya tiada sesuatu pun boleh membahayakan di bumi mahupun di langit. Dia Maha Mendengar lagi Maha Mengetahui.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 7 -->
+    <div class="card">
+      <span class="tag">7 &middot; Sebaik-baik Nama</span>
+      <div class="arabic">
+        بِسْمِ اللهِ خَيْرِ الْأَسْمَاءِ فِى الْأَرْضِ وَفِى السَّمَاءِ.
+      </div>
+      <div class="translit">Bismillaahi khairil asmaa-i fil ardhi wa fis-samaa-i.</div>
+      <div class="terjemahan show">
+        Dengan nama Allah, sebaik-baik nama di bumi dan di langit.
+      </div>
+    </div>
+    <!-- 8 -->
+    <div class="card">
+      <span class="tag">8 &middot; Allah Lebih Mulia Daripada Ketakutanku</span>
+      <div class="arabic">
+        بِسْمِ اللهِ أَفْتَتِحُ وَبِهِ أَخْتَتِمُ، اَللهُ اَللهُ اَللهُ رَبِّى لَا أُشْرِكُ بِهِ أَحَدًا، اَللهُ اَللهُ اَللهُ لَا إِلٰهَ إِلَّا هُوَ، اَللهُ اَللهُ اَللهُ أَعَزُّ وَأَجَلُّ وَأَكْبَرُ مِمَّا أَخَافُ وَأَحْذَرُ.
+      </div>
+      <div class="translit">Bismillaahi aftatihu wa bihii akhtatim... (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Dengan nama Allah aku memulakan, dan dengan nama Allah aku mengakhiri. Allah, Allah, Allah, Tuhanku, aku tidak menyekutukan-Nya dengan sesuatu pun. Allah, Allah, Allah, tiada Tuhan selain Dia. Allah, Allah, Allah, lebih mulia, lebih agung dan lebih besar daripada apa yang aku takuti dan khuatiri.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 9 -->
+    <div class="card">
+      <span class="tag">9 &middot; Perlindungan Daripada Keburukan</span>
+      <div class="arabic">
+        اَللَّهُمَّ إِنِّى أَعُوْذُ بِكَ مِنْ شَرِّ نَفْسِى وَمِنْ شَرِّ غَيْرِى، مِنْ شَرِّ مَا خَلَقَ رَبِّى، بِكَ اللَّهُمَّ أَحْتَرِزُ مِنْهُمْ، وَبِكَ اللَّهُمَّ أَدْرَأُ فِى نُحُوْرِهِمْ، وَبِكَ اللَّهُمَّ أَعُوْذُ مِنْ شُرُوْرِهِمْ، وَأَسْتَكْفِيْكَ إِيَّاهُمْ، وَأُقَدِّمُ بَيْنَ يَدَىَّ وَأَيْدِيْهِمْ وَأَيْدِى مَنْ أَحَاطَتْهُ عِنَايَتِى وَشَمِلَتْهُ إِحَاطَتِى.
+      </div>
+      <div class="translit">Allahumma innii a'uudzu bika min syarri nafsii wa min syarri ghairii...</div>
+      <div class="terjemahan show">
+        Ya Allah, aku berlindung kepada-Mu daripada keburukan diriku dan keburukan orang lain, daripada keburukan apa yang Tuhanku ciptakan. Dengan-Mu ya Allah aku berjaga daripada mereka; dengan-Mu ya Allah aku tolak (kejahatan) pada leher mereka; dengan-Mu ya Allah aku berlindung daripada kejahatan mereka, dan aku memohon Engkau mencukupiku daripada mereka; dan aku kedepankan (perlindungan-Mu) di hadapanku dan di hadapan mereka, serta di hadapan sesiapa yang diliputi oleh perhatianku dan termasuk dalam lingkungan perlindunganku.
+      </div>
+    </div>
+    <!-- 10 -->
+    <div class="card">
+      <span class="tag">10 &middot; Surah Al-Ikhlas</span>
+      <div class="arabic">
+        بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ، قُلْ هُوَ اللهُ أَحَدٌ، اَللهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُوْلَدْ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ.
+      </div>
+      <div class="translit">Bismillaahir-Rahmaanir-Rahiim. Qul huwallaahu ahad... (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Katakanlah: Dialah Allah, Yang Maha Esa. Allah tempat bergantung segala sesuatu. Dia tiada beranak dan tiada diperanakkan, dan tiada sesuatu pun yang setara dengan-Nya. <span style="color:var(--gold-400)">(Surah Al-Ikhlas)</span>
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="3"><span>3×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 11 -->
+    <div class="card">
+      <span class="tag">11 &middot; Meliputi Segenap Arah</span>
+      <div class="arabic">
+        وَمِثْلُ ذٰلِكَ عَنْ يَمِيْنِى وَأَيْمَانِهِمْ، وَمِثْلُ ذٰلِكَ عَنْ شِمَالِى وَعَنْ شَمَائِلِهِمْ، وَمِثْلُ ذٰلِكَ أَمَامِى وَأَمَامَهُمْ، وَمِثْلُ ذٰلِكَ مِنْ خَلْفِى وَمِنْ خَلْفِهِمْ، وَمِثْلُ ذٰلِكَ مِنْ فَوْقِى وَمِنْ فَوْقِهِمْ، وَمِثْلُ ذٰلِكَ مِنْ تَحْتِى وَمِنْ تَحْتِهِمْ، وَمِثْلُ ذٰلِكَ مُحِيْطٌ بِى وَبِهِمْ، وَبِمَا أَحَطْنَا بِهِ.
+      </div>
+      <div class="translit">Wa mitslu dzaalika 'an yamiinii wa aimaanihim...</div>
+      <div class="terjemahan show">
+        Dan seperti itu jua dari arah kananku dan kanan mereka; dari arah kiriku dan kiri mereka; dari arah hadapanku dan hadapan mereka; dari arah belakangku dan belakang mereka; dari arah atasku dan atas mereka; dari arah bawahku dan bawah mereka. Dan seperti itu jua meliputi diriku, mereka, dan apa sahaja yang kami liputi.
+      </div>
+    </div>
+    <!-- 12 -->
+    <div class="card">
+      <span class="tag">12 &middot; Memohon Kebaikan &amp; Perlindungan</span>
+      <div class="arabic">
+        اَللَّهُمَّ إِنِّى أَسْأَلُكَ لِى وَلَهُمْ مِنْ خَيْرِكَ بِخَيْرِكَ الَّذِى لَا يَمْلِكُهُ غَيْرُكَ، اَللَّهُمَّ اجْعَلْنِى وَإِيَّاهُمْ فِى حِفْظِكَ وَعِيَاذِكَ وَعِيَالِكَ وَجِوَارِكَ وَأَمْنِكَ وَأَمَانَتِكَ وَحِزْبِكَ وَحِرْزِكَ وَكَنَفِكَ وَسِتْرِكَ وَلُطْفِكَ، وَمِنْ كُلِّ شَيْطَانٍ وَسُلْطَانٍ، وَإِنْسٍ وَجَانٍّ، وَبَاغٍ وَحَاسِدٍ، وَسَبُعٍ وَحَيَّةٍ وَعَقْرَبٍ، وَمِنْ شَرِّ كُلِّ دَابَّةٍ أَنْتَ آخِذٌ بِنَاصِيَتِهَا إِنَّ رَبِّى عَلٰى صِرَاطٍ مُسْتَقِيْمٍ.
+      </div>
+      <div class="translit">Allahumma innii as-aluka lii wa lahum min khairika...</div>
+      <div class="terjemahan show">
+        Ya Allah, aku memohon kepada-Mu untukku dan untuk mereka daripada kebaikan-Mu yang tiada dimiliki melainkan oleh-Mu. Ya Allah, jadikanlah aku dan mereka dalam pemeliharaan-Mu, perlindungan-Mu, naungan kasih sayang-Mu, jiranan-Mu, keamanan-Mu, amanah-Mu, golongan-Mu, benteng-Mu, naungan-Mu, tirai-Mu dan kelembutan-Mu, daripada segala syaitan dan penguasa zalim, jin dan manusia, orang yang menganiaya dan dengki, binatang buas, ular dan kala jengking, serta daripada kejahatan setiap makhluk yang berjalan yang ubun-ubunnya dalam genggaman-Mu. Sesungguhnya Tuhanku di atas jalan yang lurus.
+      </div>
+    </div>
+    <!-- 13 -->
+    <div class="card">
+      <span class="tag">13 &middot; Hasbiya (Cukuplah Bagiku)</span>
+      <div class="arabic">
+        حَسْبِيَ الرَّبُّ مِنَ الْمَرْبُوْبِيْنَ، حَسْبِيَ الْخَالِقُ مِنَ الْمَخْلُوْقِيْنَ، حَسْبِيَ الرَّازِقُ مِنَ الْمَرْزُوْقِيْنَ، حَسْبِيَ السَّاتِرُ مِنَ الْمَسْتُوْرِيْنَ، حَسْبِيَ النَّاصِرُ مِنَ الْمَنْصُوْرِيْنَ، حَسْبِيَ الْقَاهِرُ مِنَ الْمَقْهُوْرِيْنَ، حَسْبِيَ الَّذِى هُوَ حَسْبِى، حَسْبِيَ مَنْ لَمْ يَزَلْ حَسْبِى، حَسْبِيَ اللهُ وَنِعْمَ الْوَكِيْلُ، حَسْبِيَ اللهُ مِنْ جَمِيْعِ خَلْقِهِ.
+      </div>
+      <div class="translit">Hasbiyar-Rabbu minal marbuubiin...</div>
+      <div class="terjemahan show">
+        Cukuplah bagiku Tuhan sebagai Pemelihara di antara sekalian yang dipelihara. Cukuplah bagiku Al-Khaliq sebagai Pencipta di antara sekalian makhluk. Cukuplah bagiku Ar-Razzaq Pemberi rezeki di antara sekalian yang diberi rezeki. Cukuplah bagiku As-Satir Yang Menutupi di antara sekalian yang ditutupi. Cukuplah bagiku An-Nasir Sang Penolong di antara sekalian yang ditolong. Cukuplah bagiku Al-Qahir Yang Maha Perkasa di antara sekalian yang dikalahkan. Cukuplah bagiku Dia yang menjadi kecukupanku. Cukuplah bagiku Dia yang sentiasa menjadi kecukupanku. Cukuplah Allah bagiku dan Dialah sebaik-baik Pelindung. Cukuplah Allah bagiku daripada seluruh makhluk-Nya.
+      </div>
+    </div>
+    <!-- 14 -->
+    <div class="card">
+      <span class="tag">14 &middot; Ayat 7:196 &amp; 17:45-46</span>
+      <div class="arabic">
+        إِنَّ وَلِيِّىَ اللهُ الَّذِى نَزَّلَ الْكِتَابَ وَهُوَ يَتَوَلَّى الصَّالِحِيْنَ، وَإِذَا قَرَأْتَ الْقُرْآنَ جَعَلْنَا بَيْنَكَ وَبَيْنَ الَّذِيْنَ لَا يُؤْمِنُوْنَ بِالْآخِرَةِ حِجَابًا مَسْتُوْرًا، وَجَعَلْنَا عَلٰى قُلُوْبِهِمْ أَكِنَّةً أَنْ يَفْقَهُوْهُ وَفِى آذَانِهِمْ وَقْرًا، وَإِذَا ذَكَرْتَ رَبَّكَ فِى الْقُرْآنِ وَحْدَهُ وَلَّوْا عَلٰى أَدْبَارِهِمْ نُفُوْرًا.
+      </div>
+      <div class="translit">Inna waliyyiyallaahul-ladzii nazzalal Kitaaba wa huwa yatawallash-shaalihiin...</div>
+      <div class="terjemahan show">
+        Sesungguhnya pelindungku ialah Allah yang menurunkan Al-Kitab, dan Dialah yang melindungi orang-orang yang soleh. Apabila engkau membaca Al-Quran, Kami adakan antara engkau dan mereka yang tidak beriman kepada akhirat suatu dinding yang tertutup. Dan Kami adakan tutupan di atas hati mereka dan sumbatan di telinga mereka, agar mereka tidak dapat memahaminya. Dan apabila engkau menyebut Tuhanmu sahaja dalam Al-Quran, mereka berpaling ke belakang kerana bencinya.
+      </div>
+    </div>
+    <!-- 15 -->
+    <div class="card">
+      <span class="tag">15 &middot; Cukuplah Allah — 7×</span>
+      <div class="arabic">
+        فَإِنْ تَوَلَّوْا فَقُلْ حَسْبِيَ اللهُ لَا إِلٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيْمِ.
+      </div>
+      <div class="translit">Fa in tawallau faqul hasbiyallaahu laa ilaaha illaa huwa...(dibaca 7×) — Surah At-Taubah, 129</div>
+      <div class="terjemahan show">
+        Jika mereka berpaling, maka katakanlah: "Cukuplah Allah bagiku; tiada Tuhan selain Dia. Hanya kepada-Nya aku bertawakal, dan Dialah Tuhan yang memiliki 'Arasy yang agung."
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">Dibaca</span>
+        <button class="tasbih-btn" data-max="7"><span>7×</span><span class="count">0</span></button>
+      </div>
+    </div>
+    <!-- 16 -->
+    <div class="card">
+      <span class="tag">16 &middot; Selawat Penutup</span>
+      <div class="arabic">
+        وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِىِّ الْعَظِيْمِ. وَصَلَّى اللهُ عَلٰى سَيِّدِنَا مُحَمَّدٍ النَّبِىِّ الْأُمِّىِّ وَعَلٰى آلِهِ وَصَحْبِهِ وَسَلَّمَ.
+      </div>
+      <div class="translit">Wa laa hawla wa laa quwwata illaa billaahil 'Aliyyil 'Azhiim...</div>
+      <div class="terjemahan show">
+        Dan tiada daya dan tiada kekuatan melainkan dengan pertolongan Allah Yang Maha Tinggi lagi Maha Agung. Semoga Allah melimpahkan rahmat ke atas junjungan kami Nabi Muhammad, Nabi yang ummi, serta keluarga dan para sahabat baginda.
+      </div>
+    </div>
+
+    <div class="section-label">﴾ Selepas Menghembus Nafas 4 Arah ﴿</div>
+    <div class="card" style="text-align:center;">
+      <div class="terjemahan show" style="text-align:center; max-height:none; opacity:1; border:none; padding:0; margin:0;">
+        Selepas itu, hembuskan nafas tanpa berludah ke arah <b>KANAN</b> (3×), <b>KIRI</b> (3×), <b>DEPAN</b> (3×), <b>BELAKANG</b> (3×), kemudian teruskan dengan doa berikut:
+      </div>
+    </div>
+
+    <!-- 17 -->
+    <div class="card">
+      <span class="tag">17 &middot; Simpanan di Perbendaharaan Bismillah</span>
+      <div class="arabic">
+        خَبَأْتُ نَفْسِى فِى خَزَائِنِ بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ، أَقْفَالُهَا ثِقَتِى بِاللهِ، مَفَاتِيْحُهَا لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ.
+      </div>
+      <div class="translit">Khaba-tu nafsii fii khazaa-ini bismillaahir-Rahmaanir-Rahiim...</div>
+      <div class="terjemahan show">
+        Aku sembunyikan diriku di dalam gedung simpanan <i>Bismillahir-Rahmanir-Rahim</i>. Kuncinya adalah kepercayaanku kepada Allah. Anak kuncinya adalah <i>lā ḥawla wa lā quwwata illā billāh</i>.
+      </div>
+    </div>
+    <!-- 18 -->
+    <div class="card">
+      <span class="tag">18 &middot; Aku Masuk Dalam Naungan Allah</span>
+      <div class="arabic">
+        أُدَافِعُ بِكَ اللَّهُمَّ عَنْ نَفْسِى مَا أُطِيْقُ وَمَا لَا أُطِيْقُ، لَا طَاقَةَ لِمَخْلُوْقٍ مَعَ قُدْرَةِ الْخَالِقِ، حَسْبِيَ اللهُ وَنِعْمَ الْوَكِيْلُ، بِخَفِىِّ لُطْفِ اللهِ، بِلَطِيْفِ صُنْعِ اللهِ، بِجَمِيْلِ سِتْرِ اللهِ، دَخَلْتُ فِى كَنَفِ اللهِ، تَشَفَّعْتُ بِسَيِّدِنَا رَسُوْلِ اللهِ، تَحَصَّنْتُ بِأَسْمَاءِ اللهِ، آمَنْتُ بِاللهِ، تَوَكَّلْتُ عَلَى اللهِ، اِدَّخَرْتُ اللهَ لِكُلِّ شِدَّةٍ.
+      </div>
+      <div class="translit">Udaafi'u bikallaahumma 'an nafsii maa uthiiqu wa maa laa uthiiq...</div>
+      <div class="terjemahan show">
+        Aku pertahankan diriku dengan-Mu ya Allah daripada apa yang aku mampu dan yang tidak aku mampu. Tiada daya bagi makhluk berhadapan dengan kekuasaan Al-Khaliq. Cukuplah Allah bagiku dan Dialah sebaik-baik Pelindung. Dengan kelembutan Allah yang tersembunyi, dengan keindahan ciptaan Allah, dengan keindahan tirai Allah, aku masuk ke dalam naungan Allah; aku bertawassul dengan junjungan kami Rasulullah; aku berlindung dengan nama-nama Allah; aku beriman kepada Allah; aku bertawakal kepada Allah; aku menyimpan (memohon) Allah bagi setiap kesulitan.
+      </div>
+    </div>
+    <!-- 19 -->
+    <div class="card">
+      <span class="tag">19 &middot; Yang Namanya Dicintai</span>
+      <div class="arabic">
+        اَللَّهُمَّ يَا مَنِ اسْمُهُ مَحْبُوْبٌ، وَوَجْهُهُ مَطْلُوْبٌ، إِكْفِنِى مَا قَلْبِى مِنْهُ مَرْهُوْبٌ، أَنْتَ غَالِبٌ غَيْرُ مَغْلُوْبٍ، وَصَلَّى اللهُ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَآلِهِ وَصَحْبِهِ وَسَلَّمَ، حَسْبِيَ اللهُ وَنِعْمَ الْوَكِيْلُ.
+      </div>
+      <div class="translit">Allahumma yaa manismuhuu mahbuub, wa wajhuhuu mathluub...</div>
+      <div class="terjemahan show">
+        Ya Allah, wahai Tuhan yang nama-Nya dicintai dan wajah-Nya (redha-Nya) sentiasa dicari; cukupilah aku daripada apa yang hatiku takuti. Engkaulah Yang Maha Mengalahkan, tidak pernah terkalahkan. Semoga Allah melimpahkan rahmat ke atas junjungan kami Nabi Muhammad, keluarga dan sahabat baginda. Cukuplah Allah bagiku dan Dialah sebaik-baik Pelindung.
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="amiri">وَاللهُ الْمُسْتَعَانُ وَعَلَيْهِ التُّكْلَان</span>
+    Dikongsi dengan penuh kasih sayang
+  </footer>
+
+</section>
+
+<section class="wirid-section" id="sec-sakran">
+
+  <div class="hero">
+    <div class="eyebrow">Himpunan Doa &amp; Zikir Pilihan</div>
+    <div class="mihrab">
+      <svg viewBox="0 0 150 190" fill="none">
+        <path d="M10 190 V90 Q10 20 75 15 Q140 20 140 90 V190" stroke="#c9a24a" stroke-width="2.2"/>
+        <path d="M28 190 V95 Q28 38 75 34 Q122 38 122 95 V190" stroke="#dab96a" stroke-width="1.3" opacity="0.7"/>
+        <circle cx="75" cy="34" r="4" fill="#c9a24a"/>
+        <path d="M75 8 L75 34 M62 20 L88 20" stroke="#c9a24a" stroke-width="1.5"/>
+        <path d="M75 4 A5 5 0 1 1 74.9 4" stroke="#dab96a" stroke-width="1.3" fill="none"/>
+      </svg>
+    </div>
+    <h1>وِرْدُ السَّكْرَان</h1>
+    <h2>Wirid Sakran</h2>
+    <p class="sub">Himpunan doa &amp; zikir perlindungan dari Al-Qur'an dan hadis, disusun oleh Al-Habib Abu Bakar bin Abdurrahman As-Sakran Assegaf — diamalkan dalam Thariqah Ba'alawi untuk memohon perlindungan Allah SWT ke atas diri dan keluarga.</p>
+    <div class="attrib">Imam Abu Bakar As-Sakran bin Syeikh al-Ghauth Abdurrahman Assegaf</div>
+  </div>
+
+  <svg class="divider" viewBox="0 0 400 34" preserveAspectRatio="xMidYMid meet">
+    <path d="M0 17 H150"/>
+    <path d="M175 17 a10 10 0 1 0 10 -14 a8 8 0 1 1 -10 14 Z"/>
+    <path d="M250 17 H400"/>
+    <circle cx="200" cy="9" r="1.6"/>
+  </svg>
+
+  <div class="wrap">
+
+    <div class="info-toggle" data-info-toggle role="button" tabindex="0">
+      <span class="label">Tentang Wirid Sakran</span>
+      <span class="chev">&#9662;</span>
+    </div>
+    <div class="info-body" data-info-body>
+      <div class="inner">
+        Wirid Sakran ialah himpunan doa dan zikir yang dikumpulkan daripada ayat-ayat Al-Qur'an dan hadis dengan sanad yang thabit, disusun oleh <b>Al-Habib Abu Bakar bin Abdurrahman As-Sakran Assegaf</b>. Baginda digelar <i>"As-Sakran"</i> (mabuk) kerana kecintaan baginda yang mendalam kepada Allah SWT, sehingga digambarkan seperti mabuk dalam kecintaan tersebut.
+        <br><br>
+        Wirid ini menjadi amalan tetap dalam Thariqah Ba'alawi dan diamalkan untuk:
+        <br>• Memohon perlindungan Allah daripada gangguan dan kejahatan makhluk — jin dan manusia.
+        <br>• Melindungi diri dan keluarga daripada sihir serta gangguan ghaib.
+        <br><br>
+        Boleh diamalkan pada waktu pagi dan petang, khususnya ketika berasa terancam atau memerlukan perlindungan khusus.
+        <br><br>
+        <i>Nota sanad:</i> Sesetengah riwayat menisbahkan wirid ini kepada putera baginda, As-Sayyid Ali bin Abi Bakar As-Sakran As-Saqqaf (818–895H), dan ada juga yang menisbahkannya kepada cucunda baginda, As-Sayyid Abdurrahman bin Ali bin Abi Bakar (850–923H).
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="grp">
+        <button class="ctrl-btn" data-font-down aria-label="Kecilkan tulisan Arab">A-</button>
+        <button class="ctrl-btn" data-font-up aria-label="Besarkan tulisan Arab">A+</button>
+      </div>
+      <div class="toggle-switch">
+        Terjemahan
+        <div class="switch on" data-trans-switch role="switch" aria-checked="true" tabindex="0">
+          <div class="knob"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-wrap" data-progress-wrap></div>
+
+    <!-- CARD 0: Bismillah -->
+    <div class="card" style="text-align:center;">
+      <div class="arabic" style="font-size:calc(var(--arfs, 24px) + 4px);">
+        بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+      </div>
+      <div class="translit">Bismillaahir-Rahmaanir-Rahiim</div>
+      <div class="terjemahan show" style="text-align:center;">
+        Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang.
+      </div>
+    </div>
+
+    <!-- CARD 1: Pembukaan -->
+    <div class="card">
+      <span class="tag">Pembukaan</span>
+      <div class="arabic">
+        اَللَّهُمَّ إِنِّى احْتَطْتُ بِدَرْبِ اللهِ، طُوْلُهُ مَا شَاءَ اللهُ، قُفْلُهُ لَا إِلٰهَ إِلَّا اللهُ، بَابُهُ مُحَمَّدٌ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ وَسَلَّمَ، سَقْفُهُ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِيِّ الْعَظِيْمِ.
+      </div>
+      <div class="translit">
+        Allahumma inni ihtatthu bi-darbillah, thuuluhu maa syaa-Allah, qufluhu laa ilaaha illallah, baabuhu Muhammadur Rasulullahi shallallahu 'alaihi wa aalihi wa sallam, saqfuhu laa hawla wa laa quwwata illaa billaahil 'Aliyyil 'Azhiim.
+      </div>
+      <div class="terjemahan show">
+        Ya Allah, aku berlindung dan membentengi diriku dengan benteng Allah; panjangnya seluas kehendak Allah, kuncinya <i>Lā ilāha illallāh</i>, pintunya Muhammad Rasulullah SAW, atapnya <i>lā ḥawla wa lā quwwata illā billāhil-'Aliyyil-'Aẓīm</i>.
+      </div>
+    </div>
+
+    <!-- CARD 2: Al-Fatihah -->
+    <div class="card">
+      <span class="tag">Perlindungan Al-Fatihah</span>
+      <div class="arabic">
+        أَحَاطَ بِنَا مِنْ ﴿بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ<span class="ayah-end">١</span> الْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَ<span class="ayah-end">٢</span> الرَّحْمٰنِ الرَّحِيْمِ<span class="ayah-end">٣</span> مٰلِكِ يَوْمِ الدِّيْنِ<span class="ayah-end">٤</span> إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِيْنُ<span class="ayah-end">٥</span> اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيْمَ<span class="ayah-end">٦</span> صِرَاطَ الَّذِيْنَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّآلِّيْنَ﴾<span class="ayah-end">٧</span>
+      </div>
+      <div class="translit">
+        Ahaatha binaa min Bismillaahir-Rahmaanir-Rahiim… (Surah Al-Fatihah, ayat 1–7)
+      </div>
+      <div class="terjemahan show">
+        Melingkungi kami dengan <i>Bismillah</i> hingga akhir Surah Al-Fatihah — memohon petunjuk ke jalan yang lurus, jalan mereka yang diberi nikmat, bukan yang dimurkai atau yang sesat.
+      </div>
+    </div>
+
+    <!-- CARD 2b: Suurun Suurun Suurun -->
+    <div class="card" style="text-align:center;">
+      <span class="tag">Penegas</span>
+      <div class="arabic" style="letter-spacing:0.08em;">
+        سُوْرٌ سُوْرٌ سُوْرٌ،
+      </div>
+      <div class="translit">Suurun, suurun, suurun (dibaca 3 kali)</div>
+      <div class="terjemahan show" style="text-align:center;">
+        Tembok, tembok, tembok — memohon dinding perlindungan berlapis-lapis, menyambung makna "tanpa parit dan tanpa tembok" sebelum ini, sebelum menyambung dengan Ayat Al-Kursi.
+      </div>
+    </div>
+
+    <!-- CARD 3: Ayat Kursi -->
+    <div class="card">
+      <span class="tag">Ayat Al-Kursi</span>
+      <div class="arabic">
+        وَآيَةٌ: اَللهُ لَا إِلٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّوْمُ، لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ، لَهُ مَا فِى السَّمٰوَاتِ وَمَا فِى الْأَرْضِ، مَنْ ذَا الَّذِيْ يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ، يَعْلَمُ مَا بَيْنَ أَيْدِيْهِمْ وَمَا خَلْفَهُمْ، وَلَا يُحِيْطُوْنَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ، وَسِعَ كُرْسِيُّهُ السَّمٰوَاتِ وَالْأَرْضَ، وَلَا يَؤُوْدُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيْمُ.
+      </div>
+      <div class="translit">
+        Wa aayatun: Allahu laa ilaaha illaa huwal Hayyul Qayyuum… wa huwal 'Aliyyul 'Azhiim. (Surah Al-Baqarah, ayat 255)
+      </div>
+      <div class="terjemahan show">
+        Allah, tiada Tuhan selain Dia, Yang Maha Hidup lagi Maha Berdiri Sendiri. Tidak mengantuk dan tidak tidur. Kepunyaan-Nya apa yang di langit dan di bumi. Kursi-Nya meliputi langit dan bumi, dan Dia tidak berat memelihara keduanya. Dialah Yang Maha Tinggi lagi Maha Besar.
+      </div>
+    </div>
+
+    <div class="section-label">﴾ Perlindungan Seperti Kota Madinah ﴿</div>
+
+    <!-- CARD 4 -->
+    <div class="card">
+      <span class="tag">Benteng Perlindungan</span>
+      <div class="arabic">
+        بِنَا اسْتَدَارَتْ كَمَا اسْتَدَارَتِ الْمَلَائِكَةُ بِمَدِيْنَةِ الرَّسُوْلِ، بِلَا خَنْدَقٍ وَلَا سُوْرٍ، مِنْ كُلِّ قَدَرٍ مَقْدُوْرٍ، وَحَذَرٍ مَحْذُوْرٍ، وَمِنْ جَمِيْعِ الشُّرُوْرِ،
+        <br><br>
+        تَتَرَّسْـنَا بِاللهِ <span class="ayah-end">(٣×)</span>،
+      </div>
+      <div class="translit">Binastadaarat kamastadaaratil malaa-ikatu bi-madiinatir-Rasuul… Tatarrasnaa billaah (dibaca 3×)</div>
+      <div class="terjemahan show">
+        Semoga ia mengelilingi kami sebagaimana para malaikat mengelilingi kota Madinah Rasulullah SAW — tanpa parit dan tanpa tembok — daripada segala takdir yang ditentukan, ancaman yang dikhuatiri, dan segala kejahatan. Kami bertameng dengan Allah <i>(dibaca 3 kali)</i>.
+      </div>
+      <div class="repeat-row">
+        <span class="rlabel">تَتَرَّسْنَا بِاللهِ</span>
+        <button class="tasbih-btn" data-max="3">
+          <span>3×</span><span class="count">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="card">
+      <span class="tag">Seratus Ribu Kali Ganda</span>
+      <div class="arabic">
+        مِنْ عَدُوِّنَا وَعَدُوِّ اللهِ، مِنْ سَاقِ عَرْشِ اللهِ إِلَى قَاعِ أَرْضِ اللهِ، بِمِائَةِ أَلْفِ أَلْفِ أَلْفِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِيِّ الْعَظِيْمِ؛
+        <br><br>
+        صَنْعَتُهُ لَا تَنْقَطِعُ بِمِائَةِ أَلْفِ أَلْفِ أَلْفِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِيِّ الْعَظِيْمِ؛
+        <br><br>
+        عَزِيْمَتُهُ لَا تَنْشَقُّ بِمِائَةِ أَلْفِ أَلْفِ أَلْفِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِيِّ الْعَظِيْمِ.
+      </div>
+      <div class="translit">
+        Min 'aduwwinaa wa 'aduwwillah… bi-mi-ati alfi alfi alfi laa hawla wa laa quwwata illaa billaahil 'Aliyyil 'Azhiim.
+      </div>
+      <div class="terjemahan show">
+        Daripada musuh kami dan musuh Allah, dari kaki 'Arasy Allah hingga ke dasar bumi Allah, dengan seratus ribu ribu ribu kali <i>lā ḥawla wa lā quwwata illā billāh</i> — perbuatan-Nya tidak akan terputus, keazaman-Nya tidak akan tertembusi.
+      </div>
+    </div>
+
+    <div class="section-label">﴾ Doa Perlindungan Diri &amp; Keluarga ﴿</div>
+
+    <!-- CARD 6 -->
+    <div class="card">
+      <span class="tag">Penutup</span>
+      <div class="arabic">
+        اَللَّهُمَّ إِنْ أَحَدٌ أَرَادَنِى بِسُوْءٍ مِنَ الْجِنِّ وَالْإِنْسِ وَالْوُحُوْشِ وَغَيْرِهِمْ مِنْ سَائِرِ الْمَخْلُوْقَاتِ، مِنْ بَشَرٍ أَوْ شَيْطَانٍ أَوْ سُلْطَانٍ أَوْ وَسْوَاسٍ، فَارْدُدْ نَظَرَهُمْ فِى انْتِكَاسٍ، وَقُلُوْبَهُمْ فِى وَسْوَاسٍ، وَأَيْدِيَهُمْ فِى إِفْلَاسٍ، وَأَوْبِقْهُمْ مِنَ الرِّجْلِ إِلَى الرَّأْسِ، لَا فِى سَهْلٍ يُقْطَعُ وَلَا فِى جَبَلٍ يُطْلَعُ، بِمِائَةِ أَلْفِ أَلْفِ أَلْفِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ الْعَلِيِّ الْعَظِيْمِ.
+      </div>
+      <div class="translit">
+        Allahumma in ahadun araadanii bisuu-in minal jinni wal-insi wal-wuhuusy… bi-mi-ati alfi alfi alfi laa hawla wa laa quwwata illaa billaahil 'Aliyyil 'Azhiim.
+      </div>
+      <div class="terjemahan show">
+        Ya Allah, sekiranya ada sesiapa yang berniat jahat terhadapku — dari kalangan jin, manusia, binatang buas, mahupun makhluk lain, sama ada manusia, syaitan, penguasa zalim atau bisikan jahat — maka balikkanlah pandangan mereka, kacaukanlah hati mereka, gagalkanlah usaha mereka, binasakanlah mereka dari kaki hingga kepala, tiada tanah lapang mahupun gunung yang dapat mereka daki, dengan seratus ribu ribu ribu kali <i>lā ḥawla wa lā quwwata illā billāh</i>.
+      </div>
+    </div>
+
+    <!-- CARD 7: Penutup -->
+    <div class="card">
+      <span class="tag">Penutup</span>
+      <div class="arabic">
+        وَصَلَّى اللهُ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَعَلٰى آلِهِ وَسَلَّمَ.
+        <br><br>
+        سُبْحٰنَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُوْنَ ۝ وَسَلَامٌ عَلَى الْمُرْسَلِيْنَ ۝ وَالْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَ ۝
+        <br><br>
+        فِيْ كُلِّ لَحْظَةٍ أَبَدًا، عَدَدَ خَلْقِهِ، وَرِضَى نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.
+      </div>
+      <div class="translit">
+        Wa shallallaahu 'alaa Sayyidinaa Muhammadin wa 'alaa aalihi wa sallam. Subhaana Rabbika Rabbil 'izzati 'ammaa yashifuun, wa salaamun 'alal mursaliin, wal hamdu lillaahi Rabbil 'aalamiin. Fii kulli lahzhatin abadan, 'adada khalqihi, wa ridhaa nafsihi, wa zinata 'arsyihi, wa midaada kalimaatih.
+      </div>
+      <div class="terjemahan show">
+        Semoga Allah mencurahkan rahmat ke atas junjungan kami Nabi Muhammad SAW dan keluarga baginda. Maha Suci Tuhanmu, Tuhan yang mempunyai keperkasaan, daripada apa yang mereka sifatkan; sejahtera ke atas para rasul; dan segala puji bagi Allah, Tuhan sekalian alam. <span style="color:var(--gold-400)">(Surah As-Saffat, 180–182)</span> — pada setiap saat, selama-lamanya, sebanyak bilangan makhluk-Nya, seluas keredhaan diri-Nya, seberat timbangan Arasy-Nya, dan sebanyak tinta bagi kalimah-kalimah-Nya.
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="amiri">وَاللهُ الْمُسْتَعَانُ وَعَلَيْهِ التُّكْلَان</span>
+    Dikongsi dengan penuh kasih sayang<br>
+    Sumber: Wirid Imam Abu Bakar bin Abdurrahman As-Sakran Assegaf
+  </footer>
+
+</section>
+
+<script>
+  // ---------- Tab switching ----------
+  const tabbtns = document.querySelectorAll('.tabbtn');
+  const sections = document.querySelectorAll('.wirid-section');
+  tabbtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      tabbtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.target;
+      sections.forEach(s=> s.classList.toggle('active', s.id === 'sec-' + target));
+      window.scrollTo({top:0, behavior:'smooth'});
+      initActiveSection();
+    });
+  });
+
+  // ---------- Font size (global, shared across all sections) ----------
+  let fs = 24;
+  const root = document.documentElement;
+  document.querySelectorAll('[data-font-up]').forEach(b=> b.addEventListener('click', ()=>{
+    fs = Math.min(fs+2, 34); root.style.setProperty('--arfs', fs+'px');
+  }));
+  document.querySelectorAll('[data-font-down]').forEach(b=> b.addEventListener('click', ()=>{
+    fs = Math.max(fs-2, 16); root.style.setProperty('--arfs', fs+'px');
+  }));
+
+  // ---------- Translation toggle (global) ----------
+  let transOn = true;
+  function applyTrans(){
+    document.querySelectorAll('.terjemahan').forEach(el=> el.classList.toggle('hide-mode', !transOn));
+    document.querySelectorAll('[data-trans-switch]').forEach(sw=>{
+      sw.classList.toggle('on', transOn);
+      sw.setAttribute('aria-checked', transOn);
+    });
+  }
+  function flipTrans(){ transOn = !transOn; applyTrans(); }
+  document.querySelectorAll('[data-trans-switch]').forEach(sw=>{
+    sw.addEventListener('click', flipTrans);
+    sw.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();flipTrans();} });
+  });
+  applyTrans();
+
+  // ---------- Info accordion (per section) ----------
+  document.querySelectorAll('[data-info-toggle]').forEach(toggle=>{
+    const body = toggle.nextElementSibling;
+    function toggleFn(){
+      const isOpen = toggle.classList.toggle('open');
+      body.style.maxHeight = isOpen ? body.scrollHeight + 'px' : '0px';
+    }
+    toggle.addEventListener('click', toggleFn);
+    toggle.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleFn();} });
+  });
+
+  // ---------- Tasbih counters ----------
+  document.querySelectorAll('.tasbih-btn').forEach(btn=>{
+    let count = 0;
+    const max = parseInt(btn.dataset.max, 10);
+    const countEl = btn.querySelector('.count');
+    btn.addEventListener('click', ()=>{
+      count = count >= max ? 0 : count + 1;
+      countEl.textContent = count;
+      btn.classList.toggle('done', count === max);
+      if(navigator.vibrate) navigator.vibrate(15);
+    });
+  });
+
+  // ---------- Progress dots (per active section) ----------
+  function initActiveSection(){
+    const activeSection = document.querySelector('.wirid-section.active');
+    if(!activeSection) return;
+    const progressWrap = activeSection.querySelector('[data-progress-wrap]');
+    if(!progressWrap || progressWrap.dataset.init) return;
+    const cards = Array.from(activeSection.querySelectorAll('.card'));
+    if(cards.length === 0) return;
+    cards.forEach(c=>{
+      const dot = document.createElement('div');
+      dot.className = 'pdot';
+      dot.addEventListener('click', ()=> c.scrollIntoView({behavior:'smooth', block:'center'}));
+      progressWrap.appendChild(dot);
+    });
+    const dots = Array.from(progressWrap.children);
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const idx = cards.indexOf(entry.target);
+        if(entry.isIntersecting){
+          dots.forEach(d=>d.classList.remove('active'));
+          if(dots[idx]) dots[idx].classList.add('active');
+        }
+      });
+    }, {threshold:0.5});
+    cards.forEach(c=>spy.observe(c));
+    progressWrap.dataset.init = "1";
+  }
+  initActiveSection();
+</script>
+
+</body>
+</html>
