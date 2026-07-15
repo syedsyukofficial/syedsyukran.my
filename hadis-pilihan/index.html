@@ -106,29 +106,154 @@
     color:var(--ink);
   }
   .cats{
-    display:flex;
-    flex-wrap:wrap;
-    gap:.5rem;
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(108px, 1fr));
+    gap:.55rem;
     margin-top:1rem;
   }
   .cat-btn{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:.3rem;
     border:1px solid var(--border);
     background:var(--card);
     color:var(--ink);
-    padding:.5rem .95rem;
-    border-radius:999px;
-    font-size:.82rem;
+    padding:.7rem .5rem;
+    min-height:76px;
+    border-radius:14px;
+    font-size:.74rem;
     font-weight:500;
+    line-height:1.25;
+    text-align:center;
     cursor:pointer;
     transition:all .15s ease;
-    white-space:nowrap;
   }
-  .cat-btn:hover{border-color:var(--primary);}
+  .cat-btn .emoji{font-size:1.25rem;}
+  .cat-btn:hover{border-color:var(--primary); transform:translateY(-1px);}
   .cat-btn.active{
     background:var(--primary);
     border-color:var(--primary);
     color:#fff;
   }
+  /* Sidebar navigation (Isi Kandungan) */
+  .fab{
+    position:fixed;
+    right:1.1rem;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    box-shadow:0 4px 14px rgba(15,92,74,.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:40;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .fab:hover{background:var(--primary-dark);}
+  .fab-menu{bottom:1.1rem;}
+  .fab-top{
+    bottom:4.6rem;
+    background:var(--gold);
+    box-shadow:0 4px 14px rgba(184,134,46,.35);
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(10px);
+  }
+  .fab-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+  .fab-top:hover{background:#96701f;}
+  .sidebar-overlay{
+    position:fixed; inset:0;
+    background:rgba(15,20,18,.45);
+    z-index:49;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease;
+  }
+  .sidebar-overlay.open{opacity:1; pointer-events:auto;}
+  .sidebar-nav{
+    position:fixed;
+    top:0; right:0;
+    height:100%;
+    width:min(300px, 84vw);
+    background:var(--card);
+    z-index:50;
+    box-shadow:-6px 0 24px rgba(20,30,25,.18);
+    transform:translateX(100%);
+    transition:transform .25s ease;
+    display:flex;
+    flex-direction:column;
+    padding:1.2rem 0 1.5rem;
+  }
+  .sidebar-nav.open{transform:translateX(0);}
+  .sidebar-nav h3{
+    margin:0 1.2rem 1rem;
+    font-size:1rem;
+    color:var(--primary-dark);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .sidebar-nav .close-btn{
+    border:none;
+    background:var(--paper);
+    width:30px; height:30px;
+    border-radius:50%;
+    cursor:pointer;
+    color:var(--muted);
+    font-size:1rem;
+    line-height:1;
+  }
+  .sidebar-nav .side-list{
+    overflow-y:auto;
+    padding:0 .6rem;
+  }
+  .sidebar-nav .side-item{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    width:100%;
+    border:none;
+    background:transparent;
+    text-align:left;
+    padding:.65rem .6rem;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:.88rem;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .sidebar-nav .side-item:hover{background:var(--paper);}
+  .sidebar-nav .side-item.active{background:var(--gold-soft); color:var(--primary-dark); font-weight:600;}
+  .sidebar-nav .side-item .cnt{
+    margin-inline-start:auto;
+    font-size:.72rem;
+    color:var(--muted);
+    background:var(--paper);
+    padding:.1rem .5rem;
+    border-radius:999px;
+  }
+  .sidebar-nav .side-item.active .cnt{background:rgba(255,255,255,.55);}
+  .back-toc-inline{
+    display:inline-flex;
+    align-items:center;
+    gap:.3rem;
+    margin-top:1.4rem;
+    font-size:.78rem;
+    color:var(--primary);
+    text-decoration:none;
+    cursor:pointer;
+    background:none;
+    border:none;
+    font-family:inherit;
+    padding:0;
+  }
+  .back-toc-inline:hover{text-decoration:underline;}
   .count-line{
     text-align:center;
     color:var(--muted);
@@ -234,7 +359,7 @@
 
 <header>
   <h1>📖 Koleksi Hadis Pilihan</h1>
-  <p>Himpunan hadis-hadis sahih dan hasan merangkumi 16 tajuk — Fiqh, Al-Quran, Haji &amp; Umrah, Halal, Kekeluargaan, Iman, Akhlak, Syamail Nabi ﷺ, Akhir Zaman, Wanita, Amalan Harian, Motivasi, Haiwan dan banyak lagi — lengkap dengan teks Arab, terjemahan dan rujukan asal.</p>
+  <p>Himpunan 167 hadis sahih dan hasan merangkumi 15 tajuk — Fiqh, Al-Quran, Haji &amp; Umrah, Halal, Kekeluargaan, Iman, Akhlak, Syamail Nabi ﷺ, Akhir Zaman, Wanita, Amalan Harian, Motivasi, Haiwan dan banyak lagi — lengkap dengan matan Arab penuh, terjemahan dan rujukan asal.</p>
 </header>
 
 <div class="wrap">
@@ -258,6 +383,19 @@
   </div>
   <p style="margin-top:1rem;text-align:center;">Disusun sebagai bahan rujukan dakwah &amp; pengajaran · Koleksi Hadis Pilihan © 2026</p>
 </footer>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<nav class="sidebar-nav" id="sidebarNav" aria-label="Isi Kandungan">
+  <h3>📑 Isi Kandungan <button class="close-btn" id="sidebarClose" aria-label="Tutup">✕</button></h3>
+  <div class="side-list" id="sidebarList"></div>
+</nav>
+
+<button class="fab fab-menu" id="fabMenu" title="Isi Kandungan / Menu Kategori" aria-label="Buka menu kategori">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="14" y2="18"/></svg>
+</button>
+<button class="fab fab-top" id="fabTop" title="Kembali ke Isi Kandungan" aria-label="Kembali ke atas">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
 
 <script>
 const HADITH = [
@@ -522,7 +660,7 @@ const HADITH = [
 },
 {
   id:43, kategori:"Akhir Zaman & Fitan",
-  arab:"إِذَا ضُيِّعَتِ الأَمَانَةُ فَانْتَظِرِ السَّاعَةَ... قِيلَ: كَيْفَ إِضَاعَتُهَا؟ قَالَ: إِذَا أُسْنِدَ الأَمْرُ إِلَى غَيْرِ أَهْلِهِ فَانْتَظِرِ السَّاعَةَ",
+  arab:"حَدَّثَنَا مُحَمَّدُ بْنُ سِنَانٍ، حَدَّثَنَا فُلَيْحُ بْنُ سُلَيْمَانَ، حَدَّثَنَا هِلاَلُ بْنُ عَلِيٍّ، عَنْ عَطَاءِ بْنِ يَسَارٍ، عَنْ أَبِي هُرَيْرَةَ رضى الله عنه قَالَ قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم إِذَا ضُيِّعَتِ الأَمَانَةُ فَانْتَظِرِ السَّاعَةَ. قَالَ كَيْفَ إِضَاعَتُهَا يَا رَسُولَ اللَّهِ قَالَ إِذَا أُسْنِدَ الأَمْرُ إِلَى غَيْرِ أَهْلِهِ، فَانْتَظِرِ السَّاعَةَ",
   terjemahan:"'Apabila amanah telah disia-siakan, maka tunggulah Kiamat.' Ditanya, 'Bagaimana ia disia-siakan, wahai Rasulullah?' Baginda menjawab, 'Apabila sesuatu urusan diserahkan kepada orang yang bukan ahlinya, maka tunggulah Kiamat.'",
   rujukan:"Sahih al-Bukhari, no. 6496", perawi:"Abu Hurairah R.A.", darjat:"sahih"
 },
@@ -547,7 +685,7 @@ const HADITH = [
 },
 {
   id:47, kategori:"Hadis Wanita",
-  arab:"أَلاَ وَاسْتَوْصُوا بِالنِّسَاءِ خَيْرًا... أَلاَ وَحَقُّهُنَّ عَلَيْكُمْ أَنْ تُحْسِنُوا إِلَيْهِنَّ فِي كِسْوَتِهِنَّ وَطَعَامِهِنَّ",
+  arab:"أَلاَ وَاسْتَوْصُوا بِالنِّسَاءِ خَيْرًا فَإِنَّمَا هُنَّ عَوَانٌ عِنْدَكُمْ لَيْسَ تَمْلِكُونَ مِنْهُنَّ شَيْئًا غَيْرَ ذَلِكَ إِلاَّ أَنْ يَأْتِينَ بِفَاحِشَةٍ مُبَيِّنَةٍ فَإِنْ فَعَلْنَ فَاهْجُرُوهُنَّ فِي الْمَضَاجِعِ وَاضْرِبُوهُنَّ ضَرْبًا غَيْرَ مُبَرِّحٍ فَإِنْ أَطَعْنَكُمْ فَلاَ تَبْغُوا عَلَيْهِنَّ سَبِيلاً أَلاَ إِنَّ لَكُمْ عَلَى نِسَائِكُمْ حَقًّا وَلِنِسَائِكُمْ عَلَيْكُمْ حَقًّا فَأَمَّا حَقُّكُمْ عَلَى نِسَائِكُمْ أَلاَّ يُوطِئْنَ فُرُشَكُمْ مَنْ تَكْرَهُونَ وَلاَ يَأْذَنَّ فِي بُيُوتِكُمْ لِمَنْ تَكْرَهُونَ أَلاَ وَحَقُّهُنَّ عَلَيْكُمْ أَنْ تُحْسِنُوا إِلَيْهِنَّ فِي كِسْوَتِهِنَّ وَطَعَامِهِنَّ",
   terjemahan:"Ketahuilah, berpesan-pesanlah untuk berbuat baik kepada isteri-isteri kamu... Ketahuilah, sesungguhnya kamu mempunyai hak ke atas isteri-isteri kamu, dan isteri-isteri kamu mempunyai hak ke atas kamu. Hak mereka ke atas kamu ialah kamu berbuat baik kepada mereka dalam soal pakaian dan makanan mereka.",
   rujukan:"Jami' at-Tirmidzi, no. 1163 (sebahagian daripada khutbah Haji Wida')", perawi:"Amr bin al-Ahwas R.A.", darjat:"sahih"
 },
@@ -589,7 +727,7 @@ const HADITH = [
 },
 {
   id:54, kategori:"Kekeluargaan & Pembangunan Insan",
-  arab:"أَتُحِبُّهُ لأُمِّكَ؟ قَالَ لاَ وَاللَّهِ... قَالَ وَلاَ النَّاسُ يُحِبُّونَهُ لأُمَّهَاتِهِمْ",
+  arab:"إِنَّ فَتًى شَابًّا أَتَى النَّبِيَّ صلى الله عليه وسلم فَقَالَ يَا رَسُولَ اللَّهِ ائْذَنْ لِي بِالزِّنَا، فَأَقْبَلَ الْقَوْمُ عَلَيْهِ فَزَجَرُوهُ وَقَالُوا مَهْ مَهْ، فَقَالَ ادْنُهْ، فَدَنَا مِنْهُ قَرِيبًا، قَالَ فَجَلَسَ، قَالَ أَتُحِبُّهُ لأُمِّكَ؟ قَالَ لاَ وَاللَّهِ، جَعَلَنِي اللَّهُ فِدَاءَكَ، قَالَ وَلاَ النَّاسُ يُحِبُّونَهُ لأُمَّهَاتِهِمْ، قَالَ أَفَتُحِبُّهُ لابْنَتِكَ؟ قَالَ لاَ وَاللَّهِ يَا رَسُولَ اللَّهِ، جَعَلَنِي اللَّهُ فِدَاءَكَ، قَالَ وَلاَ النَّاسُ يُحِبُّونَهُ لِبَنَاتِهِمْ، قَالَ أَفَتُحِبُّهُ لأُخْتِكَ؟ قَالَ لاَ وَاللَّهِ، جَعَلَنِي اللَّهُ فِدَاءَكَ، قَالَ وَلاَ النَّاسُ يُحِبُّونَهُ لأَخَوَاتِهِمْ، قَالَ أَفَتُحِبُّهُ لِعَمَّتِكَ؟ قَالَ لاَ وَاللَّهِ، جَعَلَنِي اللَّهُ فِدَاءَكَ، قَالَ وَلاَ النَّاسُ يُحِبُّونَهُ لِعَمَّاتِهِمْ، قَالَ أَفَتُحِبُّهُ لِخَالَتِكَ؟ قَالَ لاَ وَاللَّهِ، جَعَلَنِي اللَّهُ فِدَاءَكَ، قَالَ وَلاَ النَّاسُ يُحِبُّونَهُ لِخَالاَتِهِمْ، قَالَ فَوَضَعَ يَدَهُ عَلَيْهِ وَقَالَ اللَّهُمَّ اغْفِرْ ذَنْبَهُ وَطَهِّرْ قَلْبَهُ وَحَصِّنْ فَرْجَهُ، قَالَ فَلَمْ يَكُنْ بَعْدَ ذَلِكَ الْفَتَى يَلْتَفِتُ إِلَى شَىْءٍ",
   terjemahan:"Seorang pemuda datang kepada Nabi ﷺ dan berkata, 'Wahai Rasulullah, izinkan aku berzina.' Orang ramai menghalaunya, namun baginda bersabda, 'Dekatkanlah dia kepadaku.' Pemuda itu pun mendekat. Baginda bertanya, 'Adakah engkau redha perkara itu berlaku kepada ibumu?' Dia menjawab, 'Tidak, demi Allah.' Baginda bersabda, 'Begitu jugalah orang lain, mereka tidak redha ia berlaku kepada ibu mereka.' Baginda mengulangi soalan yang sama tentang anak perempuannya, saudara perempuannya, dan ibu saudaranya — jawapannya sama setiap kali. Kemudian baginda meletakkan tangannya ke atas pemuda itu sambil berdoa, 'Ya Allah, ampunilah dosanya, sucikanlah hatinya, dan peliharalah kemaluannya.' Selepas itu, pemuda tersebut tidak lagi cenderung kepada perkara yang keji.",
   rujukan:"Musnad Ahmad, no. 22211", perawi:"Abu Umamah al-Bahili R.A.", darjat:"sahih",
   nota:"Dinilai sahih oleh Syu'aib al-Arna'ut dalam takhrij Musnad Ahmad."
@@ -626,7 +764,7 @@ const HADITH = [
 },
 {
   id:60, kategori:"Amalan Harian Rasulullah SAW", waktu:"Dhuha",
-  arab:"يُصْبِحُ عَلَى كُلِّ سُلاَمَى مِنْ أَحَدِكُمْ صَدَقَةٌ... وَيُجْزِئُ مِنْ ذَلِكَ رَكْعَتَانِ يَرْكَعُهُمَا مِنَ الضُّحَى",
+  arab:"يُصْبِحُ عَلَى كُلِّ سُلاَمَى مِنْ أَحَدِكُمْ صَدَقَةٌ فَكُلُّ تَسْبِيحَةٍ صَدَقَةٌ وَكُلُّ تَحْمِيدَةٍ صَدَقَةٌ وَكُلُّ تَهْلِيلَةٍ صَدَقَةٌ وَكُلُّ تَكْبِيرَةٍ صَدَقَةٌ وَأَمْرٌ بِالْمَعْرُوفِ صَدَقَةٌ وَنَهْىٌ عَنِ الْمُنْكَرِ صَدَقَةٌ وَيُجْزِئُ مِنْ ذَلِكَ رَكْعَتَانِ يَرْكَعُهُمَا مِنَ الضُّحَى",
   terjemahan:"Setiap ruas sendi tubuh kamu wajib disedekahi pada setiap hari matahari terbit... setiap tasbih adalah sedekah, setiap tahmid adalah sedekah, setiap tahlil adalah sedekah, setiap takbir adalah sedekah, menyuruh kepada kebaikan adalah sedekah, mencegah kemungkaran adalah sedekah — dan semua itu mencukupi dengan dua rakaat solat Dhuha yang dilakukan seseorang.",
   rujukan:"Sahih Muslim, no. 720", perawi:"Abu Dzar al-Ghifari R.A.", darjat:"sahih"
 },
@@ -688,13 +826,13 @@ const HADITH = [
 },
 {
   id:70, kategori:"Motivasi Kehidupan",
-  arab:"أَنَا عِنْدَ ظَنِّ عَبْدِي بِي، وَأَنَا مَعَهُ إِذَا ذَكَرَنِي...وَإِنْ أَتَانِي يَمْشِي أَتَيْتُهُ هَرْوَلَةً",
+  arab:"يَقُولُ اللَّهُ تَعَالَى أَنَا عِنْدَ ظَنِّ عَبْدِي بِي، وَأَنَا مَعَهُ إِذَا ذَكَرَنِي، فَإِنْ ذَكَرَنِي فِي نَفْسِهِ ذَكَرْتُهُ فِي نَفْسِي، وَإِنْ ذَكَرَنِي فِي مَلأٍ ذَكَرْتُهُ فِي مَلأٍ خَيْرٍ مِنْهُمْ، وَإِنْ تَقَرَّبَ إِلَىَّ بِشِبْرٍ تَقَرَّبْتُ إِلَيْهِ ذِرَاعًا، وَإِنْ تَقَرَّبَ إِلَىَّ ذِرَاعًا تَقَرَّبْتُ إِلَيْهِ بَاعًا، وَإِنْ أَتَانِي يَمْشِي أَتَيْتُهُ هَرْوَلَةً",
   terjemahan:"Allah SWT berfirman: Aku menurut sangkaan hamba-Ku terhadap-Ku, dan Aku bersamanya apabila dia mengingati-Ku. Jika dia mendekati-Ku sejengkal, Aku mendekatinya sehasta; jika dia mendekati-Ku sehasta, Aku mendekatinya sedepa; dan jika dia mendatangi-Ku dengan berjalan, Aku mendatanginya dengan berlari anak.",
   rujukan:"Sahih al-Bukhari, no. 7405 (Hadis Qudsi)", perawi:"Abu Hurairah R.A.", darjat:"sahih"
 },
 {
   id:71, kategori:"Haiwan dalam Hadis",
-  arab:"بَيْنَا رَجُلٌ بِطَرِيقٍ، اشْتَدَّ عَلَيْهِ الْعَطَشُ فَوَجَدَ بِئْرًا فَنَزَلَ فِيهَا فَشَرِبَ، ثُمَّ خَرَجَ، فَإِذَا كَلْبٌ يَلْهَثُ يَأْكُلُ الثَّرَى مِنَ الْعَطَشِ...فِي كُلِّ ذَاتِ كَبِدٍ رَطْبَةٍ أَجْرٌ",
+  arab:"بَيْنَا رَجُلٌ بِطَرِيقٍ، اشْتَدَّ عَلَيْهِ الْعَطَشُ فَوَجَدَ بِئْرًا فَنَزَلَ فِيهَا فَشَرِبَ، ثُمَّ خَرَجَ، فَإِذَا كَلْبٌ يَلْهَثُ يَأْكُلُ الثَّرَى مِنَ الْعَطَشِ، فَقَالَ الرَّجُلُ لَقَدْ بَلَغَ هَذَا الْكَلْبَ مِنَ الْعَطَشِ مِثْلُ الَّذِي كَانَ بَلَغَ مِنِّي، فَنَزَلَ الْبِئْرَ، فَمَلأَ خُفَّهُ مَاءً، فَسَقَى الْكَلْبَ، فَشَكَرَ اللَّهُ لَهُ، فَغَفَرَ لَهُ. قَالُوا يَا رَسُولَ اللَّهِ وَإِنَّ لَنَا فِي الْبَهَائِمِ لأَجْرًا فَقَالَ فِي كُلِّ ذَاتِ كَبِدٍ رَطْبَةٍ أَجْرٌ",
   terjemahan:"Seorang lelaki dalam perjalanan berasa amat dahaga, lalu dia menjumpai sebuah perigi dan turun ke dalamnya untuk minum. Apabila keluar, dia melihat seekor anjing sedang menjelirkan lidah menjilat tanah kerana dahaga. Lelaki itu berkata, 'Anjing ini sungguh dahaga seperti yang aku alami tadi.' Maka dia turun semula ke perigi, mengisi kasutnya dengan air, lalu memberi minum kepada anjing itu. Allah menghargai perbuatannya lalu mengampuninya. Para sahabat bertanya, 'Wahai Rasulullah, adakah kami mendapat pahala kerana berbuat baik kepada haiwan?' Baginda menjawab, 'Pada setiap yang bernyawa itu ada pahala.'",
   rujukan:"Sahih al-Bukhari, no. 2466 (turut dalam Sahih Muslim, no. 2244)", perawi:"Abu Hurairah R.A.", darjat:"sahih"
 },
@@ -755,7 +893,7 @@ const HADITH = [
 },
 {
   id:81, kategori:"Sahabat yang Mengadu",
-  arab:"كَانَ النَّبِيُّ صلى الله عليه وسلم يَقُومُ يَوْمَ الْجُمُعَةِ إِلَى شَجَرَةٍ أَوْ نَخْلَةٍ...فَصَاحَتِ النَّخْلَةُ صِيَاحَ الصَّبِيِّ، ثُمَّ نَزَلَ النَّبِيُّ صلى الله عليه وسلم فَضَمَّهُ إِلَيْهِ تَئِنُّ أَنِينَ الصَّبِيِّ",
+  arab:"حَدَّثَنَا أَبُو نُعَيْمٍ، حَدَّثَنَا عَبْدُ الْوَاحِدِ بْنُ أَيْمَنَ، قَالَ سَمِعْتُ أَبِي، عَنْ جَابِرِ بْنِ عَبْدِ اللَّهِ رضى الله عنهما أَنَّ النَّبِيَّ صلى الله عليه وسلم كَانَ يَقُومُ يَوْمَ الْجُمُعَةِ إِلَى شَجَرَةٍ أَوْ نَخْلَةٍ، فَقَالَتِ امْرَأَةٌ مِنَ الأَنْصَارِ أَوْ رَجُلٌ يَا رَسُولَ اللَّهِ أَلاَ نَجْعَلُ لَكَ مِنْبَرًا قَالَ إِنْ شِئْتُمْ. فَجَعَلُوا لَهُ مِنْبَرًا، فَلَمَّا كَانَ يَوْمُ الْجُمُعَةِ دُفِعَ إِلَى الْمِنْبَرِ، فَصَاحَتِ النَّخْلَةُ صِيَاحَ الصَّبِيِّ، ثُمَّ نَزَلَ النَّبِيُّ صلى الله عليه وسلم فَضَمَّهُ إِلَيْهِ تَئِنُّ أَنِينَ الصَّبِيِّ، الَّذِي يُسَكَّنُ، قَالَ كَانَتْ تَبْكِي عَلَى مَا كَانَتْ تَسْمَعُ مِنَ الذِّكْرِ عِنْدَهَا",
   terjemahan:"Nabi ﷺ dahulunya berkhutbah bersandar pada sebatang pokok atau batang kurma pada hari Jumaat. Seorang wanita Ansar berkata, 'Wahai Rasulullah, mahukah kami buatkan mimbar untukmu?' Baginda menjawab, 'Jika kamu mahu.' Maka dibuatkan sebuah mimbar untuk baginda. Apabila tiba hari Jumaat, baginda pergi ke mimbar itu, lalu batang kurma tersebut menangis seperti tangisan kanak-kanak. Nabi ﷺ pun turun dan memeluknya, lalu ia meraung seperti rengekan kanak-kanak yang sedang ditenangkan, sehingga ia diam.",
   rujukan:"Sahih al-Bukhari, no. 3584 (versi ringkas turut pada no. 3583)", perawi:"Jabir bin Abdullah R.A.", darjat:"sahih"
 },
@@ -791,6 +929,542 @@ const HADITH = [
   arab:"ذَهَبَ أَهْلُ الدُّثُورِ بِالدَّرَجَاتِ الْعُلَى وَالنَّعِيمِ الْمُقِيمِ، يُصَلُّونَ كَمَا نُصَلِّي وَيَصُومُونَ كَمَا نَصُومُ وَلَهُمْ فَضْلٌ مِنْ أَمْوَالٍ",
   terjemahan:"Golongan fakir dari kalangan Muhajirin mengadu kepada Rasulullah ﷺ, 'Golongan berharta telah mengambil semua darjat yang tinggi dan nikmat yang berkekalan; mereka bersolat sepertimana kami bersolat, mereka berpuasa sepertimana kami berpuasa, namun mereka mempunyai lebihan harta yang digunakan untuk menunaikan haji, umrah, berjihad dan bersedekah.' Baginda bersabda, 'Mahukah aku ajarkan kamu sesuatu yang dapat menyamai mereka yang telah mendahului kamu? Bacalah Subhanallah, Alhamdulillah, dan Allahu Akbar sebanyak 33 kali selepas setiap solat.' Apabila golongan berharta mendengarnya dan turut mengamalkannya, golongan fakir mengadu semula; baginda menjawab, 'Itulah kurniaan Allah yang diberikan kepada sesiapa yang dikehendaki-Nya.'",
   rujukan:"Sahih Muslim, no. 595a", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:87, kategori:"Fiqh & Syariah",
+  arab:"بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلاَةِ، وَإِيتَاءِ الزَّكَاةِ، وَالْحَجِّ، وَصَوْمِ رَمَضَانَ",
+  terjemahan:"Islam dibina atas lima (perkara): bersaksi bahawa tiada tuhan yang berhak disembah melainkan Allah dan bahawa Muhammad adalah pesuruh Allah, mendirikan solat, menunaikan zakat, menunaikan haji, dan berpuasa di bulan Ramadan.",
+  rujukan:"Sahih al-Bukhari, no. 8", perawi:"Ibn 'Umar (Abdullah bin Umar) R.A.", darjat:"sahih",
+  nota:"Diriwayatkan juga oleh Muslim (no. 16). Hadis ini menjadi asas kepada bab usul fiqh mengenai rukun-rukun agama."
+},
+{
+  id:88, kategori:"Fiqh & Syariah",
+  arab:"السَّمْعُ وَالطَّاعَةُ عَلَى الْمَرْءِ الْمُسْلِمِ، فِيمَا أَحَبَّ وَكَرِهَ، مَا لَمْ يُؤْمَرْ بِمَعْصِيَةٍ، فَإِذَا أُمِرَ بِمَعْصِيَةٍ فَلاَ سَمْعَ وَلاَ طَاعَةَ",
+  terjemahan:"Wajib bagi seorang Muslim untuk mendengar dan taat (kepada pemimpinnya), sama ada dia suka ataupun benci, selagi dia tidak diperintahkan melakukan maksiat. Namun jika dia diperintahkan melakukan maksiat, maka tidak ada kewajipan untuk mendengar dan taat.",
+  rujukan:"Sahih al-Bukhari, no. 7144", perawi:"Abdullah bin Umar R.A.", darjat:"sahih",
+  nota:"Menjadi asas kaedah fiqh 'tiada ketaatan kepada makhluk dalam melakukan maksiat kepada al-Khaliq' (لا طاعة لمخلوق في معصية الخالق)."
+},
+{
+  id:89, kategori:"Fiqh & Syariah",
+  arab:"أُوصِيكُمْ بِتَقْوَى اللَّهِ وَالسَّمْعِ وَالطَّاعَةِ وَإِنْ عَبْدًا حَبَشِيًّا فَإِنَّهُ مَنْ يَعِشْ مِنْكُمْ بَعْدِي فَسَيَرَى اخْتِلاَفًا كَثِيرًا فَعَلَيْكُمْ بِسُنَّتِي وَسُنَّةِ الْخُلَفَاءِ الْمَهْدِيِّينَ الرَّاشِدِينَ تَمَسَّكُوا بِهَا وَعَضُّوا عَلَيْهَا بِالنَّوَاجِذِ وَإِيَّاكُمْ وَمُحْدَثَاتِ الأُمُورِ فَإِنَّ كُلَّ مُحْدَثَةٍ بِدْعَةٌ وَكُلَّ بِدْعَةٍ ضَلاَلَةٌ",
+  terjemahan:"Aku berpesan kepada kamu supaya bertakwa kepada Allah, serta mendengar dan taat (kepada pemimpin) walaupun dia seorang hamba dari Habsyah, kerana sesiapa di antara kamu yang hidup selepasku akan melihat banyak perselisihan. Maka hendaklah kamu berpegang teguh dengan sunnahku dan sunnah para khulafa' yang mendapat petunjuk lagi lurus. Genggamlah ia dan gigitlah ia kuat-kuat dengan gigi geraham kamu. Dan jauhilah perkara-perkara baharu (dalam agama), kerana setiap perkara baharu itu adalah bid'ah, dan setiap bid'ah itu sesat.",
+  rujukan:"Sunan Abi Dawud, no. 4607", perawi:"Al-'Irbad bin Sariyah R.A.", darjat:"sahih",
+  nota:"Turut diriwayatkan oleh at-Tirmidhi (no. 2676) dengan penilaian 'hasan sahih' oleh Imam at-Tirmidhi sendiri."
+},
+{
+  id:90, kategori:"Fiqh & Syariah",
+  arab:"حَدَّثَنَا علِيٌّ، قَالَ حَدَّثَنَا سُفْيَانُ، قَالَ حَدَّثَنَا الزُّهْرِيُّ، عَنْ سَعِيدِ بْنِ الْمُسَيَّبِ، وَعَنْ عَبَّادِ بْنِ تَمِيمٍ، عَنْ عَمِّهِ، أَنَّهُ شَكَا إِلَى رَسُولِ اللَّهِ صلى الله عليه وسلم الرَّجُلُ الَّذِي يُخَيَّلُ إِلَيْهِ أَنَّهُ يَجِدُ الشَّىْءَ فِي الصَّلاَةِ. فَقَالَ لاَ يَنْفَتِلْ ـ أَوْ لاَ يَنْصَرِفْ ـ حَتَّى يَسْمَعَ صَوْتًا أَوْ يَجِدَ رِيحًا",
+  terjemahan:"Bapa saudara ('Abbad bin Tamim) mengadu kepada Rasulullah SAW tentang seorang lelaki yang terbayang-bayang seolah-olah dia terasa sesuatu (terkentut) semasa solat. Rasulullah SAW bersabda, 'Janganlah dia berpaling atau meninggalkan solatnya sehingga dia mendengar bunyi atau mencium bau.'",
+  rujukan:"Sahih al-Bukhari, no. 137", perawi:"'Abdullah bin Zaid R.A.", darjat:"sahih",
+  nota:"Diriwayatkan juga oleh Muslim (no. 361). Hadis ini menjadi asas kepada kaedah fiqh besar 'al-yaqin la yazulu bi al-syak' (keyakinan tidak terhapus oleh keraguan)."
+},
+{
+  id:91, kategori:"Fiqh & Syariah",
+  arab:"يَسِّرُوا وَلاَ تُعَسِّرُوا، وَبَشِّرُوا وَلاَ تُنَفِّرُوا",
+  terjemahan:"Permudahkanlah dan janganlah kamu menyusahkan, gembirakanlah (dengan berita baik) dan janganlah kamu menakut-nakutkan (sehingga menyebabkan orang lari daripada agama).",
+  rujukan:"Sahih al-Bukhari, no. 69", perawi:"Anas bin Malik R.A.", darjat:"sahih",
+  nota:"Menjadi asas kaedah usul fiqh 'al-masyaqqah tajlib al-taysir' (kesukaran membawa kepada kemudahan) dan prinsip raf' al-haraj (mengangkat kesulitan daripada umat)."
+},
+{
+  id:92, kategori:"Fiqh & Syariah",
+  arab:"كُنَّا عِنْدَ رَسُولِ اللَّهِ صلى الله عليه وسلم فِي صَدْرِ النَّهَارِ قَالَ فَجَاءَهُ قَوْمٌ حُفَاةٌ عُرَاةٌ مُجْتَابِي النِّمَارِ أَوِ الْعَبَاءِ مُتَقَلِّدِي السُّيُوفِ عَامَّتُهُمْ مِنْ مُضَرَ بَلْ كُلُّهُمْ مِنْ مُضَرَ فَتَمَعَّرَ وَجْهُ رَسُولِ اللَّهِ صلى الله عليه وسلم لِمَا رَأَى بِهِمْ مِنَ الْفَاقَةِ فَدَخَلَ ثُمَّ خَرَجَ فَأَمَرَ بِلاَلاً فَأَذَّنَ وَأَقَامَ فَصَلَّى ثُمَّ خَطَبَ فَقَالَ يَا أَيُّهَا النَّاسُ اتَّقُوا رَبَّكُمُ الَّذِي خَلَقَكُمْ مِنْ نَفْسٍ وَاحِدَةٍ إِلَى آخِرِ الآيَةِ إِنَّ اللَّهَ كَانَ عَلَيْكُمْ رَقِيبًا وَالآيَةَ الَّتِي فِي الْحَشْرِ اتَّقُوا اللَّهَ وَلْتَنْظُرْ نَفْسٌ مَا قَدَّمَتْ لِغَدٍ وَاتَّقُوا اللَّهَ تَصَدَّقَ رَجُلٌ مِنْ دِينَارِهِ مِنْ دِرْهَمِهِ مِنْ ثَوْبِهِ مِنْ صَاعِ بُرِّهِ مِنْ صَاعِ تَمْرِهِ حَتَّى قَالَ وَلَوْ بِشِقِّ تَمْرَةٍ فَجَاءَ رَجُلٌ مِنَ الأَنْصَارِ بِصُرَّةٍ كَادَتْ كَفُّهُ تَعْجِزُ عَنْهَا بَلْ قَدْ عَجَزَتْ ثُمَّ تَتَابَعَ النَّاسُ حَتَّى رَأَيْتُ كَوْمَيْنِ مِنْ طَعَامٍ وَثِيَابٍ حَتَّى رَأَيْتُ وَجْهَ رَسُولِ اللَّهِ صلى الله عليه وسلم يَتَهَلَّلُ كَأَنَّهُ مُذْهَبَةٌ فَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم مَنْ سَنَّ فِي الإِسْلاَمِ سُنَّةً حَسَنَةً فَلَهُ أَجْرُهَا وَأَجْرُ مَنْ عَمِلَ بِهَا بَعْدَهُ مِنْ غَيْرِ أَنْ يَنْقُصَ مِنْ أُجُورِهِمْ شَىْءٌ وَمَنْ سَنَّ فِي الإِسْلاَمِ سُنَّةً سَيِّئَةً كَانَ عَلَيْهِ وِزْرُهَا وَوِزْرُ مَنْ عَمِلَ بِهَا مِنْ بَعْدِهِ مِنْ غَيْرِ أَنْ يَنْقُصَ مِنْ أَوْزَارِهِمْ شَىْءٌ",
+  terjemahan:"Kami berada bersama Rasulullah SAW pada awal siang, lalu datang kepada baginda satu kaum yang berkaki ayam dan bertubuh separuh terdedah, memakai pakaian bercorak atau jubah berbulu kasar, dengan pedang tersisip di leher mereka; kebanyakan mereka daripada kabilah Mudhar, bahkan semuanya daripada Mudhar. Wajah Rasulullah SAW berubah kerana melihat kepapaan mereka. Baginda masuk ke dalam, kemudian keluar semula, lalu memerintahkan Bilal supaya melaungkan azan dan iqamah. Baginda kemudian mengimamkan solat, lalu berkhutbah dan bersabda, 'Wahai sekalian manusia, bertakwalah kepada Tuhan kamu yang menciptakan kamu daripada satu jiwa...' sehingga akhir ayat, dan ayat dalam Surah al-Hasyr, 'Bertakwalah kepada Allah, dan hendaklah setiap jiwa memerhatikan apa yang telah disediakannya untuk hari esok...' Kemudian seorang lelaki menyedekahkan wang dinarnya, dirhamnya, pakaiannya, segantang gandumnya, segantang tamarnya, sehingga baginda bersabda, 'Walaupun sekadar sebelah biji tamar.' Lalu datang seorang lelaki daripada kaum Ansar membawa seguni harta yang hampir-hampir tidak mampu dipikul oleh tangannya, bahkan memang tidak mampu. Kemudian orang ramai turut menyumbang secara berterusan sehingga aku melihat dua timbunan makanan dan pakaian, sehingga aku melihat wajah Rasulullah SAW berseri-seri seolah-olah bersepuh emas. Rasulullah SAW lalu bersabda, 'Sesiapa yang mencetuskan suatu amalan yang baik dalam Islam, maka baginya pahalanya dan pahala orang yang mengamalkannya selepas itu, tanpa dikurangkan sedikit pun daripada pahala mereka. Dan sesiapa yang mencetuskan suatu amalan yang buruk dalam Islam, maka ke atasnya dosanya dan dosa orang yang mengamalkannya selepas itu, tanpa dikurangkan sedikit pun daripada dosa mereka.'",
+  rujukan:"Sahih Muslim, no. 1017a", perawi:"Jarir bin Abdullah al-Bajali R.A.", darjat:"sahih",
+  nota:"Menjadi asas kaedah usul fiqh berkenaan kesan 'sunnah hasanah' dan 'sunnah sayyi'ah' — iaitu tanggungjawab berterusan ke atas sesiapa yang mencetuskan sesuatu amalan, baik atau buruk."
+},
+{
+  id:93, kategori:"Fiqh & Syariah",
+  arab:"أَنَّ هِنْدَ بِنْتَ عُتْبَةَ، قَالَتْ يَا رَسُولَ اللَّهِ إِنَّ أَبَا سُفْيَانَ رَجُلٌ شَحِيحٌ، وَلَيْسَ يُعْطِينِي مَا يَكْفِينِي وَوَلَدِي، إِلاَّ مَا أَخَذْتُ مِنْهُ وَهْوَ لاَ يَعْلَمُ فَقَالَ خُذِي مَا يَكْفِيكِ وَوَلَدَكِ بِالْمَعْرُوفِ",
+  terjemahan:"Hind binti 'Utbah berkata, 'Wahai Rasulullah, sesungguhnya Abu Sufyan seorang yang bakhil, dia tidak memberiku apa yang mencukupi untukku dan anak-anakku, kecuali apa yang aku ambil daripada hartanya tanpa pengetahuannya.' Rasulullah SAW bersabda, 'Ambillah apa yang mencukupi untukmu dan anak-anakmu dengan cara yang munasabah (bi al-ma'ruf).'",
+  rujukan:"Sahih al-Bukhari, no. 5364", perawi:"'Aishah R.A.", darjat:"sahih",
+  nota:"Diriwayatkan juga oleh Muslim (no. 1714). Menjadi asas kaedah fiqh berkenaan keperluan (hajah/darurah) yang mengharuskan tindakan yang pada asalnya tidak dibenarkan, terhad kepada kadar yang munasabah ('urf/ma'ruf)."
+},
+{
+  id:94, kategori:"Al-Quran & Tajwid",
+  arab:"مَثَلُ الْمُؤْمِنِ الَّذِي يَقْرَأُ الْقُرْآنَ كَمَثَلِ الأُتْرُجَّةِ رِيحُهَا طَيِّبٌ وَطَعْمُهَا طَيِّبٌ، وَمَثَلُ الْمُؤْمِنِ الَّذِي لاَ يَقْرَأُ الْقُرْآنَ كَمَثَلِ التَّمْرَةِ لاَ رِيحَ لَهَا وَطَعْمُهَا حُلْوٌ، وَمَثَلُ الْمُنَافِقِ الَّذِي يَقْرَأُ الْقُرْآنَ مَثَلُ الرَّيْحَانَةِ رِيحُهَا طَيِّبٌ وَطَعْمُهَا مُرٌّ، وَمَثَلُ الْمُنَافِقِ الَّذِي لاَ يَقْرَأُ الْقُرْآنَ كَمَثَلِ الْحَنْظَلَةِ لَيْسَ لَهَا رِيحٌ وَطَعْمُهَا مُرٌّ",
+  terjemahan:"Perumpamaan seorang mukmin yang membaca Al-Quran adalah seperti buah utrujjah (limau manis): baunya harum dan rasanya lazat. Perumpamaan seorang mukmin yang tidak membaca Al-Quran adalah seperti buah kurma: tidak berbau tetapi rasanya manis. Perumpamaan seorang munafik yang membaca Al-Quran adalah seperti tumbuhan raihanah (sejenis tumbuhan yang wangi): baunya harum tetapi rasanya pahit. Perumpamaan seorang munafik yang tidak membaca Al-Quran adalah seperti buah hanzalah: tidak berbau dan rasanya pahit.",
+  rujukan:"Sahih al-Bukhari, no. 5427", perawi:"Abu Musa al-Ash'ari R.A.", darjat:"sahih"
+},
+{
+  id:95, kategori:"Al-Quran & Tajwid",
+  arab:"لاَ تَجْعَلُوا بُيُوتَكُمْ مَقَابِرَ إِنَّ الشَّيْطَانَ يَنْفِرُ مِنَ الْبَيْتِ الَّذِي تُقْرَأُ فِيهِ سُورَةُ الْبَقَرَةِ",
+  terjemahan:"Janganlah kamu jadikan rumah-rumah kamu seperti kubur. Sesungguhnya syaitan lari daripada rumah yang dibacakan Surah al-Baqarah di dalamnya.",
+  rujukan:"Sahih Muslim, no. 780", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:96, kategori:"Al-Quran & Tajwid",
+  arab:"لاَ حَسَدَ إِلاَّ عَلَى اثْنَتَيْنِ، رَجُلٌ آتَاهُ اللَّهُ الْكِتَابَ وَقَامَ بِهِ آنَاءَ اللَّيْلِ، وَرَجُلٌ أَعْطَاهُ اللَّهُ مَالاً فَهْوَ يَتَصَدَّقُ بِهِ آنَاءَ اللَّيْلِ وَالنَّهَارِ",
+  terjemahan:"Tidak ada dengki yang dibenarkan melainkan terhadap dua golongan: seorang lelaki yang dikurniakan Allah Kitab (Al-Quran), lalu dia bangun membacanya pada waktu-waktu malam; dan seorang lelaki yang dikurniakan Allah harta, lalu dia bersedekah dengannya pada waktu malam dan siang.",
+  rujukan:"Sahih al-Bukhari, no. 5025", perawi:"Abdullah bin Umar R.A.", darjat:"sahih",
+  nota:"Terdapat riwayat serupa dalam Sahih Muslim, no. 815, dengan lafaz \"القرآن\" (Al-Quran) menggantikan \"الكتاب\" (Kitab) dalam matan hadis ini."
+},
+{
+  id:97, kategori:"Al-Quran & Tajwid",
+  arab:"مَا أَذِنَ اللَّهُ لِشَىْءٍ مَا أَذِنَ لِنَبِيٍّ حَسَنِ الصَّوْتِ بِالْقُرْآنِ يَجْهَرُ بِهِ",
+  terjemahan:"Allah tidak mendengar sesuatu sebagaimana Dia mendengar seorang Nabi yang membaca Al-Quran dengan suara yang merdu lagi dibaca secara nyaring.",
+  rujukan:"Sahih al-Bukhari, no. 7544", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:98, kategori:"Al-Quran & Tajwid",
+  arab:"إِنَّمَا مَثَلُ صَاحِبِ الْقُرْآنِ كَمَثَلِ صَاحِبِ الإِبِلِ الْمُعَقَّلَةِ إِنْ عَاهَدَ عَلَيْهَا أَمْسَكَهَا وَإِنْ أَطْلَقَهَا ذَهَبَتْ",
+  terjemahan:"Sesungguhnya perumpamaan orang yang menghafaz Al-Quran adalah seperti pemilik unta yang diikat: jika dia sentiasa menjaganya, unta itu akan kekal bersamanya, tetapi jika dia melepaskannya, unta itu akan lari.",
+  rujukan:"Sahih al-Bukhari, no. 5031", perawi:"Abdullah bin Umar R.A.", darjat:"sahih"
+},
+{
+  id:99, kategori:"Al-Quran & Tajwid",
+  arab:"كُنْتُ أُصَلِّي فِي الْمَسْجِدِ فَدَعَانِي رَسُولُ اللَّهِ صلى الله عليه وسلم فَلَمْ أُجِبْهُ، فَقُلْتُ يَا رَسُولَ اللَّهِ إِنِّي كُنْتُ أُصَلِّي، فَقَالَ: أَلَمْ يَقُلِ اللَّهُ: اسْتَجِيبُوا لِلَّهِ وَلِلرَّسُولِ إِذَا دَعَاكُمْ، ثُمَّ قَالَ لِي: لأُعَلِّمَنَّكَ سُورَةً هِيَ أَعْظَمُ السُّوَرِ فِي الْقُرْآنِ قَبْلَ أَنْ تَخْرُجَ مِنَ الْمَسْجِدِ، ثُمَّ أَخَذَ بِيَدِي، فَلَمَّا أَرَادَ أَنْ يَخْرُجَ قُلْتُ لَهُ: أَلَمْ تَقُلْ لأُعَلِّمَنَّكَ سُورَةً هِيَ أَعْظَمُ سُورَةٍ فِي الْقُرْآنِ؟ قَالَ: الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ، هِيَ السَّبْعُ الْمَثَانِي وَالْقُرْآنُ الْعَظِيمُ الَّذِي أُوتِيتُهُ",
+  terjemahan:"Aku sedang solat di dalam masjid, lalu Rasulullah SAW memanggilku, tetapi aku tidak menyahut panggilan baginda. Aku berkata, 'Wahai Rasulullah, aku sedang solat.' Baginda bersabda, 'Bukankah Allah telah berfirman: Sahutlah seruan Allah dan Rasul apabila Rasul menyeru kamu?' Kemudian baginda bersabda kepadaku, 'Aku akan mengajarkan kepadamu satu surah yang paling agung dalam Al-Quran sebelum engkau keluar dari masjid.' Kemudian baginda memegang tanganku, dan apabila baginda hendak keluar, aku berkata kepadanya, 'Bukankah tuan telah berkata akan mengajarkan kepadaku surah yang paling agung dalam Al-Quran?' Baginda bersabda, 'Al-Hamdu Lillahi Rabbil 'Alamin (Surah al-Fatihah), ia adalah as-Sab'ul Mathani (tujuh ayat yang diulang-ulang bacaannya) dan Al-Quran yang agung yang telah dikurniakan kepadaku.'",
+  rujukan:"Sahih al-Bukhari, no. 4474", perawi:"Abu Sa'id bin al-Mu'alla R.A.", darjat:"sahih"
+},
+{
+  id:100, kategori:"Haji & Umrah",
+  arab:"وَاللَّهِ لَيَبْعَثَنَّهُ اللَّهُ يَوْمَ الْقِيَامَةِ لَهُ عَيْنَانِ يُبْصِرُ بِهِمَا وَلِسَانٌ يَنْطِقُ بِهِ يَشْهَدُ عَلَى مَنِ اسْتَلَمَهُ بِحَقٍّ",
+  terjemahan:"Demi Allah, sesungguhnya Allah akan membangkitkannya (Hajar Aswad) pada Hari Kiamat dengan memiliki dua mata yang dapat melihat dengannya, dan lidah yang dapat bercakap dengannya, lalu ia menjadi saksi bagi sesiapa yang menyentuhnya dengan penuh kebenaran dan keikhlasan.",
+  rujukan:"Jami' at-Tirmidhi, no. 961", perawi:"Ibn 'Abbas R.A.", darjat:"hasan",
+  nota:"Berkaitan keutamaan menyentuh atau mencium Hajar Aswad."
+},
+{
+  id:101, kategori:"Haji & Umrah",
+  arab:"قُلْتُ يَا رَسُولَ اللَّهِ أَلاَ نَغْزُو وَنُجَاهِدُ مَعَكُمْ فَقَالَ لَكُنَّ أَحْسَنُ الْجِهَادِ وَأَجْمَلُهُ الْحَجُّ حَجٌّ مَبْرُورٌ فَقَالَتْ عَائِشَةُ فَلاَ أَدَعُ الْحَجَّ بَعْدَ إِذْ سَمِعْتُ هَذَا مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم",
+  terjemahan:"Aisha berkata: \"Wahai Rasulullah, tidakkah kami turut keluar berperang dan berjihad bersama kamu?\" Baginda menjawab: \"Sebaik-baik jihad dan yang paling indah bagi kamu (kaum wanita) ialah haji yang mabrur.\" Aisha berkata: \"Sejak aku mendengar hal ini daripada Rasulullah SAW, aku tidak akan meninggalkan ibadah haji.\"",
+  rujukan:"Sahih al-Bukhari, no. 1861", perawi:"'Aisha binti Abi Bakr R.A.", darjat:"sahih"
+},
+{
+  id:102, kategori:"Haji & Umrah",
+  arab:"الْحَجُّ عَرَفَةُ مَنْ جَاءَ لَيْلَةَ جَمْعٍ قَبْلَ طُلُوعِ الْفَجْرِ فَقَدْ أَدْرَكَ الْحَجَّ أَيَّامُ مِنًى ثَلاَثَةٌ فَمَنْ تَعَجَّلَ فِي يَوْمَيْنِ فَلاَ إِثْمَ عَلَيْهِ وَمَنْ تَأَخَّرَ فَلاَ إِثْمَ عَلَيْهِ",
+  terjemahan:"Haji itu adalah wukuf di Arafah. Sesiapa yang tiba pada malam Jam' (Muzdalifah) sebelum terbit fajar, maka sesungguhnya dia telah sempat menunaikan haji. Hari-hari di Mina itu tiga hari; sesiapa yang bersegera meninggalkannya dalam masa dua hari, tiada dosa ke atasnya, dan sesiapa yang melewatkannya, tiada dosa ke atasnya.",
+  rujukan:"Jami' at-Tirmidhi, no. 889", perawi:"'Abdur-Rahman bin Ya'mar R.A.", darjat:"sahih",
+  nota:"Hadis asas yang menjelaskan wukuf di Arafah sebagai rukun terpenting ibadah haji."
+},
+{
+  id:103, kategori:"Haji & Umrah",
+  arab:"إِنَّ مَسْحَهُمَا كَفَّارَةٌ لِلْخَطَايَا وَسَمِعْتُهُ يَقُولُ مَنْ طَافَ بِهَذَا الْبَيْتِ أُسْبُوعًا فَأَحْصَاهُ كَانَ كَعِتْقِ رَقَبَةٍ وَسَمِعْتُهُ يَقُولُ لاَ يَضَعُ قَدَمًا وَلاَ يَرْفَعُ أُخْرَى إِلاَّ حَطَّ اللَّهُ عَنْهُ بِهَا خَطِيئَةً وَكَتَبَ لَهُ بِهَا حَسَنَةً",
+  terjemahan:"(Ibn 'Umar, tentang menyentuh Rukun Yamani dan Hajar Aswad): \"Sesungguhnya menyentuh kedua-duanya adalah penebus dosa.\" Dan aku mendengar baginda (Rasulullah SAW) bersabda: \"Sesiapa yang bertawaf mengelilingi Baitullah ini sebanyak tujuh kali dan menghitungnya dengan teliti, maka ia seperti membebaskan seorang hamba.\" Dan aku mendengar baginda bersabda lagi: \"Tidak seseorang itu meletakkan satu tapak kaki dan mengangkat tapak kaki yang lain melainkan Allah menghapuskan daripadanya satu dosa dan mencatatkan baginya satu kebaikan.\"",
+  rujukan:"Jami' at-Tirmidhi, no. 959", perawi:"'Ubaid bin 'Umair, daripada bapanya Ibn 'Umar R.A.", darjat:"hasan"
+},
+{
+  id:104, kategori:"Haji & Umrah",
+  arab:"مَا مِنْ مُلَبٍّ يُلَبِّي إِلاَّ لَبَّى مَا عَنْ يَمِينِهِ وَشِمَالِهِ مِنْ حَجَرٍ أَوْ شَجَرٍ أَوْ مَدَرٍ حَتَّى تَنْقَطِعَ الأَرْضُ مِنْ هَا هُنَا وَهَا هُنَا",
+  terjemahan:"Tidak seorang pun yang melafazkan talbiyah melainkan apa sahaja yang berada di sebelah kanan dan kirinya daripada batu, pokok, atau bongkah tanah turut sama melafazkan talbiyah bersamanya, sehingga terputus bumi dari sini dan dari sana.",
+  rujukan:"Sunan Ibn Majah, no. 2921", perawi:"Sahl bin Sa'd as-Sa'idi R.A.", darjat:"hasan"
+},
+{
+  id:105, kategori:"Haji & Umrah",
+  arab:"يَا أَيُّهَا النَّاسُ أَىُّ يَوْمٍ هَذَا قَالُوا يَوْمٌ حَرَامٌ قَالَ فَأَىُّ بَلَدٍ هَذَا قَالُوا بَلَدٌ حَرَامٌ قَالَ فَأَىُّ شَهْرٍ هَذَا قَالُوا شَهْرٌ حَرَامٌ قَالَ فَإِنَّ دِمَاءَكُمْ وَأَمْوَالَكُمْ وَأَعْرَاضَكُمْ عَلَيْكُمْ حَرَامٌ كَحُرْمَةِ يَوْمِكُمْ هَذَا فِي بَلَدِكُمْ هَذَا فِي شَهْرِكُمْ هَذَا فَأَعَادَهَا مِرَارًا ثُمَّ رَفَعَ رَأْسَهُ فَقَالَ اللَّهُمَّ هَلْ بَلَّغْتُ اللَّهُمَّ هَلْ بَلَّغْتُ",
+  terjemahan:"\"Wahai sekalian manusia, hari apakah ini?\" Mereka menjawab, \"Hari yang suci (haram).\" Baginda bertanya, \"Negeri apakah ini?\" Mereka menjawab, \"Negeri yang suci (haram).\" Baginda bertanya lagi, \"Bulan apakah ini?\" Mereka menjawab, \"Bulan yang suci (haram).\" Baginda bersabda, \"Sesungguhnya darah kamu, harta kamu, dan maruah kamu adalah suci ke atas kamu sesama sendiri sebagaimana sucinya hari ini, di negeri ini, dan pada bulan ini.\" Baginda mengulanginya beberapa kali, kemudian mengangkat kepalanya lalu bersabda, \"Ya Allah, adakah aku telah menyampaikannya? Ya Allah, adakah aku telah menyampaikannya?\"",
+  rujukan:"Sahih al-Bukhari, no. 1739", perawi:"Ibn 'Abbas R.A. (melalui 'Ikrimah)", darjat:"sahih",
+  nota:"Sebahagian daripada khutbah Hajjatul Wada' (Haji Perpisahan) di Mina pada Hari Nahr."
+},
+{
+  id:106, kategori:"Haji & Umrah",
+  arab:"اغْسِلُوهُ بِمَاءٍ وَسِدْرٍ وَكَفِّنُوهُ فِي ثَوْبَيْنِ وَلاَ تُحَنِّطُوهُ وَلاَ تُخَمِّرُوا رَأْسَهُ فَإِنَّهُ يُبْعَثُ يَوْمَ الْقِيَامَةِ مُلَبِّيًا",
+  terjemahan:"(Berkenaan seorang lelaki yang jatuh daripada tunggangannya lalu meninggal dunia dalam keadaan berihram di Arafah): \"Mandikanlah dia dengan air dan daun bidara, kafankanlah dia dengan dua helai pakaiannya, janganlah kamu memberinya wangian, dan janganlah kamu menutup kepalanya, kerana dia akan dibangkitkan pada Hari Kiamat dalam keadaan bertalbiyah.\"",
+  rujukan:"Sahih al-Bukhari, no. 1265", perawi:"Ibn 'Abbas R.A.", darjat:"sahih",
+  nota:"Menunjukkan kelebihan orang yang meninggal dunia dalam keadaan ihram semasa menunaikan ibadah haji."
+},
+{
+  id:107, kategori:"Haji & Umrah",
+  arab:"إِنَّمَا جُعِلَ رَمْىُ الْجِمَارِ وَالسَّعْىُ بَيْنَ الصَّفَا وَالْمَرْوَةِ لإِقَامَةِ ذِكْرِ اللَّهِ",
+  terjemahan:"Sesungguhnya melontar jamrah dan sa'i antara Safa dan Marwah ditetapkan semata-mata untuk menegakkan zikrullah (mengingati Allah).",
+  rujukan:"Jami' at-Tirmidhi, no. 902", perawi:"'Aisha R.A.", darjat:"hasan",
+  nota:"Terdapat riwayat serupa dalam Sunan Abu Dawud (no. 1888) yang dinilai daif oleh Syeikh Al-Albani; para ulama berbeza pandangan tentang kekuatan sanadnya, maka hadis ini boleh digunakan dengan sedikit kehati-hatian atau sebagai syawahid (sokongan)."
+},
+{
+  id:108, kategori:"Halal & Pematuhan Syariah",
+  arab:"أَيُّهَا النَّاسُ إِنَّ اللَّهَ طَيِّبٌ لاَ يَقْبَلُ إِلاَّ طَيِّبًا وَإِنَّ اللَّهَ أَمَرَ الْمُؤْمِنِينَ بِمَا أَمَرَ بِهِ الْمُرْسَلِينَ فَقَالَ يَا أَيُّهَا الرُّسُلُ كُلُوا مِنَ الطَّيِّبَاتِ وَاعْمَلُوا صَالِحًا إِنِّي بِمَا تَعْمَلُونَ عَلِيمٌ وَقَالَ يَا أَيُّهَا الَّذِينَ آمَنُوا كُلُوا مِنْ طَيِّبَاتِ مَا رَزَقْنَاكُمْ ثُمَّ ذَكَرَ الرَّجُلَ يُطِيلُ السَّفَرَ أَشْعَثَ أَغْبَرَ يَمُدُّ يَدَيْهِ إِلَى السَّمَاءِ يَا رَبِّ يَا رَبِّ وَمَطْعَمُهُ حَرَامٌ وَمَشْرَبُهُ حَرَامٌ وَمَلْبَسُهُ حَرَامٌ وَغُذِيَ بِالْحَرَامِ فَأَنَّى يُسْتَجَابُ لِذَلِكَ",
+  terjemahan:"Wahai manusia, sesungguhnya Allah itu Maha Baik (Tayyib) dan tidak menerima kecuali yang baik. Sesungguhnya Allah telah memerintahkan orang-orang mukmin dengan apa yang diperintahkan-Nya kepada para rasul, dengan firman-Nya: 'Wahai para rasul, makanlah daripada yang baik-baik dan beramallah dengan soleh, sesungguhnya Aku Maha Mengetahui apa yang kamu lakukan.' Dan Dia turut berfirman: 'Wahai orang-orang yang beriman, makanlah daripada rezeki yang baik-baik yang telah Kami kurniakan kepada kamu.' Kemudian Baginda menyebut tentang seorang lelaki yang menempuh perjalanan jauh, kusut rambutnya dan berdebu, sambil menadahkan kedua-dua tangannya ke langit merayu: 'Wahai Tuhanku, wahai Tuhanku,' sedangkan makanannya haram, minumannya haram, pakaiannya haram, dan dia dibesarkan dengan yang haram — maka bagaimanakah mungkin doanya akan dimakbulkan?",
+  rujukan:"Sahih Muslim, no. 1015", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Dikenali sebagai hadis 'Allah itu Tayyib'; menjadi asas prinsip bahawa rezeki yang halal adalah syarat kepada kemakbulan doa dan diterimanya amal."
+},
+{
+  id:109, kategori:"Halal & Pematuhan Syariah",
+  arab:"كُلُّ مُسْكِرٍ خَمْرٌ وَكُلُّ مُسْكِرٍ حَرَامٌ وَمَنْ شَرِبَ الْخَمْرَ فِي الدُّنْيَا فَمَاتَ وَهُوَ يُدْمِنُهَا لَمْ يَتُبْ لَمْ يَشْرَبْهَا فِي الآخِرَةِ",
+  terjemahan:"Setiap yang memabukkan adalah khamar, dan setiap yang memabukkan adalah haram. Sesiapa yang meminum arak di dunia lalu mati dalam keadaan ketagih dengannya tanpa bertaubat, dia tidak akan dapat meminumnya di akhirat.",
+  rujukan:"Sahih Muslim, no. 2003", perawi:"Ibnu 'Umar R.A.", darjat:"sahih",
+  nota:"Menjadi asas kaedah fiqh bahawa semua bahan yang memabukkan adalah haram, tidak terhad kepada arak anggur sahaja — amat relevan dalam isu halal makanan dan minuman."
+},
+{
+  id:110, kategori:"Halal & Pematuhan Syariah",
+  arab:"الْبَيِّعَانِ بِالْخِيَارِ مَا لَمْ يَتَفَرَّقَا ـ أَوْ قَالَ حَتَّى يَتَفَرَّقَا ـ فَإِنْ صَدَقَا وَبَيَّنَا بُورِكَ لَهُمَا فِي بَيْعِهِمَا، وَإِنْ كَتَمَا وَكَذَبَا مُحِقَتْ بَرَكَةُ بَيْعِهِمَا",
+  terjemahan:"Penjual dan pembeli mempunyai hak pilihan (untuk membatalkan atau meneruskan urus niaga) selagi mereka belum berpisah — atau Baginda bersabda: sehingga mereka berpisah. Jika kedua-duanya berlaku jujur dan menerangkan (kelebihan serta kekurangan barang), nescaya jual beli mereka akan diberkati; dan jika mereka menyembunyikan sesuatu serta berdusta, nescaya keberkatan jual beli mereka akan terhapus.",
+  rujukan:"Sahih al-Bukhari, no. 2079", perawi:"Hakim bin Hizam R.A.", darjat:"sahih",
+  nota:"Dikenali sebagai hadis Khiyar al-Majlis — menjadi asas hak pembatalan jual beli dan galakan bersikap jujur dalam urus niaga."
+},
+{
+  id:111, kategori:"Halal & Pematuhan Syariah",
+  arab:"لَعَنَ رَسُولُ اللَّهِ صلى الله عليه وسلم آكِلَ الرِّبَا وَمُوكِلَهُ وَكَاتِبَهُ وَشَاهِدَيْهِ وَقَالَ هُمْ سَوَاءٌ",
+  terjemahan:"Rasulullah SAW melaknat orang yang memakan riba, orang yang memberikannya, orang yang mencatatnya, serta dua orang saksinya, dan Baginda bersabda: Mereka semua adalah sama (dalam dosa).",
+  rujukan:"Sahih Muslim, no. 1598", perawi:"Jabir bin Abdullah R.A.", darjat:"sahih",
+  nota:"Amaran keras terhadap riba, merangkumi semua pihak yang terlibat dalam transaksi riba, bukan sekadar orang yang memakannya sahaja."
+},
+{
+  id:112, kategori:"Halal & Pematuhan Syariah",
+  arab:"نَهَى رَسُولُ اللَّهِ صلى الله عليه وسلم عَنْ بَيْعِ الْحَصَاةِ وَعَنْ بَيْعِ الْغَرَرِ",
+  terjemahan:"Rasulullah SAW melarang jual beli yang ditentukan dengan lontaran batu (bay' al-hasah), dan jual beli yang mengandungi unsur gharar (ketidaktentuan yang keterlaluan).",
+  rujukan:"Sahih Muslim, no. 1513", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Menjadi asas pengharaman gharar dalam kontrak dan jual beli — amat relevan dalam isu pematuhan Syariah bagi kewangan dan perniagaan halal."
+},
+{
+  id:113, kategori:"Halal & Pematuhan Syariah",
+  arab:"نَهَى رَسُولُ اللَّهِ صلى الله عليه وسلم عَنْ كُلِّ ذِي نَابٍ مِنَ السِّبَاعِ وَعَنْ كُلِّ ذِي مِخْلَبٍ مِنَ الطَّيْرِ",
+  terjemahan:"Rasulullah SAW melarang (memakan) setiap binatang buas yang bertaring, dan setiap burung yang mempunyai cakar (kuku tajam).",
+  rujukan:"Sahih Muslim, no. 1934", perawi:"Ibnu 'Abbas R.A.", darjat:"sahih",
+  nota:"Menjadi asas hukum haiwan yang haram dimakan dalam fiqh halal makanan — rujukan penting bagi tujuan pensijilan halal."
+},
+{
+  id:114, kategori:"Halal & Pematuhan Syariah",
+  arab:"نَهَى رَسُولُ اللَّهِ صلى الله عليه وسلم يَوْمَ خَيْبَرَ عَنْ لُحُومِ الْحُمُرِ، وَرَخَّصَ فِي الْخَيْلِ",
+  terjemahan:"Pada hari peperangan Khaibar, Rasulullah SAW melarang pemakanan daging keldai (jinak), dan mengharuskan pemakanan daging kuda.",
+  rujukan:"Sahih al-Bukhari, no. 4219", perawi:"Jabir bin Abdullah R.A.", darjat:"sahih",
+  nota:"Hadis ini menjelaskan pengharaman daging keldai jinak semasa Perang Khaibar, sekali gus mengharuskan pemakanan daging kuda."
+},
+{
+  id:115, kategori:"Halal & Pematuhan Syariah",
+  arab:"الْحَلِفُ مُنَفِّقَةٌ لِلسِّلْعَةِ مُمْحِقَةٌ لِلْبَرَكَةِ",
+  terjemahan:"Bersumpah dusta itu melariskan jualan barang, tetapi menghapuskan keberkatan (daripada transaksi tersebut).",
+  rujukan:"Sahih al-Bukhari, no. 2087", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Peringatan terhadap penggunaan sumpah sebagai taktik jualan — walaupun barang menjadi laku, ia menghilangkan keberkatan dalam transaksi tersebut."
+},
+{
+  id:116, kategori:"Iman Tidak Sempurna",
+  arab:"لاَ تَدْخُلُونَ الْجَنَّةَ حَتَّى تُؤْمِنُوا وَلاَ تُؤْمِنُوا حَتَّى تَحَابُّوا، أَوَلاَ أَدُلُّكُمْ عَلَى شَىْءٍ إِذَا فَعَلْتُمُوهُ تَحَابَبْتُمْ أَفْشُوا السَّلاَمَ بَيْنَكُمْ",
+  terjemahan:"Kamu tidak akan masuk syurga sehingga kamu beriman, dan kamu tidak akan beriman sehingga kamu saling berkasih sayang. Mahukah aku tunjukkan kepada kamu sesuatu yang jika kamu melakukannya, kamu akan saling berkasih sayang? Sebarkanlah salam sesama kamu.",
+  rujukan:"Sahih Muslim, no. 54a", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:117, kategori:"Iman Tidak Sempurna",
+  arab:"لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى أَكُونَ أَحَبَّ إِلَيْهِ مِنْ وَالِدِهِ وَوَلَدِهِ وَالنَّاسِ أَجْمَعِينَ",
+  terjemahan:"Tidak sempurna iman seseorang daripada kalangan kamu sehingga aku lebih dicintainya berbanding bapanya, anaknya, dan seluruh manusia.",
+  rujukan:"Sahih al-Bukhari, no. 15", perawi:"Anas bin Malik R.A.", darjat:"sahih"
+},
+{
+  id:118, kategori:"Iman Tidak Sempurna",
+  arab:"لاَ يَزْنِي الزَّانِي حِينَ يَزْنِي وَهْوَ مُؤْمِنٌ، وَلاَ يَشْرَبُ الْخَمْرَ حِينَ يَشْرَبُهَا وَهْوَ مُؤْمِنٌ، وَلاَ يَسْرِقُ حِينَ يَسْرِقُ وَهْوَ مُؤْمِنٌ، وَلاَ يَنْتَهِبُ نُهْبَةً يَرْفَعُ النَّاسُ إِلَيْهِ فِيهَا أَبْصَارَهُمْ حِينَ يَنْتَهِبُهَا وَهْوَ مُؤْمِنٌ",
+  terjemahan:"Seorang penzina tidak dikira beriman ketika dia melakukan zina; seorang peminum arak tidak dikira beriman ketika dia meminumnya; seorang pencuri tidak dikira beriman ketika dia mencuri; dan seorang perompak yang merompak sesuatu yang bernilai sambil dipandang oleh orang ramai, tidak dikira beriman ketika dia melakukan rompakan itu.",
+  rujukan:"Sahih al-Bukhari, no. 2475", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:119, kategori:"Iman Tidak Sempurna",
+  arab:"لَيْسَ مِنَّا مَنْ ضَرَبَ الْخُدُودَ، وَشَقَّ الْجُيُوبَ، وَدَعَا بِدَعْوَى الْجَاهِلِيَّةِ",
+  terjemahan:"Bukanlah dari kalangan kami sesiapa yang memukul pipi, mengoyakkan pakaian, dan menyeru dengan seruan jahiliyah.",
+  rujukan:"Sahih al-Bukhari, no. 1297", perawi:"Abdullah bin Mas'ud R.A.", darjat:"sahih",
+  nota:"Sebahagian sumber sekunder memaparkan lafaz hadis ini sebagai \"لطم الخدود\" (menampar pipi), tetapi teks asal dalam Sahih al-Bukhari dan Sahih Muslim menggunakan lafaz \"ضرب الخدود\" (memukul pipi) — maksudnya adalah sama."
+},
+{
+  id:120, kategori:"Iman Tidak Sempurna",
+  arab:"مَنْ حَمَلَ عَلَيْنَا السِّلاَحَ فَلَيْسَ مِنَّا",
+  terjemahan:"Sesiapa yang mengangkat senjata terhadap kami, maka dia bukan dari kalangan kami.",
+  rujukan:"Sahih al-Bukhari, no. 7070", perawi:"Abdullah bin Umar R.A.", darjat:"sahih"
+},
+{
+  id:121, kategori:"Akhlak yang Baik",
+  arab:"تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ لَكَ صَدَقَةٌ وَأَمْرُكَ بِالْمَعْرُوفِ وَنَهْيُكَ عَنِ الْمُنْكَرِ صَدَقَةٌ وَإِرْشَادُكَ الرَّجُلَ فِي أَرْضِ الضَّلاَلِ لَكَ صَدَقَةٌ وَبَصَرُكَ لِلرَّجُلِ الرَّدِيءِ الْبَصَرِ لَكَ صَدَقَةٌ وَإِمَاطَتُكَ الْحَجَرَ وَالشَّوْكَةَ وَالْعَظْمَ عَنِ الطَّرِيقِ لَكَ صَدَقَةٌ وَإِفْرَاغُكَ مِنْ دَلْوِكَ فِي دَلْوِ أَخِيكَ لَكَ صَدَقَةٌ",
+  terjemahan:"Senyumanmu kepada saudaramu adalah sedekah, menyuruh kepada kebaikan dan mencegah kemungkaran adalah sedekah, menunjukkan jalan kepada orang yang sesat adalah sedekah bagimu, membantu penglihatan orang yang rabun adalah sedekah bagimu, menyingkirkan batu, duri dan tulang dari jalan adalah sedekah bagimu, dan menuangkan baki air dari timbamu ke dalam timba saudaramu adalah sedekah bagimu.",
+  rujukan:"Jami' at-Tirmidhi, no. 1956", perawi:"Abu Dharr R.A.", darjat:"hasan",
+  nota:"Digredkan hasan oleh Darussalam. Hadis ini terletak dalam Kitab al-Birr wa as-Silah (Kebajikan dan Silaturahim)."
+},
+{
+  id:122, kategori:"Akhlak yang Baik",
+  arab:"الإِيمَانُ بِضْعٌ وَسَبْعُونَ أَوْ بِضْعٌ وَسِتُّونَ شُعْبَةً فَأَفْضَلُهَا قَوْلُ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَدْنَاهَا إِمَاطَةُ الأَذَى عَنِ الطَّرِيقِ وَالْحَيَاءُ شُعْبَةٌ مِنَ الإِيمَانِ",
+  terjemahan:"Iman itu mempunyai lebih tujuh puluh atau lebih enam puluh cabang. Yang paling utama ialah ucapan 'Tiada Tuhan melainkan Allah', dan yang paling rendah ialah menyingkirkan sesuatu yang menyakitkan dari jalan. Manakala sifat malu itu adalah salah satu cabang daripada iman.",
+  rujukan:"Sahih Muslim, no. 35b", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:123, kategori:"Akhlak yang Baik",
+  arab:"إِنَّ مِنْ أَحَبِّكُمْ إِلَىَّ وَأَقْرَبِكُمْ مِنِّي مَجْلِسًا يَوْمَ الْقِيَامَةِ أَحَاسِنَكُمْ أَخْلاَقًا وَإِنَّ أَبْغَضَكُمْ إِلَىَّ وَأَبْعَدَكُمْ مِنِّي مَجْلِسًا يَوْمَ الْقِيَامَةِ الثَّرْثَارُونَ وَالْمُتَشَدِّقُونَ وَالْمُتَفَيْهِقُونَ. قَالُوا يَا رَسُولَ اللَّهِ قَدْ عَلِمْنَا الثَّرْثَارُونَ وَالْمُتَشَدِّقُونَ فَمَا الْمُتَفَيْهِقُونَ قَالَ الْمُتَكَبِّرُونَ",
+  terjemahan:"Sesungguhnya orang yang paling aku kasihi di kalangan kamu dan yang paling dekat kedudukannya denganku pada hari Kiamat ialah orang yang paling baik akhlaknya. Dan sesungguhnya orang yang paling aku benci di kalangan kamu dan yang paling jauh kedudukannya daripadaku pada hari Kiamat ialah golongan al-Tsartharun (yang banyak bercakap tanpa faedah), al-Mutasyaddiqun (yang bercakap dengan gaya berlagak), dan al-Mutafaihiqun. Mereka bertanya: 'Wahai Rasulullah, kami telah mengetahui maksud al-Tsartharun dan al-Mutasyaddiqun, tetapi apakah maksud al-Mutafaihiqun?' Baginda bersabda: 'Iaitu orang-orang yang sombong.'",
+  rujukan:"Jami' at-Tirmidhi, no. 2018", perawi:"Jabir bin Abdullah R.A.", darjat:"hasan",
+  nota:"Imam at-Tirmidhi menyatakan hadis ini hasan gharib melalui sanad ini."
+},
+{
+  id:124, kategori:"Akhlak yang Baik",
+  arab:"أَنَا زَعِيمٌ بِبَيْتٍ فِي رَبَضِ الْجَنَّةِ لِمَنْ تَرَكَ الْمِرَاءَ وَإِنْ كَانَ مُحِقًّا وَبِبَيْتٍ فِي وَسَطِ الْجَنَّةِ لِمَنْ تَرَكَ الْكَذِبَ وَإِنْ كَانَ مَازِحًا وَبِبَيْتٍ فِي أَعْلَى الْجَنَّةِ لِمَنْ حَسَّنَ خُلُقَهُ",
+  terjemahan:"Aku menjamin sebuah rumah di kawasan sekitar Syurga bagi sesiapa yang meninggalkan pertengkaran walaupun dia berada di pihak yang benar, sebuah rumah di tengah-tengah Syurga bagi sesiapa yang meninggalkan pembohongan walaupun dalam keadaan bergurau, dan sebuah rumah di bahagian tertinggi Syurga bagi sesiapa yang memperelokkan akhlaknya.",
+  rujukan:"Sunan Abi Dawud, no. 4800", perawi:"Abu Umamah R.A.", darjat:"hasan",
+  nota:"Digredkan hasan oleh Syeikh al-Albani."
+},
+{
+  id:125, kategori:"Akhlak yang Baik",
+  arab:"مَنْ يُحْرَمِ الرِّفْقَ يُحْرَمِ الْخَيْرَ",
+  terjemahan:"Sesiapa yang dijauhkan daripada sifat lemah lembut, maka sesungguhnya dia telah dijauhkan daripada kebaikan.",
+  rujukan:"Sahih Muslim, no. 2592a", perawi:"Jarir bin Abdullah al-Bajali R.A.", darjat:"sahih"
+},
+{
+  id:126, kategori:"Akhlak yang Baik",
+  arab:"الْحَيَاءُ لاَ يَأْتِي إِلاَّ بِخَيْرٍ",
+  terjemahan:"Sifat malu itu tidak mendatangkan melainkan kebaikan.",
+  rujukan:"Sahih al-Bukhari, no. 6117", perawi:"Imran bin Husain R.A.", darjat:"sahih",
+  nota:"Dalam konteks hadis ini, Busyair bin Ka'ab pernah membantah dengan menyebut hikmah yang tertulis tentang sifat malu, lalu Imran bin Husain menegaskan bahawa beliau menyampaikan sabda Rasulullah ﷺ secara terus, bukan daripada kitab hikmah."
+},
+{
+  id:127, kategori:"Syamail Nabi SAW",
+  arab:"حَدَّثَنَا عَبْدُ الرَّحْمَنِ بْنُ يُونُسَ، قَالَ حَدَّثَنَا حَاتِمُ بْنُ إِسْمَاعِيلَ، عَنِ الْجَعْدِ، قَالَ سَمِعْتُ السَّائِبَ بْنَ يَزِيدَ، يَقُولُ ذَهَبَتْ بِي خَالَتِي إِلَى النَّبِيِّ صلى الله عليه وسلم فَقَالَتْ يَا رَسُولَ اللَّهِ، إِنَّ ابْنَ أُخْتِي وَجِعٌ‏.‏ فَمَسَحَ رَأْسِي وَدَعَا لِي بِالْبَرَكَةِ، ثُمَّ تَوَضَّأَ فَشَرِبْتُ مِنْ وَضُوئِهِ، ثُمَّ قُمْتُ خَلْفَ ظَهْرِهِ، فَنَظَرْتُ إِلَى خَاتَمِ النُّبُوَّةِ بَيْنَ كَتِفَيْهِ مِثْلِ زِرِّ الْحَجَلَةِ‏.‏",
+  terjemahan:"Emak saudaraku (adik ibuku) membawaku menemui Nabi ﷺ lalu berkata, \"Wahai Rasulullah, anak saudaraku ini sedang sakit.\" Baginda pun mengusap kepalaku dan mendoakan keberkatan untukku, kemudian baginda berwuduk dan aku meminum daripada baki air wuduknya. Aku lalu berdiri di belakang baginda dan melihat khatam an-nubuwwah (tanda kenabian) di antara kedua-dua bahunya, seperti kancing khemah kecil.",
+  rujukan:"Sahih al-Bukhari, no. 190", perawi:"As-Sa'ib bin Yazid R.A.", darjat:"sahih",
+  nota:"Menerangkan khatam an-nubuwwah (tanda kenabian) di antara dua bahu Rasulullah ﷺ."
+},
+{
+  id:128, kategori:"Syamail Nabi SAW",
+  arab:"حَدَّثَنَا سُلَيْمَانُ بْنُ حَرْبٍ، حَدَّثَنَا حَمَّادٌ، عَنْ ثَابِتٍ، عَنْ أَنَسٍ رضى الله عنه قَالَ مَا مَسِسْتُ حَرِيرًا وَلاَ دِيبَاجًا أَلْيَنَ مِنْ كَفِّ النَّبِيِّ صلى الله عليه وسلم، وَلاَ شَمِمْتُ رِيحًا قَطُّ أَوْ عَرْفًا قَطُّ أَطْيَبَ مِنْ رِيحِ أَوْ عَرْفِ النَّبِيِّ صلى الله عليه وسلم‏.‏",
+  terjemahan:"Aku tidak pernah menyentuh sutera atau sutera tebal (dibaj) yang lebih lembut daripada tapak tangan Nabi ﷺ, dan aku tidak pernah mencium bau yang lebih harum daripada peluh atau keharuman Nabi ﷺ.",
+  rujukan:"Sahih al-Bukhari, no. 3561", perawi:"Anas bin Malik R.A.", darjat:"sahih"
+},
+{
+  id:129, kategori:"Syamail Nabi SAW",
+  arab:"حَدَّثَنَا حَفْصُ بْنُ عُمَرَ، قَالَ حَدَّثَنَا شُعْبَةُ، قَالَ أَخْبَرَنِي أَشْعَثُ بْنُ سُلَيْمٍ، قَالَ سَمِعْتُ أَبِي، عَنْ مَسْرُوقٍ، عَنْ عَائِشَةَ، قَالَتْ كَانَ النَّبِيُّ صلى الله عليه وسلم يُعْجِبُهُ التَّيَمُّنُ فِي تَنَعُّلِهِ وَتَرَجُّلِهِ وَطُهُورِهِ وَفِي شَأْنِهِ كُلِّهِ‏.‏",
+  terjemahan:"Nabi ﷺ suka memulakan dengan sebelah kanan apabila memakai kasut, menyikat rambut, bersuci, dan dalam semua urusannya.",
+  rujukan:"Sahih al-Bukhari, no. 168", perawi:"Aisyah R.A.", darjat:"sahih"
+},
+{
+  id:130, kategori:"Syamail Nabi SAW",
+  arab:"كَانَ النَّبِيُّ صلى الله عليه وسلم مَرْبُوعًا، بَعِيدَ مَا بَيْنَ الْمَنْكِبَيْنِ، لَهُ شَعَرٌ يَبْلُغُ شَحْمَةَ أُذُنِهِ، رَأَيْتُهُ فِي حُلَّةٍ حَمْرَاءَ، لَمْ أَرَ شَيْئًا قَطُّ أَحْسَنَ مِنْهُ‏.‏",
+  terjemahan:"Nabi ﷺ berketinggian sederhana, mempunyai bahu yang lebar (jarak yang luas antara kedua-dua bahunya), dan rambutnya mencapai cuping telinganya. Aku pernah melihat baginda memakai jubah merah; aku tidak pernah melihat sesuatu yang lebih tampan daripadanya.",
+  rujukan:"Sahih al-Bukhari, no. 3551", perawi:"Al-Bara' bin 'Azib R.A.", darjat:"sahih"
+},
+{
+  id:131, kategori:"Syamail Nabi SAW",
+  arab:"حَدَّثَنَا مُحَمَّدُ بْنُ حُمَيْدٍ الرَّازِيُّ، قَالَ‏:‏ حَدَّثَنَا الْفَضْلُ بْنُ مُوسَى، وَأَبُو تُمَيْلَةَ، وَزَيْدُ بْنُ حُبَابٍ، عَنْ عَبْدِ الْمُؤْمِنِ بْنِ خَالِدٍ، عَنْ عَبْدِ اللهِ بْنِ بُرَيْدَةَ، عَنْ أُمِّ سَلَمَةَ، قَالَتْ‏:‏ كَانَ أَحَبَّ الثِّيَابِ إِلَى رَسُولِ اللهِ صلى الله عليه وسلم الْقَمِيصُ‏.‏",
+  terjemahan:"Pakaian yang paling disukai oleh Rasulullah ﷺ ialah qamis (baju kemeja).",
+  rujukan:"Ash-Shama'il al-Muhammadiyah, no. 55", perawi:"Ummu Salamah R.A.", darjat:"hasan",
+  nota:"Hadis ini digredkan Hasan oleh Syeikh Zubair 'Ali Za'i, di bawah bab \"Pakaian Rasulullah ﷺ\"."
+},
+{
+  id:132, kategori:"Akhir Zaman & Fitan",
+  arab:"لاَ تَقُومُ السَّاعَةُ حَتَّى تَقْتَتِلَ فِئَتَانِ عَظِيمَتَانِ، يَكُونُ بَيْنَهُمَا مَقْتَلَةٌ عَظِيمَةٌ، دَعْوَتُهُمَا وَاحِدَةٌ، وَحَتَّى يُبْعَثَ دَجَّالُونَ كَذَّابُونَ، قَرِيبٌ مِنْ ثَلاَثِينَ، كُلُّهُمْ يَزْعُمُ أَنَّهُ رَسُولُ اللَّهِ، وَحَتَّى يُقْبَضَ الْعِلْمُ، وَتَكْثُرَ الزَّلاَزِلُ، وَيَتَقَارَبَ الزَّمَانُ، وَتَظْهَرَ الْفِتَنُ، وَيَكْثُرَ الْهَرْجُ وَهْوَ الْقَتْلُ، وَحَتَّى يَكْثُرَ فِيكُمُ الْمَالُ فَيَفِيضَ، حَتَّى يُهِمَّ رَبَّ الْمَالِ مَنْ يَقْبَلُ صَدَقَتَهُ، وَحَتَّى يَعْرِضَهُ فَيَقُولُ الَّذِي يَعْرِضُهُ عَلَيْهِ لاَ أَرَبَ لِي بِهِ. وَحَتَّى يَتَطَاوَلَ النَّاسُ فِي الْبُنْيَانِ، وَحَتَّى يَمُرَّ الرَّجُلُ بِقَبْرِ الرَّجُلِ فَيَقُولُ يَا لَيْتَنِي مَكَانَهُ. وَحَتَّى تَطْلُعَ الشَّمْسُ مِنْ مَغْرِبِهَا، فَإِذَا طَلَعَتْ وَرَآهَا النَّاسُ آمَنُوا أَجْمَعُونَ، فَذَلِكَ حِينَ لاَ يَنْفَعُ نَفْسًا إِيمَانُهَا لَمْ تَكُنْ آمَنَتْ مِنْ قَبْلُ، أَوْ كَسَبَتْ فِي إِيمَانِهَا خَيْرًا، وَلَتَقُومَنَّ السَّاعَةُ وَقَدْ نَشَرَ الرَّجُلاَنِ ثَوْبَهُمَا بَيْنَهُمَا، فَلاَ يَتَبَايَعَانِهِ وَلاَ يَطْوِيَانِهِ، وَلَتَقُومَنَّ السَّاعَةُ وَقَدِ انْصَرَفَ الرَّجُلُ بِلَبَنِ لِقْحَتِهِ فَلاَ يَطْعَمُهُ، وَلَتَقُومَنَّ السَّاعَةُ وَهْوَ يُلِيطُ حَوْضَهُ فَلاَ يَسْقِي فِيهِ، وَلَتَقُومَنَّ السَّاعَةُ وَقَدْ رَفَعَ أُكْلَتَهُ إِلَى فِيهِ فَلاَ يَطْعَمُهَا",
+  terjemahan:"Hari Kiamat tidak akan berlaku sehingga dua kumpulan besar berperang sesama sendiri lalu berlaku pertumpahan darah yang amat besar di kalangan kedua-duanya, sedangkan seruan (agama) mereka adalah satu; dan sehingga muncul kira-kira tiga puluh orang Dajjal pendusta, setiap seorang daripada mereka mendakwa dirinya sebagai Rasul Allah; dan sehingga ilmu (agama) diangkat (dengan wafatnya para ulama), gempa bumi semakin banyak berlaku, masa terasa semakin singkat, pelbagai fitnah muncul, dan al-Harj (iaitu pembunuhan) semakin berleluasa; dan sehingga harta menjadi begitu melimpah ruah sehingga seseorang yang kaya berasa bimbang tiada sesiapa yang sudi menerima zakatnya, dan apabila dia menawarkannya kepada seseorang, orang itu akan berkata, \"Aku tidak memerlukannya\"; dan sehingga manusia berlumba-lumba meninggikan bangunan; dan sehingga seseorang lelaki yang melalui kubur orang lain akan berkata, \"Alangkah baiknya sekiranya aku berada di tempatnya\"; dan sehingga matahari terbit dari sebelah barat. Maka apabila matahari terbit (dari barat) dan manusia melihatnya, semua mereka akan beriman, tetapi pada ketika itu keimanan seseorang yang tidak beriman sebelum itu, atau yang tidak memperoleh sebarang kebaikan daripada imannya, tidak lagi memberi manfaat kepadanya. Dan sesungguhnya Hari Kiamat akan berlaku sedangkan dua orang lelaki telah membentangkan kain di antara mereka untuk berjual beli, namun mereka tidak sempat menjual atau melipatnya semula; dan Hari Kiamat akan berlaku sedangkan seseorang telah memerah susu untanya, namun dia tidak sempat meminumnya; dan Hari Kiamat akan berlaku sedangkan seseorang sedang membaiki kolam air ternakannya, namun dia tidak sempat memberi minum kepada haiwannya; dan Hari Kiamat akan berlaku sedangkan seseorang telah mengangkat sesuap makanan ke mulutnya, namun dia tidak sempat memakannya.",
+  rujukan:"Sahih al-Bukhari, no. 7121", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Hadis panjang yang merangkumi banyak alamat kiamat sekaligus: peperangan dua kumpulan besar, kemunculan lebih kurang tiga puluh pendusta yang mendakwa menjadi nabi, ilmu diangkat, gempa bumi meningkat, masa terasa singkat, harta melimpah ruah, dan matahari terbit dari barat."
+},
+{
+  id:133, kategori:"Akhir Zaman & Fitan",
+  arab:"تَقِيءُ الأَرْضُ أَفْلاَذَ كَبِدِهَا أَمْثَالَ الأُسْطُوَانِ مِنَ الذَّهَبِ وَالْفِضَّةِ فَيَجِيءُ الْقَاتِلُ فَيَقُولُ فِي هَذَا قَتَلْتُ. وَيَجِيءُ الْقَاطِعُ فَيَقُولُ فِي هَذَا قَطَعْتُ رَحِمِي. وَيَجِيءُ السَّارِقُ فَيَقُولُ فِي هَذَا قُطِعَتْ يَدِي ثُمَّ يَدَعُونَهُ فَلاَ يَأْخُذُونَ مِنْهُ شَيْئًا",
+  terjemahan:"Bumi akan memuntahkan kepingan-kepingan khazanahnya seumpama tiang-tiang emas dan perak. Lalu datanglah pembunuh seraya berkata, \"Kerana inilah aku membunuh.\" Datang pula orang yang memutuskan tali persaudaraan seraya berkata, \"Kerana inilah aku memutuskan silaturahim.\" Dan datang pula pencuri seraya berkata, \"Kerana inilah tanganku dipotong.\" Kemudian mereka semua meninggalkannya begitu sahaja tanpa mengambil apa-apa daripadanya.",
+  rujukan:"Sahih Muslim, no. 1013", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:134, kategori:"Akhir Zaman & Fitan",
+  arab:"لَيَكُونَنَّ مِنْ أُمَّتِي أَقْوَامٌ يَسْتَحِلُّونَ الْحِرَ وَالْحَرِيرَ وَالْخَمْرَ وَالْمَعَازِفَ، وَلَيَنْزِلَنَّ أَقْوَامٌ إِلَى جَنْبِ عَلَمٍ يَرُوحُ عَلَيْهِمْ بِسَارِحَةٍ لَهُمْ، يَأْتِيهِمْ (يَعْنِي الْفَقِيرَ) لِحَاجَةٍ فَيَقُولُوا ارْجِعْ إِلَيْنَا غَدًا، فَيُبَيِّتُهُمُ اللَّهُ وَيَضَعُ الْعَلَمَ، وَيَمْسَخُ آخَرِينَ قِرَدَةً وَخَنَازِيرَ إِلَى يَوْمِ الْقِيَامَةِ",
+  terjemahan:"Akan ada di kalangan umatku golongan yang menghalalkan zina, memakai sutera, meminum arak, dan menggunakan alat-alat muzik. Dan akan ada suatu kaum yang menetap di sisi sebuah gunung; penggembala mereka akan datang kepada mereka pada waktu petang bersama binatang ternakan mereka, lalu datang seorang yang memerlukan (fakir) meminta sesuatu keperluan kepada mereka, namun mereka berkata, \"Kembalilah kepada kami esok.\" Maka Allah akan membinasakan mereka pada waktu malam dan menjatuhkan gunung itu ke atas mereka, serta mengubah baki mereka yang lain menjadi kera dan babi sehingga Hari Kiamat.",
+  rujukan:"Sahih al-Bukhari, no. 5590", perawi:"Abu 'Amir atau Abu Malik al-Ash'ari R.A.", darjat:"sahih",
+  nota:"Isu utama yang relevan dengan tema akhir zaman ialah bahagian pertama hadis, iaitu arak yang dihalalkan dengan menukar namanya (turut disebut sutera dan muzik)."
+},
+{
+  id:135, kategori:"Akhir Zaman & Fitan",
+  arab:"لاَ تَقُومُ السَّاعَةُ حَتَّى يَحْسِرَ الْفُرَاتُ عَنْ جَبَلٍ مِنْ ذَهَبٍ يَقْتَتِلُ النَّاسُ عَلَيْهِ فَيُقْتَلُ مِنْ كُلِّ مِائَةٍ تِسْعَةٌ وَتِسْعُونَ وَيَقُولُ كُلُّ رَجُلٍ مِنْهُمْ لَعَلِّي أَكُونُ أَنَا الَّذِي أَنْجُو",
+  terjemahan:"Hari Kiamat tidak akan berlaku sehingga Sungai Furat menyingkap sebuah gunung emas, lalu manusia akan berperang memperebutkannya. Daripada setiap seratus orang, sembilan puluh sembilan akan terbunuh, namun setiap orang daripada mereka tetap berkata, \"Mudah-mudahan akulah orang yang akan terselamat.\"",
+  rujukan:"Sahih Muslim, no. 2894a", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Terdapat riwayat yang serupa dalam Sahih al-Bukhari (no. 7119) dengan lafaz yang hampir sama."
+},
+{
+  id:136, kategori:"Akhir Zaman & Fitan",
+  arab:"لاَ تَقُومُ السَّاعَةُ حَتَّى تَخْرُجَ نَارٌ مِنْ أَرْضِ الْحِجَازِ، تُضِيءُ أَعْنَاقَ الإِبِلِ بِبُصْرَى",
+  terjemahan:"Hari Kiamat tidak akan berlaku sehingga keluar api dari bumi Hijaz yang menerangi leher-leher unta di Busra.",
+  rujukan:"Sahih al-Bukhari, no. 7118", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Menurut catatan sejarawan, peristiwa ini dikaitkan dengan letusan gunung berapi berhampiran Madinah pada tahun 654H, dan sering dianggap oleh ulama sebagai salah satu tanda kecil kiamat yang telah pun berlaku."
+},
+{
+  id:137, kategori:"Akhir Zaman & Fitan",
+  arab:"إِنَّ مِنْ أَشْرَاطِ السَّاعَةِ أَنْ يُرْفَعَ الْعِلْمُ، وَيَثْبُتَ الْجَهْلُ، وَيُشْرَبَ الْخَمْرُ، وَيَظْهَرَ الزِّنَا",
+  terjemahan:"Rasulullah ﷺ bersabda: \"Antara tanda-tanda Hari Kiamat ialah ilmu (agama) akan diangkat (dengan wafatnya para ulama), kejahilan akan berleluasa, arak akan diminum secara meluas, dan zina akan berlaku secara terang-terangan.\"",
+  rujukan:"Sahih al-Bukhari, no. 80", perawi:"Anas bin Malik R.A.", darjat:"sahih"
+},
+{
+  id:138, kategori:"Hadis Wanita",
+  arab:"سُئِلَ رَسُولُ اللَّهِ صلى الله عليه وسلم عَنِ الرَّجُلِ يَجِدُ الْبَلَلَ وَلاَ يَذْكُرُ احْتِلاَمًا قَالَ \"يَغْتَسِلُ\" وَعَنِ الرَّجُلِ يَرَى أَنَّهُ قَدِ احْتَلَمَ وَلاَ يَجِدُ الْبَلَلَ قَالَ \"لاَ غُسْلَ عَلَيْهِ\" فَقَالَتْ أُمُّ سُلَيْمٍ الْمَرْأَةُ تَرَى ذَلِكَ أَعَلَيْهَا غُسْلٌ قَالَ \"نَعَمْ إِنَّمَا النِّسَاءُ شَقَائِقُ الرِّجَالِ\"",
+  terjemahan:"Rasulullah ﷺ pernah ditanya tentang seorang lelaki yang mendapati basah (mani) tetapi tidak ingat bermimpi; Baginda bersabda, \"Hendaklah dia mandi.\" Baginda juga ditanya tentang seorang lelaki yang ingat bermimpi tetapi tidak mendapati basah; Baginda bersabda, \"Tidak wajib mandi ke atasnya.\" Ummu Sulaim lalu bertanya, \"Jika seorang wanita mengalami perkara yang sama (dalam mimpi), wajibkah dia mandi?\" Baginda menjawab, \"Ya. Sesungguhnya wanita itu adalah saudara kembar bagi lelaki.\"",
+  rujukan:"Sunan Abi Dawud, no. 236", perawi:"Aisyah R.A.", darjat:"hasan",
+  nota:"Al-Albani menilai riwayat Abu Dawud ini sebagai hasan; ramai ulama seperti Syeikh Ibn Baz mengesahkan makna hadis ini sebagai sahih dan thabit secara keseluruhan berdasarkan pelbagai jalan periwayatan yang saling menguatkan."
+},
+{
+  id:139, kategori:"Hadis Wanita",
+  arab:"لاَ تُنْكَحُ الأَيِّمُ حَتَّى تُسْتَأْمَرَ وَلاَ تُنْكَحُ الْبِكْرُ حَتَّى تُسْتَأْذَنَ قَالُوا يَا رَسُولَ اللَّهِ وَكَيْفَ إِذْنُهَا قَالَ \"أَنْ تَسْكُتَ\"",
+  terjemahan:"Seorang janda tidak boleh dikahwinkan sehingga dimintai persetujuannya, dan seorang anak dara tidak boleh dikahwinkan sehingga diminta keizinannya. Para sahabat bertanya, \"Wahai Rasulullah, bagaimanakah cara izinnya?\" Baginda bersabda, \"Iaitu dengan diamnya.\"",
+  rujukan:"Sahih al-Bukhari, no. 5136", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Hadis ini menegaskan hak wanita, sama ada janda atau anak dara, untuk bersetuju atau menolak sesebuah perkahwinan yang dicadangkan untuknya."
+},
+{
+  id:140, kategori:"Hadis Wanita",
+  arab:"كَانَتِ امْرَأَةٌ لِعُمَرَ تَشْهَدُ صَلاَةَ الصُّبْحِ وَالْعِشَاءِ فِي الْجَمَاعَةِ فِي الْمَسْجِدِ، فَقِيلَ لَهَا لِمَ تَخْرُجِينَ وَقَدْ تَعْلَمِينَ أَنَّ عُمَرَ يَكْرَهُ ذَلِكَ وَيَغَارُ قَالَتْ وَمَا يَمْنَعُهُ أَنْ يَنْهَانِي قَالَ يَمْنَعُهُ قَوْلُ رَسُولِ اللَّهِ صلى الله عليه وسلم \"لاَ تَمْنَعُوا إِمَاءَ اللَّهِ مَسَاجِدَ اللَّهِ\"",
+  terjemahan:"Salah seorang isteri Umar biasa menghadiri solat Subuh dan Isyak secara berjemaah di masjid. Beliau ditanya, \"Mengapa engkau keluar, sedangkan engkau tahu Umar tidak menyukainya dan cemburu?\" Beliau menjawab, \"Apakah yang menghalangnya daripada melarangku?\" Dijawab, \"Beliau dihalang oleh sabda Rasulullah ﷺ: 'Janganlah kamu menghalang hamba-hamba perempuan Allah daripada pergi ke masjid-masjid Allah.'\"",
+  rujukan:"Sahih al-Bukhari, no. 900", perawi:"Ibnu Umar R.A.", darjat:"sahih",
+  nota:"Hadis ini menunjukkan bahawa hak wanita untuk menghadiri solat berjemaah di masjid tidak boleh disekat, walaupun oleh suaminya sendiri."
+},
+{
+  id:141, kategori:"Hadis Wanita",
+  arab:"فَلَمَّا لَمْ يَقُمْ مِنْهُمْ أَحَدٌ دَخَلَ عَلَى أُمِّ سَلَمَةَ، فَذَكَرَ لَهَا مَا لَقِيَ مِنَ النَّاسِ فَقَالَتْ أُمُّ سَلَمَةَ يَا نَبِيَّ اللَّهِ، أَتُحِبُّ ذَلِكَ اخْرُجْ ثُمَّ لاَ تُكَلِّمْ أَحَدًا مِنْهُمْ كَلِمَةً حَتَّى تَنْحَرَ بُدْنَكَ، وَتَدْعُوَ حَالِقَكَ فَيَحْلِقَكَ فَخَرَجَ فَلَمْ يُكَلِّمْ أَحَدًا مِنْهُمْ، حَتَّى فَعَلَ ذَلِكَ نَحَرَ بُدْنَهُ، وَدَعَا حَالِقَهُ فَحَلَقَهُ فَلَمَّا رَأَوْا ذَلِكَ، قَامُوا فَنَحَرُوا، وَجَعَلَ بَعْضُهُمْ يَحْلِقُ بَعْضًا، حَتَّى كَادَ بَعْضُهُمْ يَقْتُلُ بَعْضًا غَمًّا",
+  terjemahan:"Apabila tiada seorang pun daripada mereka bangun melaksanakan arahan Baginda, Nabi ﷺ masuk menemui Ummu Salamah dan menceritakan kepadanya sikap orang ramai terhadap Baginda. Ummu Salamah berkata, \"Wahai Nabi Allah, adakah Baginda mahu perkara itu berlaku? Keluarlah, kemudian jangan bercakap sepatah kata pun dengan sesiapa daripada mereka sehingga Baginda menyembelih haiwan korban Baginda, dan panggillah tukang cukur Baginda supaya mencukur kepala Baginda.\" Maka Baginda pun keluar dan tidak bercakap dengan sesiapa pun daripada mereka sehingga Baginda melakukan perkara itu — Baginda menyembelih korbannya dan memanggil tukang cukurnya lalu dicukur kepalanya. Apabila mereka melihat hal itu, mereka pun bangun lalu menyembelih korban masing-masing, dan sebahagian mereka mula mencukur kepala sebahagian yang lain, sehingga hampir-hampir sebahagian mereka membunuh sebahagian yang lain kerana kesedihan.",
+  rujukan:"Sahih al-Bukhari, no. 2731-2732", perawi:"Al-Miswar bin Makhramah R.A. dan Marwan", darjat:"sahih",
+  nota:"Ini merupakan petikan lengkap daripada sebuah hadis yang jauh lebih panjang tentang Perjanjian Hudaibiyah. Ia menunjukkan Nabi ﷺ bermesyuarat dan bertindak atas nasihat isterinya, Ummu Salamah, dalam hal besar kenegaraan, sekali gus menggambarkan penghormatan Baginda terhadap pandangan wanita."
+},
+{
+  id:142, kategori:"Hadis Wanita",
+  arab:"قَالَتِ النِّسَاءُ لِلنَّبِيِّ صلى الله عليه وسلم غَلَبَنَا عَلَيْكَ الرِّجَالُ، فَاجْعَلْ لَنَا يَوْمًا مِنْ نَفْسِكَ. فَوَعَدَهُنَّ يَوْمًا لَقِيَهُنَّ فِيهِ، فَوَعَظَهُنَّ وَأَمَرَهُنَّ، فَكَانَ فِيمَا قَالَ لَهُنَّ \"مَا مِنْكُنَّ امْرَأَةٌ تُقَدِّمُ ثَلاَثَةً مِنْ وَلَدِهَا إِلاَّ كَانَ لَهَا حِجَابًا مِنَ النَّارِ\". فَقَالَتِ امْرَأَةٌ وَاثْنَيْنِ فَقَالَ \"وَاثْنَيْنِ\"",
+  terjemahan:"Para wanita berkata kepada Nabi ﷺ, \"Kaum lelaki telah mengatasi kami dalam mendapatkan perhatian Baginda, maka peruntukkanlah untuk kami satu hari daripada diri Baginda.\" Baginda pun menjanjikan mereka satu hari, lalu Baginda menemui mereka pada hari itu, memberi nasihat dan arahan kepada mereka. Antara yang Baginda sabdakan kepada mereka ialah, \"Tidak ada seorang pun daripada kamu yang kematian tiga orang anaknya, melainkan mereka akan menjadi pendinding baginya daripada api neraka.\" Seorang wanita bertanya, \"Bagaimana jika dua orang?\" Baginda menjawab, \"Dua orang juga begitu.\"",
+  rujukan:"Sahih al-Bukhari, no. 101", perawi:"Abu Sa'id al-Khudri R.A.", darjat:"sahih",
+  nota:"Hadis ini menunjukkan Nabi ﷺ mengambil berat akan hak wanita untuk mendapat pendidikan agama secara khusus apabila mereka memohonnya."
+},
+{
+  id:143, kategori:"Hadis Wanita",
+  arab:"خَيْرُ نِسَائِهَا مَرْيَمُ، وَخَيْرُ نِسَائِهَا خَدِيجَةُ",
+  terjemahan:"Sebaik-baik wanita (pada zamannya) ialah Maryam, dan sebaik-baik wanita (pada zamannya) ialah Khadijah.",
+  rujukan:"Sahih al-Bukhari, no. 3815", perawi:"Ali bin Abi Talib R.A.", darjat:"sahih"
+},
+{
+  id:144, kategori:"Motivasi Kehidupan",
+  arab:"إِنَّ اللَّهَ لَمَّا قَضَى الْخَلْقَ كَتَبَ عِنْدَهُ فَوْقَ عَرْشِهِ إِنَّ رَحْمَتِي سَبَقَتْ غَضَبِي",
+  terjemahan:"Sesungguhnya apabila Allah selesai menciptakan makhluk, Dia menulis di sisi-Nya, di atas Arasy-Nya: \"Sesungguhnya rahmat-Ku mendahului kemurkaan-Ku.\"",
+  rujukan:"Sahih al-Bukhari, no. 7422", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Hadis ini terletak dalam Kitab At-Tauhid; versi yang serupa turut diriwayatkan dalam Sahih Muslim, no. 2751."
+},
+{
+  id:145, kategori:"Motivasi Kehidupan",
+  arab:"حَدَّثَنَا سَعِيدُ بْنُ أَبِي مَرْيَمَ، حَدَّثَنَا أَبُو غَسَّانَ، حَدَّثَنِي أَبُو حَازِمٍ، عَنْ سَهْلٍ، أَنَّ رَجُلاً، مِنْ أَعْظَمِ الْمُسْلِمِينَ غَنَاءً عَنِ الْمُسْلِمِينَ فِي غَزْوَةٍ غَزَاهَا مَعَ النَّبِيِّ صلى الله عليه وسلم فَنَظَرَ النَّبِيُّ صلى الله عليه وسلم فَقَالَ ‏\"‏ مَنْ أَحَبَّ أَنْ يَنْظُرَ إِلَى الرَّجُلِ مِنْ أَهْلِ النَّارِ فَلْيَنْظُرْ إِلَى هَذَا ‏\"‏‏.‏ فَاتَّبَعَهُ رَجُلٌ مِنَ الْقَوْمِ، وَهْوَ عَلَى تِلْكَ الْحَالِ مِنْ أَشَدِّ النَّاسِ عَلَى الْمُشْرِكِينَ، حَتَّى جُرِحَ فَاسْتَعْجَلَ الْمَوْتَ، فَجَعَلَ ذُبَابَةَ سَيْفِهِ بَيْنَ ثَدْيَيْهِ حَتَّى خَرَجَ مِنْ بَيْنِ كَتِفَيْهِ فَأَقْبَلَ الرَّجُلُ إِلَى النَّبِيِّ صلى الله عليه وسلم مُسْرِعًا فَقَالَ أَشْهَدُ أَنَّكَ رَسُولُ اللَّهِ‏.‏ فَقَالَ ‏\"‏ وَمَا ذَاكَ ‏\"‏‏.‏ قَالَ قُلْتَ لِفُلاَنٍ ‏\"‏ مَنْ أَحَبَّ أَنْ يَنْظُرَ إِلَى رَجُلٍ مِنْ أَهْلِ النَّارِ فَلْيَنْظُرْ إِلَيْهِ ‏\"‏‏.‏ وَكَانَ مِنْ أَعْظَمِنَا غَنَاءً عَنِ الْمُسْلِمِينَ، فَعَرَفْتُ أَنَّهُ لاَ يَمُوتُ عَلَى ذَلِكَ فَلَمَّا جُرِحَ اسْتَعْجَلَ الْمَوْتَ فَقَتَلَ نَفْسَهُ‏.‏ فَقَالَ النَّبِيُّ صلى الله عليه وسلم عِنْدَ ذَلِكَ ‏\"‏ إِنَّ الْعَبْدَ لَيَعْمَلُ عَمَلَ أَهْلِ النَّارِ، وَإِنَّهُ مِنْ أَهْلِ الْجَنَّةِ، وَيَعْمَلُ عَمَلَ أَهْلِ الْجَنَّةِ، وَإِنَّهُ مِنْ أَهْلِ النَّارِ، وَإِنَّمَا الأَعْمَالُ بِالْخَوَاتِيمِ ‏\"‏‏.‏",
+  terjemahan:"Diriwayatkan bahawa seorang lelaki yang paling gagah berjuang dalam kalangan orang Islam dalam suatu peperangan bersama Nabi ﷺ. Nabi ﷺ memandangnya lalu bersabda, \"Sesiapa yang ingin melihat seorang lelaki dari kalangan ahli neraka, lihatlah lelaki ini.\" Lalu seorang lelaki lain mengikutinya, dan ketika itu dia sedang berperang dengan gigih menentang kaum musyrikin sehingga dia tercedera parah, lalu dia tergesa-gesa untuk mengakhiri hayatnya dengan meletakkan hujung pedangnya di antara dadanya sehingga tembus keluar di antara kedua bahunya. Lelaki yang mengikutinya itu segera menemui Nabi ﷺ lalu berkata, \"Aku bersaksi bahawa engkau adalah Rasulullah!\" Nabi ﷺ bertanya, \"Mengapa engkau berkata demikian?\" Lalu dia menceritakan apa yang berlaku. Nabi ﷺ pun bersabda, \"Sesungguhnya seorang hamba itu boleh sahaja melakukan amalan ahli neraka sedangkan sebenarnya dia tergolong dalam kalangan ahli syurga, dan dia boleh sahaja melakukan amalan ahli syurga sedangkan sebenarnya dia tergolong dalam kalangan ahli neraka; dan sesungguhnya setiap amalan itu dinilai berdasarkan kesudahannya (khawatim).\"",
+  rujukan:"Sahih al-Bukhari, no. 6607", perawi:"Sahl bin Sa'd R.A.", darjat:"sahih",
+  nota:"Hadis ini mengajar bahawa kesudahan hidup (husnul khatimah) lebih penting berbanding penampilan luaran amalan sepanjang hayat seseorang, membawa mesej harapan sekali gus peringatan."
+},
+{
+  id:146, kategori:"Motivasi Kehidupan",
+  arab:"مَثَلُ الْمُؤْمِنِ كَالْخَامَةِ مِنَ الزَّرْعِ تُفَيِّئُهَا الرِّيحُ مَرَّةً، وَتَعْدِلُهَا مَرَّةً، وَمَثَلُ الْمُنَافِقِ كَالأَرْزَةِ لاَ تَزَالُ حَتَّى يَكُونَ انْجِعَافُهَا مَرَّةً وَاحِدَةً",
+  terjemahan:"Perumpamaan seorang mukmin itu seperti sebatang pokok tanaman yang lembut lagi segar, yang dilenturkan oleh angin ke sana ke mari, sehingga akhirnya ia tegak semula; manakala perumpamaan seorang munafik itu pula seperti pokok araz (cedar) yang keras dan tegap, yang terus berdiri sehingga ia tumbang serta-merta.",
+  rujukan:"Sahih al-Bukhari, no. 5643", perawi:"Ka'b bin Malik al-Ansari R.A.", darjat:"sahih",
+  nota:"Hadis ini terletak dalam Kitab al-Marda (Penyakit); versi yang serupa turut diriwayatkan dalam Sahih Muslim, no. 2809."
+},
+{
+  id:147, kategori:"Motivasi Kehidupan",
+  arab:"مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً مِنْ كُرَبِ الدُّنْيَا نَفَّسَ اللَّهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ، وَمَنْ يَسَّرَ عَلَى مُعْسِرٍ يَسَّرَ اللَّهُ عَلَيْهِ فِي الدُّنْيَا وَالآخِرَةِ، وَمَنْ سَتَرَ مُسْلِمًا سَتَرَهُ اللَّهُ فِي الدُّنْيَا وَالآخِرَةِ، وَاللَّهُ فِي عَوْنِ الْعَبْدِ مَا كَانَ الْعَبْدُ فِي عَوْنِ أَخِيهِ، وَمَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ، وَمَا اجْتَمَعَ قَوْمٌ فِي بَيْتٍ مِنْ بُيُوتِ اللَّهِ يَتْلُونَ كِتَابَ اللَّهِ وَيَتَدَارَسُونَهُ بَيْنَهُمْ إِلاَّ نَزَلَتْ عَلَيْهِمُ السَّكِينَةُ وَغَشِيَتْهُمُ الرَّحْمَةُ وَحَفَّتْهُمُ الْمَلاَئِكَةُ وَذَكَرَهُمُ اللَّهُ فِيمَنْ عِنْدَهُ، وَمَنْ بَطَّأَ بِهِ عَمَلُهُ لَمْ يُسْرِعْ بِهِ نَسَبُهُ",
+  terjemahan:"Sesiapa yang melapangkan satu kesusahan seorang mukmin daripada kesusahan-kesusahan dunia, Allah akan melapangkan daripadanya satu kesusahan pada hari Kiamat. Sesiapa yang memudahkan urusan orang yang berada dalam kesulitan, Allah akan memudahkan urusannya di dunia dan di akhirat. Sesiapa yang menutup aib seorang Muslim, Allah akan menutup aibnya di dunia dan di akhirat. Allah sentiasa menolong seorang hamba selagi mana hamba itu menolong saudaranya. Sesiapa yang menempuh suatu jalan untuk menuntut ilmu, Allah akan memudahkan baginya jalan menuju syurga. Tidaklah suatu kaum berkumpul di salah sebuah rumah Allah untuk membaca Kitab Allah dan mempelajarinya sesama mereka, melainkan ketenangan akan turun kepada mereka, rahmat akan meliputi mereka, para malaikat akan mengelilingi mereka, dan Allah akan menyebut-nyebut mereka dalam kalangan makhluk yang berada di sisi-Nya. Dan sesiapa yang lambat amalannya, keturunannya tidak akan dapat mempercepatkannya.",
+  rujukan:"Sahih Muslim, no. 2699a", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Bahagian \"sesiapa yang melapangkan kesusahan seorang mukmin...\" merupakan bahagian yang paling kerap dipetik secara berasingan sebagai galakan supaya sesama Muslim saling membantu."
+},
+{
+  id:148, kategori:"Motivasi Kehidupan",
+  arab:"حَدَّثَنِي مُحَمَّدُ بْنُ عَرْعَرَةَ، حَدَّثَنَا شُعْبَةُ، عَنْ سَعْدِ بْنِ إِبْرَاهِيمَ، عَنْ أَبِي سَلَمَةَ، عَنْ عَائِشَةَ ـ رضى الله عنها ـ أَنَّهَا قَالَتْ سُئِلَ النَّبِيُّ صلى الله عليه وسلم أَىُّ الأَعْمَالِ أَحَبُّ إِلَى اللَّهِ قَالَ ‏\"‏ أَدْوَمُهَا وَإِنْ قَلَّ ‏\"‏‏.‏ وَقَالَ ‏\"‏ اكْلَفُوا مِنَ الأَعْمَالِ مَا تُطِيقُونَ ‏\"‏‏.‏",
+  terjemahan:"Diriwayatkan daripada Aisyah bahawa Nabi ﷺ pernah ditanya, \"Amalan apakah yang paling dikasihi oleh Allah?\" Baginda menjawab, \"Amalan yang paling berterusan dilakukan walaupun sedikit.\" Baginda turut bersabda, \"Janganlah kamu membebankan diri kamu melainkan dengan amalan-amalan yang termampu kamu lakukan.\"",
+  rujukan:"Sahih al-Bukhari, no. 6465", perawi:"Aisyah R.A.", darjat:"sahih"
+},
+{
+  id:149, kategori:"Motivasi Kehidupan",
+  arab:"إِنَّ يَمِينَ اللَّهِ مَلأَى لاَ يَغِيضُهَا نَفَقَةٌ سَحَّاءُ اللَّيْلَ وَالنَّهَارَ، أَرَأَيْتُمْ مَا أَنْفَقَ مُنْذُ خَلَقَ السَّمَوَاتِ وَالأَرْضَ فَإِنَّهُ لَمْ يَنْقُصْ مَا فِي يَمِينِهِ، وَعَرْشُهُ عَلَى الْمَاءِ وَبِيَدِهِ الأُخْرَى الْفَيْضُ ـ أَوِ الْقَبْضُ ـ يَرْفَعُ وَيَخْفِضُ",
+  terjemahan:"Sesungguhnya Tangan Kanan Allah itu penuh, dan tidak berkurangan disebabkan pemberian yang berterusan sepanjang malam dan siang. Tidakkah kamu perhatikan apa yang telah Dia nafkahkan sejak Dia menciptakan langit dan bumi? Sesungguhnya semua itu tidak mengurangkan apa yang ada di Tangan Kanan-Nya. Arasy-Nya berada di atas air, dan pada Tangan-Nya yang satu lagi terletak kelimpahan kurniaan-Nya, Dia meninggikan sesetengah makhluk dan merendahkan yang lain.",
+  rujukan:"Sahih al-Bukhari, no. 7419", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Sesuai dijadikan mesej harapan berkaitan rezeki dan kurniaan Allah yang tidak pernah berkurangan."
+},
+{
+  id:150, kategori:"Motivasi Kehidupan",
+  arab:"اغْتَنِمْ خَمْسًا قَبْلَ خَمْسٍ: شَبَابَكَ قَبْلَ هَرَمِكَ، وَصِحَّتَكَ قَبْلَ سَقَمِكَ، وَغِنَاكَ قَبْلَ فَقْرِكَ، وَفَرَاغَكَ قَبْلَ شُغْلِكَ، وَحَيَاتَكَ قَبْلَ مَوْتِكَ",
+  terjemahan:"Rebutlah lima perkara sebelum datangnya lima perkara: masa mudamu sebelum tua, sihatmu sebelum sakit, kayamu sebelum miskin, lapangmu sebelum sibuk, dan hidupmu sebelum matimu.",
+  rujukan:"Al-Mustadrak ala as-Sahihain (al-Hakim), no. 7846", perawi:"Ibn Abbas R.A.", darjat:"sahih",
+  nota:"Hadis ini tidak terdapat dalam Sahih al-Bukhari atau Sahih Muslim, tetapi digredkan sahih (sahih li ghairih) oleh Syeikh Al-Albani dalam Sahih al-Jami' as-Saghir, no. 1077. Walau bagaimanapun, penggredan ini diperselisihkan sedikit oleh sesetengah ulama hadis kontemporari mengenai kekuatan sanadnya secara berasingan."
+},
+{
+  id:151, kategori:"Haiwan dalam Hadis",
+  arab:"إِنَّ النَّبِيَّ صلى الله عليه وسلم نَهَى عَنْ قَتْلِ أَرْبَعٍ مِنَ الدَّوَابِّ: النَّمْلَةُ، وَالنَّحْلَةُ، وَالْهُدْهُدُ، وَالصُّرَدُ",
+  terjemahan:"Sesungguhnya Nabi SAW melarang pembunuhan empat jenis haiwan: semut, lebah, burung hud-hud, dan burung shrike (sejenis burung kecil).",
+  rujukan:"Sunan Abi Dawud, no. 5267", perawi:"Ibn Abbas R.A.", darjat:"sahih"
+},
+{
+  id:152, kategori:"Haiwan dalam Hadis",
+  arab:"الْخَيْلُ لِثَلاَثَةٍ: لِرَجُلٍ أَجْرٌ، وَلِرَجُلٍ سِتْرٌ، وَعَلَى رَجُلٍ وِزْرٌ. فَأَمَّا الَّذِي لَهُ أَجْرٌ فَرَجُلٌ رَبَطَهَا فِي سَبِيلِ اللَّهِ، فَأَطَالَ فِي مَرْجٍ أَوْ رَوْضَةٍ، فَمَا أَصَابَتْ فِي طِيَلِهَا ذَلِكَ مِنَ الْمَرْجِ أَوِ الرَّوْضَةِ كَانَتْ لَهُ حَسَنَاتٌ، وَلَوْ أَنَّهَا قَطَعَتْ طِيَلَهَا فَاسْتَنَّتْ شَرَفًا أَوْ شَرَفَيْنِ كَانَتْ أَرْوَاثُهَا وَآثَارُهَا حَسَنَاتٍ لَهُ، وَلَوْ أَنَّهَا مَرَّتْ بِنَهَرٍ فَشَرِبَتْ مِنْهُ وَلَمْ يُرِدْ أَنْ يَسْقِيَهَا كَانَ ذَلِكَ حَسَنَاتٍ لَهُ، وَرَجُلٌ رَبَطَهَا فَخْرًا وَرِئَاءً وَنِوَاءً لأَهْلِ الإِسْلاَمِ فَهْىَ وِزْرٌ عَلَى ذَلِكَ",
+  terjemahan:"Kuda itu (dipelihara) untuk tiga golongan manusia: bagi seseorang ia menjadi pahala, bagi seseorang yang lain ia menjadi pelindung, dan bagi seseorang yang lain pula ia menjadi dosa. Adapun kuda yang menjadi pahala baginya ialah kuda yang ditambat pada jalan Allah, lalu diberi tali panjang di padang ragut atau taman; apa sahaja yang dimakannya daripada padang ragut atau taman itu dalam lingkungan tali tambatannya, menjadi kebaikan baginya. Sekiranya ia memutuskan tali tambatannya lalu berlari satu atau dua pusingan, maka najis dan kesan tapak kakinya turut menjadi kebaikan baginya. Dan sekiranya ia melalui sebatang sungai lalu meminum airnya sedangkan pemiliknya tidak berniat memberinya minum, itu juga menjadi kebaikan baginya. Adapun seseorang yang memelihara kuda kerana riak, menunjuk-nunjuk dan memusuhi umat Islam, maka ia menjadi dosa baginya.",
+  rujukan:"Sahih al-Bukhari, no. 2860", perawi:"Abu Hurairah R.A.", darjat:"sahih",
+  nota:"Terdapat riwayat yang serupa atau hampir sama dalam Sahih al-Bukhari, no. 3644."
+},
+{
+  id:153, kategori:"Haiwan dalam Hadis",
+  arab:"أَنَّ النَّبِيَّ صلى الله عليه وسلم مَرَّ عَلَيْهِ حِمَارٌ قَدْ وُسِمَ فِي وَجْهِهِ فَقَالَ: لَعَنَ اللَّهُ الَّذِي وَسَمَهُ",
+  terjemahan:"Seekor keldai telah melintas di hadapan Nabi SAW, keldai itu telah dicap (ditera) pada mukanya. Baginda lalu bersabda: 'Semoga Allah melaknat orang yang mencapnya.'",
+  rujukan:"Sahih Muslim, no. 2117", perawi:"Jabir bin Abdullah R.A.", darjat:"sahih"
+},
+{
+  id:154, kategori:"Haiwan dalam Hadis",
+  arab:"كُنَّا مَعَ رَسُولِ اللَّهِ صلى الله عليه وسلم فِي سَفَرٍ فَانْطَلَقَ لِحَاجَتِهِ فَرَأَيْنَا حُمَّرَةً مَعَهَا فَرْخَانِ فَأَخَذْنَا فَرْخَيْهَا فَجَاءَتِ الْحُمَّرَةُ فَجَعَلَتْ تَفْرُشُ فَجَاءَ النَّبِيُّ صلى الله عليه وسلم فَقَالَ: مَنْ فَجَعَ هَذِهِ بِوَلَدِهَا؟ رُدُّوا وَلَدَهَا إِلَيْهَا. وَرَأَى قَرْيَةَ نَمْلٍ قَدْ حَرَّقْنَاهَا فَقَالَ: مَنْ حَرَّقَ هَذِهِ؟ قُلْنَا: نَحْنُ. قَالَ: إِنَّهُ لاَ يَنْبَغِي أَنْ يُعَذِّبَ بِالنَّارِ إِلاَّ رَبُّ النَّارِ",
+  terjemahan:"Kami bersama Rasulullah SAW dalam suatu perjalanan, lalu baginda pergi menunaikan hajatnya. Kami ternampak seekor burung kecil bersama dua ekor anaknya, lalu kami mengambil kedua-dua anaknya itu. Burung tersebut pun datang dan mula mengibas-ngibaskan sayapnya kerana kesedihan. Nabi SAW kemudian datang dan bersabda: 'Siapakah yang telah menyedihkan burung ini dengan mengambil anaknya? Kembalikan anaknya kepadanya.' Baginda turut melihat sebuah sarang semut yang telah kami bakar, lalu bersabda: 'Siapakah yang membakar ini?' Kami menjawab: 'Kami.' Baginda bersabda: 'Sesungguhnya tidak layak seseorang itu menyeksa dengan api melainkan Tuhan (pemilik) api itu sendiri.'",
+  rujukan:"Sunan Abi Dawud, no. 2675", perawi:"Abdullah ibn Mas'ud R.A.", darjat:"sahih",
+  nota:"Kisah sarang semut yang dibakar dalam hadis ini adalah peristiwa yang BERBEZA daripada yang disebut dalam Sahih al-Bukhari, no. 3319 dan Sahih Muslim, no. 2241a (kisah seorang Nabi terdahulu yang disengat semut). Fokus utama hadis ini ialah kisah anak burung yang diambil."
+},
+{
+  id:155, kategori:"Haiwan dalam Hadis",
+  arab:"حَدَّثَنَا عَبْدُ اللَّهِ بْنُ مَسْلَمَةَ الْقَعْنَبِيُّ، عَنْ مَالِكٍ، عَنْ إِسْحَاقَ بْنِ عَبْدِ اللَّهِ بْنِ أَبِي طَلْحَةَ، عَنْ حُمَيْدَةَ بِنْتِ عُبَيْدِ بْنِ رِفَاعَةَ، عَنْ كَبْشَةَ بِنْتِ كَعْبِ بْنِ مَالِكٍ، وَكَانَتْ تَحْتَ ابْنِ أَبِي قَتَادَةَ أَنَّ أَبَا قَتَادَةَ دَخَلَ فَسَكَبَتْ لَهُ وَضُوءًا فَجَاءَتْ هِرَّةٌ فَشَرِبَتْ مِنْهُ فَأَصْغَى لَهَا الإِنَاءَ حَتَّى شَرِبَتْ. قَالَتْ كَبْشَةُ: فَرَآنِي أَنْظُرُ إِلَيْهِ فَقَالَ: أَتَعْجَبِينَ يَا ابْنَةَ أَخِي؟ فَقُلْتُ: نَعَمْ. فَقَالَ: إِنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ: إِنَّهَا لَيْسَتْ بِنَجَسٍ، إِنَّهَا مِنَ الطَّوَّافِينَ عَلَيْكُمْ وَالطَّوَّافَاتِ",
+  terjemahan:"Kabshah binti Ka'b bin Malik, isteri kepada Ibn Abi Qatadah, meriwayatkan bahawa Abu Qatadah masuk lalu dia menuangkan air untuknya berwuduk. Seekor kucing datang lalu meminum daripada air itu, maka Abu Qatadah pun memiringkan bekas air itu sehingga kucing itu selesai minum. Kabshah berkata: Dia melihatku sedang memerhatikannya lalu berkata, 'Adakah kamu hairan, wahai anak saudaraku?' Aku menjawab, 'Ya.' Dia lalu berkata: Rasulullah SAW bersabda, 'Ia (kucing) bukanlah najis; ia adalah antara haiwan yang sentiasa berkeliaran di sekeliling kamu.'",
+  rujukan:"Sunan Abi Dawud, no. 75", perawi:"Abu Qatadah al-Ansari R.A. (diriwayatkan oleh Kabshah binti Ka'b bin Malik)", darjat:"sahih"
+},
+{
+  id:156, kategori:"Haiwan dalam Hadis",
+  arab:"إِيَّاكُمْ أَنْ تَتَّخِذُوا ظُهُورَ دَوَابِّكُمْ مَنَابِرَ فَإِنَّ اللَّهَ إِنَّمَا سَخَّرَهَا لَكُمْ لِتُبَلِّغَكُمْ إِلَى بَلَدٍ لَمْ تَكُونُوا بَالِغِيهِ إِلاَّ بِشِقِّ الأَنْفُسِ وَجَعَلَ لَكُمُ الأَرْضَ فَعَلَيْهَا فَاقْضُوا حَاجَتَكُمْ",
+  terjemahan:"Berhati-hatilah kamu daripada menjadikan belakang haiwan tunggangan kamu sebagai mimbar, kerana sesungguhnya Allah menundukkannya untuk kamu semata-mata supaya ia membawa kamu ke suatu tempat yang tidak dapat kamu capai melainkan dengan bersusah payah. Dan Allah telah menjadikan bumi untuk kamu, maka tunaikanlah keperluan kamu di atasnya.",
+  rujukan:"Sunan Abi Dawud, no. 2567", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:157, kategori:"Soalan Sahabat & Jawapan",
+  arab:"أَنَّ رَجُلاً سَأَلَ النَّبِيَّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: أَيُّ الإِسْلاَمِ خَيْرٌ؟ قَالَ: تُطْعِمُ الطَّعَامَ، وَتَقْرَأُ السَّلاَمَ عَلَى مَنْ عَرَفْتَ وَمَنْ لَمْ تَعْرِفْ.",
+  terjemahan:"Seorang lelaki bertanya kepada Nabi ﷺ: \"Amalan atau sifat Islam yang manakah paling baik?\" Baginda menjawab: \"Memberi makan (kepada yang memerlukan), dan mengucapkan salam kepada orang yang engkau kenali dan yang tidak engkau kenali.\"",
+  rujukan:"Sahih al-Bukhari, no. 12", perawi:"Abdullah bin 'Amr bin Al-'As R.A.", darjat:"sahih"
+},
+{
+  id:158, kategori:"Soalan Sahabat & Jawapan",
+  arab:"أَنَّ رَجُلاً قَالَ لِلنَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: أَخْبِرْنِي بِعَمَلٍ يُدْخِلُنِي الْجَنَّةَ. قَالَ: مَا لَهُ مَا لَهُ؟ وَقَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: أَرَبٌ مَا لَهُ! تَعْبُدُ اللَّهَ وَلاَ تُشْرِكُ بِهِ شَيْئًا، وَتُقِيمُ الصَّلاَةَ، وَتُؤْتِي الزَّكَاةَ، وَتَصِلُ الرَّحِمَ.",
+  terjemahan:"Seorang lelaki berkata kepada Nabi ﷺ: \"Beritahulah aku suatu amalan yang boleh memasukkanku ke dalam Syurga.\" Baginda bersabda: \"Kenapa dengannya? Kenapa dengannya?\" Kemudian Nabi ﷺ bersabda: \"Dia ada sesuatu yang ingin ditanyakan! (Jawapannya): sembahlah Allah dan janganlah engkau sekutukan-Nya dengan sesuatu apa pun, dirikanlah solat dengan sempurna, tunaikanlah zakat, dan hubungkanlah silaturahim dengan kaum kerabatmu.\"",
+  rujukan:"Sahih al-Bukhari, no. 1396", perawi:"Abu Ayyub Al-Ansari R.A.", darjat:"sahih"
+},
+{
+  id:159, kategori:"Soalan Sahabat & Jawapan",
+  arab:"قَالَ عَبْدُ اللَّهِ بْنُ مَسْعُودٍ: قُلْتُ يَا رَسُولَ اللَّهِ، أَيُّ الذَّنْبِ أَعْظَمُ؟ قَالَ: أَنْ تَجْعَلَ لِلَّهِ نِدًّا وَهُوَ خَلَقَكَ. قُلْتُ: ثُمَّ أَيٌّ؟ قَالَ: أَنْ تَقْتُلَ وَلَدَكَ خَشْيَةَ أَنْ يَأْكُلَ مَعَكَ. قُلْتُ: ثُمَّ أَيٌّ؟ قَالَ: أَنْ تُزَانِيَ حَلِيلَةَ جَارِكَ. وَأَنْزَلَ اللَّهُ تَصْدِيقَ قَوْلِ النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: {وَالَّذِينَ لاَ يَدْعُونَ مَعَ اللَّهِ إِلَهًا آخَرَ} الآية.",
+  terjemahan:"Abdullah bin Mas'ud berkata: Aku bertanya, \"Wahai Rasulullah, dosa apakah yang paling besar?\" Baginda menjawab: \"Engkau menjadikan sekutu bagi Allah, padahal Dialah yang menciptakanmu.\" Aku bertanya lagi: \"Kemudian apa?\" Baginda menjawab: \"Engkau membunuh anakmu kerana bimbang dia akan turut makan bersamamu.\" Aku bertanya lagi: \"Kemudian apa?\" Baginda menjawab: \"Engkau berzina dengan isteri jiranmu.\" Lalu Allah menurunkan ayat yang membenarkan sabda Nabi ﷺ itu: \"...dan orang-orang yang tidak menyeru tuhan lain bersama Allah...\" (ayat tersebut).",
+  rujukan:"Sahih al-Bukhari, no. 6001", perawi:"Abdullah bin Mas'ud R.A.", darjat:"sahih"
+},
+{
+  id:160, kategori:"Soalan Sahabat & Jawapan",
+  arab:"قَالَ سُفْيَانُ بْنُ عَبْدِ اللَّهِ الثَّقَفِيُّ: قُلْتُ يَا رَسُولَ اللَّهِ، قُلْ لِي فِي الإِسْلاَمِ قَوْلاً لاَ أَسْأَلُ عَنْهُ أَحَدًا غَيْرَكَ. قَالَ: قُلْ آمَنْتُ بِاللَّهِ فَاسْتَقِمْ.",
+  terjemahan:"Sufyan bin Abdullah Ath-Thaqafi berkata: Aku berkata, \"Wahai Rasulullah, katakanlah kepadaku suatu perkataan tentang Islam yang tidak perlu aku tanyakan lagi kepada sesiapa selain engkau.\" Baginda bersabda: \"Katakanlah: Aku beriman kepada Allah — kemudian teguhkanlah pendirian (istiqamah).\"",
+  rujukan:"Sahih Muslim, no. 38", perawi:"Sufyan bin Abdullah Ath-Thaqafi R.A.", darjat:"sahih"
+},
+{
+  id:161, kategori:"Soalan Sahabat & Jawapan",
+  arab:"قَالَ أَبُو سَعِيدٍ الْخُدْرِيُّ رضى الله عنه: قِيلَ يَا رَسُولَ اللَّهِ، أَيُّ النَّاسِ أَفْضَلُ؟ فَقَالَ رَسُولُ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ: مُؤْمِنٌ يُجَاهِدُ فِي سَبِيلِ اللَّهِ بِنَفْسِهِ وَمَالِهِ. قَالُوا: ثُمَّ مَنْ؟ قَالَ: مُؤْمِنٌ فِي شِعْبٍ مِنَ الشِّعَابِ يَتَّقِي اللَّهَ، وَيَدَعُ النَّاسَ مِنْ شَرِّهِ.",
+  terjemahan:"Abu Sa'id Al-Khudri R.A. berkata: Ditanya, \"Wahai Rasulullah, siapakah manusia yang paling utama?\" Rasulullah ﷺ menjawab: \"Seorang mukmin yang berjihad di jalan Allah dengan jiwa dan hartanya.\" Mereka bertanya lagi: \"Kemudian siapa?\" Baginda menjawab: \"Seorang mukmin yang tinggal di salah satu lereng bukit, bertakwa kepada Allah, dan membiarkan manusia terselamat daripada kejahatannya.\"",
+  rujukan:"Sahih al-Bukhari, no. 2786", perawi:"Abu Sa'id Al-Khudri R.A.", darjat:"sahih"
+},
+{
+  id:162, kategori:"Soalan Sahabat & Jawapan",
+  arab:"قَالَ أَبُو هُرَيْرَةَ رضى الله عنه: جَاءَ رَجُلٌ إِلَى النَّبِيِّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ فَقَالَ: يَا رَسُولَ اللَّهِ، أَيُّ الصَّدَقَةِ أَعْظَمُ أَجْرًا؟ قَالَ: أَنْ تَصَدَّقَ وَأَنْتَ صَحِيحٌ شَحِيحٌ، تَخْشَى الْفَقْرَ وَتَأْمُلُ الْغِنَى، وَلاَ تُمْهِلْ حَتَّى إِذَا بَلَغَتِ الْحُلْقُومَ قُلْتَ: لِفُلاَنٍ كَذَا، وَلِفُلاَنٍ كَذَا، وَقَدْ كَانَ لِفُلاَنٍ.",
+  terjemahan:"Abu Hurairah R.A. berkata: Seorang lelaki datang kepada Nabi ﷺ lalu bertanya, \"Wahai Rasulullah, sedekah apakah yang paling besar pahalanya?\" Baginda menjawab: \"Iaitu engkau bersedekah ketika engkau sihat lagi kedekut, dalam keadaan takut miskin dan mengharapkan kekayaan. Janganlah engkau tangguhkannya sehingga apabila nyawa telah sampai ke kerongkong barulah engkau berkata: 'Untuk si fulan sekian, dan untuk si fulan sekian,' padahal harta itu memang sudah menjadi milik si fulan (waris).\"",
+  rujukan:"Sahih al-Bukhari, no. 1419", perawi:"Abu Hurairah R.A.", darjat:"sahih"
+},
+{
+  id:163, kategori:"Sahabat yang Mengadu",
+  arab:"حَدَّثَنَا مُوسَى بْنُ إِسْمَاعِيلَ، حَدَّثَنَا وُهَيْبٌ، حَدَّثَنَا عَمْرُو بْنُ يَحْيَى، عَنْ عَبَّادِ بْنِ تَمِيمٍ، عَنْ عَبْدِ اللَّهِ بْنِ زَيْدِ بْنِ عَاصِمٍ، قَالَ لَمَّا أَفَاءَ اللَّهُ عَلَى رَسُولِهِ صلى الله عليه وسلم يَوْمَ حُنَيْنٍ قَسَمَ فِي النَّاسِ فِي الْمُؤَلَّفَةِ قُلُوبُهُمْ، وَلَمْ يُعْطِ الأَنْصَارَ شَيْئًا، فَكَأَنَّهُمْ وَجَدُوا إِذْ لَمْ يُصِبْهُمْ مَا أَصَابَ النَّاسَ فَخَطَبَهُمْ فَقَالَ يَا مَعْشَرَ الأَنْصَارِ أَلَمْ أَجِدْكُمْ ضُلاَّلاً فَهَدَاكُمُ اللَّهُ بِي، وَكُنْتُمْ مُتَفَرِّقِينَ فَأَلَّفَكُمُ اللَّهُ بِي وَعَالَةً، فَأَغْنَاكُمُ اللَّهُ بِي. كُلَّمَا قَالَ شَيْئًا قَالُوا اللَّهُ وَرَسُولُهُ أَمَنُّ. قَالَ مَا يَمْنَعُكُمْ أَنْ تُجِيبُوا رَسُولَ اللَّهِ صلى الله عليه وسلم. قَالَ كُلَّمَا قَالَ شَيْئًا قَالُوا اللَّهُ وَرَسُولُهُ أَمَنُّ. قَالَ لَوْ شِئْتُمْ قُلْتُمْ جِئْتَنَا كَذَا وَكَذَا. أَتَرْضَوْنَ أَنْ يَذْهَبَ النَّاسُ بِالشَّاةِ وَالْبَعِيرِ، وَتَذْهَبُونَ بِالنَّبِيِّ صلى الله عليه وسلم إِلَى رِحَالِكُمْ، لَوْلاَ الْهِجْرَةُ لَكُنْتُ امْرَأً مِنَ الأَنْصَارِ، وَلَوْ سَلَكَ النَّاسُ وَادِيًا وَشِعْبًا لَسَلَكْتُ وَادِيَ الأَنْصَارِ وَشِعْبَهَا، الأَنْصَارُ شِعَارٌ وَالنَّاسُ دِثَارٌ، إِنَّكُمْ سَتَلْقَوْنَ بَعْدِي أَثَرَةً فَاصْبِرُوا حَتَّى تَلْقَوْنِي عَلَى الْحَوْضِ.",
+  terjemahan:"Diriwayatkan daripada Abdullah bin Zaid bin Asim: Ketika Allah mengurniakan Rasul-Nya رَلَيْهِ harta rampasan perang pada hari Hunain, baginda membahagikannya kepada golongan yang hati mereka baru dijinakkan (al-Mu’allafah Qulubuhum), tetapi tidak memberikan sedikit pun kepada kaum Ansar. Lalu mereka berasa kecewa dan sedih kerana tidak mendapat bahagian seperti orang lain. Nabi ﷺ berkhutbah di hadapan mereka, sabdanya: \"Wahai kaum Ansar! Bukankah aku dapati kamu dalam kesesatan, lalu Allah memberi kamu petunjuk melaluiku? Kamu dahulu berpecah-belah, lalu Allah menyatukan kamu melaluiku; kamu dahulu miskin, lalu Allah mengayakan kamu melaluiku.\" Setiap kali baginda berkata sesuatu, mereka (kaum Ansar) menjawab: \"Allah dan Rasul-Nya lebih pemurah (dengan nikmat mereka).\" Nabi ﷺ bersabda: \"Apakah yang menghalang kamu daripada menjawab Rasulullah?\" Namun setiap kali baginda berkata, mereka tetap menjawab: \"Allah dan Rasul-Nya lebih pemurah.\" Nabi ﷺ lalu bersabda: \"Sekiranya kamu mahu, kamu boleh berkata: 'Engkau telah datang kepada kami dalam keadaan sekian-sekian (di Madinah).' Relakah kamu jika orang lain pulang membawa kambing dan unta, sedangkan kamu pulang membawa Nabi ﷺ ke rumah kamu? Kalaulah bukan kerana hijrah, nescaya aku menjadi salah seorang daripada Ansar; dan sekiranya manusia menempuh suatu lembah atau denai, nescaya aku akan menempuh lembah dan denai Ansar. Ansar adalah syiar (pakaian dalam yang rapat dengan badan), sedangkan manusia lain adalah dithar (pakaian luar). Sesungguhnya kamu akan melihat golongan lain diutamakan berbanding kamu selepas ketiadaanku, maka bersabarlah sehingga kamu bertemu denganku di al-Haudh (telaga Kauthar).\"",
+  rujukan:"Sahih al-Bukhari, no. 4330", perawi:"Abdullah bin Zaid bin Asim R.A.", darjat:"sahih",
+  nota:"Aduan/kekecewaan halus kaum Ansar (bukan lafaz \"شكا\" secara literal, tetapi konteksnya jelas satu naratif aduan/kekesalan yang dijawab Nabi ﷺ dengan ucapan yang sangat menyentuh memuji kesetiaan mereka)."
+},
+{
+  id:164, kategori:"Sahabat yang Mengadu",
+  arab:"أَنَّ فَاطِمَةَ، عَلَيْهَا السَّلاَمُ شَكَتْ مَا تَلْقَى مِنْ أَثَرِ الرَّحَا، فَأَتَى النَّبِيَّ صلى الله عليه وسلم سَبْىٌ، فَانْطَلَقَتْ فَلَمْ تَجِدْهُ، فَوَجَدَتْ عَائِشَةَ، فَأَخْبَرَتْهَا، فَلَمَّا جَاءَ النَّبِيُّ صلى الله عليه وسلم أَخْبَرَتْهُ عَائِشَةُ بِمَجِيءِ فَاطِمَةَ، فَجَاءَ النَّبِيُّ صلى الله عليه وسلم إِلَيْنَا، وَقَدْ أَخَذْنَا مَضَاجِعَنَا، فَذَهَبْتُ لأَقُومَ فَقَالَ عَلَى مَكَانِكُمَا فَقَعَدَ بَيْنَنَا حَتَّى وَجَدْتُ بَرْدَ قَدَمَيْهِ عَلَى صَدْرِي وَقَالَ أَلاَ أُعَلِّمُكُمَا خَيْرًا مِمَّا سَأَلْتُمَانِي إِذَا أَخَذْتُمَا مَضَاجِعَكُمَا تُكَبِّرَا أَرْبَعًا وَثَلاَثِينَ، وَتُسَبِّحَا ثَلاَثًا وَثَلاَثِينَ، وَتَحْمَدَا ثَلاَثَةً وَثَلاَثِينَ، فَهْوَ خَيْرٌ لَكُمَا مِنْ خَادِمٍ",
+  terjemahan:"Fatimah r.a. mengadu kepada Nabi ﷺ tentang kesusahan yang dialaminya akibat mengisar gandum dengan tangan. Ketika itu beberapa orang tawanan dibawa kepada Nabi ﷺ; Fatimah pergi menemui baginda tetapi tidak menemuinya di rumah. Aisyah r.a. yang ada di situ diberitahu tentang hajatnya (untuk mendapatkan seorang khadam). Apabila Nabi ﷺ pulang, Aisyah memberitahu baginda tentang kedatangan Fatimah. Ali bin Abi Talib r.a. menceritakan: \"Nabi ﷺ lalu datang kepada kami ketika kami sudah berada di tempat tidur. Aku ingin bangun, tetapi Nabi ﷺ bersabda: 'Kekallah di tempat kamu.' Baginda lalu duduk di antara kami sehingga aku rasai sejuknya kedua tapak kaki baginda menyentuh dadaku. Kemudian baginda bersabda: 'Mahukah kuajarkan kamu berdua sesuatu yang lebih baik daripada apa yang kamu minta itu? Apabila kamu hendak tidur, bertakbirlah (Allahu Akbar) tiga puluh empat kali, bertasbihlah (Subhanallah) tiga puluh tiga kali, dan bertahmidlah (Alhamdulillah) tiga puluh tiga kali; itu lebih baik bagi kamu berdua daripada seorang khadam.'\"",
+  rujukan:"Sahih al-Bukhari, no. 3705", perawi:"Ali bin Abi Talib R.A.", darjat:"sahih",
+  nota:"Fatimah r.a. mengadu (شَكَتْ — lafaz aduan secara literal) tentang kepenatan mengisar gandum secara manual, lalu Nabi ﷺ mengajarnya zikir sebagai ganti khadam."
+},
+{
+  id:165, kategori:"Sahabat yang Mengadu",
+  arab:"حَدَّثَنَا مُسَدَّدٌ، حَدَّثَنَا يَحْيَى، عَنْ عِمْرَانَ أَبِي بَكْرٍ، قَالَ حَدَّثَنِي عَطَاءُ بْنُ أَبِي رَبَاحٍ، قَالَ قَالَ لِي ابْنُ عَبَّاسٍ أَلاَ أُرِيكَ امْرَأَةً مِنْ أَهْلِ الْجَنَّةِ قُلْتُ بَلَى‏.‏ قَالَ هَذِهِ الْمَرْأَةُ السَّوْدَاءُ أَتَتِ النَّبِيَّ صلى الله عليه وسلم فَقَالَتْ إِنِّي أُصْرَعُ، وَإِنِّي أَتَكَشَّفُ فَادْعُ اللَّهَ لِي‏.‏ قَالَ إِنْ شِئْتِ صَبَرْتِ وَلَكِ الْجَنَّةُ وَإِنْ شِئْتِ دَعَوْتُ اللَّهَ أَنْ يُعَافِيَكِ‏.‏ فَقَالَتْ أَصْبِرُ‏.‏ فَقَالَتْ إِنِّي أَتَكَشَّفُ فَادْعُ اللَّهَ أَنْ لاَ أَتَكَشَّفَ، فَدَعَا لَهَا‏.‏",
+  terjemahan:"Ata’ bin Abi Rabah berkata: Ibn Abbas berkata kepadaku, \"Mahukah kutunjukkan kepadamu seorang wanita ahli syurga?\" Aku menjawab, \"Ya.\" Beliau berkata, \"Wanita berkulit hitam ini pernah datang menemui Nabi ﷺ dan berkata: 'Sesungguhnya aku ditimpa penyakit sawan (epilepsi), dan auratku sering terdedah (ketika kambuh); doakanlah untukku kepada Allah.' Nabi ﷺ bersabda: 'Jika engkau mahu, bersabarlah dan engkau akan memperoleh syurga; dan jika engkau mahu, aku akan berdoa kepada Allah supaya menyembuhkanmu.' Wanita itu berkata: 'Aku akan bersabar,' lalu menambah: 'Tetapi auratku terdedah (ketika sawan), maka doakanlah kepada Allah agar auratku tidak terdedah.' Maka Nabi ﷺ pun mendoakannya.\"",
+  rujukan:"Sahih al-Bukhari, no. 5652", perawi:"Ibn Abbas R.A. (melalui Ata' bin Abi Rabah)", darjat:"sahih",
+  nota:"Aduan langsung (\"إِنّي أُصرع\" — \"sesungguhnya aku ditimpa sawan/gila babi\") daripada seorang wanita berkulit hitam kepada Nabi ﷺ; jawapan Nabi ﷺ menawarkan pilihan untuk bersabar (dengan ganjaran syurga) atau didoakan kesembuhan."
+},
+{
+  id:166, kategori:"Sahabat yang Mengadu",
+  arab:"حَدَّثَنَا هِشَامُ بْنُ عَمَّارٍ، حَدَّثَنَا عِيسَى بْنُ يُونُسَ، حَدَّثَنَا يُوسُفُ بْنُ إِسْحَاقَ، عَنْ مُحَمَّدِ بْنِ الْمُنْكَدِرِ، عَنْ جَابِرِ بْنِ عَبْدِ اللَّهِ، أَنَّ رَجُلاً، قَالَ يَا رَسُولَ اللَّهِ إِنَّ لِي مَالاً وَوَلَدًا وَإِنَّ أَبِي يُرِيدُ أَنْ يَجْتَاحَ مَالِي فَقَالَ ‏\"‏ أَنْتَ وَمَالُكَ لأَبِيكَ ‏\"‏ ‏.‏",
+  terjemahan:"Diriwayatkan daripada Jabir bin Abdullah bahawa seorang lelaki berkata: \"Wahai Rasulullah, aku mempunyai harta dan anak, dan sesungguhnya bapaku mahu mengambil (menghabiskan) seluruh hartaku.\" Nabi ﷺ bersabda: \"Engkau dan hartamu adalah milik bapamu.\"",
+  rujukan:"Sunan Ibn Majah, no. 2291", perawi:"Jabir bin Abdullah R.A.", darjat:"sahih",
+  nota:"Seorang lelaki mengadu kepada Nabi ﷺ bahawa bapanya cuba mengambil/menghabiskan hartanya; jawapan Nabi ﷺ menjadi asas fiqh berkenaan hak bapa ke atas harta anak."
+},
+{
+  id:167, kategori:"Sahabat yang Mengadu",
+  arab:"حَدَّثَنَا أَحْمَدُ بْنُ الْحَسَنِ، حَدَّثَنَا سُلَيْمَانُ بْنُ عَبْدِ الرَّحْمَنِ الدِّمَشْقِيُّ، حَدَّثَنَا الْوَلِيدُ بْنُ مُسْلِمٍ، حَدَّثَنَا ابْنُ جُرَيْجٍ، عَنْ عَطَاءِ بْنِ أَبِي رَبَاحٍ، وَعِكْرِمَةَ مَوْلَى ابْنِ عَبَّاسٍ عَنِ ابْنِ عَبَّاسٍ، أَنَّهُ قَالَ بَيْنَمَا نَحْنُ عِنْدَ رَسُولِ اللَّهِ صلى الله عليه وسلم إِذْ جَاءَهُ عَلِيُّ بْنُ أَبِي طَالِبٍ فَقَالَ بِأَبِي أَنْتَ وَأُمِّي تَفَلَّتَ هَذَا الْقُرْآنُ مِنْ صَدْرِي فَمَا أَجِدُنِي أَقْدِرُ عَلَيْهِ ‏.‏ فَقَالَ لَهُ رَسُولُ اللَّهِ صلى الله عليه وسلم ‏\"‏ يَا أَبَا الْحَسَنِ أَفَلاَ أُعَلِّمُكَ كَلِمَاتٍ يَنْفَعُكَ اللَّهُ بِهِنَّ وَيَنْفَعُ بِهِنَّ مَنْ عَلَّمْتَهُ وَيُثَبِّتُ مَا تَعَلَّمْتَ فِي صَدْرِكَ ‏\"‏ ‏.‏ قَالَ أَجَلْ يَا رَسُولَ اللَّهِ فَعَلِّمْنِي ‏.‏ قَالَ ‏\"‏ إِذَا كَانَ لَيْلَةُ الْجُمُعَةِ فَإِنِ اسْتَطَعْتَ أَنْ تَقُومَ فِي ثُلُثِ اللَّيْلِ الآخِرِ فَإِنَّهَا سَاعَةٌ مَشْهُودَةٌ وَالدُّعَاءُ فِيهَا مُسْتَجَابٌ وَقَدْ قَالَ أَخِي يَعْقُوبُ لِبَنِيهِ سَوْفَ أَسْتَغْفِرُ لَكُمْ رَبِّي يَقُولُ حَتَّى تَأْتِيَ لَيْلَةُ الْجُمُعَةِ فَإِنْ لَمْ تَسْتَطِعْ فَقُمْ فِي وَسَطِهَا فَإِنْ لَمْ تَسْتَطِعْ فَقُمْ فِي أَوَّلِهَا فَصَلِّ أَرْبَعَ رَكَعَاتٍ تَقْرَأُ فِي الرَّكْعَةِ الأُولَى بِفَاتِحَةِ الْكِتَابِ وَسُورَةِ يس وَفِي الرَّكْعَةِ الثَّانِيَةِ بِفَاتِحَةِ الْكِتَابِ وَحم الدُّخَانَ وَفِي الرَّكْعَةِ الثَّالِثَةِ بِفَاتِحَةِ الْكِتَابِ وَالم تَنْزِيلُ السَّجْدَةَ وَفِي الرَّكْعَةِ الرَّابِعَةِ بِفَاتِحَةِ الْكِتَابِ وَتَبَارَكَ الْمُفَصَّلَ فَإِذَا فَرَغْتَ مِنَ التَّشَهُّدِ فَاحْمَدِ اللَّهَ وَأَحْسِنِ الثَّنَاءَ عَلَى اللَّهِ وَصَلِّ عَلَىَّ وَأَحْسِنْ وَعَلَى سَائِرِ النَّبِيِّينَ وَاسْتَغْفِرْ لِلْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ وَلإِخْوَانِكَ الَّذِينَ سَبَقُوكَ بِالإِيمَانِ ثُمَّ قُلْ فِي آخِرِ ذَلِكَ اللَّهُمَّ ارْحَمْنِي بِتَرْكِ الْمَعَاصِي أَبَدًا مَا أَبْقَيْتَنِي وَارْحَمْنِي أَنْ أَتَكَلَّفَ مَا لاَ يَعْنِينِي وَارْزُقْنِي حُسْنَ النَّظَرِ فِيمَا يُرْضِيكَ عَنِّي اللَّهُمَّ بَدِيعَ السَّمَوَاتِ وَالأَرْضِ ذَا الْجَلاَلِ وَالإِكْرَامِ وَالْعِزَّةِ الَّتِي لاَ تُرَامُ أَسْأَلُكَ يَا اللَّهُ يَا رَحْمَنُ بِجَلاَلِكَ وَنُورِ وَجْهِكَ أَنْ تُلْزِمَ قَلْبِي حِفْظَ كِتَابِكَ كَمَا عَلَّمْتَنِي وَارْزُقْنِي أَنْ أَتْلُوَهُ عَلَى النَّحْوِ الَّذِي يُرْضِيكَ عَنِّي اللَّهُمَّ بَدِيعَ السَّمَوَاتِ وَالأَرْضِ ذَا الْجَلاَلِ وَالإِكْرَامِ وَالْعِزَّةِ الَّتِي لاَ تُرَامُ أَسْأَلُكَ يَا اللَّهُ يَا رَحْمَنُ بِجَلاَلِكَ وَنُورِ وَجْهِكَ أَنْ تُنَوِّرَ بِكِتَابِكَ بَصَرِي وَأَنْ تُطْلِقَ بِهِ لِسَانِي وَأَنْ تُفَرِّجَ بِهِ عَنْ قَلْبِي وَأَنْ تَشْرَحَ بِهِ صَدْرِي وَأَنْ تَغْسِلَ بِهِ بَدَنِي لأَنَّهُ لاَ يُعِينُنِي عَلَى الْحَقِّ غَيْرُكَ وَلاَ يُؤْتِيهِ إِلاَّ أَنْتَ وَلاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ الْعَلِيِّ الْعَظِيمِ يَا أَبَا الْحَسَنِ تَفْعَلُ ذَلِكَ ثَلاَثَ جُمَعٍ أَوْ خَمْسَ أَوْ سَبْعَ تُجَابُ بِإِذْنِ اللَّهِ وَالَّذِي بَعَثَنِي بِالْحَقِّ مَا أَخْطَأَ مُؤْمِنًا قَطُّ ‏\"‏ ‏.‏ قَالَ عَبْدُ اللَّهِ بْنُ عَبَّاسٍ فَوَاللَّهِ مَا لَبِثَ عَلِيٌّ إِلاَّ خَمْسًا أَوْ سَبْعًا حَتَّى جَاءَ عَلِيٌّ رَسُولَ اللَّهِ صلى الله عليه وسلم فِي مِثْلِ ذَلِكَ الْمَجْلِسِ فَقَالَ يَا رَسُولَ اللَّهِ إِنِّي كُنْتُ فِيمَا خَلاَ لاَ آخُذُ إِلاَّ أَرْبَعَ آيَاتٍ أَوْ نَحْوَهُنَّ وَإِذَا قَرَأْتُهُنَّ عَلَى نَفْسِي تَفَلَّتْنَ وَأَنَا أَتَعَلَّمُ الْيَوْمَ أَرْبَعِينَ آيَةً أَوْ نَحْوَهَا وَإِذَا قَرَأْتُهَا عَلَى نَفْسِي فَكَأَنَّمَا كِتَابُ اللَّهِ بَيْنَ عَيْنَىَّ وَلَقَدْ كُنْتُ أَسْمَعُ الْحَدِيثَ فَإِذَا رَدَّدْتُهُ تَفَلَّتَ وَأَنَا الْيَوْمَ أَسْمَعُ الأَحَادِيثَ فَإِذَا تَحَدَّثْتُ بِهَا لَمْ أَخْرِمْ مِنْهَا حَرْفًا ‏.‏ فَقَالَ لَهُ رَسُولُ اللَّهِ صلى الله عليه وسلم عِنْدَ ذَلِكَ ‏\"‏ مُؤْمِنٌ وَرَبِّ الْكَعْبَةِ يَا أَبَا الْحَسَنِ ‏\"‏ ‏.‏",
+  terjemahan:"Ibn Abbas r.a. berkata: \"Ketika kami berada bersama Rasulullah ﷺ, tiba-tiba Ali bin Abi Talib datang menemui baginda dan berkata: 'Demi bapa dan ibuku menjadi tebusan bagimu, al-Quran ini telah terlepas (hilang) daripada dadaku, dan aku tidak mampu lagi menguasainya (mengingatinya).' Rasulullah ﷺ bersabda kepadanya: 'Wahai Abu al-Hasan, mahukah aku ajarkan kepadamu beberapa kalimah yang dengannya Allah akan memberi manfaat kepadamu, dan memberi manfaat kepada sesiapa yang kamu ajarkan kepadanya, serta meneguhkan apa yang telah kamu pelajari di dadamu?' Ali menjawab: 'Baiklah, wahai Rasulullah, ajarkanlah aku.' Baginda bersabda: 'Apabila tiba malam Jumaat, jika engkau mampu bangun pada sepertiga malam yang akhir, maka itulah saat yang disaksikan (oleh para malaikat) dan doa padanya dimustajabkan — sebagaimana saudaraku Ya’qub berkata kepada anak-anaknya: \"Aku akan memohon keampunan untuk kamu daripada Tuhanku\" — maksudnya beliau menunggu sehingga tiba malam Jumaat. Jika engkau tidak mampu (bangun pada waktu itu), maka bangunlah pada pertengahan malam; jika masih tidak mampu, maka bangunlah pada awal malam, lalu solatlah empat rakaat: pada rakaat pertama bacalah al-Fatihah dan surah Ya-Sin, pada rakaat kedua al-Fatihah dan Ha-Mim ad-Dukhan, pada rakaat ketiga al-Fatihah dan Alif-Lam-Mim Tanzil (as-Sajdah), dan pada rakaat keempat al-Fatihah dan Tabarak (al-Mulk) dari golongan al-Mufassal. Apabila engkau selesai tasyahhud, pujilah Allah dan sanjunglah Dia dengan sebaik-baiknya, berselawatlah ke atasku dengan baik dan ke atas seluruh para nabi yang lain, serta mohonlah keampunan untuk orang-orang beriman lelaki dan perempuan, dan untuk saudara-saudaramu yang telah mendahuluimu dalam keimanan. Kemudian, pada akhirnya, ucapkanlah: \"Ya Allah, kasihanilah aku dengan (kemampuan) meninggalkan maksiat selama-lamanya sepanjang Engkau memanjangkan usiaku, dan kasihanilah aku daripada membebankan diriku dengan perkara yang tidak berfaedah bagiku, dan kurniakanlah aku pandangan yang baik terhadap apa yang meredhakan-Mu daripadaku. Ya Allah, wahai Pencipta langit dan bumi, Yang Memiliki Kebesaran, Kemuliaan dan Keperkasaan yang tidak tertandingi, aku memohon kepada-Mu, wahai Allah, wahai Yang Maha Pengasih, dengan kebesaran-Mu dan cahaya wajah-Mu, agar Engkau menetapkan hatiku untuk menghafaz Kitab-Mu sebagaimana Engkau telah mengajarkannya kepadaku, dan kurniakanlah aku agar dapat membacanya dengan cara yang meredhakan-Mu daripadaku. Ya Allah, wahai Pencipta langit dan bumi, Yang Memiliki Kebesaran, Kemuliaan dan Keperkasaan yang tidak tertandingi, aku memohon kepada-Mu, wahai Allah, wahai Yang Maha Pengasih, dengan kebesaran-Mu dan cahaya wajah-Mu, agar Engkau menyinari penglihatanku dengan Kitab-Mu, melancarkan lidahku dengannya, melapangkan hatiku dengannya, meluaskan dadaku dengannya, dan membersihkan tubuhku dengannya; kerana tiada yang dapat membantuku mencapai kebenaran melainkan Engkau, dan tiada yang menganugerahkannya melainkan Engkau, dan tiada daya dan upaya melainkan dengan pertolongan Allah Yang Maha Tinggi lagi Maha Agung.' Wahai Abu al-Hasan, lakukanlah ini selama tiga malam Jumaat, atau lima, atau tujuh, nescaya ia akan dimakbulkan dengan izin Allah; demi Tuhan yang mengutusku dengan kebenaran, ia tidak pernah gagal (memberi kesan) kepada seorang mukmin.'\" Abdullah bin Abbas berkata: \"Demi Allah, tidak sampai lima atau tujuh (hari) berlalu, Ali datang menemui Rasulullah ﷺ di dalam majlis yang sama lalu berkata: 'Wahai Rasulullah, dahulu aku hanya mampu menghafaz kira-kira empat ayat sahaja, dan apabila aku mengulanginya pada diriku, ia akan hilang; tetapi hari ini aku mempelajari kira-kira empat puluh ayat, dan apabila aku mengulanginya pada diriku, seolah-olah Kitab Allah terpampang di hadapan mataku. Dan dahulu aku mendengar sesuatu hadis, apabila aku mengulanginya ia akan hilang; tetapi hari ini aku mendengar beberapa hadis, dan apabila aku menceritakannya semula, aku tidak tersilap walau satu huruf pun.' Maka Rasulullah ﷺ bersabda kepadanya ketika itu: 'Seorang mukmin, demi Tuhan Kaabah, wahai Abu al-Hasan!'\"",
+  rujukan:"Jami' at-Tirmidhi, no. 3570", perawi:"Abdullah bin Abbas R.A. (daripada Ali bin Abi Talib R.A.)", darjat:"daif",
+  nota:"PERINGATAN PENTING: Hadis ini berstatus DA'IF (LEMAH), bukan sahih atau hasan. Ali r.a. secara jelas mengadu kesukaran menghafaz al-Quran, dan walaupun naratifnya amat sesuai secara tematik dengan kategori \"Sahabat yang Mengadu\", kelemahan pada sanadnya bermakna ia TIDAK boleh dipersembahkan sebagai hadis sahih kepada pembaca. Hadis ini disertakan semata-mata untuk tujuan rujukan/pengetahuan dan hendaklah digunakan dengan berhati-hati, dengan makluman yang jelas kepada pembaca bahawa gredannya adalah Da'if (Lemah)."
 }
 ];
 
@@ -818,17 +1492,60 @@ const badgeLabel = { sahih:"Sahih", hasan:"Hasan", daif:"Da'if (Isnad)" };
 let activeCat = "semua";
 let query = "";
 
+function countFor(key){
+  return key==="semua" ? HADITH.length : HADITH.filter(h=>h.kategori===key).length;
+}
+
+function selectCategory(key){
+  activeCat = key;
+  renderCatButtons();
+  renderSidebar();
+  renderResults();
+  closeSidebar();
+  document.querySelector(".toolbar").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
 function renderCatButtons(){
   const el = document.getElementById("catButtons");
-  el.innerHTML = CATS.map(c => `<button class="cat-btn ${c.key===activeCat?'active':''}" data-cat="${c.key}">${c.emoji} ${c.label}</button>`).join("");
+  el.innerHTML = CATS.map(c => `<button class="cat-btn ${c.key===activeCat?'active':''}" data-cat="${c.key}"><span class="emoji">${c.emoji}</span><span>${c.label}</span></button>`).join("");
   el.querySelectorAll(".cat-btn").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      activeCat = btn.dataset.cat;
-      renderCatButtons();
-      renderResults();
-    });
+    btn.addEventListener("click", ()=> selectCategory(btn.dataset.cat));
   });
 }
+
+function renderSidebar(){
+  const el = document.getElementById("sidebarList");
+  el.innerHTML = CATS.map(c => `
+    <button class="side-item ${c.key===activeCat?'active':''}" data-cat="${c.key}">
+      <span>${c.emoji}</span><span>${c.label}</span><span class="cnt">${countFor(c.key)}</span>
+    </button>
+  `).join("");
+  el.querySelectorAll(".side-item").forEach(btn=>{
+    btn.addEventListener("click", ()=> selectCategory(btn.dataset.cat));
+  });
+}
+
+function openSidebar(){
+  document.getElementById("sidebarNav").classList.add("open");
+  document.getElementById("sidebarOverlay").classList.add("open");
+}
+function closeSidebar(){
+  document.getElementById("sidebarNav").classList.remove("open");
+  document.getElementById("sidebarOverlay").classList.remove("open");
+}
+
+document.getElementById("fabMenu").addEventListener("click", openSidebar);
+document.getElementById("sidebarClose").addEventListener("click", closeSidebar);
+document.getElementById("sidebarOverlay").addEventListener("click", closeSidebar);
+
+const fabTopBtn = document.getElementById("fabTop");
+fabTopBtn.addEventListener("click", ()=>{
+  document.querySelector(".toolbar").scrollIntoView({behavior:"smooth", block:"start"});
+});
+window.addEventListener("scroll", ()=>{
+  if(window.scrollY > 600){ fabTopBtn.classList.add("show"); }
+  else{ fabTopBtn.classList.remove("show"); }
+});
 
 function matchesQuery(h, q){
   if(!q) return true;
@@ -855,8 +1572,10 @@ function renderResults(){
   }
   empty.style.display = "none";
 
+  const backToTocLink = `<button class="back-toc-inline" onclick="document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'})">⬆ Kembali ke Isi Kandungan</button>`;
+
   if(activeCat !== "semua"){
-    container.innerHTML = renderCards(filtered);
+    container.innerHTML = renderCards(filtered) + `<div style="text-align:center;">${backToTocLink}</div>`;
     return;
   }
 
@@ -868,6 +1587,7 @@ function renderResults(){
     html += `<div class="section-title"><span class="emoji">${c.emoji}</span> ${c.label}</div>`;
     html += `<div class="grid">${renderCards(group)}</div>`;
   });
+  html += `<div style="text-align:center;">${backToTocLink}</div>`;
   container.innerHTML = html;
 }
 
@@ -893,6 +1613,7 @@ document.getElementById("searchInput").addEventListener("input", (e)=>{
 });
 
 renderCatButtons();
+renderSidebar();
 renderResults();
 </script>
 
