@@ -161,6 +161,12 @@ section.seksyen{padding-top:2.2rem;scroll-margin-top:135px}
   font-weight:800;font-size:1.05rem;display:flex;align-items:center;justify-content:center}
 .toc-teks{display:flex;flex-direction:column;font-weight:700}
 .toc-teks small{font-weight:400;color:var(--teks-2);font-size:.82rem;margin-top:.15rem}
+.toc-cepat{margin-top:1rem;padding-top:1rem;border-top:1.5px dashed var(--emas);
+  display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
+.toc-cepat-label{font-size:.85rem;color:var(--teks-2);font-weight:700}
+.toc-mini{background:var(--emas);color:#1A1204;font-weight:700;font-size:.85rem;
+  padding:.45rem .9rem;border-radius:999px;text-decoration:none}
+.toc-mini:hover{background:var(--emas-terang)}
 @media(min-width:720px){.grid2{grid-template-columns:1fr 1fr}}
 
 /* ===== Dalil box ===== */
@@ -278,15 +284,43 @@ audio{width:100%;margin-top:1rem;border-radius:999px}
   background:var(--kad);color:var(--teks-2);cursor:pointer}
 .btn-reset-semak:hover{border-color:var(--merah);color:var(--merah)}
 
-/* ===== Flow infographic ===== */
-.aliran{display:flex;gap:.4rem;overflow-x:auto;padding:1rem .2rem;scrollbar-width:thin}
-.aliran-item{flex:none;width:118px;text-align:center}
-.aliran-item .bulat{width:74px;height:74px;margin:0 auto .45rem;border-radius:50%;
+/* ===== Flow infographic — susunan roadmap menegak, tiada skrol ===== */
+.aliran{display:flex;flex-direction:column;padding:.4rem 0}
+.aliran-item{display:grid;grid-template-columns:64px 1fr;grid-template-rows:auto auto;
+  column-gap:1rem;row-gap:.1rem;align-items:center;text-align:left;width:100%;padding:.5rem 0}
+.aliran-item .bulat{grid-row:1/3;grid-column:1;width:64px;height:64px;margin:0;border-radius:50%;
   background:var(--hijau-muda);border:2.5px solid var(--hijau);display:grid;place-items:center}
-.aliran-item .bulat svg{width:40px;height:40px}
-.aliran-item b{display:block;font-size:.88rem;line-height:1.3;color:var(--hijau)}
-.aliran-item small{color:var(--teks-2);font-size:.76rem}
-.aliran-panah{flex:none;align-self:center;color:var(--emas);font-size:1.5rem;margin-top:-1.6rem}
+.aliran-item .bulat svg{width:34px;height:34px}
+.aliran-item b{grid-column:2;grid-row:1;display:block;font-size:.95rem;line-height:1.3;color:var(--hijau)}
+.aliran-item small{grid-column:2;grid-row:2;color:var(--teks-2);font-size:.8rem}
+.aliran-panah{margin-left:31px;transform:rotate(90deg);color:var(--emas);font-size:1.3rem;
+  line-height:1;margin-top:-4px;margin-bottom:-4px}
+
+/* ===== Roadmap Ringkasan Umrah (Bahagian 10) ===== */
+.roadmap-kad{background:linear-gradient(180deg,var(--kad) 60%,var(--hijau-muda))}
+.roadmap{margin-top:.6rem}
+.roadmap-item{position:relative;display:flex;gap:1rem;align-items:flex-start;padding-bottom:1.7rem}
+.roadmap-item:last-child{padding-bottom:0}
+.roadmap-item:not(:last-child)::before{content:'';position:absolute;left:27px;top:58px;bottom:-2px;
+  width:3px;background:repeating-linear-gradient(to bottom,var(--emas) 0 6px,transparent 6px 13px)}
+.roadmap-ikon{position:relative;flex:none;width:56px;height:56px;border-radius:50%;
+  background:var(--hijau-muda);border:2.5px solid var(--hijau);display:grid;place-items:center;z-index:1}
+.roadmap-ikon svg{width:30px;height:30px}
+.roadmap-no{position:absolute;bottom:-4px;right:-4px;width:22px;height:22px;border-radius:50%;
+  background:var(--emas);color:#1A1204;font-size:.72rem;font-weight:800;display:grid;place-items:center;
+  border:2px solid var(--kad)}
+.roadmap-teks{padding-top:.55rem}
+.roadmap-tajuk{font-weight:800;color:var(--hijau);font-size:1rem;display:flex;align-items:center;
+  gap:.5rem;flex-wrap:wrap}
+.roadmap-ket{color:var(--teks-2);font-size:.85rem;margin-top:.2rem;line-height:1.4}
+.tag-rukun{background:var(--emas);color:#1A1204;font-size:.62rem;font-weight:800;
+  padding:.15rem .55rem;border-radius:999px;letter-spacing:.03em}
+.tag-sunat{background:transparent;color:var(--hijau);border:1.3px solid var(--hijau);
+  font-size:.62rem;font-weight:800;padding:.08rem .5rem;border-radius:999px;letter-spacing:.03em}
+.roadmap-item.roadmap-akhir .roadmap-ikon{background:linear-gradient(135deg,var(--hijau-tua),var(--hijau));
+  border-color:var(--emas)}
+.roadmap-item.roadmap-akhir .roadmap-ikon svg path{stroke:var(--emas-terang)}
+.roadmap-item.roadmap-akhir .roadmap-tajuk{color:var(--emas);font-size:1.15rem}
 
 /* ===== Tables ===== */
 table.jadual{width:100%;border-collapse:collapse;margin:.8rem 0;font-size:1rem}
@@ -309,6 +343,23 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
   border-radius:50%;border:none;background:var(--emas);color:#1A1204;font-size:1.35rem;
   box-shadow:0 4px 14px rgba(0,0,0,.3);display:none}
 #btnIsiKandungan.tunjuk{display:block}
+#btnKaunter{position:fixed;bottom:8.6rem;right:1.2rem;z-index:40;width:52px;height:52px;
+  border-radius:50%;border:none;background:var(--hijau-tua);color:var(--emas-terang);font-size:1.35rem;
+  box-shadow:0 4px 14px rgba(0,0,0,.3);display:none;border:2px solid var(--emas)}
+#btnKaunter.tunjuk{display:flex;align-items:center;justify-content:center}
+#panelKaunter{position:fixed;left:0;right:0;bottom:0;z-index:95;
+  background:var(--kad);border-radius:24px 24px 0 0;box-shadow:0 -6px 30px rgba(0,0,0,.35);
+  padding:1.1rem 1.1rem 1.6rem;transform:translateY(110%);transition:transform .3s ease;
+  max-width:640px;margin:0 auto;max-height:80vh;overflow-y:auto}
+#panelKaunter.buka{transform:translateY(0)}
+#panelKaunter h3{color:var(--hijau);font-size:1.15rem;margin:0 0 .3rem;display:flex;align-items:center;gap:.5rem}
+#pkTutup{position:absolute;top:.9rem;right:.9rem;background:var(--hijau-muda);border:none;
+  color:var(--hijau);width:38px;height:38px;border-radius:50%;font-size:1.1rem;z-index:2}
+.kaunter-mini{padding:.9rem 0;border-bottom:1px solid var(--garis)}
+.kaunter-mini:last-child{border-bottom:none}
+.kaunter-mini .saie-nombor{font-size:2.8rem}
+.kaunter-mini .saie-kaunter{padding:.4rem 0 0}
+.kaunter-mini .saie-butang button{padding:.6rem 1.15rem;font-size:.9rem}
 @media(min-width:720px){body{font-size:1.15rem}.arab{font-size:1.9rem}}
 </style>
 </head>
@@ -376,6 +427,11 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
     <a class="toc-btn" href="#s9"><span class="toc-no">9</span><span class="toc-teks">Tahallul<small>Halq &amp; taqsir</small></span></a>
     <a class="toc-btn" href="#s10"><span class="toc-no">✓</span><span class="toc-teks">Umrah Selesai<small>Checklist &amp; doa penutup</small></span></a>
   </div>
+  <div class="toc-cepat">
+    <span class="toc-cepat-label">Akses pantas kaunter:</span>
+    <a class="toc-mini" href="#kaunterTawaf">🕋 Kaunter Tawaf</a>
+    <a class="toc-mini" href="#kaunterSaie">🚶 Kaunter Saie</a>
+  </div>
 </div>
 
 <!-- ============ 1. PENGENALAN ============ -->
@@ -441,7 +497,7 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
 
   <div class="kad">
     <h3><span class="titik"></span>Infografik: Perjalanan Umrah Anda</h3>
-    <p>Tujuh peringkat mudah dari mula hingga selesai. Skrol ke kanan untuk lihat semua &rarr;</p>
+    <p>Tujuh peringkat mudah dari mula hingga selesai:</p>
     <div class="aliran" aria-label="Carta aliran perjalanan umrah">
       <div class="aliran-item"><div class="bulat"><svg viewBox="0 0 48 48"><path d="M14 40V22l10-8 10 8v18h-7v-10h-6v10z" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M24 6v6M20 9h8" stroke="#B8912A" stroke-width="2.5"/></svg></div><b>1. Persediaan</b><small>Mandi &amp; pakai ihram</small></div>
       <div class="aliran-panah">&rarr;</div>
@@ -836,7 +892,7 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
     <div class="nota"><b>✎ Nota Mutawwif</b>Rasulullah ﷺ tidak mengkhususkan bacaan tertentu bagi setiap pusingan — berdoa dan berzikirlah dengan apa sahaja yang dihafal, dalam bahasa apa pun. Doa yang khusus daripada Baginda ialah doa antara Rukun Yamani dan Hajarul Aswad di atas. Lelaki disunatkan <b>berlari-lari anak (ramal)</b> pada pusingan 1–3 dan berjalan biasa pada pusingan 4–7 (jika keadaan mengizinkan).</div>
   </div>
 
-  <div class="kad">
+  <div class="kad" id="kaunterTawaf">
     <h3><span class="titik"></span>Penanda Pusingan Tawaf Anda</h3>
     <p>Gunakan pembilang ini semasa amali atau latihan. Ketik <b>+ Tambah</b> setiap kali tiba semula di penjuru Hajarul Aswad (lampu hijau):</p>
     <div class="saie-kaunter">
@@ -972,7 +1028,7 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
     </div>
   </div>
 
-  <div class="kad">
+  <div class="kad" id="kaunterSaie">
     <h3><span class="titik"></span>Penanda Pusingan Saie Anda</h3>
     <p>Gunakan pembilang ini semasa amali atau latihan. Ketik <b>+ Tambah</b> setiap kali tiba di penghujung bukit:</p>
     <div class="saie-kaunter">
@@ -1006,9 +1062,9 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
     </div>
     <p><b>Di kawasan lampu hijau</b> (bekas lembah tempat Sayyidatina Hajar berlari): lelaki disunatkan <b>berlari-lari anak</b>; wanita berjalan biasa. Di situ dibaca:</p>
     <div class="dalil">
-      <div class="arab">رَبِّ اغْفِرْ وَارْحَمْ إِنَّكَ أَنْتَ الْأَعَزُّ الْأَكْرَمُ</div>
-      <div class="rumi">Rabbighfir warham, innaka antal-a'azzul-akram</div>
-      <div class="makna">"Ya Tuhanku, ampunilah dan rahmatilah; sesungguhnya Engkaulah Yang Maha Mulia lagi Maha Pemurah."</div>
+      <div class="arab">رَبِّ اغْفِرْ وَارْحَمْ وَاعْفُ وَتَكَرَّمْ وَتَجَاوَزْ عَمَّا تَعْلَمُ، إِنَّكَ تَعْلَمُ مَا لَا نَعْلَمُ، إِنَّكَ أَنْتَ اللَّهُ الْأَعَزُّ الْأَكْرَمُ</div>
+      <div class="rumi">Rabbighfir warham wa'fu wa takarram, wa tajawaz 'amma ta'lam, innaka ta'lamu ma la na'lam, innaka antallahul-a'azzul-akram</div>
+      <div class="makna">"Ya Tuhanku, ampunilah, kasihanilah, maafkanlah dan mulialah (dengan kemurahan-Mu), serta lampauilah apa yang Engkau ketahui (dari dosaku); sesungguhnya Engkau mengetahui apa yang kami tidak ketahui; sesungguhnya Engkaulah Allah Yang Maha Perkasa lagi Maha Mulia."</div>
     </div>
     <p>Amalan sunat lain: keluar ke tempat saie melalui <b>pintu Safa</b>, mendaki sedikit di kedua-dua bukit sambil menghadap Kaabah, sentiasa berzikir, dan berkeadaan berwuduk (saie tetap sah tanpa wuduk).</p>
     <div class="salah"><b>⚠ Kesalahan Yang Sering Berlaku</b>
@@ -1095,20 +1151,67 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
   <div class="kepala-seksyen"><span class="no-besar">✓</span><h2>Umrah Selesai — Semakan Akhir</h2></div>
   <p class="subtajuk">Tahniah! Semak semula setiap rukun dan wajib umrah anda.</p>
 
-  <div class="kad">
+  <div class="kad roadmap-kad">
     <h3><span class="titik"></span>Ringkasan Umrah Dalam Satu Infografik</h3>
-    <div class="aliran" aria-label="Ringkasan penuh umrah">
-      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">١</b></div><b>Niat di Miqat</b><small>Ihram bermula</small></div>
-      <div class="aliran-panah">&rarr;</div>
-      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">٢</b></div><b>Talbiah</b><small>Hingga mula tawaf</small></div>
-      <div class="aliran-panah">&rarr;</div>
-      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">٣</b></div><b>Tawaf 7×</b><small>Lawan jam, mula Hajarul Aswad</small></div>
-      <div class="aliran-panah">&rarr;</div>
-      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">٤</b></div><b>Solat 2 Rakaat</b><small>+ minum Zamzam</small></div>
-      <div class="aliran-panah">&rarr;</div>
-      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">٥</b></div><b>Saie 7×</b><small>Mula Safa, tamat Marwah</small></div>
-      <div class="aliran-panah">&rarr;</div>
-      <div class="aliran-item"><div class="bulat"><b style="font-size:1.5rem;color:#14663F">٦</b></div><b>Tahallul</b><small>Ihram tamat ✓</small></div>
+    <p>Tujuh peringkat perjalanan umrah anda, dari niat di Miqat hingga selesai:</p>
+    <div class="roadmap">
+
+      <div class="roadmap-item">
+        <div class="roadmap-ikon"><svg viewBox="0 0 48 48"><path d="M10 38h28M14 38V20l10-9 10 9v18" fill="none" stroke="#14663F" stroke-width="2.5"/><circle cx="24" cy="26" r="3.5" fill="#B8912A"/></svg><span class="roadmap-no">1</span></div>
+        <div class="roadmap-teks">
+          <div class="roadmap-tajuk">Niat di Miqat <span class="tag-rukun">RUKUN</span></div>
+          <div class="roadmap-ket">Mandi &amp; pakai ihram sebelum miqat, kemudian lafaz niat umrah — ihram bermula, pantang larang berkuat kuasa.</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-ikon"><svg viewBox="0 0 48 48"><path d="M24 8c-6 7-6 14 0 18 6-4 6-11 0-18z" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M12 32c4 5 8 7 12 7s8-2 12-7" fill="none" stroke="#B8912A" stroke-width="2.5"/></svg><span class="roadmap-no">2</span></div>
+        <div class="roadmap-teks">
+          <div class="roadmap-tajuk">Talbiah <span class="tag-sunat">SUNAT</span></div>
+          <div class="roadmap-ket">Dilaungkan berterusan sepanjang perjalanan — bermula selepas niat, berhenti sebaik nampak Kaabah untuk mula tawaf.</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-ikon"><svg viewBox="0 0 48 48"><rect x="16" y="18" width="16" height="16" fill="#0B3D2E"/><rect x="16" y="21" width="16" height="3" fill="#B8912A"/><circle cx="24" cy="26" r="16" fill="none" stroke="#14663F" stroke-width="2" stroke-dasharray="4 3"/><path d="M38 16l3-4M40.5 17.5L44 15" stroke="#B8912A" stroke-width="2"/></svg><span class="roadmap-no">3</span></div>
+        <div class="roadmap-teks">
+          <div class="roadmap-tajuk">Tawaf 7× <span class="tag-rukun">RUKUN</span></div>
+          <div class="roadmap-ket">Lawan jam, bermula &amp; tamat di penjuru Hajarul Aswad. Kaabah sentiasa di sebelah kiri; kekal di luar Hijr Ismail.</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-ikon"><svg viewBox="0 0 48 48"><path d="M24 10a8 8 0 0 1 8 8v3H16v-3a8 8 0 0 1 8-8z" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M12 38h24M16 38V21M32 38V21" stroke="#14663F" stroke-width="2.5" fill="none"/><path d="M36 30c2 2.4 2 4 0 5.6-2-1.6-2-3.2 0-5.6z" fill="#B8912A"/></svg><span class="roadmap-no">4</span></div>
+        <div class="roadmap-teks">
+          <div class="roadmap-tajuk">Solat 2 Rakaat + Zamzam <span class="tag-sunat">SUNAT</span></div>
+          <div class="roadmap-ket">Solat sunat tawaf di belakang Maqam Ibrahim (atau mana-mana ruang), kemudian minum air Zamzam sambil berdoa.</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-ikon"><svg viewBox="0 0 48 48"><path d="M8 34c4-8 8-8 12 0M28 34c4-8 8-8 12 0" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M16 22h16M28 18l6 4-6 4M20 30l-6-4 6-4" fill="none" stroke="#B8912A" stroke-width="2.2"/></svg><span class="roadmap-no">5</span></div>
+        <div class="roadmap-teks">
+          <div class="roadmap-tajuk">Saie 7× <span class="tag-rukun">RUKUN</span></div>
+          <div class="roadmap-ket">Bermula di Bukit Safa, tamat di Bukit Marwah (Safa→Marwah=1, Marwah→Safa=2, dan seterusnya hingga 7).</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-ikon"><svg viewBox="0 0 48 48"><circle cx="24" cy="20" r="8" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M30 32l8 8M38 32l-8 8" stroke="#B8912A" stroke-width="2.5" stroke-linecap="round"/><path d="M12 38c2-4 5-6 8-6" stroke="#14663F" stroke-width="2.5" fill="none"/></svg><span class="roadmap-no">6</span></div>
+        <div class="roadmap-teks">
+          <div class="roadmap-tajuk">Tahallul <span class="tag-rukun">RUKUN</span></div>
+          <div class="roadmap-ket">Bercukur (halq) atau bergunting (taqsir) minimum 3 helai rambut — ihram tamat, pantang larang terlerai.</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item roadmap-akhir">
+        <div class="roadmap-ikon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="none" stroke="#14663F" stroke-width="2.5"/><path d="M15 24l6 6 12-12" fill="none" stroke="#B8912A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="roadmap-teks">
+          <div class="roadmap-tajuk">Umrah Selesai ✓</div>
+          <div class="roadmap-ket">Alhamdulillah, umrah sempurna. Rebut peluang berdoa memohon umrah mabrur — lihat doa penutup di bawah.</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1171,8 +1274,48 @@ footer .kecil{font-size:.8rem;opacity:.7;margin-top:.8rem;max-width:620px;margin
   <button id="btnResetSemua" class="btn-reset-semak" style="margin-top:1rem;background:transparent;border-color:var(--emas);color:var(--emas)">&#8635; Set Semula Keseluruhan (untuk Umrah Seterusnya)</button>
 </footer>
 
+<button id="btnKaunter" aria-label="Kaunter Pantas Tawaf &amp; Saie" title="Kaunter Pantas">
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4" y="2" width="16" height="20" rx="2.5"/>
+    <rect x="7" y="5" width="10" height="4" rx="1"/>
+    <circle cx="7.5" cy="13.2" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="13.2" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="16.5" cy="13.2" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="7.5" cy="17.2" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="17.2" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="16.5" cy="17.2" r="1" fill="currentColor" stroke="none"/>
+  </svg>
+</button>
 <button id="btnIsiKandungan" aria-label="Ke Isi Kandungan" title="Isi Kandungan">&#128220;</button>
 <button id="btnAtas" aria-label="Kembali ke atas">&uarr;</button>
+
+<div id="panelKaunter" role="dialog" aria-modal="false" aria-label="Kaunter pantas tawaf dan saie">
+  <button id="pkTutup" aria-label="Tutup">&times;</button>
+  <div class="kaunter-mini">
+    <h3><span class="titik" style="width:10px;height:10px;border-radius:3px;background:var(--emas);transform:rotate(45deg);flex:none;display:inline-block"></span>Kaunter Tawaf</h3>
+    <div class="saie-kaunter">
+      <div class="saie-nombor" id="tawafNomborMini">0</div>
+      <div class="saie-arah" id="tawafArahMini">Sedia di Hajarul Aswad</div>
+      <div class="saie-butang">
+        <button id="btnTawafMiniTambah">+ Tambah</button>
+        <button id="btnTawafMiniSemula">Set Semula</button>
+      </div>
+      <div class="saie-titik" id="tawafTitikMini"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div>
+    </div>
+  </div>
+  <div class="kaunter-mini">
+    <h3><span class="titik" style="width:10px;height:10px;border-radius:3px;background:var(--emas);transform:rotate(45deg);flex:none;display:inline-block"></span>Kaunter Saie</h3>
+    <div class="saie-kaunter">
+      <div class="saie-nombor" id="saieNomborMini">0</div>
+      <div class="saie-arah" id="saieArahMini">Sedia di Bukit Safa</div>
+      <div class="saie-butang">
+        <button id="btnSaieMiniTambah">+ Tambah</button>
+        <button id="btnSaieMiniSemula">Set Semula</button>
+      </div>
+      <div class="saie-titik" id="saieTitikMini"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div>
+    </div>
+  </div>
+</div>
 
 <!-- Lightbox -->
 <div id="lightbox" role="dialog" aria-modal="true" aria-label="Paparan gambar">
@@ -1218,6 +1361,7 @@ window.addEventListener('scroll', function(){
   barProgress.style.width = p + '%';
   btnAtas.classList.toggle('tunjuk', h.scrollTop > 600);
   btnIsiKandungan.classList.toggle('tunjuk', h.scrollTop > 600);
+  btnKaunter.classList.toggle('tunjuk', h.scrollTop > 600);
   sorotCip();
 }, {passive:true});
 btnAtas.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
@@ -1329,18 +1473,28 @@ var saieNombor = document.getElementById('saieNombor');
 var saieArah = document.getElementById('saieArah');
 var saieTitik = document.getElementById('saieTitik').children;
 var saieSiap = document.getElementById('saieSiap');
+var saieNomborMini = document.getElementById('saieNomborMini');
+var saieArahMini = document.getElementById('saieArahMini');
+var saieTitikMini = document.getElementById('saieTitikMini').children;
 function lukisSaie(){
   saieNombor.textContent = saie;
   for (var i = 0; i < 7; i++) saieTitik[i].classList.toggle('siap', i < saie);
   saieSiap.classList.toggle('tunjuk', saie >= 7);
-  if (saie >= 7) saieArah.textContent = 'Selesai di Bukit Marwah ✓';
-  else if (saie === 0) saieArah.textContent = 'Sedia di Bukit Safa — mula berjalan ke Marwah';
-  else saieArah.textContent = (saie % 2 === 1)
+  var teksArah;
+  if (saie >= 7) teksArah = 'Selesai di Bukit Marwah ✓';
+  else if (saie === 0) teksArah = 'Sedia di Bukit Safa — mula berjalan ke Marwah';
+  else teksArah = (saie % 2 === 1)
     ? 'Anda di MARWAH — perjalanan seterusnya: Marwah → Safa (kiraan ke-' + (saie+1) + ')'
     : 'Anda di SAFA — perjalanan seterusnya: Safa → Marwah (kiraan ke-' + (saie+1) + ')';
+  saieArah.textContent = teksArah;
+  saieNomborMini.textContent = saie;
+  saieArahMini.textContent = teksArah;
+  for (var j = 0; j < 7; j++) saieTitikMini[j].classList.toggle('siap', j < saie);
 }
 document.getElementById('btnSaieTambah').addEventListener('click', function(){ if (saie < 7){ saie++; lukisSaie(); } });
 document.getElementById('btnSaieSemula').addEventListener('click', function(){ saie = 0; lukisSaie(); });
+document.getElementById('btnSaieMiniTambah').addEventListener('click', function(){ if (saie < 7){ saie++; lukisSaie(); } });
+document.getElementById('btnSaieMiniSemula').addEventListener('click', function(){ saie = 0; lukisSaie(); });
 lukisSaie();
 
 /* ===== Kaunter Tawaf ===== */
@@ -1349,17 +1503,33 @@ var tawafNombor = document.getElementById('tawafNombor');
 var tawafArah = document.getElementById('tawafArah');
 var tawafTitik = document.getElementById('tawafTitik').children;
 var tawafSiap = document.getElementById('tawafSiap');
+var tawafNomborMini = document.getElementById('tawafNomborMini');
+var tawafArahMini = document.getElementById('tawafArahMini');
+var tawafTitikMini = document.getElementById('tawafTitikMini').children;
 function lukisTawaf(){
   tawafNombor.textContent = tawaf;
   for (var i = 0; i < 7; i++) tawafTitik[i].classList.toggle('siap', i < tawaf);
   tawafSiap.classList.toggle('tunjuk', tawaf >= 7);
-  if (tawaf >= 7) tawafArah.textContent = 'Selesai 7 pusingan di Hajarul Aswad ✓';
-  else if (tawaf === 0) tawafArah.textContent = 'Sedia di Hajarul Aswad — mula pusingan pertama';
-  else tawafArah.textContent = 'Dalam pusingan ke-' + (tawaf+1) + ' — teruskan hingga kembali ke Hajarul Aswad';
+  var teksArah;
+  if (tawaf >= 7) teksArah = 'Selesai 7 pusingan di Hajarul Aswad ✓';
+  else if (tawaf === 0) teksArah = 'Sedia di Hajarul Aswad — mula pusingan pertama';
+  else teksArah = 'Dalam pusingan ke-' + (tawaf+1) + ' — teruskan hingga kembali ke Hajarul Aswad';
+  tawafArah.textContent = teksArah;
+  tawafNomborMini.textContent = tawaf;
+  tawafArahMini.textContent = teksArah;
+  for (var j = 0; j < 7; j++) tawafTitikMini[j].classList.toggle('siap', j < tawaf);
 }
 document.getElementById('btnTawafTambah').addEventListener('click', function(){ if (tawaf < 7){ tawaf++; lukisTawaf(); } });
 document.getElementById('btnTawafSemula').addEventListener('click', function(){ tawaf = 0; lukisTawaf(); });
+document.getElementById('btnTawafMiniTambah').addEventListener('click', function(){ if (tawaf < 7){ tawaf++; lukisTawaf(); } });
+document.getElementById('btnTawafMiniSemula').addEventListener('click', function(){ tawaf = 0; lukisTawaf(); });
 lukisTawaf();
+
+/* ===== Panel Kaunter Pantas (terapung) ===== */
+var btnKaunter = document.getElementById('btnKaunter');
+var panelKaunter = document.getElementById('panelKaunter');
+btnKaunter.addEventListener('click', function(){ panelKaunter.classList.add('buka'); });
+document.getElementById('pkTutup').addEventListener('click', function(){ panelKaunter.classList.remove('buka'); });
 
 /* ===== Checklist (dengan Butang Set Semula automatik untuk setiap senarai) ===== */
 document.querySelectorAll('.senarai-semak').forEach(function(sen){
