@@ -1,1 +1,296 @@
+<!DOCTYPE html>
+<html lang="ms" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a4f3c">
+<title>Jangan Takut &amp; Jangan Bersedih — Teman Baca untuk Hati</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f2e8; --paper:#fffdf7; --paper-2:#faf5e9;
+  --ink:#20291f; --ink-soft:#4a5347; --muted:#7c8478; --line:#e7ded0; --line-2:#efe7d7;
+  --green:#0e6b52; --green-2:#0a4f3c; --green-deep:#083528;
+  --gold:#b3812c; --gold-2:#9c6e1c; --gold-soft:#f0e5c6;
+  --khauf:#8a5a2b; --raja:#0e6b52; --mahabbah:#a23c56;
+  --sahih:#0e6b52; --hasan:#9a731b; --sahih-bg:#e6f0ea; --hasan-bg:#f5edd6;
+  --hero-1:#0f6b52; --hero-2:#0a4636; --hero-3:#062a20;
+  --sh:0 6px 26px -10px rgba(16,40,30,.2),0 2px 6px -3px rgba(16,40,30,.1);
+}
+html[data-theme="dark"]{
+  --bg:#0c1310; --paper:#141d18; --paper-2:#18231d;
+  --ink:#e9efe9; --ink-soft:#c4cdc4; --muted:#8b968b; --line:#243128; --line-2:#1d2820;
+  --green:#3fd39f; --green-2:#5adcab; --green-deep:#0c3a2c;
+  --gold:#dcb367; --gold-2:#e8c37e; --gold-soft:#2a2312;
+  --khauf:#d59b5e; --raja:#3fd39f; --mahabbah:#e087a0;
+  --sahih:#3fd39f; --hasan:#e0b869; --sahih-bg:#0f3327; --hasan-bg:#2f2710;
+  --hero-1:#0d5c46; --hero-2:#083529; --hero-3:#04201a;
+  --sh:0 10px 34px -14px rgba(0,0,0,.6),0 2px 6px -3px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Lora',Georgia,serif;font-size:18px;line-height:1.75;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s;}
+.ar{font-family:'Amiri','Noto Naskh Arabic',serif;direction:rtl;line-height:2.1;}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
 
+/* progress + controls */
+.pbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--green));width:0;z-index:60;transition:width .1s;}
+.ctrl{position:fixed;top:14px;right:14px;z-index:55;display:flex;gap:8px;}
+.cbtn{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 82%,transparent);backdrop-filter:blur(8px);color:var(--ink-soft);cursor:pointer;display:grid;place-items:center;box-shadow:var(--sh);font-family:'Plus Jakarta Sans',sans-serif;transition:.18s;}
+.cbtn:hover{border-color:var(--gold);color:var(--gold-2);}
+
+/* drawer TOC */
+.drawer{position:fixed;inset:0 auto 0 0;width:min(85vw,340px);background:var(--paper);border-right:1px solid var(--line);box-shadow:var(--sh);transform:translateX(-104%);transition:transform .32s cubic-bezier(.4,0,.2,1);z-index:70;padding:70px 18px 24px;overflow-y:auto;}
+.drawer.open{transform:none;}
+.drawer h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 8px 12px;}
+.drawer a{display:flex;gap:12px;align-items:baseline;text-decoration:none;color:var(--ink);padding:11px 10px;border-radius:11px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14.5px;line-height:1.35;transition:.15s;}
+.drawer a:hover{background:var(--paper-2);}
+.drawer a .tn{font-family:'Amiri',serif;color:var(--gold-2);font-weight:700;min-width:22px;}
+.scrim{position:fixed;inset:0;background:rgba(8,20,15,.4);opacity:0;pointer-events:none;transition:.3s;z-index:65;}
+.scrim.show{opacity:1;pointer-events:auto;}
+
+/* COVER */
+.cover{background:linear-gradient(162deg,var(--hero-1),var(--hero-2) 55%,var(--hero-3));color:#f3edde;padding:96px 24px 104px;text-align:center;position:relative;overflow:hidden;}
+.cover::before{content:"۞";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:min(96vw,720px);color:rgba(216,186,112,.055);font-family:'Amiri',serif;line-height:1;pointer-events:none;}
+.cover-in{position:relative;max-width:660px;margin:0 auto;}
+.bismillah{font-size:clamp(19px,3.2vw,25px);color:#e6d6a8;opacity:.9;margin-bottom:26px;}
+.cv-eye{font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.32em;text-transform:uppercase;font-size:11.5px;font-weight:700;color:#d6c286;margin-bottom:18px;}
+.cover h1{font-family:'Lora',serif;font-weight:600;font-size:clamp(34px,7vw,58px);line-height:1.1;margin:0 0 22px;letter-spacing:-.005em;}
+.cv-ar{font-family:'Amiri',serif;font-weight:700;font-size:clamp(38px,9vw,74px);color:#f2e4ba;margin:8px 0 26px;text-shadow:0 2px 34px rgba(240,220,150,.26);}
+.cv-sub{font-style:italic;font-size:clamp(16px,2.2vw,19px);color:#e0e7df;opacity:.92;max-width:520px;margin:0 auto 40px;line-height:1.7;}
+.cv-by{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:#d3ddd2;line-height:1.7;}
+.cv-by b{color:#f2e4ba;font-size:16px;}
+.cv-by span{font-size:12.5px;color:#b9c6ba;}
+.cv-scroll{font-family:'Plus Jakarta Sans',sans-serif;margin-top:46px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#c3d0c3;opacity:.8;}
+
+/* BAB */
+.bab{max-width:680px;margin:0 auto;padding:78px 24px 20px;}
+.bab-open{text-align:center;margin-bottom:44px;}
+.bab-no{font-family:'Amiri',serif;font-size:clamp(48px,11vw,74px);font-weight:700;color:var(--gold-2);line-height:1;opacity:.9;}
+.bab-eye{font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.26em;text-transform:uppercase;font-size:11px;font-weight:700;color:var(--muted);margin:10px 0 12px;}
+.bab-open h2{font-family:'Lora',serif;font-weight:600;font-size:clamp(25px,4.6vw,35px);line-height:1.18;margin:0 auto 16px;max-width:15ch;letter-spacing:-.01em;}
+.bab-hook{font-family:'Lora',serif;font-style:italic;font-size:clamp(16px,2.4vw,19px);color:var(--gold-2);margin:0;}
+
+.prose>p{margin:0 0 22px;}
+.prose .lead{font-size:21px;line-height:1.7;color:var(--ink);}
+.prose b{font-weight:600;color:var(--ink);}
+html[data-theme="dark"] .prose b{color:#fff;}
+
+/* scene */
+.scene{background:var(--paper-2);border:1px solid var(--line-2);border-radius:16px;padding:22px 24px;margin:8px 0 26px;font-style:italic;color:var(--ink-soft);position:relative;line-height:1.72;}
+.scene-tag{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--gold-2);margin-bottom:9px;}
+
+/* pull quote */
+.pull{margin:30px 0;padding:6px 0 6px 24px;border-left:3px solid var(--gold);font-family:'Lora',serif;font-style:italic;font-size:clamp(20px,3vw,25px);line-height:1.5;color:var(--ink);}
+
+/* hadith card */
+.hcard{margin:26px 0;background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);padding:20px 24px;position:relative;overflow:hidden;}
+.hcard::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(var(--gold),var(--gold-2));}
+.hcard.doa{background:linear-gradient(180deg,var(--paper),var(--paper-2));}
+.hc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.hc-lbl{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--gold-2);}
+.hbadge{font-family:'Plus Jakarta Sans',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px;}
+.hbadge.sahih{color:var(--sahih);background:var(--sahih-bg);}
+.hbadge.hasan{color:var(--hasan);background:var(--hasan-bg);}
+.hc-ar{text-align:center;font-size:clamp(21px,3.6vw,27px);font-weight:700;color:var(--ink);margin:6px 0 14px;}
+.hc-terj{font-size:16.5px;color:var(--ink);font-style:italic;text-align:center;margin:0 0 12px;line-height:1.6;}
+.hcard.doa .hc-terj{color:var(--green-2);}
+html[data-theme="dark"] .hcard.doa .hc-terj{color:var(--green);}
+.hc-src{font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;color:var(--muted);text-align:center;font-style:normal;}
+
+/* value callouts */
+.value{margin:26px 0;border-radius:16px;padding:18px 22px;border:1px solid var(--line);background:var(--paper-2);border-left:4px solid var(--raja);}
+.value.khauf{border-left-color:var(--khauf);}
+.value.raja{border-left-color:var(--raja);}
+.value.mahabbah{border-left-color:var(--mahabbah);}
+.v-lbl{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;}
+.value.khauf .v-lbl{color:var(--khauf);}
+.value.raja .v-lbl{color:var(--raja);}
+.value.mahabbah .v-lbl{color:var(--mahabbah);}
+.value p{margin:0;font-size:16.5px;line-height:1.68;color:var(--ink-soft);}
+
+/* trio */
+.trio{display:grid;grid-template-columns:1fr;gap:12px;margin:24px 0 28px;}
+.tr{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--paper-2);border-top:3px solid var(--raja);}
+.tr.khauf{border-top-color:var(--khauf);}
+.tr.raja{border-top-color:var(--raja);}
+.tr.mahabbah{border-top-color:var(--mahabbah);}
+.tr b{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;display:block;margin-bottom:3px;}
+.tr.khauf b{color:var(--khauf);} .tr.raja b{color:var(--raja);} .tr.mahabbah b{color:var(--mahabbah);}
+.tr span{font-size:14.5px;color:var(--ink-soft);line-height:1.5;}
+@media(min-width:620px){.trio{grid-template-columns:repeat(3,1fr);}}
+
+/* try box */
+.try{margin:28px 0;background:linear-gradient(180deg,var(--paper-2),var(--paper));border:1px dashed var(--gold);border-radius:16px;padding:20px 24px;}
+.try h4{font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;gap:9px;margin:0 0 12px;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold-2);}
+.try ul{margin:0;padding-left:20px;}
+.try li{font-size:16.5px;line-height:1.66;color:var(--ink-soft);margin-bottom:9px;}
+.try li:last-child{margin-bottom:0;}
+
+/* care note */
+.cnote{margin:28px 0;background:var(--sahih-bg);border-radius:16px;padding:20px 24px;font-size:15.5px;line-height:1.7;color:var(--ink-soft);border:1px solid color-mix(in srgb,var(--green) 22%,transparent);}
+.cnote b{color:var(--green-2);}
+html[data-theme="dark"] .cnote b{color:var(--green);}
+
+/* penutup */
+.penutup{max-width:640px;margin:0 auto;padding:90px 24px 40px;text-align:center;}
+.pen-ayah{font-family:'Amiri',serif;font-size:clamp(28px,6vw,44px);font-weight:700;color:var(--gold-2);line-height:1.9;margin-bottom:14px;}
+.pen-terj{font-family:'Lora',serif;font-style:italic;font-size:clamp(18px,3vw,22px);color:var(--ink);margin:0 0 6px;}
+.pen-src{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;letter-spacing:.1em;color:var(--muted);margin-bottom:34px;}
+.pen-prose{text-align:left;}
+.pen-prose .pull,.penutup .prose>p:last-child{}
+.pen-sign{margin-top:30px;padding-top:24px;border-top:1px solid var(--line);font-style:italic;color:var(--muted);font-size:16px;}
+
+footer.foot{background:linear-gradient(160deg,var(--hero-2),var(--hero-3));color:#cdd8cd;text-align:center;padding:40px 22px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.7;}
+footer.foot b{color:#f2e4ba;}
+footer.foot .fnote{max-width:620px;margin:14px auto 0;opacity:.85;border-top:1px solid rgba(230,214,168,.18);padding-top:16px;}
+
+@media print{
+  .ctrl,.pbar,.drawer,.scrim{display:none!important;}
+  .cover,.penutup,footer.foot{background:none!important;color:#000!important;}
+  .hcard,.try,.value,.scene,.cnote{break-inside:avoid;}
+  body{background:#fff;font-size:12pt;}
+}
+</style>
+</head>
+<body>
+<div class="pbar" id="pbar"></div>
+<div class="ctrl">
+  <button class="cbtn" id="menu" aria-label="Senarai bab">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+  <button class="cbtn" id="theme" aria-label="Tema terang / gelap">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+  </button>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Kandungan">
+  <h3>Kandungan</h3>
+  <a href="#top"><span class="tn">✦</span><span>Muka Depan</span></a>
+  <a href="#muka-bab"><span class="tn">·</span><span>Sebelum kita mula…</span></a><a href="#bab01"><span class="tn">01</span><span>Bila hati terasa berat (dan tak tahu mengapa)</span></a><a href="#bab02"><span class="tn">02</span><span>Kita tidak keseorangan dalam gua itu</span></a><a href="#bab03"><span class="tn">03</span><span>Takut & Harap: dua sayap hati</span></a><a href="#bab04"><span class="tn">04</span><span>Berhenti membandingkan hidup dengan paparan orang lain</span></a><a href="#bab05"><span class="tn">05</span><span>Bila orang sekeliling tak faham</span></a><a href="#bab06"><span class="tn">06</span><span>Bila diuji, terasa seolah-olah Allah tak sayang</span></a><a href="#bab07"><span class="tn">07</span><span>Bila terasa jauh dengan Allah</span></a><a href="#bab08"><span class="tn">08</span><span>Cinta yang menyembuhkan</span></a>
+  <a href="#penutup"><span class="tn">۞</span><span>Penutup — Hati yang Tenang</span></a>
+</aside>
+
+<header class="cover" id="top"><div class="cover-in"><div class="bismillah ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div><div class="cv-eye">Bahan Bacaan Mengubat Hati</div><h1>Jangan Takut &<br>Jangan Bersedih</h1><div class="cv-ar ar">لَا تَخَفْ وَلَا تَحْزَنْ</div><p class="cv-sub">Sebuah teman baca untuk hati yang penat, cemas dan sedih — menyemai takut & harap kepada Allah, dan cinta kepada-Nya serta Rasul-Nya ﷺ.</p><div class="cv-by"><b>Syed Syukran</b></div><div class="cv-scroll">baca perlahan-lahan &nbsp;↓</div></div></header><section class="bab" id="muka-bab"><div class="bab-open"><div class="bab-no">✦</div><div class="bab-eye">Mukadimah</div><h2>Sebelum kita mula…</h2><p class="bab-hook">Berhenti seketika. Tarik nafas. Buku ini tak ke mana.</p></div><div class="prose"><p>Mungkin buku ini dibuka ketika hati sedang berat. Ada sesuatu yang menekan, tetapi sukar untuk diluahkan kepada orang lain. Atau mungkin keadaan nampak baik-baik sahaja — cuma penat; penat yang tidur pun tak mampu memulihkannya.</p>
+<p>Apa pun keadaannya: <b>selamat datang, dan tak mengapa.</b> Buku ini bukan untuk memberi ceramah yang panjang atau menimbulkan rasa bersalah kerana iman yang naik-turun. Ia sekadar ruang untuk kita berhenti seketika dan bernafas.</p>
+<p>Kita akan sama-sama merenung dua pesan yang diajar Nabi ﷺ untuk hati yang sempit: <i>jangan takut, jangan bersedih.</i> Bukan kerana masalah itu tidak wujud, tetapi kerana ada Allah — dan apabila kita benar-benar sedar Dia ada, saiz masalah itu berubah.</p>
+<p>Sepanjang buku ini, kita cuba menyemai tiga rasa dalam hati, perlahan-lahan:</p>
+<div class="trio"><div class="tr khauf"><b>Khauf</b><span>Takut yang melahirkan rasa hormat, bukan yang melumpuhkan.</span></div><div class="tr raja"><b>Raja’</b><span>Harapan kepada Allah yang tidak pernah putus.</span></div><div class="tr mahabbah"><b>Mahabbah</b><span>Cinta kepada Allah &amp; Rasul-Nya ﷺ yang menyembuhkan.</span></div></div>
+<p>Bahasanya dibuat ringkas dan santun. Hati yang sedang luka tidak memerlukan bahasa yang kaku. Setiap bab pun pendek — boleh dibaca satu ketika hati terasa sempit, atau dihabiskan dalam satu malam.</p>
+<div class="cnote"><b>Satu perkara penting terlebih dahulu:</b> sekiranya beban yang dirasai terlalu berat — sehingga sukar makan, tidur, atau terasa tidak berdaya untuk meneruskan — janganlah menanggungnya seorang diri. Luahkan kepada orang yang dipercayai, temui kaunselor atau doktor. Itu bukan tanda iman yang lemah; itu ikhtiar, dan ikhtiar sebahagian daripada tawakkul. Buku ini teman, bukan pengganti.</div></div></section><section class="bab" id="bab01"><div class="bab-open"><div class="bab-no">01</div><div class="bab-eye">Bila hati tak tenang</div><h2>Bila hati terasa berat (dan tak tahu mengapa)</h2><p class="bab-hook">Pukul 3 pagi. Badan penat, tetapi fikiran enggan berhenti.</p></div><div class="prose"><div class="scene"><span class="scene-tag">Bayangkan…</span>Sudah berbaring, lampu sudah dipadamkan. Namun kepala terasa seperti membuka 20 tab serentak — perkara yang terkata tadi, bil hujung bulan, masa depan yang belum jelas, satu kenangan lama yang tiba-tiba menjelma. Tangan pun mencapai telefon, lalu scroll tanpa tujuan — bukan kerana seronok, tetapi kerana tidak tahu apa hendak dibuat dengan rasa tak selesa di dada itu.</div>
+<p>Sekiranya keadaan ini terasa dekat — kita tidak keseorangan, dan kita tidak "rosak". Rasa cemas seperti itu ada dua nama dalam bahasa hadis: <b>al-hamm</b> (risau tentang perkara yang belum datang) dan <b>al-huzn</b> (sedih tentang perkara yang telah berlalu). Kedua-duanya menekan hati dari dua arah.</p>
+<p>Dan tahukah kita? Nabi ﷺ sendiri mengajar kita memohon perlindungan daripada dua perkara ini. Baginda tidak berkata "orang beriman tak sepatutnya risau." Baginda mengajar satu doa khusus untuk menghadapinya:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ</p><p class="hc-terj">“Ya Allah, sesungguhnya aku berlindung dengan-Mu daripada kerisauan dan kesedihan, daripada kelemahan dan kemalasan, daripada sifat bakhil dan penakut, dan daripada bebanan hutang serta penindasan orang.”</p><figcaption class="hc-src">Anas bin Malik RA · Sahih al-Bukhari, no. 6369</figcaption></figure>
+<p>Maknanya, rasa cemas itu <b>bukan tanda iman yang lemah.</b> Kalau ia tanda iman lemah, tidak mungkin Nabi ﷺ mengajar para sahabat membaca doa untuknya. Ia sebahagian daripada menjadi manusia. Yang penting bukan "jangan berasa" — tetapi "apa yang perlu dilakukan ketika merasainya."</p>
+<p>Dan inilah bahagian yang indah. Nabi ﷺ menyebut, dalam apa jua keadaan, orang beriman sebenarnya sentiasa beruntung:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">عَجَبًا لِأَمْرِ الْمُؤْمِنِ، إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ ... إِنْ أَصَابَتْهُ سَرَّاءُ شَكَرَ فَكَانَ خَيْرًا لَهُ، وَإِنْ أَصَابَتْهُ ضَرَّاءُ صَبَرَ فَكَانَ خَيْرًا لَهُ</p><p class="hc-terj">“Sungguh menakjubkan urusan seorang mukmin; sesungguhnya semua urusannya adalah baik baginya ... Jika ditimpa kesenangan dia bersyukur, maka itu baik baginya; dan jika ditimpa kesusahan dia bersabar, maka itu juga baik baginya.”</p><figcaption class="hc-src">Suhaib bin Sinan RA · Sahih Muslim, no. 2999</figcaption></figure>
+<blockquote class="pull">Susah pun beruntung, senang pun beruntung. Kita tidak pernah rugi — selagi tangan tidak dilepaskan daripada Allah.</blockquote>
+<p>Maka malam ini, apabila dada terasa sesak semula, cubalah lakukan perkara kecil ini terlebih dahulu.</p>
+<div class="try"><h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Cuba buat ni</h4><ul><li>Letakkan telefon. Betul-betul letakkan, jauh sedikit daripada jangkauan.</li><li>Baca doa di atas tadi — perlahan, sambil memahami maknanya, bukan sekadar dilaju-lajukan.</li><li>Bisikkan dalam hati kepada Allah: <i>"Ya Allah, kepada-Mu kuserahkan malam ini; hamba tidak terdaya memikulnya sendirian."</i></li></ul></div></div></section><section class="bab" id="bab02"><div class="bab-open"><div class="bab-no">02</div><div class="bab-eye">Bila rasa terperangkap</div><h2>Kita tidak keseorangan dalam gua itu</h2><p class="bab-hook">Terasa seperti dikepung. Semua pintu tertutup serentak.</p></div><div class="prose"><div class="scene"><span class="scene-tag">Bayangkan…</span>Ada ketikanya dalam hidup, segala-galanya datang serentak. Masalah kewangan, masalah dengan orang, masalah dengan diri sendiri — semuanya mengepung dari setiap arah, dan jalan keluar langsung tak kelihatan. Terasa seperti terperangkap dalam bilik yang semakin menyempit.</div>
+<p>Nabi ﷺ pernah berada dalam keadaan yang jauh lebih menggerunkan daripada itu. Ketika Hijrah, baginda dan Abu Bakar bersembunyi dalam Gua Thur. Musuh yang memburu sampai betul-betul di mulut gua — begitu hampir, tinggal menunduk sahaja untuk melihat. Abu Bakar berbisik penuh cemas: "Kalau seorang daripada mereka memandang ke bawah kakinya, pasti dia nampak kita."</p>
+<p>Perhatikan jawapan Nabi ﷺ. Baginda tidak berkata "bertenang, mereka takkan nampak." Baginda tidak menjanjikan bahaya itu hilang. Baginda hanya memulangkan hati kepada satu hakikat:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا ... مَا ظَنُّكَ يَا أَبَا بَكْرٍ بِاثْنَيْنِ اللَّهُ ثَالِثُهُمَا</p><p class="hc-terj">“Janganlah engkau bersedih, sesungguhnya Allah bersama kita ... Apakah sangkaanmu wahai Abu Bakar terhadap dua orang, sedangkan Allah yang ketiganya (bersama mereka)?”</p><figcaption class="hc-src">Abu Bakar as-Siddiq RA · Sahih al-Bukhari, no. 3653 (peristiwa dalam Gua Thur; sejajar dengan firman Allah dalam Surah at-Taubah: 40)</figcaption></figure>
+<p>Inilah ubat paling asas untuk ketakutan: <b>bukan bahaya yang hilang, tetapi kesedaran bahawa Allah sentiasa ada.</b> Musuh tetap di mulut gua. Namun "Allah yang ketiga" mengubah segala-galanya.</p>
+<p>Andai kita terasa seperti Nabi Yunus AS — terperangkap dalam kegelapan yang tak nampak penghujungnya (dalam perut ikan, dalam gelap malam, dalam gelap laut) — ada satu doa yang mengeluarkan baginda:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ</p><p class="hc-terj">“Doa Zun-Nun (Nabi Yunus AS) ketika dia berdoa dengannya sewaktu berada dalam perut ikan: 'Tiada tuhan melainkan Engkau, Maha Suci Engkau, sesungguhnya aku termasuk orang yang zalim' — tidaklah seorang Muslim berdoa dengannya dalam sesuatu perkara melainkan Allah memakbulkannya.”</p><figcaption class="hc-src">Sa'ad bin Abi Waqqas RA · Sunan at-Tirmidzi, no. 3505 — dinilai sahih oleh al-Albani (Silsilah al-Ahadith as-Sahihah, no. 1744); asalnya Surah al-Anbiya': 87</figcaption></figure>
+<p>Dan ketika terasa langsung tiada tempat untuk bersandar, ada satu kalimah yang diucapkan Nabi Ibrahim AS ketika dicampak ke dalam api, dan diucapkan pula oleh Nabi Muhammad ﷺ ketika diberitahu musuh telah berhimpun:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ، قَالَهَا إِبْرَاهِيمُ عَلَيْهِ السَّلَامُ حِينَ أُلْقِيَ فِي النَّارِ، وَقَالَهَا مُحَمَّدٌ ﷺ</p><p class="hc-terj">“'Cukuplah Allah bagi kami, dan Dia sebaik-baik Pelindung' — kalimah ini diucapkan oleh Nabi Ibrahim AS ketika dicampakkan ke dalam api, dan diucapkan pula oleh Nabi Muhammad ﷺ (ketika diberitahu musuh telah berhimpun).”</p><figcaption class="hc-src">Abdullah bin Abbas RA · Sahih al-Bukhari, no. 4563 (sejajar dengan Surah Ali 'Imran: 173)</figcaption></figure>
+<div class="value raja"><span class="v-lbl">Raja' (Harapan)</span><p>Tawakkul bukan bermakna berdiam diri tanpa usaha. Ia bermakna kita melakukan apa yang termampu, kemudian menyerahkan hasilnya kepada Allah dengan hati yang tenang — kerana yakin Dia tidak akan meninggalkan kita.</p></div>
+<div class="try"><h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Cuba buat ni</h4><ul><li>Ketika terasa terpojok, berhentilah seketika dan sebutkan dalam hati: <b>"Hasbunallah wa ni’mal wakil"</b> — cukuplah Allah bagi kami, dan Dia sebaik-baik Pelindung.</li><li>Tuliskan satu perkara yang mampu dilakukan esok (walau kecil), dan satu perkara yang perlu dilepaskan kerana ia di luar kawalan kita.</li></ul></div></div></section><section class="bab" id="bab03"><div class="bab-open"><div class="bab-no">03</div><div class="bab-eye">Inti hati</div><h2>Takut & Harap: dua sayap hati</h2><p class="bab-hook">Burung tak mampu terbang dengan sebelah sayap. Hati pun begitu.</p></div><div class="prose"><p>Ini bab paling penting dalam buku ini, jadi izinkan saya menceritakannya dengan teliti.</p>
+<p>Hati yang sihat terbang dengan dua sayap: <b>khauf</b> (takut kepada Allah) dan <b>raja’</b> (harap kepada Allah). Hilang satu, kita jatuh.</p>
+<p>Sekiranya <b>terlalu takut tanpa harapan</b> — kita masuk ke tempat yang gelap. Terasa dosa terlalu banyak, Allah pasti membenci, diri tak layak, doa pun sia-sia. Ini bukan takwa; ini putus asa. Dan putus asa itu sendiri satu masalah yang besar.</p>
+<p>Sekiranya <b>terlalu berharap tanpa takut</b> — kita menjadi lalai. "Allah Maha Pengampun" bertukar menjadi alasan untuk terus mengulangi kesilapan tanpa rasa apa-apa. Ini bukan husnuzzan; ini tertipu.</p>
+<p>Hati yang sihat memegang kedua-duanya serentak. Dan Nabi ﷺ memberi kita satu kunci yang menakjubkan — Allah melayan kita <i>menurut sangkaan kita terhadap-Nya:</i></p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH (Hadis Qudsi)</span></div><p class="hc-ar ar">أَنَا عِنْدَ ظَنِّ عَبْدِي بِي، وَأَنَا مَعَهُ إِذَا ذَكَرَنِي، فَإِنْ ذَكَرَنِي فِي نَفْسِهِ ذَكَرْتُهُ فِي نَفْسِي</p><p class="hc-terj">“Allah berfirman: Aku menurut sangkaan hamba-Ku terhadap-Ku, dan Aku bersamanya apabila dia mengingati-Ku. Jika dia mengingati-Ku dalam dirinya, Aku mengingatinya dalam diri-Ku.”</p><figcaption class="hc-src">Abu Hurairah RA · Sahih al-Bukhari, no. 7405; Sahih Muslim, no. 2675</figcaption></figure>
+<p>Cuba renung semula. Jika kita menyangka Allah takkan mengampunkan — kita sedang memilih pintu yang salah. Jika kita bersangka baik kepada-Nya — kita sedang membuka pintu rahmat. <b>Sangkaan itu, kita yang memilihnya.</b></p>
+<p>Dan bagi sesiapa yang tenggelam dalam rasa bersalah — rasa tak cukup baik, tak cukup solat, tak cukup "warak" — dengarlah ini. Allah menuliskan satu ketetapan tentang diri-Nya, sebelum menciptakan makhluk lagi:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH (Hadis Qudsi)</span></div><p class="hc-ar ar">إِنَّ رَحْمَتِي سَبَقَتْ غَضَبِي</p><p class="hc-terj">“Sesungguhnya rahmat-Ku mendahului (mengatasi) kemurkaan-Ku.”</p><figcaption class="hc-src">Abu Hurairah RA · Sahih al-Bukhari, no. 7422; Sahih Muslim, no. 2751</figcaption></figure>
+<div class="value raja"><span class="v-lbl">Raja' (Harapan)</span><p>Rahmat Allah bukan sekadar wujud — ia <b>mendahului</b> dan <b>mengatasi</b> kemurkaan-Nya. Dosa kita, sebesar mana sekalipun, tidak lebih besar daripada rahmat-Nya. Janganlah sesekali berputus harap.</p></div>
+<div class="value khauf"><span class="v-lbl">Khauf (Takut)</span><p>Namun rahmat yang luas itu bukan lesen untuk bermain-main. Takut yang sihat bukan yang melumpuhkan — ia rasa hormat dan malu yang menahan kita daripada melakukan perkara yang Allah tidak sukai, kerana kita mengenali siapa Dia.</p></div>
+<p>Nabi ﷺ mengucapkan pesan ini tiga hari sebelum kewafatan baginda — antara wasiat terakhirnya:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">لَا يَمُوتَنَّ أَحَدُكُمْ إِلَّا وَهُوَ يُحْسِنُ الظَّنَّ بِاللَّهِ</p><p class="hc-terj">“Janganlah sekali-kali seseorang daripada kamu mati melainkan dalam keadaan dia bersangka baik terhadap Allah.”</p><figcaption class="hc-src">Jabir bin Abdillah RA · Sahih Muslim, no. 2877</figcaption></figure>
+<p>Dan apabila rasa takut itu berpunca daripada rasa keseorangan — seolah-olah kita sendiri yang perlu menguruskan segala-galanya — pinjamlah doa ini. Ia mengakui bahawa kita terlalu lemah untuk dibiarkan sendirian walau sesaat:</p>
+<figure class="hcard doa"><div class="hc-top"><span class="hc-lbl">Doa</span><span class="hbadge hasan">HASAN</span></div><p class="hc-ar ar">اللَّهُمَّ رَحْمَتَكَ أَرْجُو فَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ، وَأَصْلِحْ لِي شَأْنِي كُلَّهُ، لَا إِلَهَ إِلَّا أَنْتَ</p><p class="hc-terj">Ya Allah, rahmat-Mu yang aku harapkan, maka janganlah Engkau serahkan aku kepada diriku sendiri walau sekelip mata; dan perbaikilah bagiku segala urusanku. Tiada tuhan melainkan Engkau.</p><figcaption class="hc-src">Abu Bakrah RA · Sunan Abi Dawud, no. 5090 — dinilai hasan oleh al-Albani</figcaption></figure>
+<div class="try"><h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Cuba buat ni</h4><ul><li>Ambil sehelai kertas. Tuliskan satu perkara yang <b>ditakuti</b> (satu dosa, atau satu masa depan yang menggusarkan).</li><li>Di sebelahnya, tuliskan satu perkara yang <b>diharapkan</b> daripada Allah.</li><li>Pandang kedua-duanya. Itulah dua sayap kita. Berdoalah malam ini dengan menggunakan kedua-duanya.</li></ul></div></div></section><section class="bab" id="bab04"><div class="bab-open"><div class="bab-no">04</div><div class="bab-eye">Bila rasa hidup lambat</div><h2>Berhenti membandingkan hidup dengan paparan orang lain</h2><p class="bab-hook">Membuka aplikasi, semua orang nampak menang. Menutupnya, hati terasa kalah.</p></div><div class="prose"><div class="scene"><span class="scene-tag">Bayangkan…</span>Membuka Instagram atau TikTok. Rakan sekolah sudah berkahwin. Yang sebaya sudah membeli rumah. Seorang bercuti ke Jepun, seorang perniagaannya sudah berjaya, seorang lagi baru menamatkan sarjana. Sambil scroll dan memberi "like", ada rasa kecil yang mencucuk di hati — seolah-olah hidup kita terlalu perlahan, seolah-olah kita ketinggalan.</div>
+<p>Perangkap ini bukan baru. Cuma <i>skrinnya</i> yang baru. Dan 1,400 tahun dahulu, Nabi ﷺ sudah memberikan ubatnya — satu arahan mudah yang mengubah arah pandangan:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">انْظُرُوا إِلَى مَنْ هُوَ أَسْفَلَ مِنْكُمْ، وَلَا تَنْظُرُوا إِلَى مَنْ هُوَ فَوْقَكُمْ، فَهُوَ أَجْدَرُ أَنْ لَا تَزْدَرُوا نِعْمَةَ اللَّهِ عَلَيْكُمْ</p><p class="hc-terj">“Pandanglah kepada orang yang lebih rendah (kedudukannya) daripada kamu, dan janganlah kamu memandang kepada orang yang lebih tinggi daripada kamu; kerana yang demikian itu lebih wajar agar kamu tidak memandang rendah nikmat Allah ke atas kamu.”</p><figcaption class="hc-src">Abu Hurairah RA · Sahih Muslim, no. 2963; Sahih al-Bukhari, no. 6490</figcaption></figure>
+<p>Apabila kita hanya memandang ke atas (kepada yang lebih "berjaya"), hati sering berasa kurang. Apabila kita memandang sedikit ke bawah, barulah kita nampak betapa banyak nikmat yang ada tetapi lupa disyukuri. Ini bukan mengajak kita berasa "lega orang lain susah" — tetapi mengajak kita <b>melihat nikmat sendiri.</b></p>
+<p>Kerana tahukah kita apa yang Nabi ﷺ kira sebagai "memiliki seluruh dunia"? Bukan kereta, bukan bilangan pengikut:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge hasan">HASAN</span></div><p class="hc-ar ar">مَنْ أَصْبَحَ مِنْكُمْ آمِنًا فِي سِرْبِهِ، مُعَافًى فِي جَسَدِهِ، عِنْدَهُ قُوتُ يَوْمِهِ، فَكَأَنَّمَا حِيزَتْ لَهُ الدُّنْيَا</p><p class="hc-terj">“Sesiapa antara kamu yang berpagi hari dalam keadaan aman pada dirinya, sihat pada tubuhnya, dan mempunyai makanan untuk hari itu — maka seakan-akan seluruh dunia telah dikumpulkan untuknya.”</p><figcaption class="hc-src">Ubaidillah bin Mihsan al-Ansari RA · Sunan at-Tirmidzi, no. 2346; Sunan Ibn Majah, no. 4141 — dinilai hasan oleh al-Albani (Sahih al-Jami', no. 6042)</figcaption></figure>
+<p>Aman. Sihat. Ada makanan untuk hari ini. Sekiranya ketiga-tiganya ada pada pagi ini — kita sudah "seakan-akan memiliki dunia." Cuma paparan media sosial tidak menunjukkan perkara-perkara ini, kerana ia tidak masuk statistik.</p>
+<p>Dan "kaya" yang sebenar pun bukan seperti yang disangka:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">لَيْسَ الْغِنَى عَنْ كَثْرَةِ الْعَرَضِ، وَلَكِنَّ الْغِنَى غِنَى النَّفْسِ</p><p class="hc-terj">“Kekayaan itu bukanlah dengan banyaknya harta benda, tetapi kekayaan (yang sebenar) ialah kekayaan jiwa (rasa cukup dalam hati).”</p><figcaption class="hc-src">Abu Hurairah RA · Sahih al-Bukhari, no. 6446; Sahih Muslim, no. 1051</figcaption></figure>
+<p>Kaya yang sebenar ialah kaya <i>hati</i>. Ada orang berharta tetapi hatinya tak pernah cukup, sentiasa gelisah. Ada orang sederhana tetapi hatinya tenang dan berasa cukup. Yang kedua itu lebih kaya. Dan itulah takrif kejayaan menurut Nabi ﷺ:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">قَدْ أَفْلَحَ مَنْ أَسْلَمَ، وَرُزِقَ كَفَافًا، وَقَنَّعَهُ اللَّهُ بِمَا آتَاهُ</p><p class="hc-terj">“Sungguh beruntung orang yang memeluk Islam, diberi rezeki yang mencukupi, dan Allah menjadikannya berpuas hati dengan apa yang dikurniakan kepadanya.”</p><figcaption class="hc-src">Abdullah bin 'Amr RA · Sahih Muslim, no. 1054</figcaption></figure>
+<div class="try"><h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Cuba buat ni</h4><ul><li>Malam ini, sebelum tidur, tuliskan <b>3 nikmat hari ini</b> yang sering terlepas pandang. (Contoh: dapat makan, ada tempat berteduh, ada seseorang yang menyayangi kita.)</li><li>Sekiranya media sosial kerap membuat hati berasa kurang — senyapkan atau berhenti mengikuti apa yang selalu mencucuk hati. Jagalah hati sebagaimana kita menjaga tubuh.</li></ul></div></div></section><section class="bab" id="bab05"><div class="bab-open"><div class="bab-no">05</div><div class="bab-eye">Bila rasa asing</div><h2>Bila orang sekeliling tak faham</h2><p class="bab-hook">"Wah, warak sekarang ya…" — dan nadanya bukan pujian.</p></div><div class="prose"><div class="scene"><span class="scene-tag">Bayangkan…</span>Kita cuba menjadi lebih baik. Meninggalkan sedikit demi sedikit perkara lama, menjaga solat, menjaga pergaulan, menjaga pandangan. Tetapi orang sekeliling memandang pelik. "Wah, alim sudah sekarang." Kadang rakan sendiri. Kadang orang di rumah. Lalu timbul rasa asing — seolah-olah kita yang aneh, kita yang bersalah, kerana ingin melakukan perkara yang betul.</div>
+<p>Dengarlah ini: rasa "asing" itu bukan tanda kita tersasar. Nabi ﷺ sudah memberitahu lebih awal bahawa ia sebahagian daripada perjalanan:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">بَدَأَ الْإِسْلَامُ غَرِيبًا، وَسَيَعُودُ كَمَا بَدَأَ غَرِيبًا، فَطُوبَىٰ لِلْغُرَبَاءِ</p><p class="hc-terj">“Islam bermula dalam keadaan asing, dan akan kembali menjadi asing sebagaimana ia bermula; maka beruntunglah orang-orang yang asing (yang tetap berpegang pada kebaikan ketika ramai meninggalkannya).”</p><figcaption class="hc-src">Abu Hurairah RA · Sahih Muslim, no. 145</figcaption></figure>
+<p>"Ghuraba" — orang yang asing. Apabila kita berpegang pada kebaikan sedangkan ramai sudah melepaskannya, memang akan terasa keseorangan. Tetapi lihat apa yang Nabi ﷺ panggil mereka: <b>bukan "pelik", tetapi "beruntung".</b> Rasa asing itu bukan satu kecacatan — ia satu lencana.</p>
+<p>Namun janganlah pula tersalah faham. "Asing" tidak bermakna kita perlu memutuskan hubungan dengan semua orang, mengasingkan diri, dan menjadi keras hati terhadap masyarakat. Sebaliknya — jalan yang lebih kuat ialah tetap bergaul, tetap berbuat baik, dan bersabar:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">الْمُؤْمِنُ الَّذِي يُخَالِطُ النَّاسَ وَيَصْبِرُ عَلَىٰ أَذَاهُمْ خَيْرٌ مِنَ الَّذِي لَا يُخَالِطُ النَّاسَ وَلَا يَصْبِرُ عَلَىٰ أَذَاهُمْ</p><p class="hc-terj">“Mukmin yang bergaul dengan manusia dan bersabar atas gangguan mereka, lebih baik daripada mukmin yang tidak bergaul dengan manusia dan tidak bersabar atas gangguan mereka.”</p><figcaption class="hc-src">Abdullah bin Umar RA · Sunan at-Tirmidzi, no. 2507; Sunan Ibn Majah, no. 4032 — dinilai sahih oleh al-Albani; isnad hasan menurut Ibn Hajar</figcaption></figure>
+<p>Nabi ﷺ sendiri yang paling banyak disalah fahami — dihina, dicaci, sehingga di Taif baginda dilempar batu hingga berdarah. Namun baginda tidak membalas dengan dendam; baginda membalas dengan doa dan belas kasihan. Itulah kekuatan yang sebenar: bukan menjauh sambil membenci, tetapi kekal dalam masyarakat sambil bersabar.</p>
+<div class="value khauf"><span class="v-lbl">Khauf & Redha Allah</span><p>Apabila terpaksa memilih antara redha manusia dan redha Allah — pilihlah Allah. Manusia tidak akan pernah berpuas hati dengan kita; tetapi Allah, yang pandangan-Nya paling wajar kita ambil berat, sentiasa dekat dengan sesiapa yang mencari-Nya.</p></div>
+<div class="try"><h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Cuba buat ni</h4><ul><li>Apabila pilihan baik kita diperlekehkan — janganlah membalas dengan marah atau memutuskan hubungan. Tersenyumlah, teruskan, dan doakan mereka secara diam-diam.</li><li>Carilah seorang dua sahabat yang menarik kita ke arah kebaikan. Kita tidak memerlukan ramai — kita memerlukan yang benar.</li></ul></div></div></section><section class="bab" id="bab06"><div class="bab-open"><div class="bab-no">06</div><div class="bab-eye">Bila diuji berat</div><h2>Bila diuji, terasa seolah-olah Allah tak sayang</h2><p class="bab-hook">"Kenapa saya? Apa salah saya sampai jadi begini?"</p></div><div class="prose"><div class="scene"><span class="scene-tag">Bayangkan…</span>Kadangkala perkara buruk datang bertimpa-timpa. Baru selesai satu, datang lagi satu. Sakit, kehilangan, kegagalan, pintu yang tertutup satu demi satu. Dan di tengah semua itu, bisikan buruk mula menghasut — seolah-olah Allah sudah meninggalkan kita, seolah-olah Dia membenci kita.</div>
+<p>Izinkan saya berhenti seketika di sini untuk berkata: <b>kesedihan itu sah.</b> Islam tidak menyuruh kita berpura-pura kuat. Nabi ﷺ sendiri menitiskan air mata ketika kehilangan orang yang baginda kasihi. Air mata bukan tanda iman yang lemah.</p>
+<p>Tetapi setelah mengakui perasaan itu, ada satu perkara yang perlu kita betulkan dalam fikiran. Andaian "ujian besar bermakna Allah membenci saya" itu — Nabi ﷺ membalikkannya sepenuhnya:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُصِبْ مِنْهُ</p><p class="hc-terj">“Sesiapa yang Allah kehendaki kebaikan padanya, nescaya Dia menimpakan (ujian) kepadanya.”</p><figcaption class="hc-src">Abu Hurairah RA · Sahih al-Bukhari, no. 5645</figcaption></figure>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge hasan">HASAN</span></div><p class="hc-ar ar">إِنَّ عِظَمَ الْجَزَاءِ مَعَ عِظَمِ الْبَلَاءِ، وَإِنَّ اللَّهَ إِذَا أَحَبَّ قَوْمًا ابْتَلَاهُمْ، فَمَنْ رَضِيَ فَلَهُ الرِّضَا، وَمَنْ سَخِطَ فَلَهُ السَّخَطُ</p><p class="hc-terj">“Sesungguhnya besarnya ganjaran itu bersama besarnya ujian. Dan sesungguhnya apabila Allah mengasihi satu kaum, Dia mengujinya. Maka sesiapa yang redha, baginya keredhaan (Allah); dan sesiapa yang marah, baginya kemarahan (Allah).”</p><figcaption class="hc-src">Anas bin Malik RA · Sunan at-Tirmidzi, no. 2396 — dinilai hasan oleh at-Tirmidzi</figcaption></figure>
+<p>Renung sekali lagi: <i>apabila Allah mengasihi satu kaum, Dia mengujinya.</i> Ujian besar boleh menjadi tanda kasih, bukan benci. Tetapi — dan ini penting — pintu ganjaran itu hanya terbuka dengan <b>redha</b>, bukan dengan menggerutu sambil menanggung.</p>
+<p>Dan setiap kesakitan itu, walau sekecil tercucuk duri, ada nilainya:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">مَا يُصِيبُ الْمُسْلِمَ مِنْ نَصَبٍ وَلَا وَصَبٍ وَلَا هَمٍّ وَلَا حُزْنٍ وَلَا أَذًى وَلَا غَمٍّ حَتَّى الشَّوْكَةِ يُشَاكُهَا، إِلَّا كَفَّرَ اللَّهُ بِهَا مِنْ خَطَايَاهُ</p><p class="hc-terj">“Tidak menimpa seorang Muslim itu keletihan, sakit, kerisauan, kesedihan, gangguan mahupun kesusahan — sehinggakan tercucuk duri sekalipun — melainkan Allah menghapuskan dengannya sebahagian daripada kesalahannya.”</p><figcaption class="hc-src">Abu Sa'id al-Khudri & Abu Hurairah RA · Sahih al-Bukhari, no. 5641</figcaption></figure>
+<blockquote class="pull">Malam-malam yang gelisah, air mata yang mengalir itu — bukan sia-sia. Setiap satunya sedang menuliskan pengguguran dosa.</blockquote>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge hasan">HASAN SAHIH</span></div><p class="hc-ar ar">مَا يَزَالُ الْبَلَاءُ بِالْمُؤْمِنِ وَالْمُؤْمِنَةِ فِي نَفْسِهِ وَوَلَدِهِ وَمَالِهِ حَتَّى يَلْقَى اللَّهَ وَمَا عَلَيْهِ خَطِيئَةٌ</p><p class="hc-terj">“Ujian sentiasa menimpa seorang mukmin lelaki dan mukmin perempuan — pada dirinya, anaknya dan hartanya — sehingga dia bertemu Allah dalam keadaan tidak ada lagi dosa padanya.”</p><figcaption class="hc-src">Abu Hurairah RA · Sunan at-Tirmidzi, no. 2399 — dinilai hasan sahih oleh at-Tirmidzi</figcaption></figure>
+<p>Apabila hati benar-benar sempit dan sukar untuk berkata apa-apa kepada Allah, pinjamlah kata-kata ini — doa yang Nabi ﷺ janjikan akan menghilangkan kegundahan:</p>
+<figure class="hcard doa"><div class="hc-top"><span class="hc-lbl">Doa</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">اللَّهُمَّ إِنِّي عَبْدُكَ، ابْنُ عَبْدِكَ، ابْنُ أَمَتِكَ، نَاصِيَتِي بِيَدِكَ ... أَنْ تَجْعَلَ الْقُرْآنَ رَبِيعَ قَلْبِي، وَنُورَ صَدْرِي، وَجَلَاءَ حُزْنِي، وَذَهَابَ هَمِّي</p><p class="hc-terj">Ya Allah, sesungguhnya aku hamba-Mu, anak hamba lelaki-Mu, anak hamba perempuan-Mu, ubun-ubunku di tangan-Mu ... (aku memohon) agar Engkau menjadikan al-Quran penyubur hatiku, cahaya dadaku, pelenyap kesedihanku dan penghilang gundahku.</p><figcaption class="hc-src">Abdullah bin Mas'ud RA · Musnad Ahmad, no. 3712; Sahih Ibn Hibban, no. 972 — dinilai sahih oleh al-Albani (Silsilah al-Ahadith as-Sahihah, no. 199)</figcaption></figure>
+<div class="try"><h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Cuba buat ni</h4><ul><li>Apabila diuji, cubalah tukarkan soalan dalam fikiran: daripada <b>"kenapa saya?"</b> kepada <b>"apa yang Allah ingin ajarkan melalui ini?"</b></li><li>Soalan pertama menjadikan kita mangsa. Soalan kedua menjadikan kita pelajar. Pilihlah yang kedua.</li></ul></div></div></section><section class="bab" id="bab07"><div class="bab-open"><div class="bab-no">07</div><div class="bab-eye">Bila rasa jauh</div><h2>Bila terasa jauh dengan Allah</h2><p class="bab-hook">Kita tahu sepatutnya kembali. Tetapi rasa malu itu menahan.</p></div><div class="prose"><div class="scene"><span class="scene-tag">Bayangkan…</span>Dahulu terasa dekat. Solat terasa ada "sambungannya", doa terasa sampai. Sekarang? Kosong. Solat menjadi rutin, hati mengeras, dan kita sedar diri sudah jauh. Ingin kembali, tetapi terasa malu — rasa kotor, seolah-olah diri sudah terlalu jauh untuk pulang. Dan jarak itu semakin jauh, kerana terasa diri tak layak untuk mendekat.</div>
+<p>Inilah perangkap yang paling halus: <b>rasa malu yang menjauhkan kita daripada satu-satunya tempat yang mampu menyembuhkan.</b> Kita menyangka diri tak layak untuk pulang. Tetapi tahukah kita bagaimana Allah menyambut hamba-Nya yang kembali?</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">لَلَّهُ أَفْرَحُ بِتَوْبَةِ عَبْدِهِ مِنْ أَحَدِكُمْ سَقَطَ عَلَىٰ بَعِيرِهِ وَقَدْ أَضَلَّهُ فِي أَرْضِ فَلَاةٍ</p><p class="hc-terj">“Sungguh Allah lebih gembira dengan taubat hamba-Nya berbanding kegembiraan salah seorang daripada kamu yang tiba-tiba menemui semula untanya yang telah hilang di padang pasir (padahal di atas unta itulah segala bekalan makan dan minumnya).”</p><figcaption class="hc-src">Anas bin Malik RA · Sahih al-Bukhari, no. 6309; Sahih Muslim, no. 2747</figcaption></figure>
+<p>Bayangkan lelaki itu sungguh-sungguh. Dia kehilangan untanya di padang pasir — di atas unta itulah segala bekalan makan dan minumnya. Dicari sehingga penat, putus harapan, lalu berbaring di bawah pokok menunggu ajal. Tiba-tiba… untanya berdiri betul-betul di hadapannya. Dapatkah kita bayangkan gembiranya? Sehingga tersasul kata-katanya kerana terlalu gembira.</p>
+<p>Kegembiraan luar biasa itulah <b>gambaran betapa gembiranya Allah apabila seorang hamba kembali kepada-Nya.</b> Bukan marah. Bukan "sudah dijangka akan datang merayu." Tetapi gembira. Kita menyangka perlu mendaki gunung untuk mendekati-Nya; sebenarnya, apabila kita melangkah sejengkal, Dia mendekati kita lebih pantas.</p>
+<div class="value raja"><span class="v-lbl">Raja' (Harapan)</span><p>Rasa malu kerana dosa itu sihat — tetapi apabila ia bertukar menjadi putus asa yang menghalang kita daripada kembali, syaitan sudah menang. Allah tidak pernah menutup pintu. Kita yang menyangka pintu itu tertutup.</p></div>
+<p>Allah sendiri berfirman dalam al-Quran, betapa hampirnya Dia: <i>"Dan apabila hamba-hamba-Ku bertanya kepadamu tentang Aku, maka (jawablah) sesungguhnya Aku dekat."</i> (Surah al-Baqarah: 186). Dia tak pernah jauh. Perasaan jauh itu datang dari pihak kita, bukan dari-Nya.</p>
+<div class="value mahabbah"><span class="v-lbl">Mahabbah (Cinta)</span><p>Allah bukan sekadar menerima kita kembali — Dia <i>menanti</i> pemulangan itu. Itulah cinta yang menunggu di hujung setiap rasa jauh.</p></div>
+<div class="try"><h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Cuba buat ni</h4><ul><li>Malam ini, dirikanlah satu solat — walau terasa tak layak, walau tak khusyuk. Dirikan sahaja.</li><li>Dalam sujud, luahkan kepada Allah dengan jujur: <i>"Ya Allah, hamba sudah jauh. Tetapi hamba ingin kembali."</i> Ayat itu sendiri sudah pun permulaan pulang.</li></ul></div></div></section><section class="bab" id="bab08"><div class="bab-open"><div class="bab-no">08</div><div class="bab-eye">Ubat paling tinggi</div><h2>Cinta yang menyembuhkan</h2><p class="bab-hook">Sedarkah kita, sepanjang buku ini, betapa lembutnya Nabi ﷺ?</p></div><div class="prose"><p>Kita sudah sampai ke bab yang terakhir. Sebelum menutupnya, izinkan saya mengajak kita menyedari satu perkara yang mungkin terlepas pandang sepanjang bacaan tadi.</p>
+<p>Perhatikan betapa <b>lembutnya Nabi ﷺ</b> dalam setiap kisah ini. Di dalam gua yang menakutkan, baginda menenangkan hati Abu Bakar. Baginda mengajar seorang kanak-kanak (Ibn Abbas) formula hidup, sambil menunggang bersama:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">احْفَظِ اللَّهَ يَحْفَظْكَ، احْفَظِ اللَّهَ تَجِدْهُ تُجَاهَكَ ... وَاعْلَمْ أَنَّ النَّصْرَ مَعَ الصَّبْرِ، وَأَنَّ الْفَرَجَ مَعَ الْكَرْبِ، وَأَنَّ مَعَ الْعُسْرِ يُسْرًا</p><p class="hc-terj">“Peliharalah (hak) Allah, nescaya Dia memeliharamu. Peliharalah (hak) Allah, nescaya engkau mendapati-Nya di hadapanmu ... Dan ketahuilah bahawa kemenangan itu bersama kesabaran, kelapangan itu bersama kesempitan, dan bersama kesukaran itu ada kemudahan.”</p><figcaption class="hc-src">Abdullah bin Abbas RA · Sunan at-Tirmidzi, no. 2516; Musnad Ahmad, no. 2803 — dinilai sahih oleh al-Albani (Sahih al-Jami', no. 6806)</figcaption></figure>
+<p>Baginda melihat seorang lelaki termenung seorang diri di dalam masjid, dan bukannya berlalu sahaja — baginda berhenti, bertanya, lalu mengajarnya satu doa untuk kerisauan dan hutang yang membelenggu. Itulah Rasul yang kita cintai. Bukan sekadar penyampai hukum — tetapi hati yang paling mengambil berat tentang hati orang lain.</p>
+<p>Dan Allah — yang rahmat-Nya mendahului kemurkaan-Nya, yang melayan kita menurut sangkaan kita, yang menguji kerana kasih, yang bergembira apabila kita kembali — bagaimana mungkin kita tidak mencintai-Nya?</p>
+<div class="value mahabbah"><span class="v-lbl">Mahabbah (Cinta)</span><p>Inilah ubat yang paling tinggi. Apabila kita <b>mencintai</b> Allah, takut dan sedih terhadap dunia mengecil dengan sendirinya. Kerana hati yang penuh cinta kepada Yang Maha Kekal tidak mudah digoncang oleh perkara yang sementara.</p></div>
+<p>Dan cinta kepada Allah itu satu hubungan dua hala — seperti yang kita baca tadi: <i>"Peliharalah Allah, nescaya Dia memeliharamu."</i> Kita menjaga hubungan dengan-Nya ketika senang, Dia menjaga kita ketika susah. Dan cinta itu turut mengalir keluar — apabila kita melapangkan kesusahan orang lain, Allah melapangkan kesusahan kita:</p>
+<figure class="hcard"><div class="hc-top"><span class="hc-lbl">Sandaran</span><span class="hbadge sahih">SAHIH</span></div><p class="hc-ar ar">مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً مِنْ كُرَبِ الدُّنْيَا، نَفَّسَ اللَّهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ ... وَاللَّهُ فِي عَوْنِ الْعَبْدِ مَا كَانَ الْعَبْدُ فِي عَوْنِ أَخِيهِ</p><p class="hc-terj">“Sesiapa yang melapangkan satu kesusahan seorang mukmin daripada kesusahan-kesusahan dunia, Allah akan melapangkan daripadanya satu kesusahan daripada kesusahan-kesusahan hari Kiamat ... Dan Allah sentiasa menolong seorang hamba selagi hamba itu menolong saudaranya.”</p><figcaption class="hc-src">Abu Hurairah RA · Sahih Muslim, no. 2699</figcaption></figure>
+<p>Maka di sinilah bertemunya tiga perkara yang kita semai sepanjang buku ini: kita <b>takut</b> kepada Allah kerana menghormati siapa Dia. Kita <b>berharap</b> kepada-Nya kerana mengenali luasnya rahmat-Nya. Dan kita <b>mencintai</b>-Nya kerana sudah benar-benar mengenali siapa Dia — dan cinta itulah yang akhirnya menenangkan segala takut dan sedih.</p>
+<div class="try"><h4><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Cuba buat ni</h4><ul><li>Hari ini, lakukanlah satu amalan kecil <b>kerana cinta</b> — bukan kerana takut, bukan kerana rutin semata-mata. Satu solat yang benar-benar hadir. Satu doa yang benar-benar dirasai. Satu kebaikan kepada orang lain tanpa diketahui sesiapa.</li><li>Rasai bezanya. Itulah permulaannya.</li></ul></div></div></section><section class="penutup" id="penutup"><div class="pen-ayah ar">أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</div><p class="pen-terj">"Ketahuilah, dengan mengingati Allah, tenanglah hati."</p><div class="pen-src">— Surah ar-Ra’d: 28 —</div><div class="prose pen-prose"><p>Kita akan tetap mempunyai hari-hari yang berat. Saya tidak ingin memberi gambaran palsu — buku ini bukan jampi yang melenyapkan segala masalah.</p>
+<p>Tetapi kini kita mengetahui sesuatu yang mungkin belum diketahui sebelum ini. Apabila hati mula berat, apabila takut mula datang, apabila sedih mula menghimpit — kita ada tempat untuk berpaling. Kita tidak keseorangan dalam gua itu. Rahmat-Nya lebih besar daripada dosa kita. Dan ujian itu, mungkin, satu tanda kasih.</p>
+<p><b>Jangan takut. Jangan bersedih. Kerana ada Allah.</b></p></div><div class="pen-sign">Semoga Allah menenangkan hati sesiapa yang membaca ini, dan hati yang menulisnya.</div></section>
+
+<footer class="foot">
+  <div><b>Syed Syukran</b></div>
+  <div class="fnote">Semua hadis bertaraf Sahih atau Hasan, disahkan silang dengan sunnah.com &amp; Dorar.net. Renungan dan olahan bahasa adalah huraian tambahan untuk memudahkan penghayatan, bukan sebahagian daripada teks hadis.</div>
+</footer>
+
+<script>
+const root=document.documentElement;
+// theme
+try{const s=localStorage.getItem('jtb-book-theme');if(s)root.setAttribute('data-theme',s);}catch(e){}
+document.getElementById('theme').addEventListener('click',()=>{
+  const n=root.getAttribute('data-theme')==='dark'?'light':'dark';
+  root.setAttribute('data-theme',n);try{localStorage.setItem('jtb-book-theme',n);}catch(e){}
+});
+// drawer
+const dr=document.getElementById('drawer'),sc=document.getElementById('scrim');
+function closeDr(){dr.classList.remove('open');sc.classList.remove('show');}
+document.getElementById('menu').addEventListener('click',()=>{dr.classList.toggle('open');sc.classList.toggle('show');});
+sc.addEventListener('click',closeDr);
+dr.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDr));
+// progress
+const pb=document.getElementById('pbar');
+addEventListener('scroll',()=>{
+  const h=document.documentElement;const max=h.scrollHeight-h.clientHeight;
+  pb.style.width=(max>0?(scrollY/max*100):0)+'%';
+},{passive:true});
+</script>
+</body>
+</html>
