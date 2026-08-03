@@ -12,20 +12,20 @@
      DESIGN TOKENS
      ============================================================ */
   :root{
-    --bg:#171512;
-    --bg-raise:#201d18;
-    --surface:#1c1915;
-    --surface-2:#241f1850;
+    --bg:#242019;
+    --bg-raise:#2e291f;
+    --surface:#2a251d;
+    --surface-2:#332d2350;
     --gold-500:#b99a5b;
     --gold-400:#cfb37c;
     --gold-300:#e2d0a4;
     --cream:#e7dfcc;
     --ink:#d5cdba;
-    --muted:#978e7b;
-    --faint:#6e6656;
+    --muted:#a49a85;
+    --faint:#7d7462;
     --line:rgba(185,154,91,0.18);
-    --line-soft:rgba(255,250,235,0.07);
-    --bg-blur:rgba(23,21,18,0.86);
+    --line-soft:rgba(255,250,235,0.09);
+    --bg-blur:rgba(36,32,25,0.88);
     --accent-glow:rgba(185,154,91,0.09);
     --shadow:0 20px 50px -30px rgba(0,0,0,0.85);
     --arfs:26px;
@@ -110,6 +110,19 @@
     margin-top:18px;font-size:11px;color:var(--faint);
     letter-spacing:0.04em;
   }
+
+  .home-theme{margin-top:26px;display:flex;justify-content:center;}
+  .home-theme-btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:9px 20px;border-radius:30px;
+    border:1px solid var(--line);background:var(--surface-2);
+    color:var(--gold-400);cursor:pointer;
+    font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;
+    transition:all .2s;
+  }
+  .home-theme-btn:hover{border-color:var(--gold-500);color:var(--gold-300);}
+  .home-theme-btn .ht-icon{font-size:14px;line-height:1;}
 
   .divider{display:none;}
   .wrap{max-width:660px;margin:0 auto;padding:0 20px;}
@@ -257,6 +270,53 @@
   }
   .terjemahan.show{max-height:none;opacity:1;}
   .terjemahan.hide-mode{max-height:0 !important;opacity:0 !important;padding:0;margin-top:0;border:none;}
+
+  /* Audio player panel */
+  .audio-panel{
+    position:sticky;top:49px;z-index:35;
+    display:flex;align-items:center;gap:13px;
+    background:var(--bg-raise);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:12px 15px;margin:18px 0 6px;
+    box-shadow:var(--shadow);
+  }
+  .ap-play{
+    flex-shrink:0;width:44px;height:44px;border-radius:50%;
+    border:none;cursor:pointer;
+    background:linear-gradient(145deg,var(--gold-400),var(--gold-500));
+    color:var(--bg);font-size:17px;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .12s;
+  }
+  .ap-play:active{transform:scale(.9);}
+  .ap-mid{flex:1;min-width:0;}
+  .ap-title{
+    font-family:'Inter',sans-serif;font-size:10px;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--gold-500);
+    margin-bottom:7px;
+  }
+  .ap-bar{
+    height:6px;border-radius:6px;background:var(--line-soft);
+    cursor:pointer;position:relative;overflow:hidden;
+  }
+  .ap-fill{position:absolute;top:0;left:0;height:100%;width:0;background:var(--gold-400);border-radius:6px;}
+  .ap-time{
+    display:flex;justify-content:space-between;
+    font-size:10px;color:var(--faint);margin-top:6px;
+    font-variant-numeric:tabular-nums;
+  }
+  .ap-rate{
+    flex-shrink:0;background:transparent;border:1px solid var(--line);
+    color:var(--gold-400);border-radius:20px;padding:5px 9px;
+    font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;
+    min-width:42px;
+  }
+  .ap-note{
+    font-size:11px;color:var(--faint);text-align:center;
+    padding:10px 4px 0;line-height:1.6;
+  }
+  .audio-panel.audio-missing{opacity:.6;}
 
   /* Instruction / practice note */
   .arahan{
@@ -486,6 +546,12 @@
     <h1>حِمْيَة الْوِرْد</h1>
     <h2>Himpunan Wirid &amp; Hizib</h2>
     <p class="sub">Koleksi wirid, hizib dan doa pilihan untuk diamalkan. Sila pilih mana-mana bacaan di bawah untuk memulakan.</p>
+
+    <div class="home-theme">
+      <button class="home-theme-btn" data-theme-toggle aria-label="Tukar mod terang/gelap">
+        <span class="ht-icon">&#9789;</span><span class="ht-label">Mod Gelap</span>
+      </button>
+    </div>
   </div>
 
   <svg class="divider" viewBox="0 0 300 34"><path d="M0 17 H120 M180 17 H300"/><circle cx="150" cy="17" r="5"/><path d="M140 17 Q150 5 160 17 Q150 29 140 17 Z"/></svg>
@@ -1105,6 +1171,17 @@
 
     <div class="progress-wrap" data-progress-wrap></div>
 
+    <div class="audio-panel" data-audio="audio/Hizbul_Bahar.mp3">
+      <button class="ap-play" aria-label="Main/Jeda">&#9658;</button>
+      <div class="ap-mid">
+        <div class="ap-title">Audio &middot; Hizib Bahar</div>
+        <div class="ap-bar"><div class="ap-fill"></div></div>
+        <div class="ap-time"><span class="ap-cur">0:00</span><span class="ap-dur">0:00</span></div>
+      </div>
+      <button class="ap-rate">1&times;</button>
+      <audio preload="none" src="audio/Hizbul_Bahar.mp3"></audio>
+    </div>
+
     <div class="card">
       <span class="tag">Pembukaan &middot; Tawassul</span>
       <div class="arabic">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ<br>اَلْفَاتِحَةُ إِلَى حَضْرَةِ سَيِّدِنَا وَحَبِيبِنَا وَشَفِيعِنَا مُحَمَّدٍ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ وَصَحْبِهِ وَسَلَّمَ، ثُمَّ إِلَى رُوحِ صَاحِبِ هَذَا الْحِزْبِ الْإِمَامِ أَبِي الْحَسَنِ الشَّاذِلِيِّ رَضِيَ اللهُ عَنْهُ، وَإِلَى مَشَايِخِنَا وَوَالِدِينَا وَجَمِيعِ الْمُسْلِمِينَ، أَنَّ اللهَ يَغْفِرُ لَهُمْ وَيَرْحَمُهُمْ وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَبَرَكَاتِهِمْ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ، اَلْفَاتِحَة</div>
@@ -1530,6 +1607,17 @@
 
     <div class="progress-wrap" data-progress-wrap></div>
 
+    <div class="audio-panel" data-audio="audio/Hizib_Nawawi.mp3">
+      <button class="ap-play" aria-label="Main/Jeda">&#9658;</button>
+      <div class="ap-mid">
+        <div class="ap-title">Audio &middot; Hizib Nawawi</div>
+        <div class="ap-bar"><div class="ap-fill"></div></div>
+        <div class="ap-time"><span class="ap-cur">0:00</span><span class="ap-dur">0:00</span></div>
+      </div>
+      <button class="ap-rate">1&times;</button>
+      <audio preload="none" src="audio/Hizib_Nawawi.mp3"></audio>
+    </div>
+
     <div class="card">
       <span class="tag">Pembukaan &middot; Tawassul</span>
       <div class="arabic">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ<br>اَلْفَاتِحَةُ إِلَى حَضْرَةِ سَيِّدِنَا وَحَبِيبِنَا وَشَفِيعِنَا مُحَمَّدٍ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ وَصَحْبِهِ وَسَلَّمَ، ثُمَّ إِلَى رُوحِ صَاحِبِ هَذَا الْحِزْبِ الْإِمَامِ مُحْيِي الدِّينِ أَبِي زَكَرِيَّا يَحْيَى النَّوَوِيِّ رَضِيَ اللهُ عَنْهُ، وَإِلَى مَشَايِخِنَا وَوَالِدِينَا وَجَمِيعِ الْمُسْلِمِينَ، أَنَّ اللهَ يَغْفِرُ لَهُمْ وَيَرْحَمُهُمْ وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَبَرَكَاتِهِمْ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ، اَلْفَاتِحَة</div>
@@ -1831,6 +1919,17 @@
     </div>
 
     <div class="progress-wrap" data-progress-wrap></div>
+
+    <div class="audio-panel" data-audio="audio/Wirid_Sakran.mp3">
+      <button class="ap-play" aria-label="Main/Jeda">&#9658;</button>
+      <div class="ap-mid">
+        <div class="ap-title">Audio &middot; Wirid Sakran</div>
+        <div class="ap-bar"><div class="ap-fill"></div></div>
+        <div class="ap-time"><span class="ap-cur">0:00</span><span class="ap-dur">0:00</span></div>
+      </div>
+      <button class="ap-rate">1&times;</button>
+      <audio preload="none" src="audio/Wirid_Sakran.mp3"></audio>
+    </div>
 
     <div class="card">
       <span class="tag">Pembukaan &middot; Tawassul</span>
@@ -3114,8 +3213,17 @@
   const themeButtons = document.querySelectorAll('[data-theme-toggle]');
   function updateThemeIcons(){
     const isLight = document.documentElement.classList.contains('light-mode');
+    const icon = isLight ? '&#9789;' : '&#9788;';
+    const label = isLight ? 'Mod Gelap' : 'Mod Terang';
     themeButtons.forEach(btn=>{
-      btn.innerHTML = isLight ? '&#9789;' : '&#9788;';
+      const ic = btn.querySelector('.ht-icon');
+      if(ic){
+        ic.innerHTML = icon;
+        const lb = btn.querySelector('.ht-label');
+        if(lb) lb.textContent = label;
+      } else {
+        btn.innerHTML = icon;
+      }
       btn.setAttribute('aria-label', isLight ? 'Tukar ke mod gelap' : 'Tukar ke mod terang');
     });
   }
@@ -3175,6 +3283,62 @@
       if(sheet.classList.contains('open') && !sheet.contains(e.target) && !e.target.closest('#mushafFlow .v')){
         closeSheet();
       }
+    });
+  })();
+
+  // ---------- Audio players ----------
+  (function(){
+    function fmt(t){
+      if(!isFinite(t)) return '0:00';
+      const m=Math.floor(t/60), s=Math.floor(t%60);
+      return m+':'+(s<10?'0':'')+s;
+    }
+    const rates=[1,1.25,1.5,0.75];
+    document.querySelectorAll('.audio-panel').forEach(panel=>{
+      const audio=panel.querySelector('audio');
+      const play=panel.querySelector('.ap-play');
+      const bar=panel.querySelector('.ap-bar');
+      const fill=panel.querySelector('.ap-fill');
+      const cur=panel.querySelector('.ap-cur');
+      const dur=panel.querySelector('.ap-dur');
+      const rate=panel.querySelector('.ap-rate');
+      let ri=0, failed=false;
+
+      audio.addEventListener('error', ()=>{
+        if(failed) return; failed=true;
+        panel.classList.add('audio-missing');
+        const note=document.createElement('div');
+        note.className='ap-note';
+        note.innerHTML='Fail audio belum dimuat naik.<br>Letakkan fail di folder <b>audio/</b> pada GitHub.';
+        panel.insertAdjacentElement('afterend', note);
+        play.disabled=true; play.style.opacity=.5;
+      });
+
+      play.addEventListener('click', ()=>{
+        if(audio.paused){
+          // pause any other playing audio
+          document.querySelectorAll('.audio-panel audio').forEach(a=>{ if(a!==audio){a.pause();} });
+          document.querySelectorAll('.ap-play').forEach(b=>{ if(b!==play) b.innerHTML='&#9658;'; });
+          audio.play().then(()=>{ play.innerHTML='&#10073;&#10073;'; }).catch(()=>{});
+        } else {
+          audio.pause(); play.innerHTML='&#9658;';
+        }
+      });
+      audio.addEventListener('ended', ()=>{ play.innerHTML='&#9658;'; fill.style.width='0%'; });
+      audio.addEventListener('loadedmetadata', ()=>{ dur.textContent=fmt(audio.duration); });
+      audio.addEventListener('timeupdate', ()=>{
+        const p=audio.currentTime/(audio.duration||1);
+        fill.style.width=(p*100)+'%';
+        cur.textContent=fmt(audio.currentTime);
+      });
+      bar.addEventListener('click', e=>{
+        const r=bar.getBoundingClientRect();
+        audio.currentTime=((e.clientX-r.left)/r.width)*(audio.duration||0);
+      });
+      rate.addEventListener('click', ()=>{
+        ri=(ri+1)%rates.length; audio.playbackRate=rates[ri];
+        rate.innerHTML=rates[ri]+'&times;';
+      });
     });
   })();
 
