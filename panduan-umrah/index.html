@@ -1180,8 +1180,19 @@ window.addEventListener('resize',ukurKepala); ukurKepala();
 
 /* ============ Helaian (sheets) ============ */
 var tirai=document.getElementById('tirai');
-function bukaHelaian(id){tutupSemua();document.getElementById(id).classList.add('buka');tirai.classList.add('buka');}
-function tutupSemua(){document.querySelectorAll('.helaian.buka').forEach(function(h){h.classList.remove('buka');});tirai.classList.remove('buka');}
+/* ---- Navigasi: butang / swipe Kembali telefon ---- */
+function stKini(o){var s={v:S.mod,l:S.langkah};if(o)s.o=o;return s;}
+function tolakNav(st){try{history.pushState(st,'');}catch(e){}}
+function gantiNav(st){try{history.replaceState(st,'');}catch(e){}}
+function adaLapisan(){var lbx=document.getElementById('lightbox');return !!document.querySelector('.helaian.buka')||(lbx&&lbx.classList.contains('buka'));}
+function tutupLapisan(){
+  document.querySelectorAll('.helaian.buka').forEach(function(h){h.classList.remove('buka');});tirai.classList.remove('buka');
+  var lbx=document.getElementById('lightbox');if(lbx){lbx.classList.remove('buka');document.getElementById('lbImg').classList.remove('zum');}
+}
+function bukaLapisan(buka,id){var ada=adaLapisan();tutupLapisan();buka();if(ada)gantiNav(stKini(id));else tolakNav(stKini(id));}
+/* Tutup melalui butang ✕ / tirai: undur satu langkah sejarah supaya Kembali kekal selari */
+function tutupSemua(){if(history.state&&history.state.o)history.back();else tutupLapisan();}
+function bukaHelaian(id){bukaLapisan(function(){document.getElementById(id).classList.add('buka');tirai.classList.add('buka');},id);}
 tirai.addEventListener('click',tutupSemua);
 document.querySelectorAll('[data-tutup]').forEach(function(b){b.addEventListener('click',tutupSemua);});
 function info(tajuk,html){document.getElementById('piIsi').innerHTML='<h3 class="h-tajuk">'+tajuk+'</h3>'+html;bukaHelaian('panelInfo');}
@@ -1206,13 +1217,15 @@ function kilat(besar,teks){document.getElementById('kilatIsi').innerHTML='<b>'+b
 
 /* ============ Mod ============ */
 var skrolBaca=0;
-function setMod(m,langkah){
+function setMod(m,langkah,senyap){
+  var modLama=S.mod,lkLama=S.langkah;
   if(S.mod==='baca'&&m==='ibadah') skrolBaca=window.scrollY;
   S.mod=m; if(langkah!=null&&langkah!=='') S.langkah=+langkah;
+  if(!senyap&&(modLama!==m||(m==='ibadah'&&lkLama!==S.langkah))) tolakNav(stKini());
   document.body.classList.toggle('mod-ibadah',m==='ibadah');
   document.getElementById('tabBaca').setAttribute('aria-selected',m==='baca');
   document.getElementById('tabIbadah').setAttribute('aria-selected',m==='ibadah');
-  tutupSemua(); simpanS();
+  tutupLapisan(); simpanS();
   if(m==='ibadah'){renderIbadah();window.scrollTo(0,0);if(S.skrin)mintaSkrin();}
   else{lepasSkrin();setTimeout(function(){window.scrollTo(0,skrolBaca);},0);}
   ukurKepala();
@@ -1256,15 +1269,15 @@ function tapis(q){
 var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
 document.querySelectorAll('img[data-lb]').forEach(function(im){im.addEventListener('click',function(){
   lbImg.src=im.src;lbImg.alt=im.alt;lbImg.style.display='block';
-  document.getElementById('lbTajuk').textContent=im.dataset.lb;document.getElementById('lbTeks').textContent=im.dataset.desc||'';lb.classList.add('buka');});});
+  document.getElementById('lbTajuk').textContent=im.dataset.lb;document.getElementById('lbTeks').textContent=im.dataset.desc||'';bukaLapisan(function(){lb.classList.add('buka');},'lb');});});
 document.querySelectorAll('.svg-rajah[data-lb]').forEach(function(r){r.addEventListener('click',function(e){
   if(e.target.closest('.hotspot'))return; lbImg.style.display='none';
-  document.getElementById('lbTajuk').textContent=r.dataset.lb;document.getElementById('lbTeks').textContent=r.dataset.desc||'';lb.classList.add('buka');});});
-function tutupLB(){lb.classList.remove('buka');lbImg.classList.remove('zum');}
+  document.getElementById('lbTajuk').textContent=r.dataset.lb;document.getElementById('lbTeks').textContent=r.dataset.desc||'';bukaLapisan(function(){lb.classList.add('buka');},'lb');});});
+function tutupLB(){tutupSemua();}
 document.getElementById('lbTutup').addEventListener('click',tutupLB);
 lb.addEventListener('click',function(e){if(e.target===lb)tutupLB();});
 lbImg.addEventListener('click',function(){lbImg.classList.toggle('zum');});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){tutupLB();tutupSemua();}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&adaLapisan())tutupSemua();});
 
 /* Hotspot */
 var dataSpot={
@@ -1430,7 +1443,7 @@ function renderIbadah(){
   document.getElementById('btnSkrin').classList.toggle('on',!!S.skrin);
   simpanS();
 }
-function keLangkah(i){S.langkah=i;renderIbadah();window.scrollTo(0,0);}
+function keLangkah(i,senyap){var berubah=i!==S.langkah;S.langkah=i;renderIbadah();window.scrollTo(0,0);if(berubah&&!senyap)tolakNav(stKini());}
 stepperEl.addEventListener('click',function(e){var b=e.target.closest('[data-j]');if(b)keLangkah(+b.dataset.j);});
 document.getElementById('bbSebelum').addEventListener('click',function(){if(S.langkah>0)keLangkah(S.langkah-1);});
 document.getElementById('bbSeterus').addEventListener('click',function(){if(S.langkah<LANGKAH.length-1)keLangkah(S.langkah+1);else setMod('baca');});
@@ -1551,7 +1564,36 @@ window.addEventListener('appinstalled',function(){btnPasang.style.display='none'
 if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){navigator.serviceWorker.register('sw.js').catch(function(){});}
 
 /* ============ Mula ============ */
-setMod(S.mod==='ibadah'?'ibadah':'baca');
+/* Pautan dalam halaman (#s1 dll.) — skrol tanpa menambah sejarah */
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[href^="#"]');if(!a)return;
+  var t=document.getElementById(a.getAttribute('href').slice(1));if(!t)return;
+  e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+/* Susunan sejarah awal: [akar] → [Mod Bacaan] → ([Mod Ibadah]) */
+var modMula=S.mod==='ibadah'?'ibadah':'baca';
+gantiNav({akar:1});
+tolakNav({v:'baca',l:S.langkah});
+if(modMula==='ibadah')tolakNav({v:'ibadah',l:S.langkah});
+setMod(modMula,null,true);
+
+var backTerakhir=0;
+window.addEventListener('popstate',function(e){
+  var st=e.state;
+  tutupLapisan();
+  if(!st||st.akar){
+    /* Di hujung sejarah: minta tekan sekali lagi — elak keluar tidak sengaja semasa tawaf/saie */
+    if(Date.now()-backTerakhir<2500){history.back();return;}
+    backTerakhir=Date.now();
+    tolakNav(stKini());
+    kilat('↩','Tekan Kembali sekali lagi untuk keluar');
+    return;
+  }
+  if(st.o){gantiNav(stKini());return;}
+  if(st.v!==S.mod){setMod(st.v,st.l,true);}
+  else if(st.v==='ibadah'&&st.l!==S.langkah){keLangkah(st.l,true);}
+});
 </script>
 </body>
 </html>
