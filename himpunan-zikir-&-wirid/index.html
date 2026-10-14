@@ -110,7 +110,7 @@
   .bismillah-head{
     font-family:'Amiri',serif;direction:rtl;text-align:center;
     font-size:calc(var(--arfs,26px) + 1px);color:var(--gold-400);
-    line-height:2;margin:4px 0 2px;letter-spacing:0;
+    line-height:2;margin:24px 0 6px;letter-spacing:0;
   }
   .hero h1{
     font-family:'Amiri',serif;
@@ -342,6 +342,18 @@
     padding:10px 4px 0;line-height:1.6;
   }
   .audio-panel.audio-missing{opacity:.6;}
+  /* Mini mode: when scrolling down, audio shrinks to a small circle at the
+     side so it does not block the reading. */
+  .audio-panel.mini{
+    position:fixed;top:auto;bottom:20px;left:16px;right:auto;
+    width:50px;height:50px;min-width:0;padding:0;margin:0;gap:0;
+    border-radius:50%;overflow:hidden;z-index:62;
+    background:var(--bg-raise);box-shadow:var(--shadow);
+    opacity:.94;
+  }
+  .audio-panel.mini .ap-mid,
+  .audio-panel.mini .ap-rate{display:none;}
+  .audio-panel.mini .ap-play{width:50px;height:50px;border-radius:50%;font-size:18px;}
 
   /* Collapsible opening / tawassul card */
   .card.collapsible > .arabic,
@@ -3261,6 +3273,8 @@
   fabTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
   window.addEventListener('scroll', ()=>{
     fabTop.classList.toggle('show', window.scrollY > 300);
+    const mini = window.scrollY > 220;
+    document.querySelectorAll('.audio-panel').forEach(p=> p.classList.toggle('mini', mini));
   });
 
   // ---------- Theme toggle (buttons beside "Terjemahan" in every section) ----------
