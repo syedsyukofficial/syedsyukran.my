@@ -12,11 +12,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Wirid &amp; Hizib">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/icon-180.png">
-<link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png">
-<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
-<link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -82,7 +80,7 @@
      ============================================================ */
   .hero{
     position:relative;
-    padding:52px 22px 34px;
+    padding:30px 22px 24px;
     text-align:center;
     overflow:hidden;
     background:
@@ -94,11 +92,25 @@
     position:absolute;left:50%;bottom:0;transform:translateX(-50%);
     width:64px;height:1px;background:var(--gold-500);opacity:.5;
   }
-  .mihrab{width:88px;height:112px;margin:0 auto 20px;opacity:.9;}
+  .mihrab{width:70px;height:88px;margin:0 auto 14px;opacity:.9;}
   .mihrab svg{width:100%;height:100%;display:block;}
   .eyebrow{
     font-size:9.5px;letter-spacing:0.42em;text-transform:uppercase;
-    color:var(--gold-500);font-weight:600;margin-bottom:16px;
+    color:var(--gold-500);font-weight:600;margin-bottom:12px;
+  }
+  /* Compact inner (per-wirid) heroes — no dome, tighter spacing */
+  .wirid-section:not(#sec-home) .hero{padding:18px 22px 16px;}
+  .wirid-section:not(#sec-home) .mihrab{display:none;}
+  .wirid-section:not(#sec-home) .eyebrow{display:none;}
+  .wirid-section:not(#sec-home) .hero h1{margin-bottom:6px;}
+  .wirid-section:not(#sec-home) .hero h2{margin-bottom:10px;}
+  .wirid-section:not(#sec-home) .hero p.sub{font-size:12.5px;line-height:1.7;}
+  .wirid-section:not(#sec-home) .hero .attrib{margin-top:12px;}
+  /* Always-visible Bismillah opening for each wirid */
+  .bismillah-head{
+    font-family:'Amiri',serif;direction:rtl;text-align:center;
+    font-size:calc(var(--arfs,26px) + 1px);color:var(--gold-400);
+    line-height:2;margin:4px 0 2px;letter-spacing:0;
   }
   .hero h1{
     font-family:'Amiri',serif;
@@ -331,6 +343,32 @@
   }
   .audio-panel.audio-missing{opacity:.6;}
 
+  /* Collapsible opening / tawassul card */
+  .card.collapsible > .arabic,
+  .card.collapsible > .translit,
+  .card.collapsible > .terjemahan,
+  .card.collapsible > .repeat-row{
+    display:none;
+  }
+  .card.collapsible.open > .arabic,
+  .card.collapsible.open > .translit.show,
+  .card.collapsible.open > .repeat-row{
+    display:block;
+  }
+  .card.collapsible.open > .terjemahan.show{display:block;}
+  .collapse-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--surface-2);border:1px solid var(--line);
+    color:var(--gold-400);border-radius:30px;
+    padding:9px 18px;margin-top:4px;cursor:pointer;
+    font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;
+    letter-spacing:.08em;transition:all .2s;
+  }
+  .collapse-btn:hover{border-color:var(--gold-500);color:var(--gold-300);}
+  .collapse-btn .cb-chev{font-size:10px;transition:transform .3s ease;}
+  .card.collapsible.open .collapse-btn .cb-chev{transform:rotate(180deg);}
+  .card.collapsible.open .collapse-btn{display:none;}
+
   /* Instruction / practice note */
   .arahan{
     background:var(--surface-2);
@@ -495,26 +533,28 @@
   @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
 
   .back-btn{
-    display:inline-flex;align-items:center;gap:7px;
-    font-family:'Inter',sans-serif;font-weight:600;font-size:10.5px;
-    letter-spacing:.18em;text-transform:uppercase;
-    color:var(--faint);background:none;border:none;cursor:pointer;
-    padding:18px 20px 0;transition:color .2s;
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:12px;
+    letter-spacing:.16em;text-transform:uppercase;
+    color:var(--faint);background:var(--surface-2);
+    border:1px solid var(--line);border-radius:30px;cursor:pointer;
+    padding:11px 20px;margin:16px 20px 0;transition:all .2s;
   }
-  .back-btn:hover{color:var(--gold-400);}
+  .back-btn:hover{color:var(--gold-400);border-color:var(--gold-500);}
+  .back-btn:active{opacity:.6;}
 
   /* Floating buttons */
   .fab-stack{
     position:fixed; right:16px; bottom:18px; z-index:60;
-    display:flex; flex-direction:column; gap:9px;
+    display:flex; flex-direction:column; gap:11px;
   }
   .fab{
-    width:42px; height:42px; border-radius:50%;
+    width:52px; height:52px; border-radius:50%;
     background:var(--bg-raise);
     color:var(--gold-400);
     border:1px solid var(--line);
     display:flex; align-items:center; justify-content:center;
-    font-size:16px; cursor:pointer;
+    font-size:20px; cursor:pointer;
     box-shadow:var(--shadow);
     -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
     transition:transform .15s ease, opacity .25s ease, color .2s;
@@ -523,7 +563,7 @@
   .fab:active{transform:scale(.88);}
   .fab.fab-top{opacity:0; pointer-events:none;}
   .fab.fab-top.show{opacity:1; pointer-events:auto;}
-  .fab-home{font-size:17px;}
+  .fab-home{font-size:21px;}
 
   /* Tabbar (legacy, hidden) */
   .tabbar{display:none;}
@@ -1195,8 +1235,11 @@
       <audio preload="none" src="audio/Hizbul_Bahar.mp3"></audio>
     </div>
 
-    <div class="card">
-      <span class="tag">Pembukaan &middot; Tawassul</span>
+    <div class="bismillah-head">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ</div>
+
+    <div class="card collapsible">
+      <span class="tag">Pembukaan &middot; Al-Fatihah</span>
+      <button class="collapse-btn" type="button"><span class="cb-txt">Papar Pembukaan &amp; Al-Fatihah</span><span class="cb-chev">&#9662;</span></button>
       <div class="arabic">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ<br>اَلْفَاتِحَةُ إِلَى حَضْرَةِ سَيِّدِنَا وَحَبِيبِنَا وَشَفِيعِنَا مُحَمَّدٍ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ وَصَحْبِهِ وَسَلَّمَ، ثُمَّ إِلَى رُوحِ صَاحِبِ هَذَا الْحِزْبِ الْإِمَامِ أَبِي الْحَسَنِ الشَّاذِلِيِّ رَضِيَ اللهُ عَنْهُ، وَإِلَى مَشَايِخِنَا وَوَالِدِينَا وَجَمِيعِ الْمُسْلِمِينَ، أَنَّ اللهَ يَغْفِرُ لَهُمْ وَيَرْحَمُهُمْ وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَبَرَكَاتِهِمْ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ، اَلْفَاتِحَة</div>
       <div class="translit">Bismillaahir-Rahmaanir-Rahiim. Al-Faatihatu ilaa hadhrati Sayyidinaa wa Habiibinaa wa Syafii'inaa Muhammadin Rasuulillaahi shallallaahu 'alaihi wa aalihii wa shahbihii wa sallam, tsumma ilaa ruuhi Shaahibi haadzal-hizb... al-Faatihah.</div>
       <div class="terjemahan show">Dengan nama Allah Yang Maha Pemurah lagi Maha Penyayang. Al-Fatihah kehadapan junjungan, kekasih dan pemberi syafaat kami, Nabi Muhammad, utusan Allah SAW, serta keluarga dan sahabat baginda; kemudian kepada roh penyusun hizib ini, Al-Imam Abul Hasan Asy-Syazili RA; serta guru-guru kami, ibu bapa kami dan sekalian kaum Muslimin — semoga Allah mengampuni mereka, merahmati mereka, dan memberi manfaat kepada kami dengan rahsia dan keberkatan mereka dalam agama, dunia dan akhirat — Al-Fatihah.</div>
@@ -1631,8 +1674,11 @@
       <audio preload="none" src="audio/Hizib_Nawawi.mp3"></audio>
     </div>
 
-    <div class="card">
-      <span class="tag">Pembukaan &middot; Tawassul</span>
+    <div class="bismillah-head">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ</div>
+
+    <div class="card collapsible">
+      <span class="tag">Pembukaan &middot; Al-Fatihah</span>
+      <button class="collapse-btn" type="button"><span class="cb-txt">Papar Pembukaan &amp; Al-Fatihah</span><span class="cb-chev">&#9662;</span></button>
       <div class="arabic">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ<br>اَلْفَاتِحَةُ إِلَى حَضْرَةِ سَيِّدِنَا وَحَبِيبِنَا وَشَفِيعِنَا مُحَمَّدٍ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ وَصَحْبِهِ وَسَلَّمَ، ثُمَّ إِلَى رُوحِ صَاحِبِ هَذَا الْحِزْبِ الْإِمَامِ مُحْيِي الدِّينِ أَبِي زَكَرِيَّا يَحْيَى النَّوَوِيِّ رَضِيَ اللهُ عَنْهُ، وَإِلَى مَشَايِخِنَا وَوَالِدِينَا وَجَمِيعِ الْمُسْلِمِينَ، أَنَّ اللهَ يَغْفِرُ لَهُمْ وَيَرْحَمُهُمْ وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَبَرَكَاتِهِمْ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ، اَلْفَاتِحَة</div>
       <div class="translit">Bismillaahir-Rahmaanir-Rahiim. Al-Faatihatu ilaa hadhrati Sayyidinaa wa Habiibinaa wa Syafii'inaa Muhammadin Rasuulillaahi shallallaahu 'alaihi wa aalihii wa shahbihii wa sallam, tsumma ilaa ruuhi Shaahibi haadzal-hizb... al-Faatihah.</div>
       <div class="terjemahan show">Dengan nama Allah Yang Maha Pemurah lagi Maha Penyayang. Al-Fatihah kehadapan junjungan, kekasih dan pemberi syafaat kami, Nabi Muhammad, utusan Allah SAW, serta keluarga dan sahabat baginda; kemudian kepada roh penyusun hizib ini, Al-Imam Muhyiddin Abu Zakariyya Yahya An-Nawawi RA; serta guru-guru kami, ibu bapa kami dan sekalian kaum Muslimin — semoga Allah mengampuni mereka, merahmati mereka, dan memberi manfaat kepada kami dengan rahsia dan keberkatan mereka dalam agama, dunia dan akhirat — Al-Fatihah.</div>
@@ -1944,25 +1990,17 @@
       <audio preload="none" src="audio/Wirid_Sakran.mp3"></audio>
     </div>
 
-    <div class="card">
-      <span class="tag">Pembukaan &middot; Tawassul</span>
+    <div class="bismillah-head">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ</div>
+
+    <div class="card collapsible">
+      <span class="tag">Pembukaan &middot; Al-Fatihah</span>
+      <button class="collapse-btn" type="button"><span class="cb-txt">Papar Pembukaan &amp; Al-Fatihah</span><span class="cb-chev">&#9662;</span></button>
       <div class="arabic">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ<br>اَلْفَاتِحَةُ إِلَى حَضْرَةِ سَيِّدِنَا وَحَبِيبِنَا وَشَفِيعِنَا مُحَمَّدٍ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ وَصَحْبِهِ وَسَلَّمَ، ثُمَّ إِلَى رُوحِ صَاحِبِ هَذَا الْحِزْبِ الْإِمَامِ عَبْدِ اللهِ بْنِ أَبِي بَكْرٍ الْعَيْدَرُوسِ السَّكْرَانِ رَضِيَ اللهُ عَنْهُ، وَإِلَى مَشَايِخِنَا وَوَالِدِينَا وَجَمِيعِ الْمُسْلِمِينَ، أَنَّ اللهَ يَغْفِرُ لَهُمْ وَيَرْحَمُهُمْ وَيَنْفَعُنَا بِأَسْرَارِهِمْ وَبَرَكَاتِهِمْ فِي الدِّينِ وَالدُّنْيَا وَالْآخِرَةِ، اَلْفَاتِحَة</div>
       <div class="translit">Bismillaahir-Rahmaanir-Rahiim. Al-Faatihatu ilaa hadhrati Sayyidinaa wa Habiibinaa wa Syafii'inaa Muhammadin Rasuulillaahi shallallaahu 'alaihi wa aalihii wa shahbihii wa sallam, tsumma ilaa ruuhi Shaahibi haadzal-hizb... al-Faatihah.</div>
       <div class="terjemahan show">Dengan nama Allah Yang Maha Pemurah lagi Maha Penyayang. Al-Fatihah kehadapan junjungan, kekasih dan pemberi syafaat kami, Nabi Muhammad, utusan Allah SAW, serta keluarga dan sahabat baginda; kemudian kepada roh penyusun hizib ini, Al-Imam Abdullah bin Abu Bakar Al-Aydarus As-Sakran RA; serta guru-guru kami, ibu bapa kami dan sekalian kaum Muslimin — semoga Allah mengampuni mereka, merahmati mereka, dan memberi manfaat kepada kami dengan rahsia dan keberkatan mereka dalam agama, dunia dan akhirat — Al-Fatihah.</div>
     </div>
 
 
-
-    <!-- CARD 0: Bismillah -->
-    <div class="card" style="text-align:center;">
-      <div class="arabic" style="font-size:calc(var(--arfs, 24px) + 4px);">
-        بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
-      </div>
-      <div class="translit">Bismillaahir-Rahmaanir-Rahiim</div>
-      <div class="terjemahan show" style="text-align:center;">
-        Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang.
-      </div>
-    </div>
 
     <!-- CARD 1: Pembukaan -->
     <div class="card">
@@ -2169,8 +2207,11 @@
     <div class="section-label">SEBELUM MEMULAKAN YASIN</div>
 
     <!-- Fatihah dedication -->
-    <div class="card">
-      <span class="tag">Pembukaan &middot; Tawassul</span>
+    <div class="bismillah-head">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ</div>
+
+    <div class="card collapsible">
+      <span class="tag">Pembukaan &middot; Al-Fatihah</span>
+      <button class="collapse-btn" type="button"><span class="cb-txt">Papar Pembukaan &amp; Al-Fatihah</span><span class="cb-chev">&#9662;</span></button>
       <div class="arabic">إِلَى حَضْرَةِ سَيِّدِنَا وَحَبِيبِنَا وَشَفِيعِنَا مُحَمَّدٍ رَسُولِ اللهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ وَصَحْبِهِ وَسَلَّمَ، شَيْءٌ لِلَّهِ لَهُمُ الْفَاتِحَة</div>
       <div class="translit">Ilaa hadhrati Sayyidinaa wa Habiibinaa wa Syafii'inaa Muhammadin Rasuulillaahi shallallaahu 'alaihi wa aalihii wa shahbihii wa sallam, syai'ul-lillaahi lahumul-Faatihah.</div>
       <div class="terjemahan show">Kehadapan junjungan, kekasih dan pemberi syafaat kami, Nabi Muhammad, utusan Allah SAW, serta keluarga dan sahabat baginda — bacaan Al-Fatihah ini kami tujukan kepada Allah, pahalanya untuk mereka — Al-Fatihah.</div>
@@ -3186,7 +3227,7 @@
   (function(){
     var saved;
     try{ saved = localStorage.getItem('wirid-theme'); }catch(e){}
-    if(saved === 'light'){ document.documentElement.classList.add('light-mode'); }
+    if(saved !== 'dark'){ document.documentElement.classList.add('light-mode'); }
   })();
 
   // ---------- Navigation (tabbar + home menu cards + back buttons) ----------
@@ -3299,6 +3340,13 @@
     });
   })();
 
+  // ---------- Collapsible opening / tawassul ----------
+  document.querySelectorAll('.card.collapsible .collapse-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      btn.closest('.card.collapsible').classList.add('open');
+    });
+  });
+
   // ---------- Audio players ----------
   (function(){
     function fmt(t){
@@ -3378,7 +3426,7 @@
   }));
 
   // ---------- Translation toggle (global) ----------
-  let transOn = true;
+  let transOn = false;
   function applyTrans(){
     document.querySelectorAll('.terjemahan').forEach(el=> el.classList.toggle('hide-mode', !transOn));
     document.querySelectorAll('[data-trans-switch]').forEach(sw=>{
