@@ -11,6 +11,15 @@
 <meta property="og:description" content="Dari Miqat hingga Tahallul — mesra warga emas dan jemaah kali pertama.">
 <meta property="og:type" content="website">
 <link rel="manifest" href="manifest.json">
+<link rel="icon" href="ikon/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="ikon/ikon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="ikon/favicon-32.png">
+<link rel="apple-touch-icon" href="ikon/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Umrah">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:image" content="ikon/ikon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -50,6 +59,7 @@ header.appbar{position:sticky;top:0;z-index:60;background:#0A3526;color:#F6F2E4;
 .appbar-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:.45rem}
 .logo{display:flex;align-items:center;gap:.55rem;flex:1;min-width:0}
 .logo svg{flex:none}
+.logo-ikon{border-radius:10px;box-shadow:0 0 0 1px rgba(216,180,71,.55),0 2px 6px rgba(0,0,0,.35)}
 .logo-teks{min-width:0}
 .logo-teks b{font-family:'Marcellus',serif;font-weight:400;font-size:1.1rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .logo-teks span{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#EACF7E;display:block;white-space:nowrap}
@@ -366,11 +376,18 @@ footer .kecil{font-size:.78rem;opacity:.72;margin:.8rem auto 0;max-width:620px}
 <header class="appbar" id="kepala">
   <div class="appbar-inner">
     <div class="logo">
-      <svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true">
-        <rect x="12" y="14" width="24" height="24" rx="2" fill="#0A3526" stroke="#D8B447" stroke-width="2"/>
-        <rect x="12" y="18" width="24" height="4" fill="#D8B447"/>
-        <path d="M24 4l2.2 4.6 5 .7-3.6 3.5.9 5L24 15.4l-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="#D8B447"/>
-      </svg>
+      <svg class="logo-ikon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40" height="40" aria-hidden="true"><defs><radialGradient id="ik-bg" cx="50%" cy="36%" r="78%"><stop offset="0" stop-color="#17704A"/><stop offset=".55" stop-color="#0B3D2A"/><stop offset="1" stop-color="#04190F"/></radialGradient>
+<linearGradient id="ik-emas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7E7B0"/><stop offset=".45" stop-color="#DDB955"/><stop offset=".55" stop-color="#C79B2E"/><stop offset="1" stop-color="#E9CD7C"/></linearGradient>
+<linearGradient id="ik-emasH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B58A25"/><stop offset=".5" stop-color="#F3DD95"/><stop offset="1" stop-color="#B58A25"/></linearGradient>
+<linearGradient id="ik-kiri" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A2A2A"/><stop offset="1" stop-color="#121212"/></linearGradient>
+<linearGradient id="ik-kanan" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E0E0E"/><stop offset="1" stop-color="#050505"/></linearGradient>
+<pattern id="ik-pat" width="64" height="64" patternUnits="userSpaceOnUse">
+ <g fill="none" stroke="#E3C26A" stroke-width="1.2">
+  <rect x="21" y="21" width="22" height="22"/><rect x="21" y="21" width="22" height="22" transform="rotate(45 32 32)"/>
+  <path d="M0 32H10M54 32H64M32 0V10M32 54V64"/></g></pattern>
+<radialGradient id="ik-fade" cx="50%" cy="45%" r="60%"><stop offset=".35" stop-color="#000"/><stop offset="1" stop-color="#fff"/></radialGradient>
+<mask id="ik-m"><rect width="512" height="512" fill="url(#ik-fade)"/></mask>
+</defs><rect width="512" height="512" fill="url(#ik-bg)"/><rect width="512" height="512" fill="url(#ik-pat)" mask="url(#ik-m)" opacity="0.07"/><ellipse cx="256" cy="312" rx="187" ry="50" fill="none" stroke="#E3C26A" stroke-width="2" opacity="0.35"/><ellipse cx="256" cy="312" rx="154" ry="38" fill="none" stroke="#E3C26A" stroke-width="3" opacity="0.8"/><polygon points="160.0,150.0 256.0,182.0 256.0,318.0 160.0,286.0" fill="url(#ik-kiri)"/><polygon points="256.0,182.0 352.0,150.0 352.0,286.0 256.0,318.0" fill="url(#ik-kanan)"/><polygon points="256.0,118.0 352.0,150.0 256.0,182.0 160.0,150.0" fill="#2E2E2E"/><polygon points="160.0,179.9 256.0,211.9 256.0,226.9 160.0,194.9" fill="url(#ik-emas)"/><polygon points="256.0,211.9 352.0,179.9 352.0,194.9 256.0,226.9" fill="#A9822A"/><polygon points="219.5,235.1 244.5,243.4 244.5,295.1 219.5,286.8" fill="url(#ik-emas)"/><line x1="256" y1="182" x2="256" y2="318" stroke="#E3C26A" stroke-opacity=".35" stroke-width="1.2"/><polyline points="160.0,150.0 256.0,118.0 352.0,150.0" fill="none" stroke="#E3C26A" stroke-opacity=".3" stroke-width="1"/><path d="M102.4 312 A153.6 38.4 0 0 0 409.6 312" fill="none" stroke="#E3C26A" stroke-width="3" opacity="0.8"/></svg>
       <div class="logo-teks"><b>Panduan Umrah</b><span>Cukup bawa telefon</span></div>
     </div>
     <button class="ikon-btn" id="btnCari" aria-label="Carian" title="Cari">&#128269;</button>
